@@ -4,36 +4,25 @@
 
 @section('content')
 
-<<<<<<< HEAD
 
-
-<!-- HOME SLIDER -->
-=======
-<!-- heading-banner start -->
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 <div class="heading-banner">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <ul class="breadcrumb">
                     <li><a href="{{url('/homes/index')}}">首页</a></li>
-<<<<<<< HEAD
-                    
-=======
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
                     <li class="active">商户申请</li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-<!-- heading-banner start -->
-=======
+
 <!-- heading-banner end -->
 
 <!-- 商户申请添加 start -->
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
 <form class="form-horizontal" action="{{url('/homes/store')}}" method="post" id="box" enctype="multipart/form-data">
     <fieldset>
     <div class="form-group">
@@ -41,17 +30,7 @@
             电影院名称
         </label>
         <div class="col-sm-5">
-<<<<<<< HEAD
-            <input type="text" class="form-control" id="inputEmail3" placeholder="请输入影院名字" name="cinema" id="cinema" minlength="4"  required>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="license" class="col-sm-2 control-label">
-            电影院法人
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputPassword3" placeholder="请输入法人名字" name="legal" required>
-=======
+
             <input type="text" class="form-control" id="inputEmail3" placeholder="请输入影院名字" name="cinema" id="cinema">
         </div>
     </div>
@@ -61,7 +40,7 @@
         </label>
         <div class="col-sm-5">
             <input type="text" class="form-control" id="legal" placeholder="请输入法人名字" name="legal">
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
         </div>
     </div>
     <div class="form-group">
@@ -69,17 +48,7 @@
             联系电话
         </label>
         <div class="col-sm-5">
-<<<<<<< HEAD
-            <input type="phone" class="form-control" id="inputPassword3" placeholder="请输入手机号" name="phone" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="phone" class="col-sm-2 control-label">
-            密码
-        </label>
-        <div class="col-sm-5">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码" name="password" required>
-=======
+
             <input type="text" class="form-control" id="phone" placeholder="请输入手机号" name="phone">
         </div>
     </div>
@@ -89,7 +58,7 @@
         </label>
         <div class="col-sm-5">
             <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
         </div>
     </div>
     <div class="form-group">
@@ -97,25 +66,7 @@
             省份
         </label>
         <div class="col-sm-5">
-<<<<<<< HEAD
-            <input type="text" class="form-control" id="inputPassword3" placeholder="请输入省份" name="city" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="city" class="col-sm-2 control-label">
-            市/区
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputPassword3" placeholder="请输入市/区" name="area" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="city" class="col-sm-2 control-label">
-            详细地址
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputPassword3" placeholder="请输入详细地址" name="address" required>
-=======
+
             <input type="text" class="form-control" id="city" placeholder="请输入省份" name="city">
         </div>
     </div>
@@ -133,34 +84,13 @@
         </label>
         <div class="col-sm-5">
             <input type="text" class="form-control" id="address" placeholder="请输入详细地址" name="address">
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
         </div>
     </div>
    
 
     <div class="form-group">
-<<<<<<< HEAD
-        <label for="inputPassword3" class="col-sm-2 control-label">
-            电影院执照
-        </label>
-        <div class="col-sm-5">
-            <input type="file" id="exampleInputFile" name="license" required>
-        </div>
-    </div>
-    
-    <div class="form-group">
-        <label for="status" class="col-sm-2 control-label">
-            电影院状态
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="status" id="inlineRadio1" value="1" name="status"> 开启
-        </label>
-        <label class="radio-inline">
-          <input type="radio" name="status" id="inlineRadio2" value="0" name="status"> 关闭
-        </label>
-    </div>
-    
-=======
+
         <label for="file" class="col-sm-2 control-label">
             电影院执照
         </label>
@@ -169,7 +99,7 @@
         </div>
     </div>
     <input type="hidden" id="time" name="time" value="{{time()}}">
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-5">
             {{ csrf_field() }}
@@ -179,46 +109,7 @@
     </div>
     </fieldset>
 </form>
-<<<<<<< HEAD
 
-@endsection
-
-@section('js')
-
-<script type="text/javascript">
-    //弹框
-    $('#fun').click(function(){
-
-         layer.alert('申请成功，请等待处理', {
-            skin: 'layui-layer-molv' //样式类名  自定义样式
-            ,closeBtn: 1    // 是否显示关闭按钮
-            ,anim: 1 //动画类型
-            ,btn: ['确认'] //按钮
-            ,icon: 6    // icon
-            ,yes:function(){
-                layer.msg('跳转中')
-            }
-            ,btn2:function(){
-                layer.msg('跳转中')
-            }});
-    });
-
-   
-
-    //表单验证
-    /*$.validator.setDefaults({
-    submitHandler: function() {
-      alert("提交事件!");
-    }
-    });
-    $().ready(function() {
-        $("#box").validate();
-    });*/
-   
-
-</script>
-@endsection
-=======
 <!-- 商户申请添加 end -->
 
 @endsection
@@ -316,4 +207,4 @@
 </script>
 @endsection
 <!-- js end -->
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+

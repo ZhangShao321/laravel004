@@ -4,10 +4,7 @@
 
 @section('content')
 
-<<<<<<< HEAD
-<!-- HOME SLIDER -->
-=======
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
 <!-- heading-banner start -->
 <div class="heading-banner">
 	<div class="container">
@@ -23,7 +20,7 @@
 	</div>
 </div>
 <!-- heading-banner end -->
-<<<<<<< HEAD
+
 <!-- single-product-area start -->
 <div class="single-product-area">
 	<div class="container">
@@ -1366,7 +1363,7 @@
 <!-- brand-area start -->
 
 <!-- brand-area end -->
-=======
+
 
 
 <!-- 电影院详情 start -->
@@ -1498,6 +1495,6 @@
 </div>
 <!-- 上映电影 end -->			
 
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
 @endsection
 

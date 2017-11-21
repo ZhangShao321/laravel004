@@ -6,10 +6,7 @@
 <title>@yield('title')</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<<<<<<< HEAD
-=======
 
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 <!-- Place favicon.ico in the root directory -->
 <link rel="shortcut icon" type="image/x-icon" href="/homes/img/favicon.ico">
 <!-- google fonts -->
@@ -34,7 +31,7 @@
 <link rel="stylesheet" href="/homes/css/style.css">
 <!-- responsive css -->
 <link rel="stylesheet" href="/homes/css/responsive.css">
-<<<<<<< HEAD
+
 <!-- modernizr css -->
 <script src="/homes/js/vendor/modernizr-2.8.3.min.js"></script>
 
@@ -70,7 +67,7 @@
 <div class="sticky-wrapper">
 	<header>			
 		<!-- header-bottom-area start -->            
-=======
+
 
 </head>
 <body>
@@ -109,7 +106,7 @@
 <div class="sticky-wrapper">
 	<header>
 		<!-- 搜索栏，登陆注册 start -->			 
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
 		<div class="header-bottom-area">
 			<div class="container">
 				<div class="row">
@@ -118,7 +115,7 @@
 							<a href="{{url('/homes/index')}}"><img src="/homes/img/logo/logo.gif" alt="" /></a>
 						</div>
 					</div>
-<<<<<<< HEAD
+
 					<div class="col-lg-6 col-md-5 col-sm-5 col-xs-6 hidden-xs">
 						<div class="header-search">
 							<input type="text" placeholder="请输入影片名..." />
@@ -129,7 +126,7 @@
 						<!-- Header shopping cart -->
 						
 						<!-- Header shopping cart -->
-=======
+
                     <form action="{{url('/homes/search')}}" method="get">
     					<div class="col-lg-6 col-md-5 col-sm-5 col-xs-6 hidden-xs">
     						<div class="header-search">
@@ -139,7 +136,7 @@
     					</div>
                     </form>
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
 						<a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a>
 						<div class="my-account-holder float-right">  
 						<p class="user_info_tip" style="color:purple">
@@ -154,22 +151,12 @@
 					        </a>
 					    </p>
 					</div>
-<<<<<<< HEAD
-						
-=======
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
 					</div>
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-		<!-- header-bottom-area end -->
-		<!-- main-menu-area start -->
-=======
-		<!-- 搜索栏，登陆注册 end -->
-		
-		<!-- 导航条 start -->
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+0
 		<div class="main-menu-area hidden-xs">
 			<div class="container">
 				<div class="row">
@@ -187,28 +174,27 @@
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
+
 		</div>            
 		<!-- main-menu-area end -->
 				
 	</header>
 </div>
 <!-- HOME SLIDER -->
-=======
+
 		</div> 
 		<!-- 导航条 end -->         				
 	</header>
 </div>
 
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
-@section('content')
+
    
 
 
 @show
 <!-- footer start -->
 <footer>
-<<<<<<< HEAD
+
 		<!-- footer-top-area start -->
 		<div class="footer-top-area">
 			<div class="container">
@@ -297,7 +283,7 @@
 <!-- footer end -->
 
 <!-- all js here -->
-=======
+
     <div class="footer-top-area">
         <div class="container">
             <div class="row">
@@ -436,7 +422,7 @@
 <!-- all js here -->
 <!-- modernizr css -->
 <script src="/homes/js/vendor/modernizr-2.8.3.min.js"></script>
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
 <!-- jquery latest version -->
 <script src="/homes/js/vendor/jquery-1.12.0.min.js"></script>
 <!-- bootstrap js -->
@@ -458,13 +444,13 @@
 <!-- main js -->
 <script src="/homes/js/main.js"></script>
 <!-- 表单验证js -->
-<<<<<<< HEAD
+
 <script src="/homes/js/validate.js"></script>
 <script src="/homes/js/jquery.validate.messages_cn.js"></script>
-=======
+
 <script src="/homes/js/validate/dist/jquery.validate.min.js"></script>
 <!-- <script src="/homes/js/jquery.validate.messages_cn.js"></script> -->
->>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
+
 <!-- 弹框js -->
 <script type="text/javascript" src="{{asset('/homes/js/layer/layer.js')}}"></script>
 <script type="text/javascript" src="{{asset('/homes/js/layer/extend/layer.ext.js')}}"></script>
