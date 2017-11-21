@@ -11,6 +11,7 @@ use App\Http\Model\film;
 use App\Http\Model\cinema;
 use App\Http\Model\roominfo;
 use App\Http\Model\showfilm;
+use DB;
 
 class FilmShowController extends Controller
 {
@@ -18,26 +19,11 @@ class FilmShowController extends Controller
     public function index()
     {
        
+       $roo = DB::select("SELECT showfilm.id,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema FROM showfilm left join film On showfilm.fid=film.id Left join roominfo on showfilm.Rid=roominfo.id Left join cinema On showfilm.cid=cinema.id");
 
-        $res = showfilm::join('cinema','cinema.id','=','showfilm.cid')
-                    ->select('showfilm.*','cinema.cinema','showfilm.time')
-                    ->get();
+         $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
 
-        $film = showfilm::join('film','film.id','=','showfilm.fid')
-                    ->select('showfilm.*','film.filmname')
-                    ->get();
-
-
-        $room = showfilm::join('roominfo','roominfo.id','=','showfilm.rid')
-                    ->select('roominfo.*','roominfo.roomname','showfilm.status')
-                    ->get();
-
-                
-        // select showfilm.id,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema where showfilm.fid=film.id,showfilm.cid=roominfo.rid,showfilm.rid=roominfo.id 
-        
-       
-
-        return view('FilmAdmins.FilmShow.FilmShowList',['res'=>$res,'film'=>$film,'room'=>$room]);
+      return view('FilmAdmins.FilmShow.FilmShowList',['roo'=>$roo,'arr'=>$arr]);
     }
 
 
@@ -86,6 +72,78 @@ class FilmShowController extends Controller
      
 
         // echo "这是添加放映";
+    }
+
+
+
+
+
+    
+    public  function edit(Request $request)
+    {
+
+      // echo "这是编辑页面";
+      // echo "<pre>";
+       $res = DB::select("select showfilm.id,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema from showfilm,film,roominfo,cinema where showfilm.fid=film.id and showfilm.Rid=roominfo.id and showfilm.cid=cinema.id and showfilm.id={$request->id}");
+       // var_dump($res);
+
+        $cinema = cinema::get();
+          $roominfo = roominfo::where("status",'0')->get();
+
+          $film = film::get();
+          $show = showfilm::get();
+
+          //b用汉语判断状态
+          $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
+
+      return view("FilmAdmins.FilmShow.FilmShowEdit",['res'=>$res,'cinema'=>$cinema,"room"=>$roominfo,"film"=>$film,'show'=>$show,'arr'=>$arr]);
+
+    }
+
+    //处理更新方法
+
+
+    public function update(Request $request)
+    {
+      echo "<pre>";
+      
+
+      $info = $request->except('_token','id','time'); 
+      $time = $request->only('time');
+      $info['time'] = strtotime($time['time']);
+      $res  =showfilm::where('id',$request->only('id'))->update($info);
+
+      if($res)
+      {
+          return redirect('/FilmAdmins/filmShow')->with('msg','修改成功');
+      }else{
+
+
+        return back();
+      }
+
+      
+
+    }
+
+
+
+
+    public  function delete(Request $request)
+    {
+      $id = $request->only('id');
+      // echo "<pre>";
+      // $res = showfilm::find($id);
+
+      $res = showfilm::where('id',$id)->delete();
+      if($res)
+      {
+         echo "删除成功!";
+
+      }else{
+        return  "删除失败!";
+      }
+      // echo "这是删除页面";
     }
 
 

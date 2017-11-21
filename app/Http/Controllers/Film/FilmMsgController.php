@@ -13,27 +13,22 @@ use DB;
 
 class FilmMsgController extends Controller
 {
-    //影片管理
+      //影片管理
     public  function index(Request $request)
     {
 
-       // $film =  film::get();
-
-      // $film = film::where('filmname','like','%5%')->paginate(3);
-      $film = film::where('filmname','like','%'.$request->input('seach').'%')->paginate($request->input('num',10));
-      $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
+     $film = film::where('filmname','like','%'.$request->input('seach').'%')->paginate($request->input('num',10));
+         $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
 
         return view('FilmAdmins.FilmMag.FilmMsgList',['film'=> $film,'request'=>$request,'sta'=>$sta]);
         
     }
 
     public function add()
-    { 
-        //查询类型
-        $data = DB::table('filmtype')->where('status',1)->get();
+    {
+        return view('FilmAdmins.FilmMag.FilmMsgAdd');
 
-        return view('FilmAdmins.FilmMag.FilmMsgAdd',['data'=>$data]);
-
+      
     }
 
     //处理添加
@@ -43,8 +38,7 @@ class FilmMsgController extends Controller
         // 时间支持格式"2017-08-08","2017/08/08",
                 
         $this->validate($request, [
-        'filmname' => 'required',
-        'showtime' => 'required|regex:/\d{4}[-\/]\d{2}[-\/]\d{2}/',  //
+        'filmname' => 'required', 
         'keywords' => 'required',
         'director' => 'required',
         'protagonist' => 'required',
@@ -56,8 +50,6 @@ class FilmMsgController extends Controller
         
         ],[
             'filmname.required'=>'影片名称不能为空',
-            'showtime.regex'=>'上映日期格式错误',
-            'showtime.required'=>'上映日期不能为空',
             'keywords.required'=>'关键字不能为空',
             'director.required'=>'导员不能为空',
             'protagonist.required'=>'主演不能为空',
@@ -68,9 +60,15 @@ class FilmMsgController extends Controller
             ]
         );
      
-        $info = $request->except(['_token','filepic']);
-        $res = $request->only(['filepic']);
+   
+        $info = $request->except(['_token','filepic','showtime']);
       
+        $res = $request->only(['filepic']);
+
+        $showtime = $request->only('showtime');
+
+        $info['showtime'] = strtotime($showtime['showtime']);
+
 
                 // //判断文件是否上传
                 if($request -> hasFile('filepic'))
@@ -84,13 +82,12 @@ class FilmMsgController extends Controller
                  
 
                     //移动图片
-                 $request ->file('filepic') -> move('./public/FilmPublic/Uploads',$name.'.'.$jpg);
+                 $request ->file('filepic') -> move('./Uploads',$name.'.'.$jpg);
                 }
-                 $filepic = './public/FilmPublic/Uploads/'.$name.'.'.$jpg;
+                 $filepic = './Uploads/'.$name.'.'.$jpg;
                  // var_dump($filepic);
 
                   $info['filepic'] = $filepic;
-                  $info['cid'] = session('cid') ?? 1;
 
 
 
@@ -134,8 +131,7 @@ class FilmMsgController extends Controller
     public function update(Request $request)
     {
         $this->validate($request, [
-        'filmname' => 'required',
-        'showtime' => 'required|regex:/\d{4}[-\/]\d{2}[-\/]\d{2}/',  //
+        'filmname' => 'required', 
         'keywords' => 'required',
         'director' => 'required',
         'protagonist' => 'required',
@@ -146,8 +142,6 @@ class FilmMsgController extends Controller
         
         ],[
             'filmname.required'=>'影片名称不能为空',
-            'showtime.regex'=>'上映日期格式错误',
-            'showtime.required'=>'上映日期不能为空',
             'keywords.required'=>'关键字不能为空',
             'director.required'=>'导员不能为空',
             'protagonist.required'=>'主演不能为空',
@@ -157,9 +151,12 @@ class FilmMsgController extends Controller
             ]
         );
 
-      $id = $request->only('id');
-      $res =  $request->except('id','_token','id','filepic');
 
+
+      $id = $request->only('id');
+      $showtime = $request->only('showtime');
+      $res =  $request->except('id','_token','id','filepic','showtime');
+      $res['showtime'] = strtotime($showtime['showtime']);
              // //判断文件是否上传
               if($request -> hasFile('filepic'))
               {
@@ -176,9 +173,9 @@ class FilmMsgController extends Controller
                       //获取后缀名
                       $jpg = $request -> file('filepic')->getClientOriginalExtension();
                       //移动图片
-                       $request ->file('filepic') -> move('./public/FilmPublic/Uploads',$name.'.'.$jpg);
+                       $request ->file('filepic') -> move('./Uploads',$name.'.'.$jpg);
 
-                       $filepic = './public/FilmPublic/Uploads/'.$name.'.'.$jpg;
+                       $filepic = './Uploads/'.$name.'.'.$jpg;
                        // var_dump($filepic);
                        $res['filepic'] = $filepic;
 
@@ -201,7 +198,6 @@ class FilmMsgController extends Controller
     //信息删除
      public function delete(Request $request)
      {
-
         // echo "这是删除";
          $id = $request->only('id');
          $del = film::find($id);
@@ -220,8 +216,11 @@ class FilmMsgController extends Controller
             echo "删除失败!";
            }
 
-
      }
+
+               
+
+
 
                
 
