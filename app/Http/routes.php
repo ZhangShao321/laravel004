@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 //404找不到页面
 Route::get('/404',function(){
 	abort(404);
@@ -190,8 +191,8 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 
 
 
-//===============================前台信息=============================
 
+//===============================前台信息=============================
 
 
 
@@ -210,11 +211,21 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 
 
+
+	//电影院列表页
+	Route::get('cinemalist','HomesController@cinemalist');
+
+
 	//电影院详情
     Route::get('cinemadetail','HomesController@cinemadetail');
 
     //申请商户
 	Route::get('add','HomesController@add');
     Route::post('store','HomesController@store');
+
+
+    //搜索框的页面
+    Route::get('search','HomesController@search');
+
 
 });

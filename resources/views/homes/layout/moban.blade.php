@@ -6,6 +6,10 @@
 <title>@yield('title')</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<<<<<<< HEAD
+=======
+
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 <!-- Place favicon.ico in the root directory -->
 <link rel="shortcut icon" type="image/x-icon" href="/homes/img/favicon.ico">
 <!-- google fonts -->
@@ -30,6 +34,7 @@
 <link rel="stylesheet" href="/homes/css/style.css">
 <!-- responsive css -->
 <link rel="stylesheet" href="/homes/css/responsive.css">
+<<<<<<< HEAD
 <!-- modernizr css -->
 <script src="/homes/js/vendor/modernizr-2.8.3.min.js"></script>
 
@@ -65,6 +70,46 @@
 <div class="sticky-wrapper">
 	<header>			
 		<!-- header-bottom-area start -->            
+=======
+
+</head>
+<body>
+<!-- header-top-area start -->
+<div class="header-top-area hidden-xs">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-4">
+                <div class="welcome">
+                    <span class="phone">
+                        Phone: +13838384380
+                    </span>
+                    <span class="hidden-sm">
+                        /
+                    </span>
+                    <span class="email hidden-sm">
+                        Email: shajiahuo@dianying.com
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-8">
+                <div class="top-menu">
+                    <ul>
+                        <h2 style="color:white">
+                            欢迎来到傻家伙电影院
+                        </h2>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- header-top-area end -->
+
+
+<div class="sticky-wrapper">
+	<header>
+		<!-- 搜索栏，登陆注册 start -->			 
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 		<div class="header-bottom-area">
 			<div class="container">
 				<div class="row">
@@ -73,6 +118,7 @@
 							<a href="{{url('/homes/index')}}"><img src="/homes/img/logo/logo.gif" alt="" /></a>
 						</div>
 					</div>
+<<<<<<< HEAD
 					<div class="col-lg-6 col-md-5 col-sm-5 col-xs-6 hidden-xs">
 						<div class="header-search">
 							<input type="text" placeholder="请输入影片名..." />
@@ -83,6 +129,17 @@
 						<!-- Header shopping cart -->
 						
 						<!-- Header shopping cart -->
+=======
+                    <form action="{{url('/homes/search')}}" method="get">
+    					<div class="col-lg-6 col-md-5 col-sm-5 col-xs-6 hidden-xs">
+    						<div class="header-search">
+    							<input type="text" placeholder="请输入影片名..." name="seach" />
+    							<button><i class="fa fa-search"></i></button>
+    						</div>
+    					</div>
+                    </form>
+					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 						<a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a>
 						<div class="my-account-holder float-right">  
 						<p class="user_info_tip" style="color:purple">
@@ -97,13 +154,22 @@
 					        </a>
 					    </p>
 					</div>
+<<<<<<< HEAD
 						
+=======
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 					</div>
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
 		<!-- header-bottom-area end -->
 		<!-- main-menu-area start -->
+=======
+		<!-- 搜索栏，登陆注册 end -->
+		
+		<!-- 导航条 start -->
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 		<div class="main-menu-area hidden-xs">
 			<div class="container">
 				<div class="row">
@@ -121,12 +187,20 @@
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 		</div>            
 		<!-- main-menu-area end -->
 				
 	</header>
 </div>
 <!-- HOME SLIDER -->
+=======
+		</div> 
+		<!-- 导航条 end -->         				
+	</header>
+</div>
+
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 @section('content')
    
 
@@ -134,6 +208,7 @@
 @show
 <!-- footer start -->
 <footer>
+<<<<<<< HEAD
 		<!-- footer-top-area start -->
 		<div class="footer-top-area">
 			<div class="container">
@@ -222,6 +297,146 @@
 <!-- footer end -->
 
 <!-- all js here -->
+=======
+    <div class="footer-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4">
+                    <div class="footer-widget">
+                        <img src="/homes/img/logo/logo.gif" alt="" />
+                        <p>
+                            <h4 style="color:white">
+                                傻家伙影视是一家成立了好多好多年的超清好多好多好多D的集好多好多种娱乐项目为一体的超超超超超超大型电影院
+                            </h4>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 hidden-sm">
+                    <div class="footer-widget">
+                        <h3>
+                            如何在线选座购票
+                        </h3>
+                        <ul class="footer-menu">
+                            <li>
+                                <a href="#">
+                                    选场次&选座位
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    在线支付
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    获取取票码
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    影院现场自助取票
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    送票热线:10086111
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4">
+                    <div class="footer-widget">
+                        <h3>
+                            友情链接
+                        </h3>
+                        <ul class="footer-menu">
+                            <li>
+                                <a href="#">
+                                    中国石油
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    中国航空
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    中国石化
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    中国移动
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    中国铁建
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4">
+                    <div class="footer-widget">
+                        <h3>
+                            关于我们
+                        </h3>
+                        <ul class="footer-contact">
+                            <li>
+                                <i class="fa fa-map-marker">
+                                </i>
+                                地址:北京市昌平区回龙观文化西路,育荣教育园区
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope">
+                                </i>
+                                邮箱: shajiahuo@dianying.com
+                            </li>
+                            <li>
+                                <i class="fa fa-phone">
+                                </i>
+                                电话: +13838384380
+                            </li>
+                            <li>
+                                <a href="{{url('/homes/add')}}" style="color:white">
+                                    <i class="fa fa-plus">
+                                    </i>
+                                </a>
+                                <a href="{{url('/homes/add')}}" style="color:white">
+                                    申请商户
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-md-offset-2">
+                    <div class="copyright">
+                        <p>
+                            北京傻家伙网络科技有限公司Copyright 1937-2017 Mtime.com Inc. All rights reserved..
+                            京ICP证888888号网络视听许可证888888888888号网络文化经营许可证广播电视节目制作经营许可证(京)字第1435号京公网安备：66666666666666号
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- footer end -->
+
+
+<!-- all js here -->
+<!-- modernizr css -->
+<script src="/homes/js/vendor/modernizr-2.8.3.min.js"></script>
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 <!-- jquery latest version -->
 <script src="/homes/js/vendor/jquery-1.12.0.min.js"></script>
 <!-- bootstrap js -->
@@ -243,8 +458,13 @@
 <!-- main js -->
 <script src="/homes/js/main.js"></script>
 <!-- 表单验证js -->
+<<<<<<< HEAD
 <script src="/homes/js/validate.js"></script>
 <script src="/homes/js/jquery.validate.messages_cn.js"></script>
+=======
+<script src="/homes/js/validate/dist/jquery.validate.min.js"></script>
+<!-- <script src="/homes/js/jquery.validate.messages_cn.js"></script> -->
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 <!-- 弹框js -->
 <script type="text/javascript" src="{{asset('/homes/js/layer/layer.js')}}"></script>
 <script type="text/javascript" src="{{asset('/homes/js/layer/extend/layer.ext.js')}}"></script>

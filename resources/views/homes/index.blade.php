@@ -4,7 +4,11 @@
 
 @section('content')
 
+<<<<<<< HEAD
 <!-- HOME SLIDER -->
+=======
+<!-- 轮播图 start -->
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 <div class="slider-wrap">
 	<div class="fullwidthbanner-container">
 		<div class="fullwidthbanner">
@@ -75,6 +79,7 @@
 		</div>
 	</div>
 </div>
+<<<<<<< HEAD
 <!-- END HOME SLIDER -->
 
 <!-- banner-area start -->
@@ -1477,6 +1482,126 @@
 <!-- features-area end -->
 
 <!-- subscribe-area start -->
+=======
+<!-- 轮播图 end -->
+
+<!-- 热映电影 start -->
+<div class="banner-area">
+    <div class="container">
+        <div class="row">
+            <div class="section-title text-center">
+                <h3>
+                    热映电影
+                </h3>
+            </div>
+            @foreach($res as $k=>$v)
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <a href="{{url('/homes/filmdetail?id=').$v['id']}}">
+                    <div class="single-banner">
+                        <img src="{{ asset($v['filepic'])}}" alt="" />
+                        <div class="banner-details">
+                            <div class="mask">
+                                <p>
+                                    {{ $v['summary']}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<div class="service-area pad-top">
+	<div class="container">
+		<div class="row">
+			@foreach($res as $k=>$v)
+			<div class="col-lg-4 col-md-4 col-sm-6">
+				<a href="{{url('/homes/filmdetail?id=').$v['id']}}">
+					<div class="single-service">
+						<div class="service-icon">
+							<i class="fa fa-file"></i>
+						</div>
+						<div class="service-text">
+							<h2>
+								{{ $v['filmname']}}</h2>
+							<p>
+								导演:{{ $v['director']}}</p>
+						</div>
+					</div>
+				</a>
+			</div>
+			@endforeach
+		</div>
+	</div>
+</div>
+<!-- 热映电影 end -->
+
+<!-- 即将上映 start -->
+<div class="features-area pad-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h3>
+                        即将上映
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-tab">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="row">
+                                <div class="product-curosel">
+                                    <div class="col-lg-12">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <a href="single-product.html">
+                                                    <img class="primary-img" src="/homes/img/product/1.jpg" alt="" />
+                                                    <img class="secondary-img" src="/homes/img/product/2.jpg" alt="" />
+                                                </a>
+                                                <span class="sale">
+                                                    敬请期待
+                                                </span>
+                                                <div class="product-action">
+                                                    <div class="pro-button-top">
+                                                        <a href="#">
+                                                            查看详情
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-info">
+                                                <h3>
+                                                    <a href="single-product.html">
+                                                        电影名字
+                                                    </a>
+                                                </h3>
+                                                <div class="pro-price">
+                                                    <span class="normal">
+                                                        ￥50
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 即将上映 end -->
+
+<!-- 底部横条 start -->
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 <div class="subscribe-area">
 	<div class="container">
 		<div class="subscribe-title">
@@ -1487,6 +1612,10 @@
 		</div>
 	</div>
 </div>
+<<<<<<< HEAD
 <!-- subscribe-area end -->
+=======
+<!-- 底部横条 end -->
+>>>>>>> d9a021112ec5828c4de4b5d148256e6e902a16a0
 
 @endsection
