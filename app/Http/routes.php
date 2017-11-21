@@ -44,4 +44,27 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     //搜索框的页面
     Route::get('search','HomesController@search');
 
+
+    
+
+    //电影院登录
+	Route::get('login','HomesLoginController@index');
+
+    Route::post('dologin','HomesLoginController@dologin');
+	//电影院注册
+	Route::get('register','HomesRegisterController@index');
+
+	 //短信验证
+	Route::get('test','HomesRegisterController@doAction');
+	 //判断
+	Route::post('doregister','HomesRegisterController@store');
+	//修改密码
+    Route::get('change','HomesChangeController@index');
+    Route::get('pass','HomesChangeController@doAction');
+    Route::post('dopass','HomesChangeController@store');
+    //个人订单
+    Route::get('center','HomesCenterController@index');
+    Route::get('insert','HomesCenterController@insert');
+ 
+
 });
