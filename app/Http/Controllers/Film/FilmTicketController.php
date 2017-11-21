@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\\Film;
+namespace App\Http\Controllers\Film;
 
 use Illuminate\Http\Request;
 
@@ -8,9 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 
-class FilmTicketController.php extends Controller
+class FilmTicketController extends Controller
 {
-    //电影票
+     //电影票
     public function index()
     {
         $cid = session('cid') ?? 1;

@@ -157,6 +157,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 
     //影厅
     Route::get('/room/add','FilmRoomController@add');
+    /*Route::get('/room/add',function(){
+    	echo 1111111111111;
+    });*/
     Route::post('/room/insert','FilmRoomController@insert');
     Route::get('/room/list','FilmRoomController@index');
     Route::post('/room/seat','FilmRoomController@seat');

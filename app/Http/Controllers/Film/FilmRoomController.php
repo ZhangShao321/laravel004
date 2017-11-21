@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\\Film;
+namespace App\Http\Controllers\Film;
 
 use Illuminate\Http\Request;
 
@@ -11,9 +11,9 @@ use DB;
 use App\Http\model\roominfo;
 use App\Http\model\seat;
 
-class FilmRoomController.php extends Controller
+class FilmRoomController extends Controller
 {
-    //影厅列表
+     //影厅列表
     public function index()
 
     {  

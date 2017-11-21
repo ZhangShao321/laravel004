@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\\Film;
+namespace App\Http\Controllers\Film;
 
 use Illuminate\Http\Request;
 
@@ -13,8 +13,10 @@ use Hash;
 
 use App\Http\Model\cinlogin;
 
-class FilmLoginController.php extends Controller
+class FilmLoginController extends Controller
 {
+    //
+
        //电影院登录页面
     public function index()
     {
@@ -113,4 +115,8 @@ class FilmLoginController.php extends Controller
         }
 
    }  
+
+
+
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\\Film;
+namespace App\Http\Controllers\Film;
 
 use Illuminate\Http\Request;
 
@@ -14,8 +14,12 @@ use Flc\Alidayu\Requests\IRequest;
 
 // use  DB;
 
-class TestController.php extends Controller
+use App\Http\Model\user;
+
+class TestController extends Controller
 {
+     //
+
     public function index()
     {
         return view("FilmAdmins.FilmUser.test");

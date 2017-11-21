@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\\Film;
+namespace App\Http\Controllers\Film;
 
 use Illuminate\Http\Request;
 
@@ -12,9 +12,9 @@ use App\Http\Model\cinema;
 use App\Http\Model\roominfo;
 use App\Http\Model\showfilm;
 
-class FilmShowController.php extends Controller
+class FilmShowController extends Controller
 {
-   //放映信息
+     //放映信息
     public function index()
     {
        
@@ -87,4 +87,17 @@ class FilmShowController.php extends Controller
 
         // echo "这是添加放映";
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

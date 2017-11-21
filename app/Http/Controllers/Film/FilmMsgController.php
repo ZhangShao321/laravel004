@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\\Film;
+namespace App\Http\Controllers\Film;
 
 use Illuminate\Http\Request;
 
@@ -11,7 +11,7 @@ use App\Http\Model\film;
 use Hash;
 use DB;
 
-class FilmMsgController.php extends Controller
+class FilmMsgController extends Controller
 {
     //影片管理
     public  function index(Request $request)
@@ -229,23 +229,5 @@ class FilmMsgController.php extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
-
-      
-       
-
-     
-   
-
-
-    //这是删除页面
 
 }

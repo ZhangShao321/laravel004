@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\\Film;
+namespace App\Http\Controllers\Film;
 
 use Illuminate\Http\Request;
 
@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\cinema;
 use App\Http\Model\money;
 
-class FilmMoneyController.php extends Controller
+class FilmMoneyController extends Controller
 {
-    public  function index()
+     public  function index()
     {
 
         //根据用户id 进行查询
