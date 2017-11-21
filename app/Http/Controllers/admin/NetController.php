@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Model\config;
 
 class NetController extends Controller
 {
@@ -15,8 +16,15 @@ class NetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        
+
+        $res=config::all();
+        // $res=DB::table('config')->get();
+        // dd($res);
+        return view('admin.net.index',compact('res'));
+
+
     }
 
     /**
@@ -26,7 +34,7 @@ class NetController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -71,7 +79,53 @@ class NetController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+                        
+        //判断是否有文件上传
+        if($request->hasFile('logo')){
+            
+            //先查询
+            $find = config::where('id',$id)->first();
+            //判断图片是否存在  存在就删除
+            //遍历图片<img src="{{asset($find->logo)}}">
+                              
+            if(file_exists($find->logo))
+             {
+                unlink($find->logo);
+             }
+
+            //获取文件名
+            $name=rand(1111,9999).time();
+
+            //获取文件名后缀
+            $hz=$request->file('logo')->getClientOriginalExtension();
+
+            //移动文件
+            $request->file('logo')->move('./Uplodes/',$name.'.'.$hz);
+        }else{
+
+             return back()->with('msg','请上传网站logo!');
+             die;
+        }
+
+
+        $res = $request->except('_token','_method');
+
+       //修改上传logo的名字
+        $res['logo'] = './Uplodes/'.$name.'.'.$hz;
+
+
+        //执行修改
+        $sql=config::where('id',$id)->update($res);
+
+        if($sql){
+
+            return redirect('/admin/net')->with('msg','修改成功');
+        
+        }else{
+
+            return back();
+        }
+
     }
 
     /**

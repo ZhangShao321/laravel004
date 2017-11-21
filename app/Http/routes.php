@@ -15,24 +15,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//=======================后台信息===================================
 
 
 
-//后台路由组
-//prefix路由群组中的所有路由包含统一前缀
-//namepace控制器位于App\Http\Controllers命名空间下
-//
-//后台登录页面
-Route::get('/admin/login','admin\AdminLoginController@index'); 
-//执行登录的方法
-Route::post('/admin/dologin','admin\AdminLoginController@dologin');
-//生成登录验证码 
-Route::get('/admin/code','admin\AdminLoginController@code');
-        
+	//后台路由组
+	//prefix路由群组中的所有路由包含统一前缀
+	//namepace控制器位于App\Http\Controllers命名空间下
+	//
+	//后台登录页面
+	Route::get('/admin/login','admin\AdminLoginController@index'); 
+	//执行登录的方法
+	Route::post('/admin/dologin','admin\AdminLoginController@dologin');
+	//生成登录验证码 
+	Route::get('/admin/code','admin\AdminLoginController@code');
+	        
 
-	//后台路由组 中间件
-	Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin'], function () {
+	//后台路由组 中间件,'middleware'=>'adminlogin'
+	Route::group(['prefix'=>'admin','namespace'=>'admin'], function () {
 
 			//进入后台的首页
 			Route::get('/index', 'CeshiController@index');

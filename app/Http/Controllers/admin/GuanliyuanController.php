@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\admin;
 
+
+use Hash;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+use App\Http\Model\user;
 
 class GuanliyuanController extends Controller
 {
@@ -16,7 +21,13 @@ class GuanliyuanController extends Controller
      */
     public function index()
     {
-        //
+
+
+        $res=user::where('auth','1')->get();
+         
+        return view('admin.guanliyuan.index',compact('res'));
+
+
     }
 
     /**
@@ -27,6 +38,8 @@ class GuanliyuanController extends Controller
     public function create()
     {
         //
+         return view('admin.guanliyuan.add');
+
     }
 
     /**
@@ -37,7 +50,42 @@ class GuanliyuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+         //表单验证
+        $this->validate($request, [
+            'phone' => 'required|regex:/^\w{8,16}$/',
+            'password' => 'required|regex:/^\S{6,16}$/',
+            // 'email' => 'required|email',
+            // 'phone' => 'required|regex:/^1[34578]\d{9}$/'
+            // 'nickName' => 'required|regex:/^\w{8,16}$/',
+            
+       
+        ],[
+            'phone.required'=>'用户名不能为空',
+            'phone.regex'=>'用户名格式不正确',
+            'password.required'=>'密码不能为空',
+            'password.regex'=>'密码格式不正确',         
+
+        ]);
+
+
+        $res=$request->except('_token');
+       
+        $res['password']=Hash::make($res['password']);
+
+        $res['lastlogin']=time();
+       
+       
+       $sql=user::insert($res);  
+      
+        if($sql){
+            return redirect('/admin/guanliyuan');
+        }else{
+            return back()->withInput();
+        }
+
+
     }
 
     /**
@@ -82,6 +130,16 @@ class GuanliyuanController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+       
+        $sql = user::where('id',$id)->delete();
+        if($sql){
+            return redirect('/admin/guanliyuan')->with('删除成功');
+        }else{
+            return back();
+        }
     }
+
+
+
 }
