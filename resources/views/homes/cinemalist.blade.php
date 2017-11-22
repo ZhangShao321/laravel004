@@ -19,22 +19,20 @@
 </div>
 <!-- heading-banner end -->
 
+<!-- 服务宗旨 start -->
 <div class="about-us-area">
     <div class="container">
         <div class="row">
             <!-- about-img start -->
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="about-img">
-
                     <img src="/homes/img/fuwu.jpg" alt="" />
-
                 </div>
             </div>
             <!-- about-img end -->
             <!-- about-text start -->
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="about-text">
-
                     <h2> 服务 <span>宗旨</span></h2>
                     <h2>
                         微笑——微笑挂在脸上，服务记在心里。</h2>
@@ -63,7 +61,6 @@
 <div class="about-counter-area">
     <div class="container">
         <div class="row">
-
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="single-counter">
                     <i class="fa fa-users"></i>
@@ -72,7 +69,6 @@
                     <h4 style="color:white">观影人数</h4>
                 </div>
             </div>
-
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="single-counter">
                     <i class="fa fa-trophy"></i>
@@ -81,7 +77,6 @@
                     <h4 style="color:white">影院排行</h4>
                 </div>
             </div>
-
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="single-counter">
                     <i class="fa fa-thumbs-up"></i>
@@ -90,7 +85,6 @@
                     <h4 style="color:white">好评</h4>
                 </div>
             </div>
-
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="single-counter">
                     <i class="fa fa-home"></i>
@@ -99,7 +93,6 @@
                     <h4 style="color:white">影院数量</h4>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -109,7 +102,6 @@
 <div class="about-team-area">
     <div class="container">
         <div class="row">
-
             <div class="col-md-3 col-sm-4">
                 <div class="single-about-team">
                     <div class="about-team-img">
@@ -123,11 +115,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 <!-- 电影院列表 end -->
-
 
 @endsection

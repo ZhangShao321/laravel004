@@ -16,6 +16,8 @@ class FilmMsgController extends Controller
       //影片管理
     public  function index(Request $request)
     {
+        
+
 
      $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('uid'))->paginate($request->input('num',10));
 

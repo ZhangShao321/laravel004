@@ -4,9 +4,7 @@
 
 @section('content')
 
-
 <!-- 轮播图 start -->
-
 <div class="slider-wrap">
 	<div class="fullwidthbanner-container">
 		<div class="fullwidthbanner">
@@ -77,7 +75,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- 轮播图 end -->
 
 <!-- 热映电影 start -->
@@ -196,7 +193,6 @@
 <!-- 即将上映 end -->
 
 <!-- 底部横条 start -->
-
 <div class="subscribe-area">
 	<div class="container">
 		<div class="subscribe-title">
@@ -207,8 +203,6 @@
 		</div>
 	</div>
 </div>
-
 <!-- 底部横条 end -->
-
 
 @endsection

@@ -11,12 +11,14 @@
 |
 */
 
+ 
 
-Event::listen('illuminate.query',function($query){
-     var_dump($query);
- }); 
 
-Route::get('/', '/Homes/HomesController@index');
+Route::group(['namespace'=>'Homes'], function(){
+    Route::get('/', 'HomesController@index');
+});
+
+
 
 
 // Route::get('/', function () {
@@ -150,9 +152,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('showdoAdd','FilmShowController@doadd');
             //放映编辑
             Route::get('showEdit','FilmShowController@edit');
-            Route::post('showUpdate','FilmShowController@update');
+            Route::post('showUpdate/{id}','FilmShowController@update');
             //删除放映
-            Route::get('showDelete','FilmShowController@delete');
+            Route::get('showDelete/{id}','FilmShowController@delete');
 
 
 
@@ -211,13 +213,8 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	//电影详情页
 	Route::get('filmdetail','HomesController@filmdetail');
 
-
-
-
-
 	//电影院列表页
 	Route::get('cinemalist','HomesController@cinemalist');
-
 
 	//电影院详情
     Route::get('cinemadetail','HomesController@cinemadetail');
@@ -253,6 +250,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::get('center','HomesCenterController@index');
     Route::get('insert','HomesCenterController@insert');
  
+
 
 
 });

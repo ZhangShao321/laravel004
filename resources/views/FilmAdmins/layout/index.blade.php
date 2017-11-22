@@ -482,7 +482,7 @@
     <script src="/FilmAdmin/js/seat/jquery.seat-charts.min.js"></script>
 
 
-<script src="{{asset('/FilmAdmin/time/js/jquery.1.7.2.min.js')}}"></script>  
+    <script src="{{asset('/FilmAdmin/time/js/jquery.1.7.2.min.js')}}"></script>  
      <script src="{{asset('/FilmAdmin/time/js/jquery-1.js')}}"></script>  
     <script src="{{asset('/FilmAdmin/time/js/mobiscroll_002.js')}}" type="text/javascript"></script>  
     <script src="{{asset('/FilmAdmin/time/js/mobiscroll_004.js')}}" type="text/javascript"></script>  
@@ -493,7 +493,7 @@
     <link href="{{asset('/FilmAdmin/time/css/mobiscroll.css')}}" rel="stylesheet" type="text/css">  
     <link href="{{asset('/FilmAdmin/time/css/mobiscroll_002.css')}}" rel="stylesheet" type="text/css">  
     <link href="{{asset('/FilmAdmin/time/css/mobiscroll_003.css')}}" rel="stylesheet" type="text/css">
-
+    <script src="/FilmAdmin/js/seat/jquery.seat-charts.min.js"></script>
 
 
 

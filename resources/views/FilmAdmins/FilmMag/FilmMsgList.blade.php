@@ -176,7 +176,7 @@
                                     <td class="bian">{{$v->director}}</td>
                                     <td class="bian">{{$v->protagonist}}</td>
                                     <td class="bian">{{$v->summary}}</td>
-                                    <td class="bian">{{ date('Y-m-d',$v->showtime) }}</td>
+                                    <td class="bian">{{ date('Y-m-d H:i:s',$v->showtime) }}</td>
                                     <td class="bian">{{$v->price}}</td>
                                     <td class="bian">{{$v->shownum}}</td>
                                     <td >
