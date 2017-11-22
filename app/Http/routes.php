@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/', '/Homes/HomesController@index');
+// Route::get('/', '/Homes/HomesController@index');
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 
@@ -209,7 +214,6 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('add','HomesController@add');
     Route::post('store','HomesController@store');
 
-<<<<<<< HEAD
 
     //搜索框的页面
     Route::get('search','HomesController@search');
@@ -240,6 +244,3 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 
 });
-=======
-});
->>>>>>> bf023ea9517cec0ebec19c6308e83902e4f0ce91
