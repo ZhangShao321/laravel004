@@ -36,6 +36,7 @@ class CinemaController extends Controller
             // var_dump($res);die;
         return view('admin.cinema.index',['res'=>$res,'request'=>$request]);
 
+
     }
 
     /**
@@ -48,6 +49,7 @@ class CinemaController extends Controller
 
         //
        return view('admin.cinema.add');
+
 
     }
 
@@ -172,6 +174,7 @@ class CinemaController extends Controller
      */
     public function update(Request $request, $id)
     {
+
           //判断是否有文件上传
         if($request->hasFile('clogo')){
             
@@ -222,6 +225,7 @@ class CinemaController extends Controller
     }
 
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -230,6 +234,7 @@ class CinemaController extends Controller
      */
     public function destroy($id)
     {
+
         DB::beginTransaction();
 
         $res1 = DB::table('cinema')->where('id',$id)->delete();
@@ -243,6 +248,7 @@ class CinemaController extends Controller
         }else{
             return back();
         }
+
 
     }
 }

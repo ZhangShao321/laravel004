@@ -30,7 +30,6 @@ class AdminLoginMiddleware
 
             return $next($request);
 
-        }
-          var_dump($id);
+        }      
     }
 }

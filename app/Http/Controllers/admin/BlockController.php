@@ -17,7 +17,9 @@ class BlockController extends Controller
     public function index()
     {
 
+
         return view('admin.block.index');
+
 
     }
 

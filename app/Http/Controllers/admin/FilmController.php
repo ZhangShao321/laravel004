@@ -16,7 +16,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        return view('admin.film.index');
+        
     }
 
     /**
@@ -26,7 +26,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-        return view('admin.film.add');
+        
     }
 
     /**

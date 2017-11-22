@@ -100,7 +100,7 @@ class NetController extends Controller
             $hz=$request->file('logo')->getClientOriginalExtension();
 
             //移动文件
-            $request->file('logo')->move('./adminsUplode',$name.'.'.$hz);
+            $request->file('logo')->move('./Uplodes/',$name.'.'.$hz);
         }else{
 
              return back()->with('msg','请上传网站logo!');
@@ -111,7 +111,7 @@ class NetController extends Controller
         $res = $request->except('_token','_method');
 
        //修改上传logo的名字
-        $res['logo'] = './adminsUplode/'.$name.'.'.$hz;
+        $res['logo'] = './Uplodes/'.$name.'.'.$hz;
 
 
         //执行修改

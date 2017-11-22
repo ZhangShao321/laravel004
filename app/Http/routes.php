@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 
 
+
 //=======================后台信息===================================
 
 
@@ -213,3 +214,4 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('store','HomesController@store');
 
 });
+

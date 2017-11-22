@@ -17,7 +17,6 @@ class RequestController extends Controller
     public function index()
     {
 
-        return view('admin.request.index');
     }
 
     /**
@@ -27,7 +26,7 @@ class RequestController extends Controller
      */
     public function create()
     {
-        //
+  
     }
 
     /**
@@ -38,7 +37,7 @@ class RequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -49,7 +48,7 @@ class RequestController extends Controller
      */
     public function show($id)
     {
-        //
+ 
     }
 
     /**
@@ -60,7 +59,7 @@ class RequestController extends Controller
      */
     public function edit($id)
     {
-        //
+ 
     }
 
     /**
@@ -72,7 +71,7 @@ class RequestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
@@ -83,6 +82,6 @@ class RequestController extends Controller
      */
     public function destroy($id)
     {
-        //
+ 
     }
 }
