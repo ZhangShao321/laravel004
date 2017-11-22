@@ -11,6 +11,7 @@ use App\Http\Model\cininfo;
 
 
 use DB;
+use Hash;
 
 class FilmUserController extends Controller
 {
@@ -26,10 +27,7 @@ class FilmUserController extends Controller
     {   
             $id = session('uid');
 
-             // $res = cinema::find($id);
-             // echo "<pre>";
-             // var_dump($res->cinema);
-             // die;
+             
              $res = cinema::join('cininfo','cininfo.cid','=','cinema.id')
                             ->where('cinema.id',$id)
                             ->get();
@@ -98,29 +96,15 @@ class FilmUserController extends Controller
                     return back();
 
                 }
+
+
+
+
+
                
 
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     //商户logo
@@ -196,6 +180,49 @@ class FilmUserController extends Controller
     {
             echo "这是修改页面";
             return view('FilmAdmins.FilmUser.FilmPassEdit');
+    }
+
+
+    ///执行修改密码
+
+    public function  PasUpdate(Request $request)
+    {
+
+        // var_dump($request->all());
+     $oldpassword = $request->only('oldpassword');
+     $newpassword = $request->only('newpassword');
+
+      $info =cinema::find(session('uid')); 
+      if(!Hash::check($oldpassword['password'],$info->password))
+      {
+
+         $new = Hash::make($newpassword['newpassword']);
+
+         $update = cinema::where('id',session('uid'))->update(['password',$new]);
+
+         if($update)
+         {
+            echo 1;
+
+
+         }else{
+          echo 0;
+         }
+      }else{
+
+        echo 2;
+      }
+
+      
+      
+
+    
+      
+     
+     
+
+      // var_dump($info);
+
     }
 
 

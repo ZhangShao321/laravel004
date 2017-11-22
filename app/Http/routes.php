@@ -121,7 +121,10 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('Profile','FilmUserController@Profile');
             //执行图片修改
             Route::post('dopro','FilmUserController@doPro');
+            //修改密码
             Route::get('pass','FilmUserController@PasEdit');
+            //执行修改密码
+            Route::get('updatePass','FilmUserController@PasUpdate');
 
 
 
@@ -152,9 +155,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('showdoAdd','FilmShowController@doadd');
             //放映编辑
             Route::get('showEdit','FilmShowController@edit');
-            Route::post('showUpdate/{id}','FilmShowController@update');
+            Route::post('showUpdate','FilmShowController@update');
             //删除放映
-            Route::get('showDelete/{id}','FilmShowController@delete');
+            Route::get('showDelete','FilmShowController@delete');
 
 
 

@@ -18,11 +18,14 @@ class FilmShowController extends Controller
      //放映信息
     public function index()
     {
+      // $res = DB::select("select showfilm.id,showfilm.price,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema from showfilm,film,roominfo,cinema where showfilm.fid=film.id and showfilm.Rid=roominfo.id and showfilm.cid=cinema.id and showfilm.id={$request->id}");
  
 
-       $roo = showfilm::join('film','showfilm.fid','=','film.id')
+       $roo = showfilm::where('showfilm.cid',session('uid'))
+                        ->join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
+                        ->select('showfilm.id','showfilm.time','showfilm.status','film.filmname','roominfo.roomname','showfilm.price')
                         ->paginate(2);
 
         $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
@@ -90,19 +93,25 @@ class FilmShowController extends Controller
 
       // echo "这是编辑页面";
       // echo "<pre>";
-       $res = DB::select("select showfilm.id,showfilm.price,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema from showfilm,film,roominfo,cinema where showfilm.fid=film.id and showfilm.Rid=roominfo.id and showfilm.cid=cinema.id and showfilm.id={$request->id}");
-       // var_dump($res);die;
+       // $res = DB::select("select showfilm.id,showfilm.price,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema from showfilm,film,roominfo,cinema where showfilm.fid=film.id and showfilm.Rid=roominfo.id and showfilm.cid=cinema.id and showfilm.id={$request->id}");
+    
+      // $res = showfilm::find($request->only('id'));
+     $res = showfilm::join('film','showfilm.fid','=','film.id')
+                        ->join('roominfo','showfilm.rid','=','roominfo.id')
+                        ->join('cinema','showfilm.cid','=','cinema.id')
+                        ->find($request->only('id'));
 
-          $cinema = cinema::get();
+          //判断影厅是否正有电影放映
           $roominfo = roominfo::where("status",'0')->get();
 
-          $film = film::get();
+          //判断是否是该的登录用户的电影
+          $film = film::where('cid',session('uid'))->get();
           $show = showfilm::get();
 
           //b用汉语判断状态
           $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
 
-      return view("FilmAdmins.FilmShow.FilmShowEdit",['res'=>$res,'cinema'=>$cinema,"room"=>$roominfo,"film"=>$film,'show'=>$show,'arr'=>$arr]);
+      return view("FilmAdmins.FilmShow.FilmShowEdit",['res'=>$res,"room"=>$roominfo,"film"=>$film,'show'=>$show,'arr'=>$arr]);
 
     }
 
@@ -111,8 +120,6 @@ class FilmShowController extends Controller
 
     public function update(Request $request)
     {
-      echo "<pre>";
-      
 
       $info = $request->except('_token','id','time'); 
       $time = $request->only('time');

@@ -22,7 +22,16 @@
 	                </ul>
 	            </div>
 	        @endif
+			<style type="text/css">
+				
+					.yanzheng{
+						color:red;
+						text-align: center;
+					}
 
+
+
+			</style>
 
 
 
@@ -30,11 +39,14 @@
 			            <div class="mws-form-inline">
 			                <div class="mws-form-row">
 			                    <label class="mws-form-label">
-			                      原先密码
+			                      旧密码
 			                    </label>
 			                    <div class="mws-form-item">
-			                        <input type="text" value="" name="filmname" class="medium">
+			                        <input type="password" value="" id="oldpassword" class="medium">
 			                    </div>
+			                    <div   id="oldpasswordmsg" class="yanzheng">
+								
+								</div>
 			                </div>
 
 			                 <div class="mws-form-row">
@@ -42,16 +54,22 @@
 			                       新密码
 			                    </label>
 			                    <div class="mws-form-item">
-			                        <input type="text" value="" name="filmname" class="medium">
+			                        <input type="password" value=""  id="newpassword" class="medium">
 			                    </div>
+			                     <div   id="newpasswordmsg" class="yanzheng">
+								
+								</div>
 			                </div>
 			                <div class="mws-form-row">
 			                    <label class="mws-form-label">
 			                       确认密码
 			                    </label>
 			                    <div class="mws-form-item">
-			                        <input type="text" value="" name="filmname" class="medium">
+			                        <input type="password" value="" id="passwordRepeat" class="medium">
 			                    </div>
+			                     <div   id="confirmpasswordmsg" class="yanzheng">
+								
+								</div>
 			                </div>
 			               
 			               
@@ -64,13 +82,121 @@
 			           
 			            </div>
 			            <div class="mws-button-row">
-			                <input type="submit" class="btn btn-danger" value="修改">
+			                <input type="submit" class="btn btn-danger" id="passwordchange" value="修改">
 			            </div>
 			        </form>
 			    </div>
 			</div>
 
 
+
+
+
+@endsection
+
+
+
+@section('js')
+    <script src="{{asset('/FilmAdmin/validate.js')}}"></script>
+
+<script type="text/javascript">
+
+
+	 	$('#oldpassword').blur(function()
+	 	{
+	 		checkoldpassword = checkOldPassword($(this), $('#oldpasswordmsg'), 6)
+	 		
+	 	})
+	 	
+         
+	 	$('#newpassword').blur(function() 
+        {                         
+            checknewpassword = checkNewPassword($(this),$('#newpasswordmsg'), 6)
+	 	
+
+             
+        })
+
+        $('#passwordRepeat').blur(function() 
+        {       
+             checkrelpassword = checkRelPassword($('#newpassword'), $(this), $('#confirmpasswordmsg'), 6)
+	 		
+
+
+        })
+
+        $('#passwordchange').click(function() 
+        {	
+        	var Opassword = $('#oldpassword').val();
+
+
+        	var Npassword = $('#newpassword').val();
+        	console.log(Opassword);
+        	console.log(Npassword);
+
+
+        	
+
+        	if(checkoldpassword ==100 && checknewpassword == 100 && checkrelpassword == 100)
+        	{	
+        		 $.get("{{url('/FilmAdmins/updatePass')}}",{oldpassword:Opassword,newpassword:Npassword,'_token':'{{csrf_token()}}'},function(data) {
+                	
+	                if(data == '1')
+	                {   
+	                    layer.open({
+	                         
+	                          content: '修改成功！'
+	                        }); 
+	                    
+	                }else if(data == 0)
+	                {
+		            	layer.open({
+		                     
+		                      content: '修改失败！'
+		                    }); 
+	                }else{
+
+	                	layer.open({
+		                     
+		                      content: '原密码错误！'
+		                    }); 
+
+	                }
+
+                })
+        	}else
+        	{
+        		layer.open({  
+                      content:'请填写完整的修改信息！'
+                    });
+        	}
+
+
+
+        	return false;
+        	
+        }) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 
 
 
