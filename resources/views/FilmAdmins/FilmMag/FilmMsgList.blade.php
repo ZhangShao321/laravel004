@@ -229,6 +229,7 @@
     $("span").click(function(){
         //获取id
          var id = $(this).attr('value');
+         
          layer.alert('你确定要删除此信息', {
             skin: 'layui-layer-molv' //样式类名  自定义样式
             ,closeBtn: 1    // 是否显示关闭按钮

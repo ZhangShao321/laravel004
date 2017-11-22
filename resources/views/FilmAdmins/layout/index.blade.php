@@ -286,8 +286,8 @@
                     </div>
                     <ul>
 
-                    	<li><a href="{{asset('/FilmAdmins/Profile')}}">修改头像</a></li>
-                        <li><a href="">修改密码</a></li>
+                    	<li><a href="{{asset('/FilmAdmins/Profile')}}">修改Logo</a></li>
+                        <li><a href="{{asset('FilmAdmins/pass')}}">修改密码</a></li>
                         <li><a href="{{asset('/FilmAdmins/outlogin')}}">退出</a></li>
 
                     </ul>
@@ -480,6 +480,7 @@
     <script type="text/javascript" src="{{asset('/FilmAdmin/layer/layer.js')}}"></script>
     <script type="text/javascript" src="{{asset('/FilmAdmin/layer/extend/layer.ext.js')}}"></script>
     <script src="/FilmAdmin/js/seat/jquery.seat-charts.min.js"></script>
+
 
 
     <script src="{{asset('/FilmAdmin/time/js/jquery.1.7.2.min.js')}}"></script>  

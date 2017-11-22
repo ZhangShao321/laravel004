@@ -18,8 +18,11 @@ class FilmMsgController extends Controller
     {
         
 
-        $film = film::where('filmname','like','%'.$request->input('seach').'%')->paginate($request->input('num',10));
-        $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
+
+     $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('uid'))->paginate($request->input('num',10));
+
+
+         $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
 
         return view('FilmAdmins.FilmMag.FilmMsgList',['film'=> $film,'request'=>$request,'sta'=>$sta]);
         
@@ -27,6 +30,8 @@ class FilmMsgController extends Controller
 
     public function add()
     {
+
+      
         return view('FilmAdmins.FilmMag.FilmMsgAdd');
 
       
@@ -89,9 +94,7 @@ class FilmMsgController extends Controller
                  // var_dump($filepic);
 
                   $info['filepic'] = $filepic;
-
-
-
+                  $info['cid'] = session('uid');
                   //链接数据库
                   $db = film::insert($info);
 
@@ -162,23 +165,23 @@ class FilmMsgController extends Controller
               if($request -> hasFile('filepic'))
               {
 
-                $find = film::find($id);
-                //2,判断图片是否存在
-                //存在就删除
-                if(file_exists("{$find[0]->filepic}"))
-                 {
-                    unlink("{$find[0]->filepic}");
-                 }
-                      //文件名
-                      $name = rand(1111,9999).time();
-                      //获取后缀名
-                      $jpg = $request -> file('filepic')->getClientOriginalExtension();
-                      //移动图片
-                       $request ->file('filepic') -> move('./Uploads',$name.'.'.$jpg);
+                  $find = film::find($id);
+                  //2,判断图片是否存在
+                  //存在就删除
+                  if(file_exists("{$find[0]->filepic}"))
+                   {
+                      unlink("{$find[0]->filepic}");
+                   }
+                        //文件名
+                        $name = rand(1111,9999).time();
+                        //获取后缀名
+                        $jpg = $request -> file('filepic')->getClientOriginalExtension();
+                        //移动图片
+                         $request ->file('filepic') -> move('./Uploads',$name.'.'.$jpg);
 
-                       $filepic = './Uploads/'.$name.'.'.$jpg;
-                       // var_dump($filepic);
-                       $res['filepic'] = $filepic;
+                         $filepic = './Uploads/'.$name.'.'.$jpg;
+                         // var_dump($filepic);
+                         $res['filepic'] = $filepic;
 
               }
 

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\cinema;
+use App\Http\Model\cininfo;
+
+
+use DB;
+use Hash;
 
 class FilmUserController extends Controller
 {
@@ -19,8 +24,86 @@ class FilmUserController extends Controller
 
     //电影院信息
     public function FilmInfo()
+    {   
+            $id = session('uid');
+
+             
+             $res = cinema::join('cininfo','cininfo.cid','=','cinema.id')
+                            ->where('cinema.id',$id)
+                            ->get();
+                    
+        return view('FilmAdmins.FilmUser.info',['res'=>$res]);
+    }
+
+//电影院信息修改
+    public function filmUpdate(Request $request)
     {
-        return view('FilmAdmins.FilmUser.info');
+        
+         
+            $cinema =  $request->except('_token','city','area','','address','license');
+            $city = $request->only('city');
+            $area = $request->only('area');
+            $address = $request->only('address');
+
+            //
+            $arr = array('city'=>$city['city'],'area'=>$area['area'],'address'=>$address['address']);
+
+
+            //获取用户id
+
+            $id = session('uid');
+
+            $license = $request->only('license');
+            
+
+              if($request -> hasFile('license'))
+              {
+
+                 $clic = cinema::find($id);
+
+                  //2,判断图片是否存在
+                  //存在就删除
+                  if(file_exists($clic->license))
+                   {
+                      unlink($clic->license);
+                   }
+
+                //文件名
+                $name = rand(1111,9999).time();
+                //获取后缀名
+                $jpg = $request -> file('license')->getClientOriginalExtension();
+                //移动图片
+                 $request ->file('license') -> move('./Uploads',$name.'.'.$jpg);
+
+                 $license = './Uploads/'.$name.'.'.$jpg;
+                 $cinema['license'] = $license;
+                
+              }
+
+                $cin = DB::table('cinema')->where('id',$id)->update($cinema);
+                $cinfo = DB::table('cininfo')->where('cid',$id)->update($arr);
+
+                if($cin)
+                {
+                      return redirect('/FilmAdmins/info')->with('msg','修改成功'); 
+                }else if($cinfo)
+                {
+                     return redirect('/FilmAdmins/info')->with('msg','修改成功'); 
+                }else if($cin && cinfo)
+                {
+                     return redirect('/FilmAdmins/info')->with('msg','修改成功'); 
+                }else{
+                    return back();
+
+                }
+
+
+
+
+
+               
+
+
     }
 
 
@@ -66,10 +149,10 @@ class FilmUserController extends Controller
                    var_dump($jpg);
 
                     //移动图片
-                    $request ->file('clogo') -> move('./public/FilmPublic/Uploads',$name.'.'.$jpg);
+                    $request ->file('clogo') -> move('./Uploads',$name.'.'.$jpg);
                 }
 
-                $clogo = './public/FilmPublic/Uploads/'.$name.'.'.$jpg;
+                $clogo = './Uploads/'.$name.'.'.$jpg;
 
                 $info =cinema::find(1); 
                 $info->clogo = "{$clogo}";
@@ -91,6 +174,56 @@ class FilmUserController extends Controller
 
 
     //修改密码
+
+
+    public  function PasEdit(Request $request)
+    {
+            echo "这是修改页面";
+            return view('FilmAdmins.FilmUser.FilmPassEdit');
+    }
+
+
+    ///执行修改密码
+
+    public function  PasUpdate(Request $request)
+    {
+
+        // var_dump($request->all());
+     $oldpassword = $request->only('oldpassword');
+     $newpassword = $request->only('newpassword');
+
+      $info =cinema::find(session('uid')); 
+      if(!Hash::check($oldpassword['password'],$info->password))
+      {
+
+         $new = Hash::make($newpassword['newpassword']);
+
+         $update = cinema::where('id',session('uid'))->update(['password',$new]);
+
+         if($update)
+         {
+            echo 1;
+
+
+         }else{
+          echo 0;
+         }
+      }else{
+
+        echo 2;
+      }
+
+      
+      
+
+    
+      
+     
+     
+
+      // var_dump($info);
+
+    }
 
 
 

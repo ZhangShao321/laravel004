@@ -11,10 +11,19 @@
 |
 */
 
+ 
+
+
 Route::group(['namespace'=>'Homes'], function(){
     Route::get('/', 'HomesController@index');
 });
 
+
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
@@ -91,17 +100,20 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 
 Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
-       //电影院登录
+         //电影院登录
         Route::get('FilmLogin','FilmLoginController@index');
         //电影院登录验证码
         Route::get('FilmCode','FilmLoginController@code');
         //处理登录
         Route::post('doAction','FilmLoginController@doAction');
 
+
+        
+
         //退出登录
         Route::get('outlogin','FilmLoginController@outlogin');
-            // ['middleware'=>'filmlogin']
-        Route::group([],function(){
+        // 'middleware'=>'filmlogin'
+        Route::group(['middleware'=>'filmlogin'],function(){
             
             //电影院首页
             Route::get('index','FilmUserController@index');
@@ -109,9 +121,19 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('Profile','FilmUserController@Profile');
             //执行图片修改
             Route::post('dopro','FilmUserController@doPro');
+            //修改密码
+            Route::get('pass','FilmUserController@PasEdit');
+            //执行修改密码
+            Route::get('updatePass','FilmUserController@PasUpdate');
+
+
 
             //电影院信息
             Route::get('info','FilmUserController@FilmInfo');
+            //执行信息修改
+            Route::post('filmUp','FilmUserController@filmUpdate');
+
+
 
             //影片管理
             Route::get('filmMsg','FilmMsgController@index');
@@ -133,9 +155,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('showdoAdd','FilmShowController@doadd');
             //放映编辑
             Route::get('showEdit','FilmShowController@edit');
-            Route::post('showUpdate/{id}','FilmShowController@update');
+            Route::post('showUpdate','FilmShowController@update');
             //删除放映
-            Route::get('showDelete/{id}','FilmShowController@delete');
+            Route::get('showDelete','FilmShowController@delete');
 
 
 
@@ -204,6 +226,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('add','HomesController@add');
     Route::post('store','HomesController@store');
 
+
     //搜索框的页面
     Route::get('search','HomesController@search');
 
@@ -234,9 +257,3 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 
 });
-
-
-
-
-
-
