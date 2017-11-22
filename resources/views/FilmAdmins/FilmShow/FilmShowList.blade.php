@@ -141,7 +141,69 @@
             <div class="dataTables_info" id="DataTables_Table_1_info">
                 Showing 1 to 10 of 57 entries
             </div>
-            <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+             <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+              <!-- {!! $roo->render() !!} -->
+
+
+              <style type="text/css">
+                     .pagination li{
+
+                            background-color: #444444;
+                            border-left: 1px solid rgba(255, 255, 255, 0.15);
+                            border-right: 1px solid rgba(0, 0, 0, 0.5);
+                            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.15) inset;
+                            color: #fff;
+                            cursor: pointer;
+                            display: block;
+                            float: left;
+                            font-size: 12px;
+                            height: 20px;
+                            line-height: 20px;
+                            outline: medium none;
+                            padding: 0 10px;
+                            text-align: center;
+                            text-decoration: none;
+
+                         }
+                         .pagination  .active{
+
+                                 
+                                background-color: #c5d52b;
+                                 background-image: none;
+                                border: medium none;
+                                box-shadow: 0 0 4px rgba(0, 0, 0, 0.25) inset;
+                                color: #323232;
+                               
+
+                                 }
+
+                        .pagination a{
+                            color: #fff;
+                        }
+                        
+                         .pagination .disabled{
+                                  color: #666666;
+                                 cursor: default;
+                                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              </style>
+
+
+
+                               
             </div>
         </div>
     </div>
@@ -158,7 +220,7 @@
 @endsection
 
 
-@section('js');
+@section('js')
 
 <script type="text/javascript">
 
@@ -201,17 +263,8 @@
                 // layer.msg('按钮2');取消执行的按钮
             }});
     });
-
-
-
-
-
-
-    
-       
-
     
 </script>
 
 
-@endsection;
+@endsection

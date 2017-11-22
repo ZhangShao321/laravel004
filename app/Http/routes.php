@@ -11,12 +11,17 @@
 |
 */
 
-// Route::get('/', '/Homes/HomesController@index');
+
+Event::listen('illuminate.query',function($query){
+     var_dump($query);
+ }); 
+
+Route::get('/', '/Homes/HomesController@index');
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
@@ -114,9 +119,16 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('Profile','FilmUserController@Profile');
             //执行图片修改
             Route::post('dopro','FilmUserController@doPro');
+            Route::get('pass','FilmUserController@PasEdit');
+
+
 
             //电影院信息
             Route::get('info','FilmUserController@FilmInfo');
+            //执行信息修改
+            Route::post('filmUp','FilmUserController@filmUpdate');
+
+
 
             //影片管理
             Route::get('filmMsg','FilmMsgController@index');

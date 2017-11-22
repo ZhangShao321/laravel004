@@ -287,7 +287,7 @@
                     <ul>
 
                     	<li><a href="{{asset('/FilmAdmins/Profile')}}">修改Logo</a></li>
-                        <li><a href="">修改密码</a></li>
+                        <li><a href="{{asset('FilmAdmins/pass')}}">修改密码</a></li>
                         <li><a href="{{asset('/FilmAdmins/outlogin')}}">退出</a></li>
 
                     </ul>

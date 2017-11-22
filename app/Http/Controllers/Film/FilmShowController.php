@@ -19,7 +19,15 @@ class FilmShowController extends Controller
     public function index()
     {
        
-       $roo = DB::select("SELECT showfilm.id,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema FROM showfilm left join film On showfilm.fid=film.id Left join roominfo on showfilm.Rid=roominfo.id Left join cinema On showfilm.cid=cinema.id");
+       // $roo = DB::select("SELECT showfilm.id,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema FROM showfilm left join film On showfilm.fid=film.id Left join roominfo on showfilm.Rid=roominfo.id Left join cinema On showfilm.cid=cinema.id");
+
+       $roo = showfilm::join('film','showfilm.fid','=','film.id')
+                        ->join('roominfo','showfilm.rid','=','roominfo.id')
+                        ->join('cinema','showfilm.cid','=','cinema.id')
+                        ->paginate(2);
+  
+                        
+
 
          $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
 
