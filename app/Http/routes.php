@@ -14,10 +14,6 @@
 Route::get('/', '/Homes/HomesController@index');
 
 
-//404找不到页面
-Route::get('/404',function(){
-	abort(404);
-});
 
 
 //=======================后台信息===================================
@@ -28,47 +24,46 @@ Route::get('/404',function(){
 //namepace控制器位于App\Http\Controllers命名空间下
 //
 //后台登录页面
+
 Route::get('/admin/login','admin\AdminLoginController@index'); 
 //执行登录的方法
 Route::post('/admin/dologin','admin\AdminLoginController@dologin');
 //生成登录验证码 
 Route::get('/admin/code','admin\AdminLoginController@code');
         
-	//后台路由组 中间件
-	Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin'], function () {
 
-			//进入后台的首页
-			Route::get('/index', 'CeshiController@index');
+//后台路由组 中间件
+Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin'], function () {
 
-			//后台user用户管理
-			Route::resource('/user','UserController');
+		//进入后台的首页
+		Route::get('/index', 'CeshiController@index');
 
+		//后台user用户管理
+		Route::resource('/user','UserController');
 
-			//后台管理员管理
-			Route::resource('/guanliyuan','GuanliyuanController');
-			//后台管理员修改状态
-			// Route::post('/guanliyuan/zt','GuanliyuanController@zt');
+		//后台管理员管理
+		Route::resource('/guanliyuan','GuanliyuanController');
 
+		//后台商户(电影院)管理
+		Route::resource('/cinema','CinemaController');
 
-			//后台商户(电影院)管理
-			Route::resource('/ciname','CinemaController');
+		//后台申请管理
+		Route::resource('/request','RequestController');
 
-			//后台申请管理
-			Route::resource('/request','RequestController');
+		//后台影视分类
+		Route::resource('/film','FilmController');
 
-			//后台影视分类
-			Route::resource('/film','FilmController');
+		//后台轮播图管理
+		Route::resource('/lunbo','LunboController');
 
-			//后台轮播图管理
-			Route::resource('/lunbo','LunboController');
+		//后台板块管理
+		Route::resource('/block','BlockController');
 
-			//后台板块管理
-			Route::resource('/block','BlockController');
+		//后台网站配置
+		Route::resource('/net','NetController');
 
-			//后台网站配置
-			Route::resource('/net','NetController');
+});
 
-	});
 
 
 
@@ -211,6 +206,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('add','HomesController@add');
     Route::post('store','HomesController@store');
 
+<<<<<<< HEAD
 
     //搜索框的页面
     Route::get('search','HomesController@search');
@@ -241,3 +237,6 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 
 });
+=======
+});
+>>>>>>> bf023ea9517cec0ebec19c6308e83902e4f0ce91
