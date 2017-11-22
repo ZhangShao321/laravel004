@@ -20,7 +20,7 @@ class FilmLoginController extends Controller
        //电影院登录页面
     public function index()
     {
-        return view('FilmAdmins.FilmUser.login');
+        return view('FilmAdmins.FilmUser.filmlogin');
     } 
 
       //电影院信息填写
@@ -52,6 +52,7 @@ class FilmLoginController extends Controller
 
         //获取
         $res = $request->except('_token');
+       
 
 
         $dd = cinlogin::where('cinema',$res['cinema'])->first();

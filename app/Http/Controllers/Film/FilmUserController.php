@@ -66,10 +66,10 @@ class FilmUserController extends Controller
                    var_dump($jpg);
 
                     //移动图片
-                    $request ->file('clogo') -> move('./public/FilmPublic/Uploads',$name.'.'.$jpg);
+                    $request ->file('clogo') -> move('./Uploads',$name.'.'.$jpg);
                 }
 
-                $clogo = './public/FilmPublic/Uploads/'.$name.'.'.$jpg;
+                $clogo = './Uploads/'.$name.'.'.$jpg;
 
                 $info =cinema::find(1); 
                 $info->clogo = "{$clogo}";
@@ -91,6 +91,12 @@ class FilmUserController extends Controller
 
 
     //修改密码
+
+
+    public  function PasEdit(Request $request)
+    {
+            
+    }
 
 
 

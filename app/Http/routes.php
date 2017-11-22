@@ -94,17 +94,20 @@ Route::get('/admin/code','admin\AdminLoginController@code');
 
 
 Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
-       //电影院登录
+         //电影院登录
         Route::get('FilmLogin','FilmLoginController@index');
         //电影院登录验证码
         Route::get('FilmCode','FilmLoginController@code');
         //处理登录
         Route::post('doAction','FilmLoginController@doAction');
 
+
+        
+
         //退出登录
         Route::get('outlogin','FilmLoginController@outlogin');
-            // ['middleware'=>'filmlogin']
-        Route::group([],function(){
+        // 'middleware'=>'filmlogin'
+        Route::group(['middleware'=>'filmlogin'],function(){
             
             //电影院首页
             Route::get('index','FilmUserController@index');
