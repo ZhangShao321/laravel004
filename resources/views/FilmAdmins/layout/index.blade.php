@@ -40,7 +40,7 @@
     body, 
 #mws-container
 {
-    background-image:url('../images/core/bg/paper.png');
+    /*background-image:url('../images/core/bg/paper.png');*/
 }
 
 #mws-sidebar, 
@@ -440,7 +440,7 @@
     </div>
 
     <!-- JavaScript Plugins -->
-    <script src="/FilmAdmin/js/libs/jquery-1.8.3.min.js"></script>
+    <script src="/FilmAdmin/js/libs/jquery-1.8.3.js"></script>
     <script src="/FilmAdmin/js/libs/jquery.mousewheel.min.js"></script>
     <script src="/FilmAdmin/js/libs/jquery.placeholder.min.js"></script>
     <script src="/FilmAdmin/custom-plugins/fileinput.js"></script>
@@ -455,11 +455,11 @@
     <!--[if lt IE 9]>
     <script src="/FilmAdmin/js/libs/excanvas.min.js"></script>
     <![endif]-->
-    <script src="/FilmAdmin/plugins/flot/jquery.flot.min.js"></script>
-    <script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.tooltip.min.js"></script>
-    <script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.pie.min.js"></script>
-    <script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.stack.min.js"></script>
-    <script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.resize.min.js"></script>
+    <!-- <script src="/FilmAdmin/plugins/flot/jquery.flot.js"></script> -->
+    <!-- <script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.tooltip.min.js"></script> -->
+    <!--<script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.pie.min.js"></script>-->
+    <!--<script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.stack.min.js"></script>-->
+    <!--<script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.resize.min.js"></script>-->
     <script src="/FilmAdmin/plugins/colorpicker/colorpicker-min.js"></script>
     <script src="/FilmAdmin/plugins/validate/jquery.validate-min.js"></script>
     <script src="/FilmAdmin/custom-plugins/wizard/wizard.min.js"></script>
