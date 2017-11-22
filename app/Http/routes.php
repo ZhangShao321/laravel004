@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', '/Homes/HomesController@index');
+Route::group(['namespace'=>'Homes'], function(){
+    Route::get('/', 'HomesController@index');
+});
+
 
 
 
