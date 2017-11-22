@@ -19,9 +19,9 @@ class FilmShowController extends Controller
     public function index()
     {
        
-       $roo = DB::select("SELECT showfilm.id,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema FROM showfilm left join film On showfilm.fid=film.id Left join roominfo on showfilm.Rid=roominfo.id Left join cinema On showfilm.cid=cinema.id");
+        $roo = DB::select("SELECT showfilm.id,showfilm.price,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema FROM showfilm left join film On showfilm.fid=film.id Left join roominfo on showfilm.Rid=roominfo.id Left join cinema On showfilm.cid=cinema.id");
 
-         $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
+        $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
 
       return view('FilmAdmins.FilmShow.FilmShowList',['roo'=>$roo,'arr'=>$arr]);
     }
@@ -46,20 +46,22 @@ class FilmShowController extends Controller
         // echo "<pre>";
         $info = $request->except('_token');
 
+        //'time' => "required|regex:/\d{4}[-\/]\d{2}[-\/]\d{2}\s([0-1][0-9]):([0-5][0-9]):([0-5][0-9])/"
+        //'time.regex'=>'时间格式错误',
         $this->validate($request, [
         'time' => 'required',
-        'time' => "required|regex:/\d{4}[-\/]\d{2}[-\/]\d{2}\s([0-1][0-9]):([0-5][0-9]):([0-5][0-9])/"
+        'price' => 'required',
         
         ],[
             'time.required'=>'时间不能为空',
-            'time.regex'=>'时间格式错误',
+            'price.required'=>'价格不能为空',
             ]
         );
         
         //时间格式  ([0-1][0-9]|(2[0-3])):([0-5][0-9]):([0-5][0-9])$#
         
-
-         $res = showfilm::insert($info);
+        $info['cid'] = session('cid') ?? 1;
+        $res = showfilm::insert($info);
 
          if($res)
          {
@@ -84,10 +86,10 @@ class FilmShowController extends Controller
 
       // echo "这是编辑页面";
       // echo "<pre>";
-       $res = DB::select("select showfilm.id,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema from showfilm,film,roominfo,cinema where showfilm.fid=film.id and showfilm.Rid=roominfo.id and showfilm.cid=cinema.id and showfilm.id={$request->id}");
-       // var_dump($res);
+       $res = DB::select("select showfilm.id,showfilm.price,showfilm.status,showfilm.time,film.filmname,roominfo.roomname,cinema.cinema from showfilm,film,roominfo,cinema where showfilm.fid=film.id and showfilm.Rid=roominfo.id and showfilm.cid=cinema.id and showfilm.id={$request->id}");
+       // var_dump($res);die;
 
-        $cinema = cinema::get();
+          $cinema = cinema::get();
           $roominfo = roominfo::where("status",'0')->get();
 
           $film = film::get();

@@ -133,9 +133,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('showdoAdd','FilmShowController@doadd');
             //放映编辑
             Route::get('showEdit','FilmShowController@edit');
-            Route::post('showUpdate','FilmShowController@update');
+            Route::post('showUpdate/{id}','FilmShowController@update');
             //删除放映
-            Route::get('showDelete','FilmShowController@delete');
+            Route::get('showDelete/{id}','FilmShowController@delete');
 
 
 

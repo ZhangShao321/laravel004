@@ -9,7 +9,7 @@
         line-height: 30px;
         text-align: center;
         font-size: 18px;
-        background: white;
+        background: #fff;
     }
 
     #seat-maps .cur{
@@ -27,6 +27,23 @@
         text-align: center;
         font-size: 18px;
         background: red;
+    }
+
+    #seat-maps .curs{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 18px;
+        background: #ddd;
+    }
+    #seat-maps .aaa{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        font-size: 18px;
+        background: white;
     }
     #xiugai{
         height: 50px;
@@ -131,13 +148,29 @@ function registSeat(){
     });
 
         // sc.get(['1_2', '4_1', '7_1', '7_2']).status('none');
-
+    //可选座位
     @foreach($seat as $k=>$v)
 
         $("#{{ $v }}").addClass('cur');
 
     @endforeach
 
+    //不可选的座位
+    $('.seatCharts-cell').each(function(){
+
+        // console.log($(this).attr('class')); //seatCharts-seat seatCharts-cell available cur
+        if($(this).attr('class') != 'seatCharts-seat seatCharts-cell available cur'){
+
+            
+            $(this).click(function(){
+                $(this).removeClass('none');
+            });
+        }
+    })
+
+    zuos();
+
+    //购票
     $('button').click(function(){
 
                 var info = [];
@@ -146,37 +179,37 @@ function registSeat(){
                     //获取座位号
                     var zuo = $(this).attr('id');
 
-                    // console.log(zuo);
-
                     info.push(zuo);
 
                 })
                 
-                // console.log(info);
                 var into = info.join('#');
 
-                // console.log(into);
+                if(!into){
+                    // alert('请选择电影票!!');
+                    layer.alert('请选择电影票!!', {icon: 6});
+ 
+                }else{
 
+                    var reg = /^\w{3}$/;
+                    if(!reg.exec(into)){
 
-                //发送ajax      into = '4_5#4_6#4_7'
-                $.post('{{ url("/FilmAdmins/ticket/shopseat/$id") }}',{_token:'{{ csrf_token() }}', zuo:into},function(data){
+                        // alert('抱歉!一次只能买一张!');
+                        layer.alert('抱歉!一次只能买一张!', {icon: 6});
+                    }else{
 
+                        //发送ajax      into = '4_5#4_6#4_7'
+                        $.post('{{ url("/FilmAdmins/ticket/shopseat/$id") }}',{_token:'{{ csrf_token() }}', zuo:into},function(data){
 
-                    console.log(data);
-                    if(data == '1'){
+                                layer.alert(data, {icon: 6});
 
-                        alert('购买成功');
+                                zuos();
 
-                        zuos();
-
-
-                    } else {
-
-                        // alert(data);
+                        })
                     }
+                    
+                }
 
-
-                },'json')
             })
 
 
@@ -185,20 +218,23 @@ function registSeat(){
             function zuos(){
                 $.post('{{ url("/FilmAdmins/ticket/shopseat_into/$id") }}',{_token:'{{ csrf_token() }}'},function(data){
 
-                    console.log(data);
-                    for (var i = 0; i < data.length; i++) {
-                        
-                        $('#'+data[i]).addClass('none');
-                    }
+                    // console.log(typeof data);
+                   
+                    for(var a in data){
+
+                        //遍历已售票
+                        $('#'+data[a]).removeClass('none');
+                        $('#'+data[a]).addClass('curs');
+
+                    };
+                   
                 },'json');
 
             }
 
-            zuos();
+            
 
 }    
-
-
 
 
 

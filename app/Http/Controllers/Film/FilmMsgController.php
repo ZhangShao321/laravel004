@@ -16,9 +16,10 @@ class FilmMsgController extends Controller
       //影片管理
     public  function index(Request $request)
     {
+        
 
-     $film = film::where('filmname','like','%'.$request->input('seach').'%')->paginate($request->input('num',10));
-         $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
+        $film = film::where('filmname','like','%'.$request->input('seach').'%')->paginate($request->input('num',10));
+        $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
 
         return view('FilmAdmins.FilmMag.FilmMsgList',['film'=> $film,'request'=>$request,'sta'=>$sta]);
         

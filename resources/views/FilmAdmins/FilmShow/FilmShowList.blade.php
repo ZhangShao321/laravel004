@@ -64,7 +64,7 @@
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
                         style="width: 64px;">
-                            影院
+                            价格 /元
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
@@ -110,7 +110,7 @@
                            
                         </td>
                         <td class=" ">
-                             {{$v->cinema}}
+                             {{$v->price}}
                             
                         </td>
                         <td class=" ">
@@ -158,7 +158,7 @@
 @endsection
 
 
-@section('js');
+@section('js')
 
 <script type="text/javascript">
 
@@ -214,4 +214,4 @@
 </script>
 
 
-@endsection;
+@endsection
