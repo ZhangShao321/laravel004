@@ -27,10 +27,10 @@
                             <option value="10" @if(isset($_GET['num'])  ? $_GET['num'] : '10')) selected="selected"  @endif >
                             10
                             </option>
-                            <option value="25" @if($request->num == '25')  selected="selected" @endif >
+                            <option value="25" @if($request->num == '15')  selected="selected" @endif >
                                 25
                             </option>
-                            <option value="50" @if($request->num == '50')  selected="selected" @endif  >
+                            <option value="50" @if($request->num == '25')  selected="selected" @endif  >
                                 50
                             </option>
                        
@@ -145,7 +145,6 @@
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
                     <style type="text/css">
-
                      table{
                         
                             table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
@@ -177,24 +176,19 @@
                                     <td class="bian">{{$v->director}}</td>
                                     <td class="bian">{{$v->protagonist}}</td>
                                     <td class="bian">{{$v->summary}}</td>
-                                    <td class="bian">{{ $v->showtime }}</td>
+                                    <td class="bian">{{ date('Y-m-d',$v->showtime) }}</td>
                                     <td class="bian">{{$v->price}}</td>
                                     <td class="bian">{{$v->shownum}}</td>
                                     <td >
-
                                         <img src="{{asset($v->filepic)}}" style="width:120px;height:60px"  />
                                     </td>
                                   
                                   
-
-
+                                    
                                     <td class=""> {{$sta[$v->status] }}</td>
                                    <td style="overflow: visible; " class="">
                                      <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" >编辑</a> |
                                      <span style="cursor:pointer; color:#C5D52B" class="del"  value="{{$v->id}}"  >删除</span>
-                                    
-
-
                                    </td>
                                 </tr>
                      @endforeach 
@@ -213,6 +207,7 @@
 
 
 
+                               
             </div>
 
         </div>
@@ -295,51 +290,6 @@
 
 @endsection;
 
-
-
-    <script type="text/javascript">
-        // alert($);
-        $("#del").click(function(){
-
-
-
-            layer.alert('你确定要删除该信息吗', {
-            skin: 'layui-layer-molv' //样式类名  自定义样式
-            ,closeBtn: 1    // 是否显示关闭按钮
-            ,anim: 1 //动画类型
-            ,btn: ['确定','取消'] //按钮
-            ,icon: 6    // icon
-            ,yes:function(){
-                layer.msg('按钮1')
-
-                //确认发送ajax
-                var id = $('#del').attr('name');
-
-               console.log();
-
-               
-                $.get("{{asset('/FilmAdmins/delete')}}",{id:id},function(data){
-                      // console.log(data);
-                      alert(data+"删除成功");
-                      });
-
-
-
-
-
-            }
-            ,btn2:function(){
-                layer.msg('按钮2')
-            }});
-                    
-
-
-
-
-
-        });
-
-    </script>
 
 
 

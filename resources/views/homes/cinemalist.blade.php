@@ -3,9 +3,7 @@
 @section('title','电影院列表页')
 
 @section('content')
-<!-- heading-banner start -->
 
-<!-- HOME SLIDER -->
 <!-- heading-banner start -->
 <div class="heading-banner">
     <div class="container">
@@ -20,53 +18,49 @@
     </div>
 </div>
 <!-- heading-banner end -->
-<!-- about-us-area start -->
+
+<!-- 服务宗旨 start -->
 <div class="about-us-area">
     <div class="container">
         <div class="row">
             <!-- about-img start -->
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="about-img">
-                    <img src="img/about/1.jpg" alt="" />
+                    <img src="/homes/img/fuwu.jpg" alt="" />
                 </div>
             </div>
             <!-- about-img end -->
             <!-- about-text start -->
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="about-text">
+                    <h2> 服务 <span>宗旨</span></h2>
                     <h2>
-                        We are <span>Maahi Shop</span></h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum justo vitae
-                        convallis varius. Nulla tristique risus ut justo pulvinar mattis. Phasellus aliquet
-                        egestas mauris in venenatis. Nulla tristique risus ut justo pulvinar mattis. Phasellus
-                        aliquet egestas mauris in venenatis.</p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum justo vitae
-                        convallis varius. Nulla tristique risus ut justo pulvinar mattis. Phasellus aliquet
-                        egestas mauris in venenatis. Nulla tristique risus ut justo pulvinar mattis. Phasellus
-                        aliquet egestas mauris in venenatis.</p>
-                    <p>
-                        Donec aliquet, nibh ut imperdiet venenatis, arcu lectus bibendum velit, et gravida
-                        sapien justo a libero. Suspendisse ornare, urna id finibus vestibulum.</p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi fermentum justo vitae
-                        convallis varius. Nulla tristique risus ut justo pulvinar mattis. Phasellus aliquet
-                        egestas mauris in venenatis. Nulla tristique risus ut justo pulvinar mattis. Phasellus
-                        aliquet egestas mauris in venenatis.
-                    </p>
+                        微笑——微笑挂在脸上，服务记在心里。</h2>
+                    <h2>
+                        诚信——坚持诚信理念，开展优质服务。
+                    </h2>
+                    <h2>
+                        效率——创新服务理念，提升服务效率。
+                   </h2>
+                    <h2>
+                       专业——以专业为导向，以服务为宗旨。
+                    </h2>
+                    <hr class="page-divider small">
+                    <h2> 服务 <span>理念</span></h2>
+                    <h2>
+                       让电影融入生活，让生活充满快乐。
+                    </h2>
                 </div>
             </div>
-            <!-- about-text end -->
         </div>
     </div>
 </div>
-<!-- about-us-area end -->
-<!-- about-counter-area start -->
+<!-- 服务宗旨 end -->
+
+<!-- 中间图 start -->
 <div class="about-counter-area">
     <div class="container">
         <div class="row">
-            <!-- single-counter start -->
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="single-counter">
                     <i class="fa fa-users"></i>
@@ -75,8 +69,6 @@
                     <h4 style="color:white">观影人数</h4>
                 </div>
             </div>
-            <!-- single-counter end -->
-            <!-- single-counter start -->
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="single-counter">
                     <i class="fa fa-trophy"></i>
@@ -85,8 +77,6 @@
                     <h4 style="color:white">影院排行</h4>
                 </div>
             </div>
-            <!-- single-counter end -->
-            <!-- single-counter start -->
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="single-counter">
                     <i class="fa fa-thumbs-up"></i>
@@ -95,8 +85,6 @@
                     <h4 style="color:white">好评</h4>
                 </div>
             </div>
-            <!-- single-counter end -->
-            <!-- single-counter start -->
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="single-counter">
                     <i class="fa fa-home"></i>
@@ -105,16 +93,15 @@
                     <h4 style="color:white">影院数量</h4>
                 </div>
             </div>
-            <!-- single-counter end -->
         </div>
     </div>
 </div>
-<!-- about-counter-area end -->
-<!-- about-team-area start -->
+<!-- 中间图 end -->
+
+<!-- 电影院列表 start -->
 <div class="about-team-area">
     <div class="container">
         <div class="row">
-            <!-- single-about-team start -->
             <div class="col-md-3 col-sm-4">
                 <div class="single-about-team">
                     <div class="about-team-img">
@@ -128,14 +115,9 @@
                     </div>
                 </div>
             </div>
-            <!-- single-about-team end -->
-           
         </div>
     </div>
 </div>
-<!-- about-team-area end -->
+<!-- 电影院列表 end -->
 
-
-
-<!-- shop-area end -->
 @endsection

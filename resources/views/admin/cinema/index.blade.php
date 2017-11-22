@@ -2,10 +2,7 @@
         
 @section('title','商户列表')
 
-
-
 @section('content')
-<<<<<<< HEAD
 
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">

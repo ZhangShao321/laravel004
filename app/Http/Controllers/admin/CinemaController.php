@@ -61,6 +61,9 @@ class CinemaController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        //var_dump($request);die;
         //用only方法拿出添加页面传递过来的你需要的数据存入$input1
         $input1 = $request->only('cinema','password','phone','legal','clogo','time');
 
@@ -216,7 +219,7 @@ class CinemaController extends Controller
         $res = DB::table('cininfo')->where('cid',$id)->update($input2);
         $res = DB::table('cinlogin')->where('cid',$id)->update($input3);
 
-        if($res==1 || $res==0){
+        if($res){
              return redirect('/admin/cinema');
            
         }else{
