@@ -80,6 +80,21 @@ return [
             'url_type'  => 'publicURL',
         ],
 
+        'qiniu' => [
+            'driver'  => 'qiniu',
+            'domains' => [
+                'default'   => 'ozss4v1w9.bkt.clouddn.com', 
+                'https'     => '',
+                'custom'    => '',                
+             ],
+            'access_key'=> 'UWYSmdE5Fe0Frzjn-twX3GNMckcBfYK0Y-iydx4E',  
+            'secret_key'=> 'SBJ8hJRNrc3J3ud_vqBwwDT2nwNP_d2BvTxx6ljw',
+            'bucket'    => 'hudie',
+            'notify_url'=> 'ozss4v1w9.bkt.clouddn.com', 
+            'access'    => 'public'
+        ],
+
+
     ],
 
 ];

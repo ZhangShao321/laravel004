@@ -81,8 +81,10 @@ class GuanliyuanController extends Controller
       
         if($sql){
             return redirect('/admin/guanliyuan');
+            
         }else{
             return back()->withInput();
+            
         }
 
 
@@ -135,8 +137,12 @@ class GuanliyuanController extends Controller
         $sql = user::where('id',$id)->delete();
         if($sql){
             return redirect('/admin/guanliyuan')->with('删除成功');
+            // echo "1";
+           
         }else{
             return back();
+            // echo "0";
+         
         }
     }
 

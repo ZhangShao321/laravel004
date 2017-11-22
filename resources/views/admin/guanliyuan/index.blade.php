@@ -41,7 +41,7 @@
                                 
                                 {{csrf_field()}}
                                 {{method_field('DELETE')}}
-                            <button class="btn btn-danger">删除</button>
+                            <button class="btn btn-danger" id="sc"><span>删除</span></button>
                             
                             </form>
                         </td>
@@ -52,6 +52,12 @@
         </div>
 
     </div>
-
+    
 
 @endsection
+
+<script type="text/javascript">
+         
+   
+   
+</script>
