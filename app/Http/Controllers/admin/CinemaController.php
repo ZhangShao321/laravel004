@@ -19,7 +19,7 @@ class CinemaController extends Controller
      */
     public function index(Request $request)
     {   
-
+        // echo 111111111;die;
         $res = DB::table('cinema')    
 
              //将两张表拼接起来 
@@ -59,6 +59,8 @@ class CinemaController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         //用only方法拿出添加页面传递过来的你需要的数据存入$input1
         $input1 = $request->only('cinema','password','phone','legal','clogo','time');
 

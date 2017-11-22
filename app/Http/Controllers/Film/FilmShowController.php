@@ -45,7 +45,8 @@ class FilmShowController extends Controller
     {
         // echo "<pre>";
         $info = $request->except('_token');
-
+        $info['time'] = strtotime($info['time']); 
+        // var_dump($info);die;
         //'time' => "required|regex:/\d{4}[-\/]\d{2}[-\/]\d{2}\s([0-1][0-9]):([0-5][0-9]):([0-5][0-9])/"
         //'time.regex'=>'时间格式错误',
         $this->validate($request, [
