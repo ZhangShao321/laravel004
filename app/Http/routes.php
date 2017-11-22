@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', '/Homes/HomesController@index');
 
 
 //404找不到页面

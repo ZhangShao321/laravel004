@@ -100,14 +100,11 @@
 </div>
 <!-- header-top-area end -->
 <div class="sticky-wrapper">
-<<<<<<< HEAD
+
 	<header>
 		<!-- 搜索栏，登陆注册 start -->			 
 
-=======
-	<header>			
-		<!-- header-bottom-area start -->            
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
+
 		<div class="header-bottom-area">
 			<div class="container">
 				<div class="row">
@@ -116,17 +113,14 @@
 							<a href="{{url('/homes/index')}}"><img src="/homes/img/logo/logo.gif" alt="" /></a>
 						</div>
 					</div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
 					<div class="col-lg-6 col-md-5 col-sm-5 col-xs-6 hidden-xs">
 						<div class="header-search">
 							<input type="text" placeholder="请输入影片名..." />
 							<button><i class="fa fa-search"></i></button>
 						</div>
 					</div>
-<<<<<<< HEAD
+
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
 						<!-- Header shopping cart -->
 						
@@ -142,12 +136,12 @@
                     </form>
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
 
-=======
+
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
 						<!-- Header shopping cart -->
 						
 						<!-- Header shopping cart -->
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
+
 						<a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a>
 						<div class="my-account-holder float-right">  
 						<p class="user_info_tip" style="color:purple">
@@ -164,21 +158,12 @@
 					        <a class="user_info_reg" href="/homes/center" style="color:purple">个人订单</a>
 					    </p>
 					</div>
-<<<<<<< HEAD
 
-=======
-						
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
 					</div>
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-0
-=======
-		<!-- header-bottom-area end -->
-		<!-- main-menu-area start -->
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
+
 		<div class="main-menu-area hidden-xs">
 			<div class="container">
 				<div class="row">
@@ -196,22 +181,7 @@
 					</div>
 				</div>
 			</div>
-<<<<<<< HEAD
 
-		</div>            
-		<!-- main-menu-area end -->
-				
-	</header>
-</div>
-<!-- HOME SLIDER -->
-
-		</div> 
-		<!-- 导航条 end -->         				
-	</header>
-</div>
-
-
-=======
 		</div>            
 		<!-- main-menu-area end -->
 				
@@ -219,17 +189,14 @@
 </div>
 <!-- HOME SLIDER -->
 @section('content')
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
+
    
 
 
 @show
 <!-- footer start -->
 <footer>
-<<<<<<< HEAD
 
-=======
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
 		<!-- footer-top-area start -->
 		<div class="footer-top-area">
 			<div class="container">
@@ -314,7 +281,7 @@
 			</div>
 		</div>
 		<!-- footer-bottom-area end -->
-<<<<<<< HEAD
+
 	</footer>
 <!-- footer end -->
 
@@ -451,18 +418,16 @@
             </div>
         </div>
     </div>
-=======
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
+
 </footer>
 <!-- footer end -->
 
 <!-- all js here -->
-<<<<<<< HEAD
+
 <!-- modernizr css -->
 <script src="/homes/js/vendor/modernizr-2.8.3.min.js"></script>
 
-=======
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
+
 <!-- jquery latest version -->
 <script src="/homes/js/vendor/jquery-1.12.0.min.js"></script>
 <!-- bootstrap js -->
@@ -484,7 +449,7 @@
 <!-- main js -->
 <script src="/homes/js/main.js"></script>
 <!-- 表单验证js -->
-<<<<<<< HEAD
+
 
 <script src="/homes/js/validate.js"></script>
 <script src="/homes/js/jquery.validate.messages_cn.js"></script>
@@ -492,10 +457,10 @@
 <script src="/homes/js/validate/dist/jquery.validate.min.js"></script>
 <!-- <script src="/homes/js/jquery.validate.messages_cn.js"></script> -->
 
-=======
+
 <script src="/homes/js/validate.js"></script>
 <script src="/homes/js/jquery.validate.messages_cn.js"></script>
->>>>>>> 370d26f0ebb66a8e566e9ef8412f2748baeaf6b9
+
 <!-- 弹框js -->
 <script type="text/javascript" src="{{asset('/homes/js/layer/layer.js')}}"></script>
 <script type="text/javascript" src="{{asset('/homes/js/layer/extend/layer.ext.js')}}"></script>
