@@ -180,7 +180,8 @@
                                     <td class="bian">{{$v->price}}</td>
                                     <td class="bian">{{$v->shownum}}</td>
                                     <td >
-                                        <img src="{{asset($v->filepic)}}" style="width:120px;height:60px"  />
+
+                                        <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$v->filepic.'?imageView2/0/w/120/h/120')}}" style="width:120px;height:60px"  />
                                     </td>
                                   
                                   

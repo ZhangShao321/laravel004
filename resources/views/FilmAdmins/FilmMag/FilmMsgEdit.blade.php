@@ -100,8 +100,8 @@
 			                        图片
 			                    </label>
 			                    <div style="text-align: center; margin-bottom: 5px;">
-			                     
-			                     <img src="{{asset($res->filepic)}}" style="width:220px;height:220px;">
+			                    
+			                     <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $res->filepic.'?imageView2/0/w/220/h/220')}}" style="width:220px;height:220px;">
 			                    		
 
 			                    </div>
