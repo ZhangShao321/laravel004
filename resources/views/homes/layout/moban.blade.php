@@ -32,6 +32,8 @@
 <!-- responsive css -->
 <link rel="stylesheet" href="/homes/css/responsive.css">
 
+<link rel="stylesheet" href="/FilmAdmin/css/seat/jquery.seat-charts.css">
+
 </head>
 <body>
 <!-- header-top-area start -->
@@ -300,6 +302,8 @@
 <!-- 弹框js -->
 <script type="text/javascript" src="{{asset('/homes/js/layer/layer.js')}}"></script>
 <script type="text/javascript" src="{{asset('/homes/js/layer/extend/layer.ext.js')}}"></script>
+
+<script type="text/javascript" src="/FilmAdmin/js/seat/jquery.seat-charts.min.js"></script>
 
 </body>
 </html>

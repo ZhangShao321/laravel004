@@ -102,19 +102,21 @@
 <div class="about-team-area">
     <div class="container">
         <div class="row">
+            @foreach($res as $k => $v)
             <div class="col-md-3 col-sm-4">
                 <div class="single-about-team">
+                    <a href="{{url('/homes/cinemadetail?id=').$v->id}}">
                     <div class="about-team-img">
-                        <a href="{{url('/homes/cinemadetail')}}"><img src="img/about/team.jpg" alt="" /></a>
+                        <img src="{{ asset($v->clogo)}}" alt="" />
                     </div>
                     <div class="about-team-info">
                         <h3>
-                            电影院名称</h3>
-                        <p>地址：</p>
-                        
+                            {{ $v->cinema}}</h3>
                     </div>
+                    </a>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>

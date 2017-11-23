@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\cinema;
 use App\Http\Model\cininfo;
 use App\Http\Model\film;
+use App\Http\Model\showfilm;
+use App\Http\Model\lunbo;
+use App\Http\Model\seat;
 use Hash;
 use DB;
 
@@ -18,8 +21,11 @@ class HomesController extends Controller
     {   
         //热映电影数据
         $res = film::orderBy('shownum','desc')->limit('3')->get();
+        //轮播图数据
+        $res1 = lunbo::get();
+
         //加载首页
-        return view('homes/index',['res' => $res]);
+        return view('homes/index',['res' => $res,'res1' => $res1]);
     }
 
 
@@ -41,27 +47,52 @@ class HomesController extends Controller
     //电影详情页
     public function filmdetail(Request $request)
     {
-        //电影详情数据
-        $res = film::find($request->only('id'));
-        //加载电影详情数据
-        return view('homes/filmdetail',['res' => $res]);
+
+        
+        $aaa = film::find($request->id);
+        // echo "<pre>";var_dump($aaa->filmname);die;
+        $bbb = film::where('filmname',$aaa->filmname)
+                ->join('showfilm','film.id','=','showfilm.fid')
+                ->join('cinema','showfilm.cid','=','cinema.id')
+                ->join('cininfo','cinema.id','=','cininfo.cid')
+                ->select('showfilm.id','showfilm.time','cinema.cinema')
+                ->get();
+        // echo "<pre>";var_dump($bbb);die;
+        //加载电影详情页面
+        return view('homes/filmdetail',['aaa' => $aaa,'bbb' => $bbb]);
     }
 
 
     //电影院列表
     public function cinemalist()
     {
+        //电影院列表数据
         $res = cinema::get();
 
-        return view('homes/cinemalist');
+        //加载电影院列表页面
+        return view('homes/cinemalist',['res' => $res]);
     }
 
 
     //电影院详情
-    public function cinemadetail()
+    public function cinemadetail(Request $request)
     {
+        //电影院详情数据 
+       /* $id = implode($request->only('id'));
+        $res = cinema::find($request->only('id'));
+        $res1 = cininfo::where('cid',$id)->get();
 
-        return view('homes/cinemadetail');
+        $res3 = film::where('cid',$id)->get();*/
+
+        $res = cinema::where('id',$request->only('id'))
+                ->join('film','cinema.id','=','film.cid')
+                
+                ->select('film.id')
+                ->get();
+                dd($res);
+
+        //加载电影院详情页面
+        return view('homes/cinemadetail',['res' => $res,'res1' => $res1,'res3' => $res3]);
     }
 
 
@@ -132,6 +163,27 @@ class HomesController extends Controller
         
     
 
+    //订座的页面
+    public function dingpiao(Request $request)
+    {
+        $id = $request->id;
+       
+        //获取放映信息
+        $res = DB::table('showfilm')->where('id',$id)->first();
+
+        //获取影厅信息
+        $seat = DB::table('roominfo')->where('id',$res->rid)->first();
+        //获取座位信息
+        $data = DB::table('seat')->where('id',$seat->sid)->first();
+
+        //获取座位
+        $seat = $data->seat;
+
+        $seats = explode('#',$seat); 
+
+
+        return view('/homes/shopseat', ['data'=>$data, 'id'=>$id, 'seat'=>$seats]); 
+    }
 
 
 
