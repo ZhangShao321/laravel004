@@ -91,14 +91,14 @@ class LunboController extends Controller
             //插入到数据库
             $sql=lunbo::insert($res);
 
-            if($sql){
+                if($sql){
 
-                return redirect('/admin/lunbo')->with('msg','添加成功');
-            }else{
+                    return redirect('/admin/lunbo')->with('msg','添加成功');
+                }else{
 
-                return back()->withInput();
-            }
-          
+                    return back()->withInput();
+                }
+              
         }else{
 
              return back()->with('lbt','请输入电影名称!');
@@ -256,13 +256,13 @@ class LunboController extends Controller
             //执行删除
             $sql=lunbo::where('id',$id)->delete();
 
-            if($sql){
+                if($sql){
 
-                return redirect('/admin/lunbo')->with('msg','删除成功');    
-            }else{
-                
-                return back();
-            }
+                    return redirect('/admin/lunbo')->with('msg','删除成功');    
+                }else{
+                    
+                    return back();
+                }
 
     }
 }
