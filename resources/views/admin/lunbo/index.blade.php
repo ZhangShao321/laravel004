@@ -1,6 +1,7 @@
 @extends('admin.layout.admins')
         
 @section('title','轮播图列表')
+
 	
 	
 @section('content')
@@ -34,9 +35,9 @@
                             </thead>
                             <tbody>
                                 @foreach($res as $k=>$v)
-                                <tr>
+                                <tr align="center">
                                     <td>{{$v->id}}</td>
-                                    <td><img src="{{asset($v->picname)}}" style="width:180px;height:100px;"></td>
+                                    <td><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{($v->picname)}}" style="width:180px;height:100px;"></td>
                                     <td>{{$v->fname}}</td>
                                     <td>{{date('Y-m-d  H:i:s',$v->time)}}</td>
                                     <td>{{$v->status == 0 ?'正在使用':'未使用'}}</p></td>
@@ -67,5 +68,6 @@
         $('.mws-form-message').delay(2000).slideUp(1000);
 
     </script>
+
 
 @endsection

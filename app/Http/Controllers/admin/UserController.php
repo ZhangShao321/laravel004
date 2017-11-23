@@ -14,15 +14,17 @@ use Hash;
 class UserController extends Controller
 {
 
-    public function index()
-    {
-        //
-        $res = user::all();
-        // echo "<pre>";
-        // var_dump($res);
 
-        return view('admin.user.index',['res'=>$res]);
+    public function index(Request $request)
+    {
         
+        $res = DB::table('user')->
+            where('phone','like','%'.$request->input('search').'%')->
+            orderBy('id','asc')->
+            paginate($request->input('num',10));
+
+        return view('admin.user.index',['res'=>$res,'request'=>$request]);
+
         
     }
 

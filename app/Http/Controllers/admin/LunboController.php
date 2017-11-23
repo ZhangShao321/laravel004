@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 use App\Http\Model\lunbo;
+
+
+use zgldh\QiniuStorage\QiniuStorage;
+use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
+
 class LunboController extends Controller
 {
     /**
@@ -15,10 +22,12 @@ class LunboController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {   
         $res=lunbo::all();
         // dd($res);
         return view('admin.lunbo.index',compact('res'));
+
 
     }
 
@@ -42,17 +51,21 @@ class LunboController extends Controller
      */
     public function store(Request $request)
     {
+
          //判断是否有文件上传
        if($request->hasFile('picname')){
            
-            //获取文件名
-            $name=rand(1111,9999).time();
+              //获取文件
+                $file=$request->file('picname');
+                //初始化七牛
+                $disk=QiniuStorage::disk('qiniu');
 
-            //获取文件名后缀
-            $hz=$request->file('picname')->getClientOriginalExtension();
+                //重命名文件名
+                $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
 
-            //移动文件
-            $request->file('picname')->move('./Uplodes/',$name.'.'.$hz);
+                //上传到文件到七牛
+                $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
         }else{
               
             //如果没有文件上传  判断是否输入了电影名称  
@@ -69,7 +82,8 @@ class LunboController extends Controller
             $res = $request->except('_token');
 
             //修改上传轮播图的名字
-            $res['picname'] = './Uplodes/'.$name.'.'.$hz;
+            //修改上传logo的名字
+            $res['picname'] = 'image_'.$name;
 
             //获取上传时间
             $res['time']=time();
@@ -91,6 +105,7 @@ class LunboController extends Controller
         }
         
         
+
     }
 
     /**
@@ -111,11 +126,13 @@ class LunboController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
     {   
 
         $sql=lunbo::find($id);
         // dd($res);
         return view('admin.lunbo.edit',compact('sql'));
+
     }
 
     /**
@@ -127,54 +144,78 @@ class LunboController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
 
-
-         //判断是否有文件上传
-        
-        if($request->hasFile('picname')){
+            //判断是否有文件上传
+            if($request->hasFile('picname')){
             
-            //先查询
-            $s=lunbo::find($id);
+                /*删除七牛文件的方法*/
+                /*在上传文件前先删除此文件  再上传新的文件并修改数据库的信息*/
 
-            //判断图片是否存在  存在就删除  
-            if(file_exists($s->picname)){
+                //从数据库查询
+                $find=lunbo::find($id);
+                // var_dump($find);die;
 
-                //图片要绝对路径
-                unlink($s->picname);
+                $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+                $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-            }
-            //获取文件名
-            $name=rand(1111,9999).time();
+                //初始化Auth状态：
+                $auth = new Auth($accessKey, $secretKey);
 
-            //获取文件名后缀
-            $hz=$request->file('picname')->getClientOriginalExtension();
+                //初始化BucketManager
+                $bucketMgr = new BucketManager($auth);
 
-            //移动文件
-            $request->file('picname')->move('./Uplodes/',$name.'.'.$hz);
+                //你要测试的空间， 并且这个key在你空间中存在
+                $bucket = 'laravel-upload';
+                $key = "Uplodes/".$find->picname;
+                // var_dump($find->logo);
+
+                //删除$bucket 中的文件 $key   删除七牛里的文件
+                $err = $bucketMgr->delete($bucket,$key);
+                  
+
+           /*执行文件上传*/
+
+                //获取文件
+                $file=$request->file('picname');
+                //初始化七牛
+                $disk=QiniuStorage::disk('qiniu');
+
+                //重命名文件名
+                $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+                //上传到文件到七牛
+                $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+                
+                //判断上传到七牛是否成功
+                if($bool){
+                        //http:/Uplodes/image_981e101cc9a0efecb77f7bb3b7129525.jpg
+                       // $path=$disk->downloadUrl('Uplodes/image_'.$name);
+                        $res = $request->except('_token','_method');
+
+                        //修改上传logo的名字
+                        $res['picname'] = 'image_'.$name;
+
+                        //将修改后的文件名插入到数据库
+                        $sql=lunbo::where('id',$id)->update($res);
+
+                            //判断是否插入数据库成功
+                            if($sql){
+
+                                return redirect('/admin/lunbo')->with('msg','修改成功');
+                            
+                            }else{
+
+                                return back();
+                            }
+
+                }else{
+                           return "上传失败";                    
+                }
+                    
+                    
         }else{
 
-             return back()->with('msg','请上传轮播图!');
-             die;
-        }
-
-
-        $res = $request->except('_token','_method');
-
-       //修改上传logo的名字
-        $res['picname'] = './Uplodes/'.$name.'.'.$hz;
-
-
-        //执行修改
-        $sql=lunbo::where('id',$id)->update($res);
-
-        if($sql){
-
-            return redirect('/admin/lunbo')->with('msg','修改成功');
-        
-        }else{
-
-            return back();
+            return back()->with('msg','请上传文件');
         }
     }
 
@@ -187,16 +228,30 @@ class LunboController extends Controller
     public function destroy($id)
     {   
 
-            //先查询
-            $s=lunbo::find($id);
+     
+            /*删除七牛文件的方法*/
+            /*先删远程文件 再删数据库文件*/
 
-            //判断图片是否存在  存在就删除  
-            if(file_exists($s->picname)){
+            //从数据库查询
+            $find = lunbo::where('id',$id)->first();
+           
+            $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+            $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-                //图片要绝对路径
-                unlink($s->picname);
+            //初始化Auth状态：
+            $auth = new Auth($accessKey, $secretKey);
 
-            }
+            //初始化BucketManager
+            $bucketMgr = new BucketManager($auth);
+
+            //你要测试的空间， 并且这个key在你空间中存在
+            $bucket = 'laravel-upload';
+            $key = "Uplodes/".$find->picname;
+            // var_dump($find->logo);
+
+            //删除$bucket 中的文件 $key   删除七牛里的文件
+            $err = $bucketMgr->delete($bucket,$key);
+             
 
             //执行删除
             $sql=lunbo::where('id',$id)->delete();
@@ -208,5 +263,6 @@ class LunboController extends Controller
                 
                 return back();
             }
+
     }
 }

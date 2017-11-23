@@ -14,7 +14,9 @@ class AdminLoginMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+
+    {    
+
          $id = session('aid');
 
        if(!$id){
@@ -31,7 +33,8 @@ class AdminLoginMiddleware
             return $next($request);
 
         }
-         
+
+          // var_dump($id);
     }
-   
+
 }

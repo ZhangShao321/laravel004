@@ -7,6 +7,7 @@
 @section('content')
 	
 
+
 <div class="mws-panel grid_8">
 		<div class="mws-panel-header">
 	    	<span>修改轮播图</span>
@@ -28,7 +29,7 @@
 	    			<div class="mws-form-row">
 	    				<label class="mws-form-label">轮播图:</label>
 	    				<div class="mws-form-item">
-	    					<img src="{{asset($sql->picname)}}" style="width:130px;height:70px;"><input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="文件上传" name='picname'>
+	    					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{($sql->picname)}}?imageView2/2/w/160/h/160"><input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="文件上传" name='picname'>
 	    				</div>
 	    			</div>
 					
@@ -70,5 +71,6 @@
         $('.mws-form-message').delay(2000).slideUp(1000);
 
     </script>
+
 
 @endsection

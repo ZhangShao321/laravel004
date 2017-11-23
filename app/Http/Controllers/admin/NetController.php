@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\config;
+
 use zgldh\QiniuStorage\QiniuStorage;
+use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
+
+
 
 class NetController extends Controller
 {
@@ -80,87 +85,107 @@ class NetController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        /* $find = config::where('id',$id)->first();
+
+            $accessKey = 'UWYSmdE5Fe0Frzjn-twX3GNMckcBfYK0Y-iydx4E';
+            $secretKey = 'SBJ8hJRNrc3J3ud_vqBwwDT2nwNP_d2BvTxx6ljw';
+
+            //初始化Auth状态：
+            $auth = new Auth($accessKey, $secretKey);
+
+            //初始化BucketManager
+            $bucketMgr = new BucketManager($auth);
+
+            //你要测试的空间， 并且这个key在你空间中存在
+            $bucket = 'hudie';
+            $key = "Uplodes/".$find->logo;
+            var_dump($find->logo);
+
+            //删除$bucket 中的文件 $key
+            $err = $bucketMgr->delete($bucket,$key);*/
+            // echo "\n====> delete $key : \n";
+         /*   if ($err !== null) {
+                var_dump($err);
+            } else {
+                echo "Success!";
+            } 
+
+            die; */
                         
         //判断是否有文件上传
         if($request->hasFile('logo')){
             
-           //先查询
+
+            /*删除七牛文件的方法*/
+            /*在上传文件前先删除此文件  再上传新的文件并修改数据库的信息*/
+
+            //从数据库查询
             $find = config::where('id',$id)->first();
-      
-            $n="http://ozss4v1w9.bkt.clouddn.com/Uplodes/".$find->logo;
-             echo $n; 
+           
+            $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+            $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-            //判断图片是否存在  存在就删除    
-            if(file_exists($n))
-             {  
-                 echo "存在";die;
-              
-                 unlink($n);
-             } else{
-                 echo "不存在";die;
+            //初始化Auth状态：
+            $auth = new Auth($accessKey, $secretKey);
 
-             }          
+            //初始化BucketManager
+            $bucketMgr = new BucketManager($auth);
 
-             //获取文件
-             $file=$request->file('logo');
-             //初始化七牛
-             $disk=QiniuStorage::disk('qiniu');
+            //你要测试的空间， 并且这个key在你空间中存在
+            $bucket = 'laravel-upload';
+            $key = "Uplodes/".$find->logo;
+            // var_dump($find->logo);
 
-            //重命名文件名
-            $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+            //删除$bucket 中的文件 $key   删除七牛里的文件
+            $err = $bucketMgr->delete($bucket,$key);
+             
 
-            //上传到文件到七牛
-           $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+                /*执行文件上传*/
 
-        }
+                //获取文件
+                $file=$request->file('logo');
+                //初始化七牛
+                $disk=QiniuStorage::disk('qiniu');
 
-        if($bool){
-            //http:/Uplodes/image_981e101cc9a0efecb77f7bb3b7129525.jpg
-           // $path=$disk->downloadUrl('Uplodes/image_'.$name);
-            $res = $request->except('_token','_method');
+                //重命名文件名
+                $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
 
-            //修改上传logo的名字
-            $res['logo'] = 'image_'.$name;
+                //上传到文件到七牛
+                $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
 
-            // dd($res);
-             $sql=config::where('id',$id)->update($res);
 
-                if($sql){
+                //判断上传到七牛是否成功
+                if($bool){
+                        //http:/Uplodes/image_981e101cc9a0efecb77f7bb3b7129525.jpg
+                       // $path=$disk->downloadUrl('Uplodes/image_'.$name);
+                        $res = $request->except('_token','_method');
 
-                    return redirect('/admin/net')->with('msg','修改成功');
-                
+                        //修改上传logo的名字
+                        $res['logo'] = 'image_'.$name;
+
+                        //将修改后的文件名插入到数据库
+                        $sql=config::where('id',$id)->update($res);
+
+                            //判断是否插入数据库成功
+                            if($sql){
+
+                                return redirect('/admin/net')->with('msg','修改成功');
+                            
+                            }else{
+
+                                return back();
+                            }
+
                 }else{
-
-                    return back();
+                           return "上传失败";                    
                 }
-
-         
-        }else{
-           return "上传失败";
-
-        }
-
-
-
-/*
-        $res = $request->except('_token','_method');
-
-       //修改上传logo的名字
-        $res['logo'] = './Uplodes/'.$name.'.'.$hz;
-
-
-        //执行修改
-        $sql=config::where('id',$id)->update($res);
-
-        if($sql){
-
-            return redirect('/admin/net')->with('msg','修改成功');
-        
+                    
+                    
         }else{
 
-            return back();
+            return back()->with('msg','请上传文件');
         }
-*/
     }
 
     /**

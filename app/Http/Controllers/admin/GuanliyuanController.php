@@ -12,6 +12,9 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Model\user;
 
+use DB;
+
+
 class GuanliyuanController extends Controller
 {
     /**
@@ -81,10 +84,10 @@ class GuanliyuanController extends Controller
       
         if($sql){
             return redirect('/admin/guanliyuan');
-            
+
         }else{
             return back()->withInput();
-            
+
         }
 
 
@@ -133,16 +136,21 @@ class GuanliyuanController extends Controller
     public function destroy($id)
     {
 
+
+        
        
         $sql = user::where('id',$id)->delete();
         if($sql){
-            return redirect('/admin/guanliyuan')->with('删除成功');
-            // echo "1";
-           
+
+             // return redirect('/admin/guanliyuan')->with('msg','删除成功');
+            echo "删除成功!";
+            
+
         }else{
-            return back();
-            // echo "0";
-         
+            // return back();
+            echo "删除失败!";
+
+
         }
     }
 

@@ -201,7 +201,7 @@
                         <li><a href="#">修改密码</a></li>
 
 
-                        <li><a href="/admin/login">退出</a></li>
+                        <li><a href="/admin/outlogin">退出</a></li>
 
                       
                     </ul>
@@ -371,9 +371,10 @@
 
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
-    
+
     <!-- layer -->
     <script src="/admins/js/layer/layer.js"></script>
+
 
     @section('js')
 

@@ -67,7 +67,9 @@
                               <div class="mws-button-row">
 
                                    {{csrf_field() }}
+
                                    <input id="but" type="submit" class="btn btn-danger" value="添加">
+
 
                               
               
@@ -90,7 +92,6 @@
                           
           layer.msg('管理员添加成功:)');
       });
-
 
 
 </script>

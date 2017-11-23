@@ -16,7 +16,12 @@ class RequestController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         //
+=======
+
+        return view('admin.request.index');
+>>>>>>> 6d03b9cafe831cd8b80312b24fd41c9090c564b6
     }
 
     /**
