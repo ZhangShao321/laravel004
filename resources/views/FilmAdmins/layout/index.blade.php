@@ -159,7 +159,7 @@
                 ?>
             	<!-- User Photo -->
             	<div id="mws-user-photo">
-                	<img src="{{ $res->clogo }}" alt="User Photo">
+                	<img src=" alt="User Photo">
                 </div>
                 
                 <!-- Username and Functions -->

@@ -104,7 +104,7 @@ class FilmMsgController extends Controller
 
                 }
 
-                  $info['cid'] = session('uid');
+                  $info['cid'] = session('cid');
                   //链接数据库
                   $db = film::insert($info);
 

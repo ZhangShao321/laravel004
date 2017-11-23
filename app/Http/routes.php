@@ -56,6 +56,12 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		//后台管理员管理
 		Route::resource('/guanliyuan','GuanliyuanController');
         Route::post('/guanliyuan/phone','GuanliyuanController@phone');
+        Route::post('/guanliyuan/work','GuanliyuanController@work');
+        Route::get('/guanli/pass','GuanliyuanController@pass');
+        Route::post('/guanli/dopass','GuanliyuanController@dopass');
+        Route::get('/guanli/photo','GuanliyuanController@photo');
+        Route::post('/guanli/dophoto','GuanliyuanController@dophoto');
+        
 
 		//后台商户(电影院)管理
 		Route::resource('/cinema','CinemaController');
