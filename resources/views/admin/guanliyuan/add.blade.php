@@ -62,7 +62,7 @@
                                   <div class="mws-form-row">
                                       <label class="mws-form-label">状态</label>
                                       <div class="mws-form-item">
-                                          <select class="status">
+                                          <select class="status" name="status">
                                               <option selected value="1">普通管理员</option>
                                               <option value="2">中级管理员</option>
                                               <option value="3">超级管理员</option>

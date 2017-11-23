@@ -55,7 +55,7 @@ class GuanliyuanController extends Controller
     {
 
 
-         //表单验证
+        /* //表单验证
         $this->validate($request, [
             'phone' => 'required|regex:/^\w{8,16}$/',
             'password' => 'required|regex:/^\S{6,16}$/',
@@ -70,7 +70,7 @@ class GuanliyuanController extends Controller
             'password.required'=>'密码不能为空',
             'password.regex'=>'密码格式不正确',         
 
-        ]);
+        ]);*/
 
 
         $res=$request->except('_token','repass');
@@ -79,7 +79,7 @@ class GuanliyuanController extends Controller
 
         $res['lastlogin']=time();
        
-       
+       // var_dump($res);die;
        $sql=user::insert($res);  
       
         if($sql){

@@ -4,13 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-
-    "hash": "f92982079d7132cd40d773337065931a",
-    "content-hash": "fe0b885972f661ff0015f5692f8a061f",
-
-    "hash": "4e5955b2d15691333a5d94280aff5271",
-    "content-hash": "f7648d75978b09c26b20f5280a005720",
-
+    "hash": "31b586713f1fe91418305d1091c63a2b",
+    "content-hash": "6690f2cb26ec0a030f9cb952bbe2401c",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -269,8 +264,6 @@
             "time": "2017-07-22 12:18:28"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "endroid/qrcode",
             "version": "2.4.0",
             "source": {
@@ -340,7 +333,6 @@
             "time": "2017-10-22 12:17:28"
         },
         {
->>>>>>> 12a6bc7227cb3bfeca7963e1e048f16e2d895e59
             "name": "flc/alidayu",
             "version": "v2.0.6",
             "source": {
