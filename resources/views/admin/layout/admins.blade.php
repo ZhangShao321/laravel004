@@ -294,10 +294,10 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="icon-align-justify" ></i>板块管理</a>
+                        <a href="#"><i class="icon-align-justify" ></i>友情链接</a>
                         <ul class='closed'>
-                            <li><a href="/admin/block/create">添加板块</a></li>
-                            <li><a href="/admin/block">板块列表</a></li>
+                            <li><a href="/admin/block/create">添加友情链接</a></li>
+                            <li><a href="/admin/block">友情链接列表</a></li>
                         </ul>
                     </li>
 

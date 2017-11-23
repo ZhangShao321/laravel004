@@ -56,9 +56,6 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		//后台影视分类
 		Route::resource('/film','FilmController');
 
-		//后台轮播图管理
-		Route::resource('/lunbo','LunboController');
-
 		//后台板块管理
 		Route::resource('/block','BlockController');
 
