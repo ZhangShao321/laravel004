@@ -100,26 +100,24 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="product-tab">
-                    <!-- Nav tabs -->
-                    <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="home">
                             <div class="row">
                                 <div class="product-curosel">
-                                    <!-- single-product start -->
+                                 @foreach($res2 as $k=>$v)
                                     <div class="col-lg-12">
                                         <div class="single-product">
                                             <div class="product-img">
                                                 <a href="single-product.html">
-                                                    <img class="primary-img" src="/homes/img/product/1.jpg" alt="" />
-                                                    <img class="secondary-img" src="/homes/img/product/2.jpg" alt="" />
+                                                    <img class="primary-img" src="{{url($v->filepic)}}" alt="" />
+                                                    <img class="secondary-img" src="{{url($v->filepic)}}" alt="" />
                                                 </a>
                                                 <span class="sale">
                                                     精品
                                                 </span>
                                                 <div class="product-action">
                                                     <div class="pro-button-top">
-                                                        <a href="#">
+                                                        <a href="{{url('/homes/dingpiao?id=').$v->id}}">
                                                             购票
                                                         </a>
                                                     </div>
@@ -128,17 +126,18 @@
                                             <div class="product-info">
                                                 <h3>
                                                     <a href="single-product.html">
-                                                        电影名字
+                                                        {{$v->filmname}}
                                                     </a>
                                                 </h3>
                                                 <div class="pro-price">
                                                     <span class="normal">
-                                                        ￥50
+                                                        ￥{{$v->price}}
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                @endforeach  
                                 </div>
                             </div>
                         </div>
