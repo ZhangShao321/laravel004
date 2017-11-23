@@ -86,7 +86,7 @@
 			                    <div class="mws-form-item">
 			                    	<div style="width:180px;height:220px;border:1px solid #C5C5C5;margin-bottom: 5px">
 			                    		
-										  <img src="{{asset($res[0]->license)}}" style="width:100%;height:218px;" >
+										  <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$res[0]->license.'?imageView2/0/w/220/h/220')}}" style="width:100%;height:218px;" >
 
 			                    	</div>
 			                        <input type="file" name="license" value="" class="medium">

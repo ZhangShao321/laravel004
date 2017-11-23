@@ -9,9 +9,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Model\cinema;
 use App\Http\Model\cininfo;
 
+use zgldh\QiniuStorage\QiniuStorage;
+
 
 use DB;
 use Hash;
+use Qiniu\Storage\UploadManager;
+use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
+
 
 class FilmUserController extends Controller
 {
@@ -48,9 +54,6 @@ class FilmUserController extends Controller
             //
             $arr = array('city'=>$city['city'],'area'=>$area['area'],'address'=>$address['address']);
 
-
-            //获取用户id
-
             $id = session('uid');
 
             $license = $request->only('license');
@@ -61,21 +64,36 @@ class FilmUserController extends Controller
 
                  $clic = cinema::find($id);
 
-                  //2,判断图片是否存在
-                  //存在就删除
-                  if(file_exists($clic->license))
-                   {
-                      unlink($clic->license);
-                   }
+                  //删除原先的图片
+                  $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+                  $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-                //文件名
-                $name = rand(1111,9999).time();
-                //获取后缀名
-                $jpg = $request -> file('license')->getClientOriginalExtension();
-                //移动图片
-                 $request ->file('license') -> move('./Uploads',$name.'.'.$jpg);
+                  //初始化Auth状态：
+                  $auth = new Auth($accessKey, $secretKey);
 
-                 $license = './Uploads/'.$name.'.'.$jpg;
+                  //初始化BucketManager
+                  $bucketMgr = new BucketManager($auth);
+
+                  //你要测试的空间， 并且这个key在你空间中存在
+                  $bucket = 'laravel-upload';
+                  $key = 'Uplodes/'.$clic->license;
+
+                  //删除$bucket 中的文件 $key
+                  $err = $bucketMgr->delete($bucket, $key);
+                
+
+                     //获取文件
+                   $file=$request->file('license');
+                   //初始化七牛
+                   $disk=QiniuStorage::disk('qiniu');
+
+                  //重命名文件名
+                  $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+                  //上传到文件到七牛
+                 $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
+                 $license = 'image_'.$name;
                  $cinema['license'] = $license;
                 
               }
@@ -116,47 +134,59 @@ class FilmUserController extends Controller
         $id = session('uid');
     
         $res = cinema::find($id);
+
+        
+
         return view('FilmAdmins.FilmUser.Profile',['res'=>$res]);
     }
 
 
-    //执行修改
+    //执行修改logo
     public function doPro(Request $request)
     {
-
              //先删除原先的图片
 
             //1,先查询
-            $find = cinema::find(1);
-            //2,判断图片是否存在
-            //存在就删除
-            if(file_exists($find->clogo))
-             {
-                unlink($find->clogo);
-             }
-  
+            $find = cinema::where('id',session('uid'))->first();
+            // //判断文件是否上传
+            if($request -> hasFile('clogo'))
+            {
 
-                $res = $request->only(['clogo']);
 
-                // //判断文件是否上传
-                if($request -> hasFile('clogo'))
-                {
-                    //文件名
-                    $name = rand(1111,9999).time();
+               $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+              $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-                    //获取后缀名
-                    $jpg = $request -> file('clogo')->getClientOriginalExtension();
-                   var_dump($jpg);
+              //初始化Auth状态：
+              $auth = new Auth($accessKey, $secretKey);
 
-                    //移动图片
-                    $request ->file('clogo') -> move('./Uploads',$name.'.'.$jpg);
-                }
+              //初始化BucketManager
+              $bucketMgr = new BucketManager($auth);
 
-                $clogo = './Uploads/'.$name.'.'.$jpg;
+              //你要测试的空间， 并且这个key在你空间中存在
+              $bucket = 'laravel-upload';
+              $key = 'Uplodes/'.$find->clogo;
 
-                $info =cinema::find(1); 
-                $info->clogo = "{$clogo}";
-                if($info->save())
+            //删除$bucket 中的文件 $key
+              $err = $bucketMgr->delete($bucket, $key);
+             $res = $request->only(['clogo']);
+
+
+               //获取文件
+               $file=$request->file('clogo');
+               //初始化七牛
+               $disk=QiniuStorage::disk('qiniu');
+
+              //重命名文件名
+              $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+              //上传到文件到七牛
+             $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
+              //上传
+              $clogo = 'image_'.$name;
+              $info =cinema::find(1); 
+              $info->clogo = "{$clogo}";
+              if($info->save())
                 {
                     // echo "修改成功";
                     return redirect('/FilmAdmins/Profile')->with('msg','修改成功');
@@ -167,6 +197,15 @@ class FilmUserController extends Controller
                     return back();
 
                 }
+
+            }else{
+
+                 return back()->with('msg','您还未选择图片');
+
+
+            }
+                
+               
    
     }
 
@@ -221,7 +260,7 @@ class FilmUserController extends Controller
      
      
 
-      // var_dump($info);
+      
 
     }
 
