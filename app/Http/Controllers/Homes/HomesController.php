@@ -78,21 +78,21 @@ class HomesController extends Controller
     public function cinemadetail(Request $request)
     {
         //电影院详情数据 
-       /* $id = implode($request->only('id'));
+        $id = implode($request->only('id'));
         $res = cinema::find($request->only('id'));
         $res1 = cininfo::where('cid',$id)->get();
 
-        $res3 = film::where('cid',$id)->get();*/
-
-        $res = cinema::where('id',$request->only('id'))
-                ->join('film','cinema.id','=','film.cid')
-                
-                ->select('film.id')
+       
+        
+        $res2 = cinema::where('cinema.id',$request->id)
+                ->join('cininfo','cinema.aid','=','cininfo.id')
+                ->join('showfilm','cininfo.cid','=','showfilm.cid')
+                ->join('film','showfilm.fid','=','film.id')
+                ->select('film.filmname','film.filepic','film.price','showfilm.id')
                 ->get();
-                dd($res);
-
+                
         //加载电影院详情页面
-        return view('homes/cinemadetail',['res' => $res,'res1' => $res1,'res3' => $res3]);
+        return view('homes/cinemadetail',['res' => $res,'res1' => $res1,'res2' => $res2]);
     }
 
 
