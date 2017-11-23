@@ -56,8 +56,8 @@ class AdminLoginController extends Controller
            }
 
            //判断输入的密码和数据库的密码是否一致
-          // if(!Hash::check($res['password'],$uname->password)){
-            if($res['password']!=$uname->password){
+          if(!Hash::check($res['password'],$uname->password)){
+            // if($res['password']!=$uname->password){
                 return redirect('/admin/login')->with('msg','密码输入错误');
            }
 

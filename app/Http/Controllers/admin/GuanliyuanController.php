@@ -26,7 +26,7 @@ class GuanliyuanController extends Controller
     {
 
 
-        $res=user::where('auth','1')->get();
+        $res=user::where('auth','1')->where('status','>','0')->get();
          
         return view('admin.guanliyuan.index',compact('res'));
 
@@ -73,7 +73,7 @@ class GuanliyuanController extends Controller
         ]);
 
 
-        $res=$request->except('_token');
+        $res=$request->except('_token','repass');
        
         $res['password']=Hash::make($res['password']);
 
@@ -140,6 +140,22 @@ class GuanliyuanController extends Controller
             return redirect('/admin/guanliyuan')->with('删除成功');
         }else{
             return back();
+        }
+    }
+
+
+    //添加管理员验证
+    public function phone(Request $request)
+    {
+        $phone = $request->except('_token')['phone'];
+
+        $data = DB::table('user')->where('phone',$phone)->first();
+
+        if ($data) {
+
+            echo "管理员已存在";
+        } else {
+            echo '√';
         }
     }
 

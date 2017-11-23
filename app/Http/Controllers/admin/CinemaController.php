@@ -17,18 +17,18 @@ class CinemaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+        public function index(Request $request)
     {   
-        // echo 111111111;die;
+
         $res = DB::table('cinema')    
 
              //将两张表拼接起来 
              //链接两个表的方法join
              //join('表名','主表id','与主表关联的附表的关联id')
-            ->join('cininfo','cinema.id', '=', 'cininfo.cid')   
+            ->join('cininfo','cininfo.cid', '=', 'cinema.id')->join('cinlogin','cinlogin.cid', '=', 'cinema.id')  
 
             //选择需要用的字段查询
-            ->select('cinema.id','cinema.cinema','cinema.phone','cinema.clogo','cinema.time','cinema.legal','cininfo.city','cininfo.area','cininfo.address')
+            ->select('cinema.id','cinema.cinema','cinema.phone','cinema.clogo','cinema.time','cinema.legal','cininfo.city','cininfo.area','cininfo.address','cinlogin.cinema','cinlogin.time')
             ->where('cinema.cinema','like','%'.$request->input('search').'%')
             ->orderBy('cinema.id','asc')
             ->paginate($request->input('num',10));
@@ -36,8 +36,8 @@ class CinemaController extends Controller
             // var_dump($res);die;
         return view('admin.cinema.index',['res'=>$res,'request'=>$request]);
 
-    }
 
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -60,7 +60,7 @@ class CinemaController extends Controller
     public function store(Request $request)
     {
 
-        
+
         //用only方法拿出添加页面传递过来的你需要的数据存入$input1
         $input1 = $request->only('cinema','password','phone','legal','clogo','time');
 
@@ -111,7 +111,8 @@ class CinemaController extends Controller
             $input3['cid'] = $cinema;
 
 
-            $input3['password'] = Hash::make($input1['password']);
+            // $input3['password'] = Hash::make($input1['password']);
+            $input3['password'] = $input1['password'];
 
             $ctime = time();
             $input3['time'] = $ctime;

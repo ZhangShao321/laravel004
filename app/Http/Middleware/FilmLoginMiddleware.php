@@ -15,9 +15,9 @@ class FilmLoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $id = session('uid');
+        $id = session('cid');
 
-        if(!$id){
+        if($id){
 
             $ip = $request->ip();
 
@@ -25,10 +25,10 @@ class FilmLoginMiddleware
 
             file_put_contents('FileLoginid.txt',$str,FILE_APPEND);
 
-            return redirect("/FilmAdmins/FilmLogin");
-        } else {
-
             return $next($request);
+        } else {
+            
+            return redirect("/FilmAdmins/FilmLogin");
 
         }
 

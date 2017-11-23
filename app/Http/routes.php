@@ -55,6 +55,7 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台管理员管理
 		Route::resource('/guanliyuan','GuanliyuanController');
+        Route::post('/guanliyuan/phone','GuanliyuanController@phone');
 
 		//后台商户(电影院)管理
 		Route::resource('/cinema','CinemaController');
