@@ -31,12 +31,15 @@ class FilmUserController extends Controller
     //电影院信息
     public function FilmInfo()
     {   
-            $id = session('uid');
+            $id = session('cid');
 
-             
+
+           
              $res = cinema::join('cininfo','cininfo.cid','=','cinema.id')
                             ->where('cinema.id',$id)
                             ->get();
+
+               // echo "后台信息";die;
                     
         return view('FilmAdmins.FilmUser.info',['res'=>$res]);
     }
@@ -54,7 +57,7 @@ class FilmUserController extends Controller
             //
             $arr = array('city'=>$city['city'],'area'=>$area['area'],'address'=>$address['address']);
 
-            $id = session('uid');
+            $id = session('cid');
 
             $license = $request->only('license');
             
@@ -131,7 +134,7 @@ class FilmUserController extends Controller
     {
 
         //获取用户session
-        $id = session('uid');
+        $id = session('cid');
     
         $res = cinema::find($id);
 
@@ -147,7 +150,7 @@ class FilmUserController extends Controller
              //先删除原先的图片
 
             //1,先查询
-            $find = cinema::where('id',session('uid'))->first();
+            $find = cinema::where('id',session('cid'))->first();
             // //判断文件是否上传
             if($request -> hasFile('clogo'))
             {
@@ -231,13 +234,13 @@ class FilmUserController extends Controller
      $oldpassword = $request->only('oldpassword');
      $newpassword = $request->only('newpassword');
 
-      $info =cinema::find(session('uid')); 
+      $info =cinema::find(session('cid')); 
       if(!Hash::check($oldpassword['password'],$info->password))
       {
 
          $new = Hash::make($newpassword['newpassword']);
 
-         $update = cinema::where('id',session('uid'))->update(['password',$new]);
+         $update = cinema::where('id',session('cid'))->update(['password',$new]);
 
          if($update)
          {

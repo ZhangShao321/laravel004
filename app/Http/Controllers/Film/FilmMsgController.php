@@ -24,7 +24,7 @@ class FilmMsgController extends Controller
         
 
 
-     $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('uid'))->paginate($request->input('num',10));
+     $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('cid'))->paginate($request->input('num',10));
 
 
          $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
@@ -104,7 +104,7 @@ class FilmMsgController extends Controller
 
                 }
 
-                  $info['cid'] = session('uid');
+                  $info['cid'] = session('cid');
                   //链接数据库
                   $db = film::insert($info);
 
