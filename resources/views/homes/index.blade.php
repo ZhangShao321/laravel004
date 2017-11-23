@@ -5,14 +5,15 @@
 @section('content')
 
 <!-- 轮播图 start -->
-<div class="slider-wrap">
+<div style="width:auth" class="slider-wrap">
 	<div class="fullwidthbanner-container">
 		<div class="fullwidthbanner">
 			<ul>
 				@foreach($res1 as $k => $v)
 				<li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="on">
 					<!--MAIN IMAE-->
-					<img src="{{asset($v->picname)}}" alt="" data-bgposition="center top" data-duration=""
+                    
+					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $v->picname }}" alt="" data-bgposition="center top" data-duration=""
 						data-ease="Power0.easeInOut" data-bgfit="cover" data-bgrepeat="no-repeat"  />
 					<!-- LAYER NR. -->
 					<div class="tp-caption skewfromrightshort skewtorightshort tp-resizeme" data-x="center"
@@ -53,9 +54,9 @@
     <div class="container">
         <div class="row">
             <div class="section-title text-center">
-                <h3>
-                    热映电影
-                </h3>
+                
+                <h2 style="color:red;margin:3px"> 热 映 电 影 </h2>
+                
             </div>
             @foreach($res as $k=>$v)
             <div class="col-lg-4 col-md-4 col-sm-4">
@@ -107,9 +108,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h3>
-                        即将上映
-                    </h3>
+                   <h2 style="color:red;margin:3px"> 即 将 上 映 </h2>
                 </div>
             </div>
         </div>

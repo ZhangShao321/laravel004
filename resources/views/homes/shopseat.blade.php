@@ -53,23 +53,23 @@
     }
 </style>
 @section('content') 
-
+<center>
 <div class="mws-panel grid_8">
-    <div class="mws-panel-header">
-        <span>座位图</span>
-    </div>
+    
     <div class="mws-panel-body no-padding">
         <form class="mws-form">
         <div class="mws-form-block">
 
                  
             <div class="mws-form-row">
-                <label class="mws-form-label"><h3>座位图</h3></label>
+                <label class="mws-form-label"><h2> 座 位 图 </h2></label>
                 <input type="hidden" id="x" value="{{ $data->hang }}"  name="hang">
                 <input type="hidden" id="y"  value="{{ $data->lie }}" name="lie">
                  <br/>  
-                <div class="mws-form-item"> 
-                    <div id="seat-maps"></div>
+                <div style="border:2px solid blue;padding:0 auto;" class="mws-form-item">
+                <div style="clear:both"></div> 
+                    <div style=" margin:0 auto;float:left" id="seat-maps"></div>
+                <div style="clear:both"></div> 
                     <ul id="selected-seats">
                     </ul>
                 </div>
@@ -86,7 +86,7 @@
     </div>
 </div>
 
-
+</center>
 
 
 @endsection

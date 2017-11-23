@@ -37,8 +37,8 @@
 </head>
 <body>
 <!-- header-top-area start -->
-<div class="header-top-area hidden-xs">
-    <div class="container">
+<div  class="header-top-area hidden-xs">
+    <div  class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-4">
                 <div class="welcome">
@@ -57,8 +57,9 @@
                 <div class="top-menu">
                     <ul>
                         <h2 style="color:white">
-                            欢迎来到傻家伙电影院
+                            
                         </h2>
+                        <h2 ><marquee behavior="" style="color:red;font-family:'宋体'" direction="left"><i> 欢 迎 来 到 傻 家 伙 电 影 院 !!! </i></marquee></h2>
                     </ul>
                 </div>
             </div>
@@ -68,10 +69,10 @@
 <!-- header-top-area end -->
 
 
-<div class="sticky-wrapper">
+<div  class="sticky-wrapper">
 	<header>
 		<!-- 搜索栏，登陆注册 start -->			 
-		<div class="header-bottom-area">
+		<div style="background:#eee" class="header-bottom-area">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
@@ -111,8 +112,9 @@
 			</div>
 		</div>
 		<!-- 搜索栏，登陆注册 end -->
-		
+	
 		<!-- 导航条 start -->
+        <div style="padding:0px" class="container"> 
 		<div class="main-menu-area hidden-xs">
 			<div class="container">
 				<div class="row">
@@ -123,7 +125,9 @@
 									<li><a href="{{url('/homes/index')}}">首页</a></li>
 									<li><a href="{{url('/homes/filmlist')}}">电影</a></li>
 									<li><a href="{{url('/homes/cinemalist')}}">电影院</a></li>
-									<li style="float:right"><h2 >让生活遇见电影，让电影融入生活！</h2></li>
+									<li style="float:right">
+                                        <h2 ><marquee behavior="" style="color:blue;font-family:'宋体'" direction="left"><i>让生活遇见电影，让电影融入生活！</i></marquee></h2>
+                                    </li>
 								</ul>
 							</nav>
 						</div>
@@ -131,16 +135,19 @@
 				</div>
 			</div>
 		</div> 
+        </div>
 		<!-- 导航条 end -->         				
 	</header>
 </div>
-
+<div class="container" style="background:#eee;padding:0px"> 
 @section('content')
    
 
 
 @show
+</div>
 <!-- footer start -->
+<div style="padding:0px" class="container">
 <footer>
     <div class="footer-top-area">
         <div class="container">
@@ -274,6 +281,7 @@
         </div>
     </div>
 </footer>
+</div>
 <!-- footer end -->
 
 
@@ -308,10 +316,9 @@
 <script type="text/javascript" src="{{asset('/homes/js/layer/extend/layer.ext.js')}}"></script>
 
 <script type="text/javascript" src="/FilmAdmin/js/seat/jquery.seat-charts.min.js"></script>
-
-</body>
-</html>
-
 @section('js')
 
 @show
+</body>
+</html>
+
