@@ -51,7 +51,8 @@ class FilmShowController extends Controller
         // echo "<pre>";
         $info = $request->except('_token');
         $info['time'] = strtotime($info['time']); 
-      ,
+
+        
         $this->validate($request, [
         'time' => 'required',
         'price' => 'required',
@@ -64,7 +65,7 @@ class FilmShowController extends Controller
         
         //时间格式  ([0-1][0-9]|(2[0-3])):([0-5][0-9]):([0-5][0-9])$#
         
-        $info['cid'] = session('cid') ?? 1;
+        $info['cid'] = session('cid');
         $res = showfilm::insert($info);
 
          if($res)
