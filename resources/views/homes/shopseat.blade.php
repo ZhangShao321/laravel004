@@ -49,7 +49,28 @@
         height: 50px;
         padding-left: 20px;
         background: lightblue;
-        padding-top: 18px;
+        padding-top: 10px;
+    }
+    #seat-maps{
+        margin: 10px 300px; 
+        /*border: 2px solid blue;*/
+        width: auto;
+        height: auto;   
+    }
+
+    #mmm{
+        /*border:2px solid blue;*/
+        width: auto;
+        height: auto;
+        padding: 0px auto; 
+    }
+    #ccc{
+        /*border:2px solid blue;*/
+        width: 300;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        background: red; 
     }
 </style>
 @section('content') 
@@ -66,19 +87,20 @@
                 <input type="hidden" id="x" value="{{ $data->hang }}"  name="hang">
                 <input type="hidden" id="y"  value="{{ $data->lie }}" name="lie">
                  <br/>  
-                <div style="border:2px solid blue;padding:0 auto;" class="mws-form-item">
-                <div style="clear:both"></div> 
-                    <div style=" margin:0 auto;float:left" id="seat-maps"></div>
-                <div style="clear:both"></div> 
-                    <ul id="selected-seats">
-                    </ul>
+                <div id="mmm" style="" class="mws-form-item">
+                    <div id="ccc">大屏幕</div>
+                    <div  class=""  id="seat-maps">
+                        
+                    </div>
+                 
                 </div>
+                <ul id="selected-seats"></ul>
             </div> 
             <br>
         </div>
         </form>
             <div class="mws-button-row" id="xiugai"  >
-                <button  class="btn btn-danger">购买</button>
+                <button   class="btn btn-danger">购买</button>
                 
             </div>
             <!-- <div id="legend"></div> -->
