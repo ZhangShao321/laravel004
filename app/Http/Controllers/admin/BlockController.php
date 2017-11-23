@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\model\friendlink;
+use DB;
 
 class BlockController extends Controller
 {
@@ -14,11 +16,16 @@ class BlockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $res = DB::table('friendlink')
+        ->where('linkname','like','%'.$request->input('search').'%')
+        ->orderBy('id','asc')
+        ->paginate($request->input('num',10));
 
-        return view('admin.block.index');
-
+        // echo"<pre>";
+        // var_dump($res);die;
+        return view('admin.block.index',['res'=>$res,'request'=>$request]);
     }
 
     /**
@@ -41,7 +48,19 @@ class BlockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->except('_token','_method');
+
+        // var_dump($input);die;
+        $res = friendlink::insert($input);
+
+        // echo "<pre>";
+        // var_dump($res);die;
+
+        if($res){
+            return redirect('/admin/block');
+        }else{
+            return back();
+        }
     }
 
     /**
@@ -63,7 +82,9 @@ class BlockController extends Controller
      */
     public function edit($id)
     {
-        //
+        $res = friendlink::find($id);
+
+        return view('admin.block.edit',['res'=>$res]);
     }
 
     /**
@@ -75,7 +96,18 @@ class BlockController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $input = $request->except('_token','_method');
+        
+        $res = DB::table('friendlink')->where('id',$id)->update($input);
+
+        if($res){
+            return redirect('/admin/block');
+        }else{
+            return back();
+        }
+        
+
     }
 
     /**
@@ -86,6 +118,13 @@ class BlockController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res=DB::table('friendlink')->where('id',$id)->delete();
+
+        // var_dump($res);die;
+         if($res){
+             return redirect('/admin/user')->with('删除成功');
+         }else{
+             return back();
+         }
     }
 }

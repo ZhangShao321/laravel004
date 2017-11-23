@@ -42,6 +42,8 @@ Route::get('/admin/login','admin\AdminLoginController@index');
 Route::post('/admin/dologin','admin\AdminLoginController@dologin');
 //生成登录验证码 
 Route::get('/admin/code','admin\AdminLoginController@code');
+//退出登录的方法
+Route::get('/admin/outlogin','admin\AdminLoginController@outlogin');
         
 
 //后台路由组 中间件
@@ -72,8 +74,8 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		//后台影视分类
 		Route::resource('/film','FilmController');
 
-		//后台轮播图管理
-		Route::resource('/lunbo','LunboController');
+        //后台轮播图管理
+        Route::resource('/lunbo','LunboController');
 
 		//后台板块管理
 		Route::resource('/block','BlockController');
@@ -206,8 +208,8 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 
 
 
-
 //===============================前台信息=============================
+
 
 
 
@@ -264,3 +266,4 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 
 });
+

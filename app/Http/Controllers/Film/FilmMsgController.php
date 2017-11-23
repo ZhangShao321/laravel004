@@ -23,23 +23,24 @@ class FilmMsgController extends Controller
     {
         
 
+        $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('cid'))->paginate($request->input('num',10));
 
-     $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('cid'))->paginate($request->input('num',10));
 
+        $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
 
-         $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
-
+        
         return view('FilmAdmins.FilmMag.FilmMsgList',['film'=> $film,'request'=>$request,'sta'=>$sta]);
         
     }
 
+    //加载添加页面
     public function add()
     {
 
-      
-        return view('FilmAdmins.FilmMag.FilmMsgAdd');
+        $data = DB::table('filmtype')->where('status',1)->get();
 
-      
+        return view('FilmAdmins.FilmMag.FilmMsgAdd',['data'=>$data]);
+
     }
 
     //处理添加
@@ -62,7 +63,7 @@ class FilmMsgController extends Controller
         ],[
             'filmname.required'=>'影片名称不能为空',
             'keywords.required'=>'关键字不能为空',
-            'director.required'=>'导员不能为空',
+            'director.required'=>'导演不能为空',
             'protagonist.required'=>'主演不能为空',
             'filmtime.required'=>'时长不能为空',
             'price.required'=>'价格不能为空',

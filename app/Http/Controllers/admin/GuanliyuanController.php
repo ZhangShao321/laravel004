@@ -73,6 +73,7 @@ class GuanliyuanController extends Controller
         //添加时间
         $res['lastlogin']=time();
        
+
         // var_dump($res);die;
         //修改
         $id = DB::table('user')->insertGetId($res);  
@@ -93,6 +94,7 @@ class GuanliyuanController extends Controller
             
         }else{
             return back()->withInput('添加失败');
+
         }
 
 
@@ -171,12 +173,21 @@ class GuanliyuanController extends Controller
     public function destroy($id)
     {
 
+
+        
        
         $sql = user::where('id',$id)->delete();
         if($sql){
-            return redirect('/admin/guanliyuan')->with('删除成功');
+
+             // return redirect('/admin/guanliyuan')->with('msg','删除成功');
+            echo "删除成功!";
+            
+
         }else{
-            return back();
+            // return back();
+            echo "删除失败!";
+
+
         }
     }
 

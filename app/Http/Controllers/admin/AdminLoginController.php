@@ -97,4 +97,23 @@ class AdminLoginController extends Controller
 
     }
 
+
+     //退出登录
+
+    public function outlogin(Request $request)
+    {
+
+        //清除session里的aid
+        $tc = $request->session()->forget('aid');
+
+        if($tc){
+
+            return redirect('/admin/outlogin');
+        }else{
+
+            return back();
+        }
+
+    }
+
 }

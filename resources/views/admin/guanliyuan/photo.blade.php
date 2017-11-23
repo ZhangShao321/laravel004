@@ -33,9 +33,9 @@
                                    </div>
                                    <div style="width:240px;height:240px;border:1px solid #C5C5C5;margin:auto;">
 								
-										<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px"/>
-										
-									</div>
+                										<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px"/>
+                										
+                									</div>
 					                
 					              <div class="mws-form-row">
 					                    <label class="mws-form-label">

@@ -44,7 +44,7 @@ class FilmUserController extends Controller
         return view('FilmAdmins.FilmUser.info',['res'=>$res]);
     }
 
-//电影院信息修改
+    //电影院信息修改
     public function filmUpdate(Request $request)
     {
         

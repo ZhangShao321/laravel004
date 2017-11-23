@@ -143,11 +143,7 @@
             </div>
              <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
               {!! $roo->render() !!}
-
-
-
-
-                               
+                        
             </div>
         </div>
     </div>
@@ -206,7 +202,7 @@
             ,btn2:function(){
                 // layer.msg('按钮2');取消执行的按钮
             }});
-    });
+    })
     
 </script>
 
