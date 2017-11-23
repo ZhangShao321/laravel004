@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Model\filmtype;
+use DB;
 class FilmController extends Controller
 {
     /**
@@ -119,4 +120,37 @@ class FilmController extends Controller
             return back();
         }
     }
+
+
+    //修改状态
+    public function work(Request $request)
+    {
+
+        // echo '1';die;
+        $data = $request->except('_token');
+
+        // var_dump($data);die;
+
+        if($data['status'] == '1'){
+
+            $res1 = DB::table('filmtype')->where('id',$data['id'])->update(['status'=>'0']);
+            if($res1){
+                echo '1';
+            }else{
+                echo '0';
+            }
+        }else if($data['status'] == '0'){
+            $res2 = DB::table('filmtype')->where('id',$data['id'])->update(['status'=>'1']);
+            // var_dump($res2);die;
+            if($res2){
+                echo '2';
+            }else{
+                echo '0';
+            }
+        }
+    }
+
+
+
+
 }

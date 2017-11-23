@@ -73,6 +73,7 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台影视分类
 		Route::resource('/film','FilmController');
+        Route::post('/film/work','FilmController@work');
 
         //后台轮播图管理
         Route::resource('/lunbo','LunboController');
