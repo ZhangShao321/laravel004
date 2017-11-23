@@ -109,17 +109,17 @@
     //弹框
     $('#fun').click(function(){
 
-     layer.alert('申请成功，请等待处理', {
+     layer.alert('请确认填写信息', {
         skin: 'layui-layer-molv' //样式类名  自定义样式
         ,closeBtn: 1    // 是否显示关闭按钮
         ,anim: 1 //动画类型
-        ,btn: ['确认'] //按钮
+        ,btn: ['确认','返回'] //按钮
         ,icon: 6    // icon
         ,yes:function(){
             layer.msg('跳转中')
         }
         ,btn2:function(){
-            layer.msg('跳转中')
+            layer.msg('返回中')
         }});
     });
     

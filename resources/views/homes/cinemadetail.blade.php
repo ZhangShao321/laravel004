@@ -26,13 +26,14 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12">
+                @foreach($res as $k => $v)
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="single-pro-tab-content">
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="home">
                                     <a href="#">
-                                        <img src="img/product/1.jpg" alt="" />
+                                        <img src="{{asset($v->clogo)}}" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -40,44 +41,43 @@
                     </div>
                     <div class="col-md-6 col-sm-6 col-xs-12 shop-list">
                         <div class="product-info product-single">
+                            <h1>
+                                    {{$v->cinema}}
+                            </h1>
+                            <hr class="page-divider">
                             <h3>
-                                <a href="single-product.html">
-                                    电影院名字
-                                </a>
+                                    联系电话：{{$v->phone}}
                             </h3>
-                            <div class="pro-rating">
-                                <i class="fa fa-star">
-                                </i>
-                                <i class="fa fa-star">
-                                </i>
-                                <i class="fa fa-star">
-                                </i>
-                                <i class="fa fa-star">
-                                </i>
-                                <i class="fa fa-star">
-                                </i>
+                            <hr class="page-divider">
+                            <div class="product-desc">
+                                @foreach($res1 as $k => $v)
+                                <p>
+                                    地址：{{$v->city}}{{$v->area}}{{$v->address}}
+                                </p>
+                                @endforeach
                             </div>
                             <hr class="page-divider">
                             <div class="product-desc">
                                 <p>
-                                    地址：
+                                    儿童票：1.3米以下儿童免票无座,1.3米以上儿童半价观影
                                 </p>
-                                <ul>
-                                    <li>
-                                        - Cras tristique neque a mauris volutpat, eget sodales neque elementum.
-                                    </li>
-                                    <li>
-                                        - Vestibulum iaculis velit sed dolor suscipit pretium.
-                                    </li>
-                                    <li>
-                                        - Etiam mattis risus id leo imperdiet tincidunt.
-                                    </li>
-                                </ul>
                             </div>
                             <hr class="page-divider">
+                            <div class="product-desc">
+                                <p>
+                                    停车：VIP免费停车
+                                </p>
+                            </div>
+                            <hr class="page-divider">
+                            <div class="product-desc">
+                                <p>
+                                    3D影院：免押金
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
 		</div>
 	</div>
@@ -120,7 +120,7 @@
                                                 <div class="product-action">
                                                     <div class="pro-button-top">
                                                         <a href="#">
-                                                            查看详情
+                                                            购票
                                                         </a>
                                                     </div>
                                                 </div>
@@ -148,7 +148,7 @@
         </div>
     </div>
 </div>
-<!-- 上映电影 end -->			
+<!-- 上映电影 end -->	
 
 @endsection
 
