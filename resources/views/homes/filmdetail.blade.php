@@ -4,7 +4,6 @@
 
 @section('content')
 
-
 <!-- heading-banner start -->
 <div class="heading-banner">
 	<div class="container">
@@ -21,9 +20,7 @@
 </div>
 <!-- heading-banner end -->
 
-
 <!-- 电影详情 start -->
-
 <div class="single-product-area">
 	<div class="container">
 		<div class="row">
@@ -31,7 +28,6 @@
 				<div class="row">
 					<div class="col-md-6 col-sm-6 col-xs-12">
 						<div class="single-pro-tab-content">
-
                             @foreach($res as $k=>$v)
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="home">
@@ -39,12 +35,10 @@
 										<img src="{{asset($v->filepic) }}" alt="" /></a>
                                 </div>	
 							</div>
-                            @endforeach
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-6 col-xs-12 shop-list">
 						<div class="product-info product-single">
-
 							<h3><a href="single-product.html">{{$v->filmname}}</a></h3>
 							<div class="pro-price">
 								<span class="normal">￥{{$v->price}}</span> 
@@ -106,6 +100,5 @@
 	</div>
 </div>
 <!-- 底部横条 end -->
-
 @endsection
 

@@ -4,25 +4,22 @@
 
 @section('content')
 
-
+<!-- heading-banner start -->
 <div class="heading-banner">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <ul class="breadcrumb">
                     <li><a href="{{url('/homes/index')}}">首页</a></li>
-
                     <li class="active">商户申请</li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-
 <!-- heading-banner end -->
 
 <!-- 商户申请添加 start -->
-
 <form class="form-horizontal" action="{{url('/homes/store')}}" method="post" id="box" enctype="multipart/form-data">
     <fieldset>
     <div class="form-group">
@@ -30,7 +27,6 @@
             电影院名称
         </label>
         <div class="col-sm-5">
-
             <input type="text" class="form-control" id="inputEmail3" placeholder="请输入影院名字" name="cinema" id="cinema">
         </div>
     </div>
@@ -40,7 +36,6 @@
         </label>
         <div class="col-sm-5">
             <input type="text" class="form-control" id="legal" placeholder="请输入法人名字" name="legal">
-
         </div>
     </div>
     <div class="form-group">
@@ -48,7 +43,6 @@
             联系电话
         </label>
         <div class="col-sm-5">
-
             <input type="text" class="form-control" id="phone" placeholder="请输入手机号" name="phone">
         </div>
     </div>
@@ -58,7 +52,6 @@
         </label>
         <div class="col-sm-5">
             <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
-
         </div>
     </div>
     <div class="form-group">
@@ -66,7 +59,6 @@
             省份
         </label>
         <div class="col-sm-5">
-
             <input type="text" class="form-control" id="city" placeholder="请输入省份" name="city">
         </div>
     </div>
@@ -84,13 +76,11 @@
         </label>
         <div class="col-sm-5">
             <input type="text" class="form-control" id="address" placeholder="请输入详细地址" name="address">
-
         </div>
     </div>
    
 
     <div class="form-group">
-
         <label for="file" class="col-sm-2 control-label">
             电影院执照
         </label>
@@ -99,7 +89,6 @@
         </div>
     </div>
     <input type="hidden" id="time" name="time" value="{{time()}}">
-
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-5">
             {{ csrf_field() }}
@@ -109,7 +98,6 @@
     </div>
     </fieldset>
 </form>
-
 <!-- 商户申请添加 end -->
 
 @endsection
@@ -207,4 +195,3 @@
 </script>
 @endsection
 <!-- js end -->
-

@@ -11,7 +11,6 @@
 			<div class="col-lg-12">
 				<ul class="breadcrumb">
 					<li><a href="{{url('/homes/index')}}">首页</a></li>
-
 					<li class="active">电影列表</li>
 				</ul>
 			</div>
@@ -19,7 +18,6 @@
 	</div>
 </div>
 <!-- heading-banner end -->
-
 
 <!-- content start -->
 <div class="shop-area">
@@ -171,5 +169,4 @@
     </div>
 </div>
 <!-- content end -->
-
 @endsection

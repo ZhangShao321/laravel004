@@ -5,6 +5,7 @@
 @section('content')
 
 <!-- HOME SLIDER -->
+ 
 <div class="heading-banner">
     <div class="container">
         <div class="row">
@@ -18,6 +19,7 @@
         </div>
     </div>
 </div>
+
 <!-- heading-banner start -->
 <form class="form-horizontal" action="{{url('/homes/insert')}}" method="post" id="box" enctype="multipart/form-data">
     <fieldset>
@@ -110,6 +112,7 @@
 
     </fieldset>
 </form>
+
 
 @endsection
 
