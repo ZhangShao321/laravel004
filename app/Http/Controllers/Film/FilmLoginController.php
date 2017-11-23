@@ -20,7 +20,7 @@ class FilmLoginController extends Controller
        //电影院登录页面
     public function index()
     {
-        return view('FilmAdmins.FilmUser.login');
+        return view('FilmAdmins.FilmUser.filmlogin');
     } 
 
       //电影院信息填写
@@ -48,39 +48,32 @@ class FilmLoginController extends Controller
 
     public function doAction(Request $request)
     {
-        // echo "这是处理登录方法";
+        // echo "这是处理登录方法";die;
 
         //获取
         $res = $request->except('_token');
+       
 
+        //判断用户是否存在
+        $ddd = cinlogin::where('cinema',$res['cinema'])->first();
 
-        $dd = cinlogin::where('cinema',$res['cinema'])->first();
-        // dd($dd);
+        echo "<pre>";
 
-       if(!$dd)
+        // var_dump($ccc);
+        // var_dump($ddd->password);die;
+        
+
+        if(!$ddd)
         {
             return redirect('/FilmAdmins/FilmLogin')->with('msg','您输入的用户名或密码错误');
             
-    
         }
 
-        if($dd->password != $res['password'])
-        {
-            return redirect('/FilmAdmins/FilmLogin')->with('msg','密码错误');
+        //验证密码
+        if(!Hash::check($res['password'],$ddd->password)){
+
+            return redirect('/FilmAdmins/FilmLogin')->with('msg','用户名或密码不正确');
         }
-
-        
-
-        //使用hash
-        // Hash::check('plain-text', $hashedPassword)
-
-        // if(!Hash::check($res['password'],$uname->password))
-        // {
-        //     return redirect('/FilmAdmins/FilmLogin')->with('msg','您输入的用户名或密码错误');
-        
-
-            
-        // }
 
 
         //验证验证码
@@ -89,7 +82,9 @@ class FilmLoginController extends Controller
             return redirect('/FilmAdmins/FilmLogin')->with('msg','验证码错误');
         }
     
-        session(['uid' => $dd->id]);
+        session(['cid' => $ddd->cid]);
+
+        // var_dump(session('cid'));die;
 
         return redirect("/FilmAdmins/index");
 
@@ -108,7 +103,7 @@ class FilmLoginController extends Controller
 
         if($res)
         {
-                return  redirect("/FilmAdmins/FilmLogin");
+            return  redirect("/FilmAdmins/FilmLogin");
         }
         else{
             return back();

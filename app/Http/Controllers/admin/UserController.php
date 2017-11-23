@@ -14,7 +14,6 @@ use Hash;
 class UserController extends Controller
 {
 
-
     public function index(Request $request)
     {
         
@@ -24,7 +23,6 @@ class UserController extends Controller
             paginate($request->input('num',10));
 
         return view('admin.user.index',['res'=>$res,'request'=>$request]);
-
         
     }
 

@@ -11,11 +11,19 @@
 |
 */
 
+ 
+
+
 Route::group(['namespace'=>'Homes'], function(){
     Route::get('/', 'HomesController@index');
 });
 
 
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 
@@ -49,6 +57,13 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台管理员管理
 		Route::resource('/guanliyuan','GuanliyuanController');
+        Route::post('/guanliyuan/phone','GuanliyuanController@phone');
+        Route::post('/guanliyuan/work','GuanliyuanController@work');
+        Route::get('/guanli/pass','GuanliyuanController@pass');
+        Route::post('/guanli/dopass','GuanliyuanController@dopass');
+        Route::get('/guanli/photo','GuanliyuanController@photo');
+        Route::post('/guanli/dophoto','GuanliyuanController@dophoto');
+        
 
 		//后台商户(电影院)管理
 		Route::resource('/cinema','CinemaController');
@@ -59,8 +74,8 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		//后台影视分类
 		Route::resource('/film','FilmController');
 
-		//后台轮播图管理
-		Route::resource('/lunbo','LunboController');
+        //后台轮播图管理
+        Route::resource('/lunbo','LunboController');
 
 		//后台板块管理
 		Route::resource('/block','BlockController');
@@ -94,17 +109,20 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 
 Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
-       //电影院登录
+         //电影院登录
         Route::get('FilmLogin','FilmLoginController@index');
         //电影院登录验证码
         Route::get('FilmCode','FilmLoginController@code');
         //处理登录
         Route::post('doAction','FilmLoginController@doAction');
 
+
+        
+
         //退出登录
         Route::get('outlogin','FilmLoginController@outlogin');
-            // ['middleware'=>'filmlogin']
-        Route::group([],function(){
+        // 'middleware'=>'filmlogin'
+        Route::group(['middleware'=>'filmlogin'],function(){
             
             //电影院首页
             Route::get('index','FilmUserController@index');
@@ -112,9 +130,19 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('Profile','FilmUserController@Profile');
             //执行图片修改
             Route::post('dopro','FilmUserController@doPro');
+            //修改密码
+            Route::get('pass','FilmUserController@PasEdit');
+            //执行修改密码
+            Route::get('updatePass','FilmUserController@PasUpdate');
+
+
 
             //电影院信息
             Route::get('info','FilmUserController@FilmInfo');
+            //执行信息修改
+            Route::post('filmUp','FilmUserController@filmUpdate');
+
+
 
             //影片管理
             Route::get('filmMsg','FilmMsgController@index');
@@ -155,7 +183,7 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('/room/seat','FilmRoomController@seat');
             Route::get('/room/edit/{id}','FilmRoomController@edit');
             Route::post('/room/update/{id}','FilmRoomController@update');
-            Route::get('/room/delete/{id}','FilmRoomController@delete');
+            Route::post('/room/delete/{id}','FilmRoomController@delete');
             Route::post('/room/work','FilmRoomController@work');
             Route::get('/room/seats/{id}','FilmRoomController@seats');
             Route::get('/room/seatedit/{id}','FilmRoomController@seatedit');
@@ -180,8 +208,8 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 
 
 
-
 //===============================前台信息=============================
+
 
 
 
@@ -206,6 +234,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     //申请商户
 	Route::get('add','HomesController@add');
     Route::post('store','HomesController@store');
+
 
     //搜索框的页面
     Route::get('search','HomesController@search');
@@ -237,9 +266,4 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 
 });
-
-
-
-
-
 

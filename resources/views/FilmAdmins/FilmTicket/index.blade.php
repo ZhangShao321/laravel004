@@ -30,7 +30,7 @@
                     <td>{{ $v->id }}</td>
                     <td>{{ $v->filmname }}</td>
                     <td>{{ $v->roomname }}</td>
-                    <td>{{ date('Y-m-d H:i:s', $v->time) }}上映</td>
+                    <td>{{ date('Y-m-d H:i:s', $v->time) }}</td>
                     <td>￥{{ $v->price }} 元</td>
                     <td>
                         @if($v->status==1)

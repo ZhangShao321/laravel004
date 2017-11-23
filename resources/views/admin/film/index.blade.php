@@ -4,6 +4,7 @@
 
 	
 @section('content')
+
 <div class="mws-panel grid_8">
 
         <div class="mws-panel-header">
@@ -60,6 +61,7 @@
 
     </div>
 
+
 @endsection
 
  @section('js')
@@ -69,6 +71,5 @@
         $('.mws-form-message').delay(2000).slideUp(1000);
 
     </script>
-
 
 @endsection

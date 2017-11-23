@@ -17,6 +17,7 @@ class FilmController extends Controller
      */
     public function index()
     {
+
         $res=filmtype::all();
         return view('admin.film.index',compact('res'));
 
@@ -29,9 +30,7 @@ class FilmController extends Controller
      */
     public function create()
     {
-
         return view('admin.film.add');
-
     }
 
     /**

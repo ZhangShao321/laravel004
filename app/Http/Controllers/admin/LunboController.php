@@ -22,7 +22,6 @@ class LunboController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-
     {   
         $res=lunbo::all();
         // dd($res);
@@ -66,14 +65,14 @@ class LunboController extends Controller
                 //上传到文件到七牛
                 $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
 
-        }else{
+            }else{
               
-            //如果没有文件上传  判断是否输入了电影名称  
-            if($request->only('fname')){
+                //如果没有文件上传  判断是否输入了电影名称  
+                if($request->only('fname')){
 
-                return back()->with('lbt','请上传轮播图或电影名称!');
-                die;
-            }
+                    return back()->with('lbt','请上传轮播图或电影名称!');
+                    die;
+                }
             
         }
 
@@ -126,7 +125,6 @@ class LunboController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-
     {   
 
         $sql=lunbo::find($id);
@@ -171,9 +169,8 @@ class LunboController extends Controller
 
                 //删除$bucket 中的文件 $key   删除七牛里的文件
                 $err = $bucketMgr->delete($bucket,$key);
-                  
 
-           /*执行文件上传*/
+                /*执行文件上传*/
 
                 //获取文件
                 $file=$request->file('picname');
@@ -188,35 +185,35 @@ class LunboController extends Controller
                 
                 //判断上传到七牛是否成功
                 if($bool){
-                        //http:/Uplodes/image_981e101cc9a0efecb77f7bb3b7129525.jpg
-                       // $path=$disk->downloadUrl('Uplodes/image_'.$name);
-                        $res = $request->except('_token','_method');
+                    //http:/Uplodes/image_981e101cc9a0efecb77f7bb3b7129525.jpg
+                   // $path=$disk->downloadUrl('Uplodes/image_'.$name);
+                    $res = $request->except('_token','_method');
 
-                        //修改上传logo的名字
-                        $res['picname'] = 'image_'.$name;
+                    //修改上传logo的名字
+                    $res['picname'] = 'image_'.$name;
 
-                        //将修改后的文件名插入到数据库
-                        $sql=lunbo::where('id',$id)->update($res);
+                    //将修改后的文件名插入到数据库
+                    $sql=lunbo::where('id',$id)->update($res);
 
-                            //判断是否插入数据库成功
-                            if($sql){
+                        //判断是否插入数据库成功
+                        if($sql){
 
-                                return redirect('/admin/lunbo')->with('msg','修改成功');
-                            
-                            }else{
+                            return redirect('/admin/lunbo')->with('msg','修改成功');
+                        
+                        }else{
 
-                                return back();
-                            }
+                            return back();
+                        }
 
                 }else{
-                           return "上传失败";                    
+                    return "上传失败";                    
                 }
                     
                     
-        }else{
+            }else{
 
-            return back()->with('msg','请上传文件');
-        }
+                return back()->with('msg','请上传文件');
+            }
     }
 
     /**
@@ -265,4 +262,5 @@ class LunboController extends Controller
                 }
 
     }
+
 }

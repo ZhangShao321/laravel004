@@ -120,9 +120,9 @@
                 				<label class="mws-form-label">类型</label>
                 				<div class="mws-form-item">
                 					<select class="large" name="tid">
-                						 
-                                        <option value="" selected>sdf</option>
-                                       
+                						@foreach($data as $k=>$v)
+                                        <option value="{{ $v->id }}" selected>{{ $v->tname }}</option>
+                                        @endforeach
                 					</select>
                 				</div>
                     		</div>

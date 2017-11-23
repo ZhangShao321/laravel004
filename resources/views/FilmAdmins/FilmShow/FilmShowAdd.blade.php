@@ -39,18 +39,6 @@
                 				</div>
                     		</div>
 
-
-                    		<div class="mws-form-row">
-                				<label class="mws-form-label">影院名称</label>
-                				<div class="mws-form-item">
-                					<select class="large" name="cid">
-                					   @foreach($cinema as $ck => $cv)
-                                        <option  value="{{$cv->id}}">{{$cv->cinema}}</option>
-                                        @endforeach 
-                					</select>
-                				</div>
-                    		</div>
-
                     		<div class="mws-form-row">
                 				<label class="mws-form-label">影厅名称</label>
                 				<div class="mws-form-item">
@@ -61,6 +49,13 @@
                 					</select>
                 				</div>
                     		</div>
+
+                            <div class="mws-form-row">
+                                <label class="mws-form-label">价格</label>
+                                <div class="mws-form-item">
+                                    <input type="number" name="price"> /元
+                                </div>
+                            </div>
 
                     		 <div class="mws-form-row">
 			                    <label class="mws-form-label">

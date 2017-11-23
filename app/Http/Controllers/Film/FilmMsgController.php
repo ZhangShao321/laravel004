@@ -11,24 +11,36 @@ use App\Http\Model\film;
 use Hash;
 use DB;
 
+use Qiniu\Storage\UploadManager;
+use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
+use zgldh\QiniuStorage\QiniuStorage;
+
 class FilmMsgController extends Controller
 {
       //影片管理
     public  function index(Request $request)
     {
+        
 
-     $film = film::where('filmname','like','%'.$request->input('seach').'%')->paginate($request->input('num',10));
-         $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
+        $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('cid'))->paginate($request->input('num',10));
 
+
+        $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
+
+        
         return view('FilmAdmins.FilmMag.FilmMsgList',['film'=> $film,'request'=>$request,'sta'=>$sta]);
         
     }
 
+    //加载添加页面
     public function add()
     {
-        return view('FilmAdmins.FilmMag.FilmMsgAdd');
 
-      
+        $data = DB::table('filmtype')->where('status',1)->get();
+
+        return view('FilmAdmins.FilmMag.FilmMsgAdd',['data'=>$data]);
+
     }
 
     //处理添加
@@ -51,7 +63,7 @@ class FilmMsgController extends Controller
         ],[
             'filmname.required'=>'影片名称不能为空',
             'keywords.required'=>'关键字不能为空',
-            'director.required'=>'导员不能为空',
+            'director.required'=>'导演不能为空',
             'protagonist.required'=>'主演不能为空',
             'filmtime.required'=>'时长不能为空',
             'price.required'=>'价格不能为空',
@@ -73,24 +85,27 @@ class FilmMsgController extends Controller
                 // //判断文件是否上传
                 if($request -> hasFile('filepic'))
                 {
-                    //文件名
-                    $name = rand(1111,9999).time();
-                   
 
-                    //获取后缀名
-                    $jpg = $request -> file('filepic')->getClientOriginalExtension();
-                 
 
-                    //移动图片
-                 $request ->file('filepic') -> move('./Uploads',$name.'.'.$jpg);
-                }
-                 $filepic = './Uploads/'.$name.'.'.$jpg;
-                 // var_dump($filepic);
+                     //获取文件
+                   $file=$request->file('filepic');
+                   //初始化七牛
+                   $disk=QiniuStorage::disk('qiniu');
+
+                  //重命名文件名
+                  $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+                  //上传到文件到七牛
+                 $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
+                  $filepic = 'image_'.$name;
 
                   $info['filepic'] = $filepic;
+                
 
+                }
 
-
+                  $info['cid'] = session('cid');
                   //链接数据库
                   $db = film::insert($info);
 
@@ -161,23 +176,41 @@ class FilmMsgController extends Controller
               if($request -> hasFile('filepic'))
               {
 
-                $find = film::find($id);
-                //2,判断图片是否存在
-                //存在就删除
-                if(file_exists("{$find[0]->filepic}"))
-                 {
-                    unlink("{$find[0]->filepic}");
-                 }
-                      //文件名
-                      $name = rand(1111,9999).time();
-                      //获取后缀名
-                      $jpg = $request -> file('filepic')->getClientOriginalExtension();
-                      //移动图片
-                       $request ->file('filepic') -> move('./Uploads',$name.'.'.$jpg);
+                  $find = film::find($id);
 
-                       $filepic = './Uploads/'.$name.'.'.$jpg;
-                       // var_dump($filepic);
-                       $res['filepic'] = $filepic;
+                   //删除原先的图片
+                  $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+                  $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
+
+                  //初始化Auth状态：
+                  $auth = new Auth($accessKey, $secretKey);
+
+                  //初始化BucketManager
+                  $bucketMgr = new BucketManager($auth);
+
+                  //你要测试的空间， 并且这个key在你空间中存在
+                  $bucket = 'laravel-upload';
+                  $key = 'Uplodes/'.$find[0]->filepic;
+
+                  //删除$bucket 中的文件 $key
+                  $err = $bucketMgr->delete($bucket, $key);
+
+
+
+                   $file=$request->file('filepic');
+                   //初始化七牛
+                   $disk=QiniuStorage::disk('qiniu');
+
+                  //重命名文件名
+                  $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+                  //上传到文件到七牛
+                 $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
+                   $filepic = 'image_'.$name;
+                   $res['filepic'] =$filepic;
+                          
+                        
 
               }
 
@@ -202,19 +235,42 @@ class FilmMsgController extends Controller
          $id = $request->only('id');
          $del = film::find($id);
          // echo $id;
-         
-          if(file_exists($del[0]->filepic))
-           {
-              unlink($del[0]->filepic);
-           }
 
-           // $res = $del->delete();
-           if(film::where('id',$id)->delete())
-           {
-            echo "删除成功!";
-           }else{
-            echo "删除失败!";
-           }
+
+          //删除原先的图片
+          $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+          $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
+
+          //初始化Auth状态：
+          $auth = new Auth($accessKey, $secretKey);
+
+          //初始化BucketManager
+          $bucketMgr = new BucketManager($auth);
+
+          //你要测试的空间， 并且这个key在你空间中存在
+          $bucket = 'laravel-upload';
+          $key = 'Uplodes/'.$del[0]->filepic;
+
+          //删除$bucket 中的文件 $key
+          $err = $bucketMgr->delete($bucket, $key);
+
+          if($err){
+
+                // $res = $del->delete();
+               if(film::where('id',$id)->delete())
+               {
+                echo "删除成功!";
+               }else{
+                echo "删除失败!";
+               }
+
+
+
+          }else{
+            echo "删除失败";
+          }
+        
+           
 
      }
 
