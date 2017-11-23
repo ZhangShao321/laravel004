@@ -94,12 +94,16 @@
 					        Hi,欢迎来到傻家伙!
 					    </p>
 					    <p>
-					        <a class="user_info_login" href="" style="color:purple">
+					        <a class="user_info_login" href="/homes/login" style="color:purple">
 					            登录
 					        </a>
-					        <a class="user_info_reg" href="" style="color:purple">
+					        <a class="user_info_reg" href="/homes/register" style="color:purple">
 					            注册
 					        </a>
+					        <a class="user_info_reg" href="/homes/detail" style="color:purple">
+					            个人中心
+					        </a>
+
 					    </p>
 					</div>
 					</div>

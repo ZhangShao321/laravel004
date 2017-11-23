@@ -258,6 +258,11 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('test','HomesRegisterController@doAction');
 	 //判断
 	Route::post('doregister','HomesRegisterController@store');
+
+    //个人中心
+    Route::get('detail','HomesDetailController@index');
+    Route::post('doaction','HomesDetailController@store');
+
 	//修改密码
     Route::get('change','HomesChangeController@index');
     Route::get('pass','HomesChangeController@doAction');

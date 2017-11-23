@@ -1,0 +1,144 @@
+*{
+				padding:0px;
+				margin:0px;
+			}
+			
+			#box{
+				width:100%;
+				height:2000px;
+				background-image:url(./Public/public/10.gif);
+				background-attachment: fixed;
+				background-repeat: repeat-x;
+			}
+			#nav{
+				width:960px;
+				height:40px;
+				border-radius: 2px 2px 5px 5px;
+				margin:0px auto;
+				border: 1px solid red;
+				background-color: rgb(198,225,250);
+
+			}
+			#nav #a1{
+				width:100px;
+				height:40px;
+				float:left;
+				/* border: 1px solid red; */
+				background-image: url(./Public/public/9.gif);
+				background-size:100%;
+			}
+			#nav #a2{
+				width:220px;
+				height:40px;
+				float:left;
+				line-height: 40px;
+				/* border: 1px solid red; */
+				background-color: rgb(198,225,250);
+
+			}
+			#nav #a4{
+				width:250px;
+				height:40px;
+				float:left;
+				line-height: 40px;
+				/* border: 1px solid red; */
+				background-color: rgb(198,225,250);
+			}
+			#nav #a3{
+				width:300px;
+				height:40px;
+				float:right;
+				line-height: 40px;
+				text-align: right;
+				/* border: 1px solid red; */
+				background-color: rgb(198,225,250);
+			}
+
+
+			#bbox{
+				width:960px;
+				height:1200px;
+				margin:0px auto;
+				/* border: 1px solid red; */
+
+			}
+			#bbox #b1{
+				width:150px;
+				height:50px;
+				float:left;
+				/* border: 1px solid red; */
+			}
+			#bbox #b1 #b11{
+				width:100px;
+				height:50px;
+				float:left;
+				/* border: 1px solid red; */
+			}
+			#bbox #b1 #logo{
+				width:50px;
+				height:50px;
+				float:left;
+				background-image: url(./Public/public/12.gif);
+				background-size:100%;
+				/* border: 1px solid red; */
+			}
+			#bbox #c1{
+				width:400px;
+				height:50px;
+				float:right;
+				line-height: 50px;
+				/* border: 1px solid red; */
+			}
+
+			#bbox #clear{
+				clear:both;
+			}
+
+			#bbox #d1{
+				width:100px;
+				height:600px;
+				float:left;
+				line-height: 50px;
+				background-color: rgb(192,225,208);
+				/* border: 1px solid red; */
+			}
+			#bbox #d1 ul{
+				list-style:none;
+			}
+			#bbox #d1 ul li{
+				width:100px;
+				height:40px;
+				/* border: 1px solid red; */
+			}
+			#bbox #f1{
+				width:600px;
+				height:1000px;
+				float:left;
+				line-height: 50px;
+				background-color: rgb(255,255,255);
+				border: 1px solid red;
+			}
+
+			#bbox #e1{
+				width:250px;
+				height:1000px;
+				float:right;
+				line-height: 50px;
+				background-color: rgb(192,225,208);
+				border: 1px solid red;
+			}
+
+
+
+
+
+			#bbox #footer{
+				width:960px;
+				height:200px;
+				/* border:1px solid black; */
+				
+				margin-top:10px;
+				text-align:center;
+				display:table-cell;
+				vertical-align:middle;
+			}
