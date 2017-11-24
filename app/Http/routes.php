@@ -206,6 +206,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
     //订座
     Route::get('dingpiao','HomesController@dingpiao');
+    Route::get('la','HomesController@la');
 
 
 
