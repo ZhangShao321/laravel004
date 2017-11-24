@@ -14,23 +14,23 @@
 	type='text/css'>
 <!-- all css here -->
 <!-- bootstrap v3.3.6 css -->
-<link rel="stylesheet" href="/homes/css/bootstrap.min.css">
+<link rel="stylesheet" href="{{asset('/homes/css/bootstrap.min.css')}}">
 <!-- animate css -->
-<link rel="stylesheet" href="/homes/css/animate.css">
+<link rel="stylesheet" href="{{asset('/homes/css/animate.css')}}">
 <!-- jquery-ui.min css -->
-<link rel="stylesheet" href="/homes/css/jquery-ui.min.css">
+<link rel="stylesheet" href="{{asset('/homes/css/jquery-ui.min.css')}}">
 <!-- meanmenu css -->
-<link rel="stylesheet" href="/homes/css/meanmenu.min.css">
+<link rel="stylesheet" href="{{asset('/homes/css/meanmenu.min.css')}}">
 <!-- RS slider css -->
-<link rel="stylesheet" type="text/css" href="/homes/lib/rs-plugin/css/settings.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="{{asset('/homes/lib/rs-plugin/css/settings.css')}}" media="screen" />
 <!-- owl.carousel css -->
-<link rel="stylesheet" href="/homes/css/owl.carousel.css">
+<link rel="stylesheet" href="{{asset('/homes/css/owl.carousel.css')}}">
 <!-- font-awesome css -->
-<link rel="stylesheet" href="/homes/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{asset('/homes/css/font-awesome.min.css')}}">
 <!-- style css -->
-<link rel="stylesheet" href="/homes/css/style.css">
+<link rel="stylesheet" href="{{asset('/homes/css/style.css')}}">
 <!-- responsive css -->
-<link rel="stylesheet" href="/homes/css/responsive.css">
+<link rel="stylesheet" href="{{asset('/homes/css/responsive.css')}}">
 
 </head>
 <body>
@@ -86,7 +86,7 @@
     					</div>
                     </form>
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
-						<a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a>
+						<a href=""><img src="{{asset('/homes/img/default.jpg')}}" style="width:57px;height:57px;float:right"></a>
 						<div class="my-account-holder float-right">  
 						<p class="user_info_tip" style="color:purple">
 					        Hi,欢迎来到傻家伙!
@@ -141,7 +141,7 @@
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-4">
                     <div class="footer-widget">
-                        <img src="/homes/img/logo/logo.gif" alt="" />
+                        <img src="{{asset('/homes/img/logo/logo.gif')}}" alt="" />
                         <p>
                             <h4 style="color:white">
                                 傻家伙影视是一家成立了好多好多年的超清好多好多好多D的集好多好多种娱乐项目为一体的超超超超超超大型电影院
@@ -273,29 +273,29 @@
 
 <!-- all js here -->
 <!-- modernizr css -->
-<script src="/homes/js/vendor/modernizr-2.8.3.min.js"></script>
+<script src="{{asset('/homes/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 <!-- jquery latest version -->
-<script src="/homes/js/vendor/jquery-1.12.0.min.js"></script>
+<script src="{{asset('/homes/js/vendor/jquery-1.12.0.min.js')}}"></script>
 <!-- bootstrap js -->
-<script src="/homes/js/bootstrap.min.js"></script>
+<script src="{{asset('/homes/js/bootstrap.min.js')}}"></script>
 <!-- owl.carousel js -->
-<script src="/homes/js/owl.carousel.min.js"></script>
+<script src="{{asset('/homes/js/owl.carousel.min.js')}}"></script>
 <!-- jquery-ui js -->
-<script src="/homes/js/jquery-ui.min.js"></script>
+<script src="{{asset('/homes/js/jquery-ui.min.js')}}"></script>
 <!-- RS-Plugin JS -->
-<script type="text/javascript" src="/homes/lib/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-<script type="text/javascript" src="/homes/lib/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-<script src="/homes/lib/rs-plugin/rs.home.js"></script>
+<script type="text/javascript" src="{{asset('/homes/lib/rs-plugin/js/jquery.themepunch.tools.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('/homes/lib/rs-plugin/js/jquery.themepunch.revolution.min.js')}}"></script>
+<script src="{{asset('/homes/lib/rs-plugin/rs.home.js')}}"></script>
 <!-- meanmenu js -->
-<script src="/homes/js/jquery.meanmenu.js"></script>
+<script src="{{asset('/homes/js/jquery.meanmenu.js')}}"></script>
 <!-- wow js -->
-<script src="/homes/js/wow.min.js"></script>
+<script src="{{asset('/homes/js/wow.min.js')}}"></script>
 <!-- plugins js -->
-<script src="/homes/js/plugins.js"></script>
+<script src="{{asset('/homes/js/plugins.js')}}"></script>
 <!-- main js -->
-<script src="/homes/js/main.js"></script>
+<script src="{{asset('/homes/js/main.js')}}"></script>
 <!-- 表单验证js -->
-<script src="/homes/js/validate/dist/jquery.validate.min.js"></script>
+<script src="{{asset('/homes/js/validate/dist/jquery.validate.min.js')}}"></script>
 <!-- <script src="/homes/js/jquery.validate.messages_cn.js"></script> -->
 <!-- 弹框js -->
 <script type="text/javascript" src="{{asset('/homes/js/layer/layer.js')}}"></script>
