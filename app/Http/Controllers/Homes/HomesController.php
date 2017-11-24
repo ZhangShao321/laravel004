@@ -12,6 +12,10 @@ use App\Http\Model\lunbo;
 use App\Http\Model\seat;
 use Hash;
 use DB;
+use Qiniu\Storage\UploadManager;
+use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
+use zgldh\QiniuStorage\QiniuStorage;
 
 class HomesController extends Controller
 {
@@ -120,19 +124,25 @@ class HomesController extends Controller
         if($request -> hasFile('license'))
         {
 
-           //文件名
-            $name = rand(11111,99999).time();
+            //获取文件
+            $file=$request->file('license');
 
-            //获取后缀名
-            $jpg = $request -> file('license')->getClientOriginalExtension();
-          
-            //移动图片
-            $request ->file('license') -> move('./public/FilmPublic/Uploads',$name.'.'.$jpg); 
+            //初始化七牛
+            $disk=QiniuStorage::disk('qiniu');
+
+            //重命名文件名
+            $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+            //上传到文件到七牛
+            $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
+            $license = 'image_'.$name;
+
+            $res['license'] = $license;
+
         }  
 
-        $license = './public/FilmPublic/Uploads/'.$name.$name.'.'.$jpg;
-        $res['license'] = $license;
-
+      
         //事务处理
         DB::beginTransaction();
 

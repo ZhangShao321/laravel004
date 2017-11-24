@@ -10,11 +10,11 @@
 		<div class="fullwidthbanner">
 			<ul>
 				@foreach($res1 as $k => $v)
+               
 				<li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="on">
 					<!--MAIN IMAE-->
-                    
-					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $v->picname }}" alt="" data-bgposition="center top" data-duration=""
-						data-ease="Power0.easeInOut" data-bgfit="cover" data-bgrepeat="no-repeat"  />
+                   
+					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $v->picname }}" alt="" data-bgposition="center top" data-duration="" data-ease="Power0.easeInOut" data-bgfit="cover" data-bgrepeat="no-repeat"  />
 					<!-- LAYER NR. -->
 					<div class="tp-caption skewfromrightshort skewtorightshort tp-resizeme" data-x="center"
 						data-hoffset="0" data-y="center" data-voffset="-150" data-speed="500" data-start="500"
@@ -42,6 +42,7 @@
 						
 					</div>
 				</li>
+
 				@endforeach
 			</ul>
 		</div>
@@ -126,9 +127,9 @@
                                             <div class="product-img">
                                                 <a href="{{url('/homes/filmdetail?id=').$v->id}}">
                                                     <img class="primary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
-" style="width:250px;height:350px" alt="" />
+" style="width:300px;height:350px" alt="" />
                                                     <img class="secondary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
-" style="width:250px;height:350px" alt="" />
+" style="width:300px;height:350px" alt="" />
                                                 </a>
                                                 <span class="sale">
                                                     敬请期待
