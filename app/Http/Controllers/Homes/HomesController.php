@@ -171,10 +171,14 @@ class HomesController extends Controller
         //获取放映信息
         $res = DB::table('showfilm')->where('id',$id)->first();
 
+        //获取电影院信息
+        $cinema = DB::table('cinema')->where('id',$res->cid)->first();
+
         //获取影厅信息
-        $seat = DB::table('roominfo')->where('id',$res->rid)->first();
+        $room = DB::table('roominfo')->where('id',$res->rid)->first();
+
         //获取座位信息
-        $data = DB::table('seat')->where('id',$seat->sid)->first();
+        $data = DB::table('seat')->where('id',$room->sid)->first();
 
         //获取座位
         $seat = $data->seat;
@@ -182,7 +186,7 @@ class HomesController extends Controller
         $seats = explode('#',$seat); 
 
 
-        return view('/homes/shopseat', ['data'=>$data, 'id'=>$id, 'seat'=>$seats]); 
+        return view('/homes/shopseat', ['data'=>$data,'room'=>$room, 'id'=>$id, 'seat'=>$seats, 'cinema'=>$cinema]); 
     }
 
 

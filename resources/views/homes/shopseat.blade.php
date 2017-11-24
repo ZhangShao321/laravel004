@@ -52,25 +52,21 @@
         padding-top: 10px;
     }
     #seat-maps{
-        margin: 10px 300px; 
-        /*border: 2px solid blue;*/
+        margin: 10px auto; 
         width: auto;
         height: auto;   
     }
 
     #mmm{
-        /*border:2px solid blue;*/
         width: auto;
         height: auto;
         padding: 0px auto; 
     }
     #ccc{
-        /*border:2px solid blue;*/
-        width: 300;
+        width: auto;
         height: 40px;
         line-height: 40px;
         text-align: center;
-        background: red; 
     }
 </style>
 @section('content') 
@@ -88,8 +84,21 @@
                 <input type="hidden" id="y"  value="{{ $data->lie }}" name="lie">
                  <br/>  
                 <div id="mmm" style="" class="mws-form-item">
-                    <div id="ccc">大屏幕</div>
-                    <div  class=""  id="seat-maps">
+
+                    <table>
+                        <tr align="center">
+                            <td>
+                                <div id="ccc"><img src="/homes/ticket_screen.jpg" alt=""></div>
+                                <p><h2>{{ $cinema->cinema }}</h2></p>
+                                <p><h2>{{ $room->roomname }}{{ $room->roomtype }}</h2></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><div  class=""  id="seat-maps"></td>
+                        </tr>
+                    </table>
+                    
+                    
                         
                     </div>
                  
