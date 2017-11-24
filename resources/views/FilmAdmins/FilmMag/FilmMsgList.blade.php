@@ -46,9 +46,9 @@
                               <button>确定</button>
                         </label>
                     </div>
-
-
-        </form>
+                    
+                    
+        </form> 
             <table class="mws-datatable mws-table dataTable" id="DataTables_Table_0"
             aria-describedby="DataTables_Table_0_info">
                 <thead>
@@ -176,19 +176,20 @@
                                     <td class="bian">{{$v->director}}</td>
                                     <td class="bian">{{$v->protagonist}}</td>
                                     <td class="bian">{{$v->summary}}</td>
-                                    <td class="bian">{{ date('Y-m-d',$v->showtime) }}</td>
+                                    <td class="bian">{{ date('Y-m-d H:i:s',$v->showtime) }}</td>
                                     <td class="bian">{{$v->price}}</td>
                                     <td class="bian">{{$v->shownum}}</td>
                                     <td >
-                                        <img src="{{asset($v->filepic)}}" style="width:120px;height:60px"  />
+
+                                        <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$v->filepic.'?imageView2/0/w/120/h/120')}}" style="width:120px;height:60px"  />
                                     </td>
                                   
                                   
                                     
                                     <td class=""> {{$sta[$v->status] }}</td>
-                                   <td style="overflow: visible; " class="">
-                                     <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" >编辑</a> |
-                                     <span style="cursor:pointer; color:#C5D52B" class="del"  value="{{$v->id}}"  >删除</span>
+                                   <td style="overflow: visible;padding:0px " align="center" class="">
+                                     <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" ><button  class="btn btn-default btn-sm ">编辑</button></a> 
+                                     <span style="cursor:pointer; color:#C5D52B" class="del"  value="{{$v->id}}"  ><button class="btn btn-default btn-sm ">删除</button></span>
                                    </td>
                                 </tr>
                      @endforeach 
@@ -229,6 +230,7 @@
     $("span").click(function(){
         //获取id
          var id = $(this).attr('value');
+         
          layer.alert('你确定要删除此信息', {
             skin: 'layui-layer-molv' //样式类名  自定义样式
             ,closeBtn: 1    // 是否显示关闭按钮

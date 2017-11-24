@@ -19,7 +19,7 @@ class FilmTicketController extends Controller
                     ->join('roominfo', 'showfilm.rid','=','roominfo.id')
                     ->join('film', 'showfilm.fid','=','film.id')
                     ->select('showfilm.id','showfilm.price','showfilm.cid','showfilm.time','showfilm.status','roominfo.roomname','film.filmname')
-                    ->where('showfilm.cid',1)->where('showfilm.time',1)
+                    ->where('showfilm.cid',$cid)->where('showfilm.time','<',time())
                     ->get();
         // echo "<pre>";
         // var_dump($res);die;
@@ -52,6 +52,19 @@ class FilmTicketController extends Controller
     public function shopseat(Request $request,$id)
     {
 
+        $seat = $request->except('_token')['zuo'];
+
+        if(!$seat){
+
+            echo '请选择电影票';die;
+        }
+
+        $bbb = DB::table('ticket')->where('showid',$id)->where('seat',$seat)->get();
+
+        if($bbb){
+            echo '票已出售';die;
+        }
+
         $res = DB::table('showfilm')->where('id',$id)->first();
 
         $data = array();
@@ -72,13 +85,14 @@ class FilmTicketController extends Controller
 
         if($aaa){
 
-            echo '1';
+            echo '购买成功';
         }else{
-            echo '0';
+            echo '购买失败';
         }
 
     }
 
+    //已出售
     public function shopseat_into(Request $request,$id)
     {
         // echo 1;die;

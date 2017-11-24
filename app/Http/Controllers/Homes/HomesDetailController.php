@@ -17,16 +17,17 @@ class HomesDetailController extends Controller
     //
     public function index()
     {
+        // echo 11111111;die;
     	return view('homes/detail');
     }
 
     public function store(Request $request)
     {
-    	 if(!session('uid')){
+    	//  if(!session('uid')){
     		
-    		return view('/homes/login');
-    		die;
-    	}
+    	// 	return view('/homes/login');
+    	// 	die;
+    	// }
 
     	$result = $request->except('_token','phone');
 

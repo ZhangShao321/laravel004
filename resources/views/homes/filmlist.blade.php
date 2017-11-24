@@ -30,46 +30,18 @@
                         影片分类
                     </h3>
                     <ul class="sidebar-menu">
+
+                    @foreach($type as $aa=>$bb)
                         <li>
                             <a href="#">
-                                惊悚
+                                {{ $bb->tname }}
                             </a>
                             <span class="count">
-                               
+                              ({{ $bb->num }}) 
                             </span>
                         </li>
-                        <li>
-                            <a href="#">
-                                悬疑
-                            </a>
-                            <span class="count">
-                                
-                            </span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                恐怖
-                            </a>
-                            <span class="count">
-                                (2)
-                            </span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                诈尸
-                            </a>
-                            <span class="count">
-                                (2)
-                            </span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                王炸
-                            </a>
-                            <span class="count">
-                                (8)
-                            </span>
-                        </li>
+                    @endforeach
+                        
                     </ul>
                 </aside>
                 <!-- 影片分类 end -->
@@ -118,8 +90,9 @@
                                     <div class="single-product">
                                         <div class="product-img">
                                             <a href="{{url('/homes/filmdetail?id=').$v->id}}">
-                                                <img class="primary-img" src="{{asset($v->filepic) }}" alt="" />
-                                                <img class="secondary-img" src="{{asset($v->filepic) }}" alt="" />
+                                                
+                                                <img style="width:200px;height:300px" class="primary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" alt="" />
+                                                <img style="width:200px;height:300px" class="secondary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" alt="" />
                                             </a>
                                         </div>
                                         <div class="product-info">

@@ -148,8 +148,10 @@ class FilmRoomController extends Controller
     }
 
     //执行删除
-    public function delete($id)
+    public function delete(Request $request,$id)
     {
+
+        // echo 1111;die;
         $data = DB::table('roominfo')->where('id',$id)->first();
 
         $sid = $data->sid;
@@ -162,11 +164,11 @@ class FilmRoomController extends Controller
         if($res && $res1){
 
             DB::commit();
-            return redirect('/FilmAdmins/room/list');
+            return '删除成功';
         } else {
 
             DB::rollback();
-            return redirect('/FilmAdmins/room/list');
+            return '删除失败';
         }
 
     }
