@@ -40,16 +40,20 @@
 <div  class="header-top-area hidden-xs">
     <div  class="container">
         <div class="row">
+        <?php
+
+            $con = DB::table('config')->first();
+        ?>
             <div class="col-lg-6 col-md-6 col-sm-4">
                 <div class="welcome">
                     <span class="phone">
-                        Phone: +13838384380
+                        Phone: +{{ $con->phone }}
                     </span>
                     <span class="hidden-sm">
                         /
                     </span>
                     <span class="email hidden-sm">
-                        Email: shajiahuo@dianying.com
+                        Email: {{$con->email}}
                     </span>
                 </div>
             </div>
@@ -89,24 +93,28 @@
     					</div>
                     </form>
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
-						<a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a>
-						<div class="my-account-holder float-right">  
-						<p class="user_info_tip" style="color:purple">
-					        Hi,欢迎来到傻家伙!
-					    </p>
-					    <p>
-					        <a class="user_info_login" href="/homes/login" style="color:purple">
-					            登录
-					        </a>
-					        <a class="user_info_reg" href="/homes/register" style="color:purple">
-					            注册
-					        </a>
-					        <a class="user_info_reg" href="/homes/detail" style="color:purple">
-					            个人中心
-					        </a>
+						
+                        <table>
+                            <tr>
+                                <td>Hi,欢迎来到{{ $con->webname }}!</td>
+                                <td rowspan="2"><a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="user_info_login" href="/homes/login" style="color:purple">
+                                        登录
+                                    </a>
+                                    <a class="user_info_reg" href="/homes/register" style="color:purple">
+                                        注册
+                                    </a>
+                                    <a class="user_info_reg" href="/homes/detail" style="color:purple">
+                                        个人中心
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
 
-					    </p>
-					</div>
+                   
 					</div>
 				</div>
 			</div>
