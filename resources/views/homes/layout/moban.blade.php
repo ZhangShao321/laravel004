@@ -86,7 +86,25 @@
     					</div>
                     </form>
 					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
-						<a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a>
+                        <?php
+                            $uid = session('uid');
+                           
+                            $result = DB::table('userDetail')->where('uid',$uid)->get();
+
+                            foreach($result as $key=>$val){ 
+                                // var_dump($val);die;
+                                if($val->photo){    
+                        ?>
+                            <a href=""><img src="<?= $val->photo ?>" style="width:57px;height:57px;float:right"></a>
+                        <?php
+                            }else{
+                        ?>
+                            <a href=""><img src="/homes/img/default.jpg " style="width:57px;height:57px;float:right"></a>
+                        <?php
+                            }
+                        }
+                        ?>
+                            
 						<div class="my-account-holder float-right">  
 						<p class="user_info_tip" style="color:purple">
 					        Hi,欢迎来到傻家伙!

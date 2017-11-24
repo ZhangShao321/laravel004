@@ -52,13 +52,13 @@
         <input type="submit" name="" id="submit" value="登 录" class="am-btn am-btn-primary am-btn-sm">
 
 
-            <div class="partner">
+            <!-- <div class="partner">
               @if (session('status'))
                 <p style="color:red">
                 {{ session('status') }}
               @endif
               </p>
-            </div>
+            </div> -->
     </div>
     </form>
 </div>
