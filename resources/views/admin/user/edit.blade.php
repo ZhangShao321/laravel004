@@ -7,7 +7,10 @@
 
 <div class="mws-panel grid_8">
           <div  class="mws-panel-header">
-               <span >编辑用户 | <a href="/admin/user/pass">编辑密码</a></span>
+               <span >编辑用户 | 
+                    <a href="{{url('admin/user/pass/'.$res1->id)}}">编辑密码</a> | 
+                    <a href="{{url('admin/user/photo/'.$res1->id)}}">编辑头像</a>
+               </span>
                
           </div>
 
@@ -28,14 +31,14 @@
                          <div class="mws-form-row">
                               <label class="mws-form-label">手机号：</label>
                               <div class="mws-form-item">
-                                   <input type="text" readonly="readonly" name="phone" class="small" value="{{$res1->phone}}">
+                                   <input type="text" readonly="readonly" name="phone" class="small" value="{{$res1->phone}}"><span></span>
                               </div>
                          </div>
 
                          <div class="mws-form-row">
                               <label class="mws-form-label">昵称:</label>
                               <div class="mws-form-item">
-                                   <input type="text" name="nickName" class="small" value="{{$res2->nickName}}">
+                                   <input type="text" name="nickName" class="small" value="{{$res2->nickName}}"><span></span>
                               </div>
                          </div>
 
@@ -43,15 +46,16 @@
                          <div class="mws-form-row">
                               <label class="mws-form-label">邮箱:</label>
                               <div class="mws-form-item">
-                                   <input type="text" name="email" class="small" value="{{$res2->email}}">
+                                   <input type="text" name="email" class="small" value="{{$res2->email}}"><span></span>
                               </div>
                          </div>
                          <div class="mws-form-row">
                               <label class="mws-form-label">QQ:</label>
                               <div class="mws-form-item">
-                                   <input type="text" name="qq" class="small" value="{{$res2->qq}}">
+                                   <input type="text" name="qq" class="small" value="{{$res2->qq}}"><span></span>
                               </div>
                          </div>
+
                          <div class="mws-form-row">
                               <label class="mws-form-label">性别:</label>
                               <div class="mws-form-item">
@@ -85,7 +89,7 @@
      //昵称验证
      $('input[name=nickName]').blur(function(){
 
-        var reg = /^\S{4,16}$/;
+        var reg = /^\S{1,16}$/;
 
         var nickName = $(this).val();
 

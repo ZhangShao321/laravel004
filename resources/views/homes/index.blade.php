@@ -10,11 +10,11 @@
 		<div class="fullwidthbanner">
 			<ul>
 				@foreach($res1 as $k => $v)
+               
 				<li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-saveperformance="on">
 					<!--MAIN IMAE-->
-                    
-					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $v->picname }}" alt="" data-bgposition="center top" data-duration=""
-						data-ease="Power0.easeInOut" data-bgfit="cover" data-bgrepeat="no-repeat"  />
+                   
+					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $v->picname }}" alt="" data-bgposition="center top" data-duration="" data-ease="Power0.easeInOut" data-bgfit="cover" data-bgrepeat="no-repeat"  />
 					<!-- LAYER NR. -->
 					<div class="tp-caption skewfromrightshort skewtorightshort tp-resizeme" data-x="center"
 						data-hoffset="0" data-y="center" data-voffset="-150" data-speed="500" data-start="500"
@@ -42,6 +42,7 @@
 						
 					</div>
 				</li>
+
 				@endforeach
 			</ul>
 		</div>
@@ -62,7 +63,8 @@
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <a href="{{url('/homes/filmdetail?id=').$v->id}}">
                     <div class="single-banner">
-                        <img src="{{ asset($v->filepic)}}" alt="" />
+                        <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
+" style="width:360px;height:420px" alt="" />
                         <div class="banner-details">
                             <div class="mask">
                                 <p>
@@ -119,19 +121,22 @@
                         <div role="tabpanel" class="tab-pane active" id="home">
                             <div class="row">
                                 <div class="product-curosel">
+                                    @foreach($res2 as $k=>$v)
                                     <div class="col-lg-12">
                                         <div class="single-product">
                                             <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img" src="/homes/img/product/1.jpg" alt="" />
-                                                    <img class="secondary-img" src="/homes/img/product/2.jpg" alt="" />
+                                                <a href="{{url('/homes/filmdetail?id=').$v->id}}">
+                                                    <img class="primary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
+" style="width:300px;height:350px" alt="" />
+                                                    <img class="secondary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
+" style="width:300px;height:350px" alt="" />
                                                 </a>
                                                 <span class="sale">
                                                     敬请期待
                                                 </span>
                                                 <div class="product-action">
                                                     <div class="pro-button-top">
-                                                        <a href="#">
+                                                        <a href="{{url('/homes/filmdetail?id=').$v->id}}">
                                                             查看详情
                                                         </a>
                                                     </div>
@@ -139,18 +144,19 @@
                                             </div>
                                             <div class="product-info">
                                                 <h3>
-                                                    <a href="single-product.html">
-                                                        电影名字
+                                                    <a href="{{url('/homes/filmdetail?id=').$v->id}}">
+                                                       {{$v->filmname}}
                                                     </a>
                                                 </h3>
                                                 <div class="pro-price">
                                                     <span class="normal">
-                                                        ￥50
+                                                        ￥{{$v->price}}
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

@@ -4,12 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
+
     "hash": "31b586713f1fe91418305d1091c63a2b",
     "content-hash": "6690f2cb26ec0a030f9cb952bbe2401c",
-=======
-    "content-hash": "2c57d1ae26c0f3e0d8031c07abefc73c",
->>>>>>> 761ab2ae2dad47f83b5010651b71614ce8da8a29
+
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -55,11 +53,10 @@
             ],
             "description": "BaconQrCode is a QR code generator for PHP.",
             "homepage": "https://github.com/Bacon/BaconQrCode",
-<<<<<<< HEAD
+
             "time": "2017-10-17 09:59:25"
-=======
-            "time": "2017-10-17T09:59:25+00:00"
->>>>>>> 761ab2ae2dad47f83b5010651b71614ce8da8a29
+
+
         },
         {
             "name": "classpreloader/classpreloader",

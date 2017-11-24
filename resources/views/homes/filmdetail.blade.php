@@ -33,7 +33,7 @@
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="home">
 									<a href="#">
-										<img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $aaa->filepic) }}" alt="" /></a>
+										<img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $aaa->filepic) }}" style="width:500px;height:600px" alt="" /></a>
                                 </div>	
 							</div>
 						</div>

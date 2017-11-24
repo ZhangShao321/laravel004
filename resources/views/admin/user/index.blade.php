@@ -88,7 +88,7 @@
                         <th aria-label="CSS grade: activate to sort column ascending" style="width: 200px;"
                         colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                         role="columnheader" class="sorting">
-                            最后登录时间
+                            头像
                         </th>
                         <th aria-label="CSS grade: activate to sort column ascending" style="width: 200px;"
                         colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
@@ -131,7 +131,10 @@
                             @endif         
                         </td>
                         <td class=" ">
-                            {{date('Y-m-d H:i:s',$v->lastlogin)}}
+                                
+                            <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$v->photo}}?imageView2/0/w/100/h/100" style="width:80px;height:80px"/>
+                               
+                            
                         </td>
                         <td class=" " style="padding:0px">
                             <a href="{{url('admin/user/'.$v->id.'/edit')}}" class='btn btn-primary'>编辑</a>

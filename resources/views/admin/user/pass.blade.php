@@ -21,7 +21,7 @@
                     </div>
                @endif
 
-               <form action="{{url('admin/user/'.$res1->id)}}" method="post" class="mws-form" enctype="multipart/form-data">
+               <form action="{{url('admin/user/dopass')}}" method="post" class="mws-form" enctype="multipart/form-data">
                     <div class="mws-form-inline">
 
                         
@@ -29,7 +29,7 @@
                          <div class="mws-form-row">
                               <label class="mws-form-label">手机号：</label>
                               <div class="mws-form-item">
-                                   <input type="text" name="phone" class="small" value="{{$res1->phone}}">
+                                   <input type="text" name="phone" class="small" value="{{$res->phone}}">
                               </div>
                          </div>
 
@@ -41,12 +41,9 @@
                          </div>
 
                     
-                         
-                         
-                    
                     </div>
                     <div class="mws-button-row">
-
+						<input type="hidden" name="id" value="{{ $res->id }}">
                          {{csrf_field() }}
                          <input type="submit" class="btn btn-danger" value="编辑">
                     
@@ -62,6 +59,26 @@
 <script type="text/javascript">
 
 	$('.mws-form-message').delay(5000).slideUp();
+
+	 //密码验证
+     $('input[name=password]').blur(function(){
+
+        var reg = /^\S{6,12}$/;
+
+        var password = $(this).val();
+
+        var x = reg.exec(password);
+
+        if (x) {
+            $(this).css('color','green');
+            $(this).next().text(' √ ');
+            $(this).next().css('color','green');
+        } else {
+            $(this).css('color','red');
+            $(this).next().text('密码格式不正确');
+            $(this).next().css('color','red');
+        }
+     })
 
 </script>
 

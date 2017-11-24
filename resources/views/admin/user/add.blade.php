@@ -60,7 +60,7 @@
                          <div class="mws-form-row">
                               <label class="mws-form-label">头像:</label>
                               <div class="mws-form-item">
-                                   <input type="file" name="photo" class="small" value="">
+                                   <input type="file" name="photo" class="large" value="">
                               </div>
                          </div>
 
@@ -149,7 +149,7 @@
      //昵称验证
      $('input[name=nickName]').blur(function(){
 
-        var reg = /^\S{4,16}$/;
+        var reg = /^\S{1,16}$/;
 
         var nickName = $(this).val();
 

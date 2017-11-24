@@ -122,8 +122,6 @@
 </div>
 </center>
 
-
-
 @endsection
 @section('js')      
 <script>

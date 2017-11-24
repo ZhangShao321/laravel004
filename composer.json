@@ -7,10 +7,7 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-<<<<<<< HEAD
-=======
 
->>>>>>> 22e78d8ee3eb57bfa18cbf4310ca8e127d2e0100
         "zgldh/qiniu-laravel-storage": "^0.8.4",
         "endroid/qrcode": "^2.4",
         "gregwar/captcha": "v1.1.3",

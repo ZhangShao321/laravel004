@@ -56,6 +56,10 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		Route::resource('/user','UserController');
         Route::post('/user/phone','UserController@phone');
         Route::post('/user/work','UserController@work');
+        Route::get('/user/pass/{id}','UserController@pass');
+        Route::post('/user/dopass','UserController@dopass');
+        Route::get('/user/photo/{id}','UserController@photo');
+        Route::post('/user/dophoto','UserController@dophoto');
 
 		//后台管理员管理
 		Route::resource('/guanliyuan','GuanliyuanController');
@@ -244,6 +248,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
     //订座
     Route::get('dingpiao','HomesController@dingpiao');
+    Route::get('la','HomesController@la');
 
 
 

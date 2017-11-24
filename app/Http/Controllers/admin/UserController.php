@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 use App\Http\model\user;
 use App\Http\model\userDetail;
 
+use Qiniu\Storage\UploadManager;
+use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
+use zgldh\QiniuStorage\QiniuStorage;
+
 use DB;
 use Hash;
 class UserController extends Controller
@@ -19,7 +24,7 @@ class UserController extends Controller
     {
         
         $res = DB::table('user')->join('userDetail','userDetail.uid','=','user.id')->
-            select('user.id','user.phone','userDetail.nickName','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')->
+            select('user.id','user.phone','userDetail.nickName','userDetail.photo','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')->
             where('phone','like','%'.$request->input('search').'%')->
             orderBy('id','asc')->
             paginate($request->input('num',10));
@@ -79,7 +84,7 @@ class UserController extends Controller
             if($request -> hasFile('photo')){
         
 
-            $clic = DB::table('userDetail')->where('uid',$uid)->first();
+            // $clic = DB::table('userDetail')->where('uid',$uid)->first();
 
                 //删除原先的图片
                 $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
@@ -92,11 +97,11 @@ class UserController extends Controller
                 $bucketMgr = new BucketManager($auth);
 
                 //你要测试的空间， 并且这个key在你空间中存在
-                $bucket = 'laravel-upload';
+                $bucket = 'laravel-upload';/*
                 $key = 'Uplodes/'.$clic->photo;
 
                 //删除$bucket 中的文件 $key
-                $err = $bucketMgr->delete($bucket, $key);
+                $err = $bucketMgr->delete($bucket, $key);*/
             
 
                  //获取文件
@@ -110,20 +115,27 @@ class UserController extends Controller
                  //上传到文件到七牛
                 $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
 
+                if(!$bool){
+
+                    DB::table('user')->where('id',$uid)->delete();
+
+                    return back()->with('上传文件失败');
+                }
+
                 $photo = 'image_'.$name;
-                // echo 111111;die;
-                $res = DB::table('userDetail')->where('uid',$uid)->update(['photo'=>$photo]);
 
                 //获取其他数据
                 $input2 = $request->only('nickName','email','qq','sex');
             
                 //把传递过来的id赋值给$input2['cid']
                 $input2['uid'] = $uid;
-
+                $input2['photo'] = $photo;
 
                 $userDetail = DB::table('userDetail')->insert($input2);
 
-                if($user && $userDetail)
+                // var_dump($input2);die;
+
+                if($userDetail)
                 {   
                     return redirect('/admin/user'); 
 
@@ -142,7 +154,7 @@ class UserController extends Controller
 
                 $userDetail = DB::table('userDetail')->insert($input2);
 
-                if($user && $userDetail)
+                if($userDetail)
                 {   
                     return redirect('/admin/user'); 
 
@@ -198,10 +210,9 @@ class UserController extends Controller
 
         $input2 = $request->only('nickName','email','qq','sex');
         
-        $res1 = DB::table('user')->where('id',$id)->update($input1);
         $res2 = DB::table('userDetail')->where('uid',$id)->update($input2);
 
-        if($res1 && $res2){
+        if($res2){
             return redirect('/admin/user')->with('修改成功');  
         }else{
             return back()->with('修改失败');
@@ -218,7 +229,30 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-    
+        
+        $clic = DB::table('userDetail')->where('uid',$id)->first();
+
+        //删除原先的图片
+        $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+        $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
+
+        //初始化Auth状态：
+        $auth = new Auth($accessKey, $secretKey);
+
+        //初始化BucketManager
+        $bucketMgr = new BucketManager($auth);
+
+        //你要测试的空间， 并且这个key在你空间中存在
+        $bucket = 'laravel-upload';
+        $key = 'Uplodes/'.$clic->photo;
+
+        //删除$bucket 中的文件 $key
+        $err = $bucketMgr->delete($bucket, $key);
+
+        if(!$err){
+            return back();
+        }
+
         DB::beginTransaction();
 
         $res1 = DB::table('user')->where('id',$id)->delete();
@@ -278,6 +312,94 @@ class UserController extends Controller
             }
         }
     }
+
+    //加载修改密码页面
+    public function pass($id)
+    {
+        $res = DB::table('user')->where('id',$id)->first();
+        return view('/admin/user/pass',['res'=>$res]);
+    }
+
+    //执行修改密码
+    public  function dopass(Request $request)
+    {
+        $pass = $request->only('password');
+
+        $id = $request->only('id');
+
+        $data = DB::table('user')->where('id',$id)->update($pass);
+
+        if($data){
+            return redirect('/admin/user')->with('修改成功');
+        } else {
+            return back();
+        }
+    }
+
+    //添加修改头像页面
+    public function photo($id)
+    {
+
+        $data = DB::table('userDetail')->where('uid',$id)->first();
+
+        return view('/admin/guanliyuan/photo',['data'=>$data]);
+    }
+
+    //执行修改头像
+    public function dophoto(Request $request)
+    {
+
+        if($request -> hasFile('photo')){
+        
+
+            $clic = DB::table('userDetail')->where('uid',session('aid'))->first();
+
+                //删除原先的图片
+                $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+                $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
+
+                //初始化Auth状态：
+                $auth = new Auth($accessKey, $secretKey);
+
+                //初始化BucketManager
+                $bucketMgr = new BucketManager($auth);
+
+                //你要测试的空间， 并且这个key在你空间中存在
+                $bucket = 'laravel-upload';
+                $key = 'Uplodes/'.$clic->photo;
+
+                //删除$bucket 中的文件 $key
+                $err = $bucketMgr->delete($bucket, $key);
+            
+
+                 //获取文件
+                $file=$request->file('photo');
+                //初始化七牛
+                $disk=QiniuStorage::disk('qiniu');
+
+                 //重命名文件名
+                $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+                 //上传到文件到七牛
+                $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
+                $photo = 'image_'.$name;
+                // echo 111111;die;
+                $res = DB::table('userDetail')->where('uid',session('aid'))->update(['photo'=>$photo]);
+
+                // var_dump($res);die;
+
+                if ($res) {
+                    return redirect('/admin/index');
+                } else {
+                    return back()->with('抱歉! 修改失败!');
+                };
+        };
+
+        
+    }
+
+
 
 
 }
