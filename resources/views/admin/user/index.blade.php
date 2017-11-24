@@ -58,7 +58,27 @@
                         <th aria-label="Browser: activate to sort column ascending" style="width: 212px;"
                         colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                         role="columnheader" class="sorting">
+                            用户名
+                        </th>
+                        <th aria-label="Browser: activate to sort column ascending" style="width: 212px;"
+                        colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                        role="columnheader" class="sorting">
                             phone
+                        </th>
+                        <th aria-label="Browser: activate to sort column ascending" style="width: 212px;"
+                        colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                        role="columnheader" class="sorting">
+                            邮箱
+                        </th>
+                        <th aria-label="Browser: activate to sort column ascending" style="width: 212px;"
+                        colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                        role="columnheader" class="sorting">
+                            qq
+                        </th>
+                        <th aria-label="Browser: activate to sort column ascending" style="width: 212px;"
+                        colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                        role="columnheader" class="sorting">
+                            性别
                         </th>
                         <th aria-label="Platform(s): activate to sort column ascending" style="width: 197px;"
                         colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
@@ -84,11 +104,23 @@
                         <td class="  sorting_1">
                             {{$v->id}}
                         </td>
+                        <td class="  sorting_1">
+                            {{$v->nickName}}
+                        </td>
                         <td class=" ">
                             {{$v->phone}}
                         </td>
+                        <td class="  sorting_1">
+                            {{$v->email}}
+                        </td>
+                        <td class="  sorting_1">
+                            {{$v->qq}}
+                        </td>
+                        <td class="  sorting_1">
+                            {{$v->sex}}
+                        </td>
                         <td class=" ">
-                            <button class='btn btn-primary'>{{$v->status ? '开启' : '关闭'}}</button>         
+                            <button class='btn btn-primary'>{{$v->status ? '用户' : '禁用'}}</button>         
                         </td>
                         <td class=" ">
                             {{date('Y-m-d H:i:s',$v->lastlogin)}}

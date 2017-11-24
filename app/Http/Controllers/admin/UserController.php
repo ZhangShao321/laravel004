@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\model\user;
+use App\Http\model\userDetail;
 
 use DB;
 use Hash;
@@ -17,7 +18,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         
-        $res = DB::table('user')->
+        $res = DB::table('user')->join('userDetail','userDetail.uid','=','user.id')->
+            select('user.id','user.phone','userDetail.nickName','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')->
             where('phone','like','%'.$request->input('search').'%')->
             orderBy('id','asc')->
             paginate($request->input('num',10));
@@ -52,21 +54,48 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $input1 = $request->only('phone','password','lastlogin');
 
-        $input = $request->except('_token','_method');
 
-        $input['lastlogin'] = time();
-        $input['password'] = Hash::make($input['password']);
-        // var_dump($input);die;
-        $res = user::insert($input);
-        // $res = DB::table('user')->insert($input);
-        // var_dump($res);die;
+        //哈希加密
+        $input1['password'] = Hash::make($input1['password']);
 
-        if($res){
-            return redirect('admin/user/');
-        }else{
-            return back();
-        }
+        // $time = time();
+      
+        $input1['lastlogin'] = time();
+        echo "<pre>";
+        // var_dump($input1);die;
+        
+        //定义一个变量$cinema存查询cinema表的id
+        $user = DB::table('user')->insertGetId($input1);
+
+
+        //判断$cinema为ture或false
+        //为ture时证明id传过来了
+        //false就没有值传递过来
+        if($user){ 
+
+            //开启事务
+            DB::beginTransaction();
+
+            $input2 = $request->only('nickName','email','qq','sex');
+            
+            //把传递过来的id赋值给$input2['cid']
+            $input2['uid'] = $user;
+
+
+            $userDetail = DB::table('userDetail')->insert($input2);
+
+            if($user && $userDetail)
+            {   
+                DB::commit();
+                return redirect('/admin/user'); 
+
+            }else{
+                //回滚
+                DB::rollback();
+            }
+        }  
 
 
     }
@@ -92,10 +121,11 @@ class UserController extends Controller
     {
 
         // var_dump($id);
-        $res = user::find($id);
+        $res1 = user::find($id);
+        $res2 = userDetail::where('uid',$id)->first();
         // echo "<pre>";
         // var_dump($res);
-        return view('admin.user.edit',['res'=>$res]);
+        return view('admin.user.edit',['res1'=>$res1,'res2'=>$res2]);
 
     }
 
@@ -109,22 +139,15 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
 
-
         // echo "<pre>";
-        $input = $request->except('_token','_method');
+        $input1 = $request->only('phone');
+        $input2 = $request->only('nickName','email','qq','sex');
         
-        // var_dump($input);die;
-        $res = user::find($id);
-        // var_dump($id);die;   
-        // $ress = user::where('id',$id)->update($input);
-        $res = DB::table('user')->where('id',$id)->update($input);
+        $res1 = DB::table('user')->where('id',$id)->update($input1);
+        $res2 = DB::table('userDetail')->where('uid',$id)->update($input2);
 
-        // var_dump($res);
-
-        // var_dump($res);die;
-
-        if($res){
-            return redirect('/admin/user');
+        if($res1 && $res2){
+            return redirect('/admin/user');  
         }else{
             return back();
         }
@@ -140,20 +163,19 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        
-        // var_dump($id);
-        //  //删除
-        // $res = user::delete($id);
+    
+        DB::beginTransaction();
 
-        // var_dump($res);die;
-        $res=DB::table('user')->where('id',$id)->delete();
+        $res1 = DB::table('user')->where('id',$id)->delete();
+        $res2 = DB::table('userDetail')->where('uid',$id)->delete();
 
-        // var_dump($res);die;
-         if($res){
-             return redirect('admin/user/')->with('删除成功');
-         }else{
-             return back();
-         }
+        // var_dump($res1);die;
+        if($res1 || $res2){
+            DB::commit();
+            return redirect('/admin/user')->with('删除成功');
+        }else{
+            return back();
+        }
 
        
     }

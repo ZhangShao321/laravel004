@@ -21,31 +21,49 @@
                     </div>
                @endif
 
-               <form action="{{url('admin/user/'.$res->id)}}" method="post" class="mws-form" enctype="multipart/form-data">
+               <form action="{{url('admin/user/'.$res1->id)}}" method="post" class="mws-form" enctype="multipart/form-data">
                     <div class="mws-form-inline">
 
                          <div class="mws-form-row">
-                              <label class="mws-form-label">电话（帐号）:</label>
+                              <label class="mws-form-label">用户名:</label>
                               <div class="mws-form-item">
-                                   <input type="text" name="phone" class="small" value="{{$res->phone}}">
+                                   <input type="text" name="nickName" class="small" value="{{$res2->nickName}}">
+                              </div>
+                         </div>
+
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">手机号：</label>
+                              <div class="mws-form-item">
+                                   <input type="text" name="phone" class="small" value="{{$res1->phone}}">
+                              </div>
+                         </div>
+
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">邮箱:</label>
+                              <div class="mws-form-item">
+                                   <input type="text" name="email" class="small" value="{{$res2->email}}">
+                              </div>
+                         </div>
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">qq:</label>
+                              <div class="mws-form-item">
+                                   <input type="text" name="qq" class="small" value="{{$res2->qq}}">
+                              </div>
+                         </div>
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">性别:</label>
+                              <div class="mws-form-item">
+                                   <input type="text" name="sex" class="small" value="{{$res2->sex}}">
                               </div>
                          </div>
                          
                          <div class="mws-form-row">
                               <label class="mws-form-label">权限:</label>
                               <div class="mws-form-item">
-                                   <input type="text" name="auth" class="small" value="{{$res->auth}}">
+                                   <input type="text" name="auth" disabled class="small" value="{{$res1->auth}}">
                               </div>
                          </div>
                     
-                         <div class="mws-form-row">
-                              <label class="mws-form-label">状态：</label>
-                              <div class="mws-form-item clearfix">
-                                   <input type="text" name="status" class="small" value="{{$res->status}}">
-                              </div>
-                         </div>
-               
-               
                     </div>
                     <div class="mws-button-row">
 

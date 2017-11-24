@@ -32,32 +32,55 @@
           					<input type="text" name="phone" class="small" value="">
           				</div>
           			</div>
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">用户名:</label>
+                              <div class="mws-form-item">
+                                   <input type="text" name="nickName" class="small" value="">
+                              </div>
+                         </div>
           			<div class="mws-form-row">
           				<label class="mws-form-label">密码:</label>
           				<div class="mws-form-item">
-          					<input type="password" name="password" class="small">
+          					<input type="text" name="password" class="small">
           				</div>
           			</div>
-          			
+          			<div class="mws-form-row">
+                              <label class="mws-form-label">邮箱:</label>
+                              <div class="mws-form-item">
+                                   <input type="text" name="email" class="small" value="">
+                              </div>
+                         </div>
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">QQ:</label>
+                              <div class="mws-form-item">
+                                   <input type="text" name="qq" class="small" value="">
+                              </div>
+                         </div>
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">性别:</label>
+                              <div class="mws-form-item">
+                                   <input type="text" name="sex" class="small" value="">
+                              </div>
+                         </div>
           			<div class="mws-form-row">
           				<label class="mws-form-label">权限:</label>
           				<div class="mws-form-item">
-          					<input type="text" name="auth" class="small" value="1">
+          					<input type="text" disabled name="auth" class="small" value="普通用户">
           				</div>
           			</div>
-          		
+          		      
 					<div class="mws-form-row">
           				<label class="mws-form-label">状态：</label>
           				<div class="mws-form-item clearfix">
-          					<input type="text" name="status" class="small" value="1">
+          					<input type="text" disabled name="status" class="small" value="开启">
           				</div>
-          			</div>
-        		
-          	
+          			</div>  
+          	    
           		</div>
           		<div class="mws-button-row">
 
           			{{ csrf_field() }}
+
           			<input type="submit" class="btn btn-danger" value="添加">
           		
           			
