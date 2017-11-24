@@ -59,8 +59,7 @@
 
     #mmm{
         width: auto;
-        height: auto;
-        padding: 0px auto; 
+        height: auto; 
     }
     #ccc{
         width: auto;
@@ -68,6 +67,7 @@
         line-height: 40px;
         text-align: center;
     }
+    
 </style>
 @section('content') 
 <center>
@@ -79,7 +79,7 @@
 
                  
             <div class="mws-form-row">
-                <label class="mws-form-label"><h2> 座 位 图 </h2></label>
+                <!-- <label class="mws-form-label"><h2> 座 位 图 </h2></label> -->
                 <input type="hidden" id="x" value="{{ $data->hang }}"  name="hang">
                 <input type="hidden" id="y"  value="{{ $data->lie }}" name="lie">
                  <br/>  
@@ -92,11 +92,15 @@
                                 <p><h2>{{ $cinema->cinema }}</h2></p>
                                 <p><h2>{{ $room->roomname }}{{ $room->roomtype }}</h2></p>
                             </td>
+                            <!-- <td>dddddddddddd</td> -->
                         </tr>
                         <tr>
                             <td><div  class=""  id="seat-maps"></td>
+                            <!-- <td>ddddddddddddddddddd</td> -->
                         </tr>
                     </table>
+
+                    
                     
                     
                         
@@ -116,8 +120,8 @@
         
     </div>
 </div>
-
 </center>
+
 
 
 @endsection

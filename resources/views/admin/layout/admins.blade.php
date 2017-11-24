@@ -185,16 +185,12 @@
                     <li>
                         <a href="#"><i class="icon-snowflake"></i>网站配置</a>
                         <ul class='closed'>
-                            <li><a href="/admin/net">网站配置</a></li>
+                            <li><a href="/admin/net">网站配置信息</a></li>
+                            <li><a href="/admin/net/create">修改网站配置</a></li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="icon-snowflake"></i>友情链接</a>
-                        <ul class='closed'>
-                            <li><a href="#">友情链接</a></li>
-                        </ul>
-                    </li>
+                    
                 </ul>
             </div>         
         </div>

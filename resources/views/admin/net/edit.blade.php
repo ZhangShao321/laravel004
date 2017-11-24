@@ -9,7 +9,7 @@
 
 	<div class="mws-panel grid_8">
 	<div class="mws-panel-header">
-    	<span>网站配置</span>
+    	<span>修改网站配置</span>
     </div>
 
     <div class="mws-panel-body no-padding">
@@ -23,7 +23,7 @@
 		@endif
 
 	
-    	<form action="#" class="mws-form" method='post' enctype='multipart/form-data'>
+    	<form action="/admin/net/{{$res[0]->id}}" class="mws-form" method='post' enctype='multipart/form-data'>
     		<div class="mws-form-inline">
 
     			<div class="mws-form-row">
@@ -32,16 +32,13 @@
     					<input type="text" class="small" name='webname' value="{{$res[0]->webname}}">
     				</div>
     			</div>
-    
-
                 <div class="mws-form-row">
                     <label class="mws-form-label">网站联系电话:</label>
                     <div class="mws-form-item">
                         <input type="text" class="small" name='phone' value="{{$res[0]->phone}}">
                     </div>
                 </div>
-
-                 <div class="mws-form-row">
+                <div class="mws-form-row">
                     <label class="mws-form-label">网站邮箱:</label>
                     <div class="mws-form-item">
                         <input type="text" class="small" name='email' value="{{$res[0]->email}}">
@@ -66,8 +63,7 @@
     				<label class="mws-form-label">网站logo:</label>
     				<div class="mws-form-item">
 
-    					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$res[0]->logo}}?imageView2/2/w/200/h/200/interlace/1/q/100|watermark/2/text/6J206J22/font/5qW35L2T/fontsize/600/fill/IzRGODBCRQ==/dissolve/78/gravity/SouthEast/dx/5/dy/6|imageslim">
-                        <!-- <input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="文件上传" name='logo'> -->
+    					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$res[0]->logo}}?imageView2/2/w/120/h/120/interlace/1/q/100|watermark/2/text/6J206J22/font/5qW35L2T/fontsize/600/fill/IzRGODBCRQ==/dissolve/78/gravity/SouthEast/dx/5/dy/6|imageslim"><input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="文件上传" name='logo'>
 
     				</div>
     			</div>
@@ -85,7 +81,9 @@
 
     		</div>
     		<div class="mws-button-row">
-    			<!-- <input type="submit" class="btn btn-danger" value="提交"> -->
+    			{{ csrf_field()}}
+    			{{ method_field('PUT')}}
+    			<input type="submit" class="btn btn-danger" value="修改">
     			
     			
     		</div>
