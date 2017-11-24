@@ -130,7 +130,7 @@
                     </td>
 
                     <td class="">
-                        <img src="{{asset($v->clogo)}}" alt="" style="height: 50px" >
+                        <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$v->clogo.'?imageView2/0/w/220/h/220')}}" alt="" style="height: 50px" >
                     </td>
 
                     <td class=" ">

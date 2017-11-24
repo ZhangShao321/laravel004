@@ -27,7 +27,7 @@
                                 <tr>
                                     <th style="width:97px;">ID</th>
                                     <th style="width:97px;">轮播图</th>
-                                    <th style="width:97px;">电影院名称</th>
+                                    <th style="width:97px;">电影名称</th>
                                     <th style="width:97px;">上传时间</th>
                                     <th style="width:97px;">状态</th>
                                     <th style="width:120px;">操作</th>
@@ -37,14 +37,14 @@
                                 @foreach($res as $k=>$v)
                                 <tr align="center">
                                     <td>{{$v->id}}</td>
-                                    <td><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{($v->picname)}}" style="width:180px;height:100px;"></td>
+                                    <td><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{($v->picname)}}" style="width:200px;height:80px;"></td>
                                     <td>{{$v->fname}}</td>
                                     <td>{{date('Y-m-d  H:i:s',$v->time)}}</td>
                                     <td>{{$v->status == 0 ?'正在使用':'未使用'}}</p></td>
                                     <td>
                                     	<a href="/admin/lunbo/{{$v->id}}/edit"><button class="btn btn-primary">修改</button></a>
                                     	
-                                    	<form action="/admin/lunbo/{{$v->id}}" method="post">
+                                    	<form action="/admin/lunbo/{{$v->id}}" style="display:inline" method="post">
 
                                     	{{csrf_field() }}	
                                     	{{method_field('DELETE') }}	

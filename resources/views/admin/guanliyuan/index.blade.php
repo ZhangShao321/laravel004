@@ -50,7 +50,7 @@
                         </td>
                         <td>
 
-                            <a href="/admin/guanliyuan/{{$v->id}}/edit"><button class="btn btn-danger">修改</button></a>&nbsp;&nbsp;&nbsp;
+                            <a href="/admin/guanliyuan/{{$v->id}}/edit"><button class="btn btn-danger">编辑</button></a>&nbsp;&nbsp;&nbsp;
                             <form action="/admin/guanliyuan/{{$v->id}}" style="display:inline" method="post">  
                                 
 

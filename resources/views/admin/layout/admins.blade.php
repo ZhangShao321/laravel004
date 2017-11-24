@@ -65,7 +65,7 @@
                 <!-- User Photo -->
                 <div id="mws-user-photo">
                     <!-- <img src="{{ $datas->photo }}" alt="User Photo"> -->
-                    <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$datas->photo}}?imageView2/0/w/240/h/240" alt="User Photo">
+                    <img style="width:30px;height:30px" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$datas->photo}}?imageView2/0/w/240/h/240" alt="User Photo">
                 </div>
 
                 <!-- Username and Functions -->
