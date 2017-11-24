@@ -65,7 +65,7 @@ return [
 
          'qiniu' => [
             'driver'  => 'qiniu',
-            'domain' => 'ozspkrste.bkt.clouddn.com',  //域名
+            'domain' => 'ozspa9a4f.bkt.clouddn.com',  //域名
               
             'access_key'=> '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w',  //AccessKey
             'secret_key'=> 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ',  //SecretKey

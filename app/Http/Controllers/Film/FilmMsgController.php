@@ -265,21 +265,17 @@ class FilmMsgController extends Controller
           //删除$bucket 中的文件 $key
           $err = $bucketMgr->delete($bucket, $key);
 
-          if($err){
+
 
                 // $res = $del->delete();
                if(film::where('id',$id)->delete())
                {
-                echo "删除成功!";
+                echo "删除成功!".$key;
                }else{
                 echo "删除失败!";
                }
 
-
-
-          }else{
-            echo "删除失败";
-          }
+      
         
            
 

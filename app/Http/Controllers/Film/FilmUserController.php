@@ -152,37 +152,31 @@ class FilmUserController extends Controller
             //1,先查询
             $find = cinema::where('id',session('cid'))->first();
 
-            var_dump($find->clogo);
-
 
             // //判断文件是否上传
             if($request -> hasFile('clogo'))
             {
 
 
-               $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
-              $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-              //初始化Auth状态：
-              $auth = new Auth($accessKey, $secretKey);
+                //删除原先的图片
+                $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+                $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-              //初始化BucketManager
-              $bucketMgr = new BucketManager($auth);
+                //初始化Auth状态：
+                $auth = new Auth($accessKey, $secretKey);
 
-              //你要测试的空间， 并且这个key在你空间中存在
-              $bucket = 'laravel-upload';
-              $key = '/Uplodes/image_121369e9df76cec928c70f24d2e8648e.jpg';
+                //初始化BucketManager
+                $bucketMgr = new BucketManager($auth);
 
-            //删除$bucket 中的文件 $key
-              $err = $bucketMgr->delete($bucket, $key);
-             $res = $request->only(['clogo']);
-             echo "<pre>";
-             var_dump($err);
-             die;
+                //你要测试的空间， 并且这个key在你空间中存在
+                $bucket = 'laravel-upload';
+                $key = 'Uplodes/'.$find->clogo;
 
-             
-             echo "<hr>";
-
+                //删除$bucket 中的文件 $key
+                $err = $bucketMgr->delete($bucket, $key);
+              
+                 $res = $request->only(['clogo']);
 
                //获取文件
                $file=$request->file('clogo');
@@ -194,7 +188,7 @@ class FilmUserController extends Controller
 
               //上传到文件到七牛
              $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
-             var_dump($bool);
+           
 
               //上传
               $clogo = 'image_'.$name;
@@ -203,19 +197,18 @@ class FilmUserController extends Controller
               if($info->save())
                 {
                     // echo "修改成功";
-                      // return redirect('FilmAdmins/Profile')->with('msg','修改成功'); 
-                   
+                      return redirect('FilmAdmins/Profile')->with('msg','修改成功'); 
 
 
                 }else{
                     
-                    // return back()->with('msg','修改失败');
+                    return back()->with('msg','修改失败');
 
                 }
 
             }else{
 
-                 // return back()->with('msg','修改失败');
+                 return back();
 
 
             }
