@@ -54,6 +54,13 @@
     					<input type="text" class="small" name='keywords' value="{{$res[0]->keywords}}">
     				</div>
     			</div>
+                
+                <div class="mws-form-row">
+                    <label class="mws-form-label">网站地址:</label>
+                    <div class="mws-form-item">
+                        <input type="text" class="small" name='address' value="{{$res[0]->address}}">
+                    </div>
+                </div>
 
     			<div class="mws-form-row">
     				<label class="mws-form-label">网站版权:</label>

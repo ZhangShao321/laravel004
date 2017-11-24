@@ -33,7 +33,7 @@
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane active" id="home">
 									<a href="#">
-										<img src="{{asset($aaa->filepic) }}" alt="" /></a>
+										<img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $aaa->filepic) }}" alt="" /></a>
                                 </div>	
 							</div>
 						</div>
@@ -49,8 +49,8 @@
 							<div class="product-desc">
 								<p>导演：{{$aaa->director}}</p>
 								<p>主演：{{$aaa->protagonist}}</p>
-								<p>电影时长：{{$aaa->filmtime}}</p>
-								<p>上映时间：{{$aaa->showtime}}</p>
+								<p>电影时长：{{$aaa->filmtime}} 分钟</p>
+								<p>上映时间：{{date('Y-m-d H:i:s',$aaa->showtime)}}</p>
 								<p>影片简介：{{$aaa->summary}}</p>
 							</div>
 							<hr class="page-divider">

@@ -81,6 +81,17 @@ class FilmMsgController extends Controller
 
         $info['showtime'] = strtotime($showtime['showtime']);
 
+        //修改电影类型
+        $tid = $request->only('tid')['tid'];
+
+        $type = DB::table('filmtype')->where('id',$tid)->first();
+
+        $type->num = $type->num + 1;
+
+        $sss = DB::table('filmtype')->where('id',$tid)->update(['num'=>$type->num]);
+
+        
+
 
                 // //判断文件是否上传
                 if($request -> hasFile('filepic'))
@@ -88,7 +99,7 @@ class FilmMsgController extends Controller
 
 
                      //获取文件
-                   $file=$request->file('filepic');
+                    $file=$request->file('filepic');
                    //初始化七牛
                    $disk=QiniuStorage::disk('qiniu');
 

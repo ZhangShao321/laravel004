@@ -92,28 +92,45 @@
     						</div>
     					</div>
                     </form>
-					<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
-						
+					<div style="float:right" class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
+						@if(session('uid'))
+                        <table>
+                            <tr align="right">
+                                <td>
+                                    <a class="user_info_login" href="/homes/login" style="color:purple">
+                                        <button class="btn btn-default btn-sm">登录</button>
+                                    </a>&nbsp;&nbsp;&nbsp;
+                                    <a class="user_info_reg" href="/homes/register" style="color:purple">
+                                        <button class="btn btn-default btn-sm">注册</button>
+                                    </a>&nbsp;&nbsp;&nbsp;
+                                   
+                                </td>
+
+                                <td><a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a></td>
+                        
+                            </tr>
+                        </table>
+                        @else
+                        
                         <table>
                             <tr>
-                                <td>Hi,欢迎来到{{ $con->webname }}!</td>
+                                <td>欢迎来到{{ $con->webname }}!</td>
                                 <td rowspan="2"><a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a class="user_info_login" href="/homes/login" style="color:purple">
-                                        登录
-                                    </a>
-                                    <a class="user_info_reg" href="/homes/register" style="color:purple">
-                                        注册
-                                    </a>
+                                    
                                     <a class="user_info_reg" href="/homes/detail" style="color:purple">
-                                        个人中心
+                                        <button class="btn btn-default btn-sm">个人中心</button>
+                                    </a>&nbsp;&nbsp;&nbsp;
+                                    <a class="user_info_reg" href="/homes/detail" style="color:purple">
+                                        <button class="btn btn-default btn-sm">退出</button>
                                     </a>
                                 </td>
                             </tr>
                         </table>
 
+                        @endif
                    
 					</div>
 				</div>
@@ -209,32 +226,20 @@
                         <h3>
                             友情链接
                         </h3>
+                        <?php 
+                            $friend = DB::table('friendlink')->get();
+                        ?>
                         <ul class="footer-menu">
+
+                            @foreach($friend as $aa=>$bb)
                             <li>
-                                <a href="#">
-                                    中国石油
+                                <a href="{{ $bb->url }}">
+                                    {{ $bb->linkname }}
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    中国航空
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    中国石化
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    中国移动
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    中国铁建
-                                </a>
-                            </li>
+
+                            @endforeach
+                            
                         </ul>
                     </div>
                 </div>
@@ -247,17 +252,17 @@
                             <li>
                                 <i class="fa fa-map-marker">
                                 </i>
-                                地址:北京市昌平区回龙观文化西路,育荣教育园区
+                                地址:{{ $con->address }}
                             </li>
                             <li>
                                 <i class="fa fa-envelope">
                                 </i>
-                                邮箱: shajiahuo@dianying.com
+                                邮箱: {{ $con->email }}
                             </li>
                             <li>
                                 <i class="fa fa-phone">
                                 </i>
-                                电话: +13838384380
+                                电话: +{{ $con->phone }}
                             </li>
                             <li>
                                 <a href="{{url('/homes/add')}}" style="color:white">

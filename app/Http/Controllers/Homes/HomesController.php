@@ -36,11 +36,14 @@ class HomesController extends Controller
         //电影列表数据
         $res = film::paginate(2);
 
+        //电影类型
+        $type = DB::table('filmtype')->where('status',1)->get();
+
         //电影排行榜数据
         $res1 = film::orderBy('shownum','desc')->limit('3')->get();
 
        //加载电影列表
-        return view('homes/filmlist',['res' => $res,'res1'=>$res1]);
+        return view('homes/filmlist',['res' => $res,'res1'=>$res1,'type'=>$type]);
     }
 
 
