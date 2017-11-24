@@ -54,6 +54,8 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台user用户管理
 		Route::resource('/user','UserController');
+        Route::post('/user/phone','UserController@phone');
+        Route::post('/user/work','UserController@work');
 
 		//后台管理员管理
 		Route::resource('/guanliyuan','GuanliyuanController');
