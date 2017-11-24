@@ -56,8 +56,8 @@ class AdminLoginController extends Controller
            }
 
            //判断输入的密码和数据库的密码是否一致
-          // if(!Hash::check($res['password'],$uname->password)){
-            if($res['password']!=$uname->password){
+          if(!Hash::check($res['password'],$uname->password)){
+            // if($res['password']!=$uname->password){
                 return redirect('/admin/login')->with('msg','密码输入错误');
            }
 
@@ -94,6 +94,25 @@ class AdminLoginController extends Controller
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
+
+    }
+
+
+     //退出登录
+
+    public function outlogin(Request $request)
+    {
+
+        //清除session里的aid
+        $tc = $request->session()->forget('aid');
+
+        if($tc){
+
+            return redirect('/admin/outlogin');
+        }else{
+
+            return back();
+        }
 
     }
 

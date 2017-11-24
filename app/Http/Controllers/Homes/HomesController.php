@@ -36,11 +36,14 @@ class HomesController extends Controller
         //电影列表数据
         $res = film::paginate(2);
 
+        //电影类型
+        $type = DB::table('filmtype')->where('status',1)->get();
+
         //电影排行榜数据
         $res1 = film::orderBy('shownum','desc')->limit('3')->get();
 
        //加载电影列表
-        return view('homes/filmlist',['res' => $res,'res1'=>$res1]);
+        return view('homes/filmlist',['res' => $res,'res1'=>$res1,'type'=>$type]);
     }
 
 
@@ -171,10 +174,14 @@ class HomesController extends Controller
         //获取放映信息
         $res = DB::table('showfilm')->where('id',$id)->first();
 
+        //获取电影院信息
+        $cinema = DB::table('cinema')->where('id',$res->cid)->first();
+
         //获取影厅信息
-        $seat = DB::table('roominfo')->where('id',$res->rid)->first();
+        $room = DB::table('roominfo')->where('id',$res->rid)->first();
+
         //获取座位信息
-        $data = DB::table('seat')->where('id',$seat->sid)->first();
+        $data = DB::table('seat')->where('id',$room->sid)->first();
 
         //获取座位
         $seat = $data->seat;
@@ -182,7 +189,7 @@ class HomesController extends Controller
         $seats = explode('#',$seat); 
 
 
-        return view('/homes/shopseat', ['data'=>$data, 'id'=>$id, 'seat'=>$seats]); 
+        return view('/homes/shopseat', ['data'=>$data,'room'=>$room, 'id'=>$id, 'seat'=>$seats, 'cinema'=>$cinema]); 
     }
 
    

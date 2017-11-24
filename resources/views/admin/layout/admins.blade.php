@@ -48,143 +48,24 @@
         
             <!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
             <div id="mws-logo-wrap">
-                <h2 style='color:white'>my houtai</h2>
+                <h2 style='color:white'>后台管理</h2>
             </div>
         </div>
         
         <!-- User Tools (notifications, logout, profile, change password) -->
         <div id="mws-user-tools" class="clearfix">
-        
-            <!-- Notifications -->
-            <div id="mws-user-notif" class="mws-dropdown-menu">
-                <a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
-                
-                <!-- Unread notification count -->
-                <span class="mws-dropdown-notif">35</span>
-                
-                <!-- Notifications dropdown -->
-                <div class="mws-dropdown-box">
-                    <div class="mws-dropdown-content">
-                        <ul class="mws-notifications">
-                            <li class="read">
-                                <a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="read">
-                                <a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="unread">
-                                <a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="unread">
-                                <a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-                            <a href="#">View All Notifications</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Messages -->
-            <div id="mws-user-message" class="mws-dropdown-menu">
-                <a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
-                
-                <!-- Unred messages count -->
-                <span class="mws-dropdown-notif">35</span>
-                
-                <!-- Messages dropdown -->
-                <div class="mws-dropdown-box">
-                    <div class="mws-dropdown-content">
-                        <ul class="mws-messages">
-                            <li class="read">
-                                <a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="read">
-                                <a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="unread">
-                                <a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="unread">
-                                <a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-                            <a href="#">View All Messages</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+                    
             <!-- User Information and functions section -->
-            <div id="mws-user-info" class="mws-inset">
+            <div id="mws-user-info" class="mws-inset">                
+                <?php
+                    $uid = session('aid');
 
-                
-            
+                    $datas = DB::table('userDetail')->where('uid',$uid)->first();
+                ?>
                 <!-- User Photo -->
                 <div id="mws-user-photo">
-                    <img src="" alt="User Photo">
+                    <!-- <img src="{{ $datas->photo }}" alt="User Photo"> -->
+                    <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$datas->photo}}?imageView2/0/w/240/h/240" alt="User Photo">
                 </div>
 
                 <!-- Username and Functions -->
@@ -192,16 +73,16 @@
                     
             
                     <div id="mws-username">
-                        Hello,admin
+                        Hello,{{ $datas->nickName }}
 
 
                     </div>
                     <ul>
-                        <li><a href="#">修改头像</a></li>
-                        <li><a href="#">修改密码</a></li>
+                        <li><a href="/admin/guanli/photo">修改头像</a></li>
+                        <li><a href="/admin/guanli/pass">修改密码</a></li>
 
 
-                        <li><a href="/admin/login">退出</a></li>
+                        <li><a href="/admin/outlogin">退出</a></li>
 
                       
                     </ul>
@@ -294,19 +175,22 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="icon-align-justify" ></i>板块管理</a>
+                        <a href="#"><i class="icon-align-justify" ></i>友情链接</a>
                         <ul class='closed'>
-                            <li><a href="/admin/block/create">添加板块</a></li>
-                            <li><a href="/admin/block">板块列表</a></li>
+                            <li><a href="/admin/block/create">添加友情链接</a></li>
+                            <li><a href="/admin/block">友情链接列表</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a href="#"><i class="icon-snowflake"></i>网站配置</a>
                         <ul class='closed'>
-                            <li><a href="/admin/net">网站配置</a></li>
+                            <li><a href="/admin/net">网站配置信息</a></li>
+                            <li><a href="/admin/net/create">修改网站配置</a></li>
                         </ul>
                     </li>
+
+                    
                 </ul>
             </div>         
         </div>
@@ -371,6 +255,10 @@
 
     <!-- Demo Scripts (remove if not needed) -->
     <script src="/admins/js/demo/demo.dashboard.js"></script>
+
+    <!-- layer -->
+    <script src="/admins/js/layer/layer.js"></script>
+
 
     @section('js')
 

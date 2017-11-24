@@ -62,6 +62,22 @@ return [
             // 'timeout'  => 30,
         ],
 
+
+         'qiniu' => [
+            'driver'  => 'qiniu',
+            'domain' => 'ozspkrste.bkt.clouddn.com',  //域名
+              
+            'access_key'=> '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w',  //AccessKey
+            'secret_key'=> 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ',  //SecretKey
+            'bucket'    => 'laravel-upload',  //Bucket名字  空间名
+            'notify_url'=> 'ozspa9a4f.bkt.clouddn.com',  //持久化处理回调地址    域名
+            'access'    => 'public'  //空间访问控制 public 或 private
+        ],
+
+
+
+
+
         's3' => [
             'driver' => 's3',
             'key'    => 'your-key',
@@ -79,6 +95,22 @@ return [
             'region'    => 'IAD',
             'url_type'  => 'publicURL',
         ],
+
+        'qiniu' => [
+            'driver'  => 'qiniu',
+            'domains' => [
+                'default'   => 'ozss4v1w9.bkt.clouddn.com', //我自己的地址
+                'https'     => '',
+                'custom'    => '',                
+             ],
+            'access_key'=> '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w',  //AccessKey
+            'secret_key'=> 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ',  //SecretKey
+            'bucket'    => 'laravel-upload',  //Bucket名字
+            'notify_url'=> 'ozspa9a4f.bkt.clouddn.com',  //持久化处理回调地址
+            'access'    => 'public'  //空间访问控制 public 或 private
+
+        ],
+
 
     ],
 

@@ -46,20 +46,7 @@
                             </div>
 
 
-                            <div class="mws-form-row">
-                                <label class="mws-form-label">影院名称</label>
-                                <div class="mws-form-item">
-                                    <select class="large" name="cid">
-                                       
-                                       
-                                           @foreach($cinema as $ck => $cv)
-                                        <option  value="{{$cv->id}}"   @if( $v->cinema == $fv->cinema) selected  @endif > {{$cv->cinema}} </option>
-                                          @endforeach 
-
-                                      
-                                    </select>
-                                </div>
-                            </div>
+                            
 
                             <div class="mws-form-row">
                                 <label class="mws-form-label">影厅名称</label>
@@ -68,12 +55,19 @@
                                       
                                         
                                          @foreach($room as $rk => $rv)
-                                        <option  value="{{$rv->id}}" @if( $v->roomname == $rv->cinema) selected  @endif > {{$rv->roomname}} </option>
+                                        <option  value="{{$rv->id}}" @if( $v->roomname == $rv->roomname) selected  @endif > {{$rv->roomname}} </option>
                                           @endforeach 
 
                                        
                                     
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="mws-form-row">
+                                <label class="mws-form-label">价格</label>
+                                <div class="mws-form-item">
+                                  <input type="number" name="price" value="{{ $res['0']->price }}">
                                 </div>
                             </div>
                             

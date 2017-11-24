@@ -64,7 +64,7 @@
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
                         style="width: 64px;">
-                            影院
+                            价格 /元
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
@@ -110,7 +110,7 @@
                            
                         </td>
                         <td class=" ">
-                             {{$v->cinema}}
+                             {{$v->price}}
                             
                         </td>
                         <td class=" ">
@@ -141,7 +141,9 @@
             <div class="dataTables_info" id="DataTables_Table_1_info">
                 Showing 1 to 10 of 57 entries
             </div>
-            <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+             <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
+              {!! $roo->render() !!}
+                        
             </div>
         </div>
     </div>
@@ -158,7 +160,7 @@
 @endsection
 
 
-@section('js');
+@section('js')
 
 <script type="text/javascript">
 
@@ -200,18 +202,9 @@
             ,btn2:function(){
                 // layer.msg('按钮2');取消执行的按钮
             }});
-    });
-
-
-
-
-
-
-    
-       
-
+    })
     
 </script>
 
 
-@endsection;
+@endsection

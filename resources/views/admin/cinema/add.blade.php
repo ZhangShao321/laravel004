@@ -76,10 +76,16 @@
                          <div class="mws-form-row">
                               <label class="mws-form-label">法人：</label>
                               <div class="mws-form-item clearfix">
-                                   <input type="text" name="legal" class="small" value="">
+                                <input type="text" name="legal" class="small" value="">
                               </div>
                          </div>
                          
+                         <div class="mws-form-row">
+                              <label class="mws-form-label">状态：</label>
+                            <div class="mws-form-item clearfix">
+                              <input type="text" name="status" class="small" value="2">
+                            </div>
+                         </div>
                          <div class="mws-form-row">
                              <label class="mws-form-label">
                                    电影院logo:

@@ -39,7 +39,8 @@
                     </td>
                     <td>
                         <a href="/FilmAdmins/room/edit/{{ $v->id }}"><button>修改</button></a>
-                        <a href="/FilmAdmins/room/delete/{{ $v->id }}"><button>删除</button></a>
+                        <!-- <a href="/FilmAdmins/room/delete/{{ $v->id }}"></a> -->
+                        <button id="{{ $v->id }}" class="del">删除</button>
                         <a href="/FilmAdmins/room/seats/{{ $v->id }}"><button>座位</button></a>
                     </td>
                 </tr>
@@ -75,6 +76,23 @@ $('.b1').click(function(){
 
 })
 
+
+$('.del').click(function(){
+
+    var ids = $(this).attr('id');
+
+    layer.confirm('您确认要删除吗？', {
+      btn: ['确认','取消'] //按钮
+    }, function(){
+
+      $.post("/FilmAdmins/room/delete/"+ids,{_token:'{{ csrf_token() }}'}, function(data){
+
+            layer.msg(data, {icon: 1});
+        })
+    });
+
+    
+})
 
 </script>
 

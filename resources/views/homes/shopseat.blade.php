@@ -49,43 +49,78 @@
         height: 50px;
         padding-left: 20px;
         background: lightblue;
-        padding-top: 18px;
+        padding-top: 10px;
     }
+    #seat-maps{
+        margin: 10px auto; 
+        width: auto;
+        height: auto;   
+    }
+
+    #mmm{
+        width: auto;
+        height: auto; 
+    }
+    #ccc{
+        width: auto;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+    }
+    
 </style>
 @section('content') 
-
+<center>
 <div class="mws-panel grid_8">
-    <div class="mws-panel-header">
-        <span>座位图</span>
-    </div>
+    
     <div class="mws-panel-body no-padding">
         <form class="mws-form">
         <div class="mws-form-block">
 
                  
             <div class="mws-form-row">
-                <label class="mws-form-label"><h3>座位图</h3></label>
+                <!-- <label class="mws-form-label"><h2> 座 位 图 </h2></label> -->
                 <input type="hidden" id="x" value="{{ $data->hang }}"  name="hang">
                 <input type="hidden" id="y"  value="{{ $data->lie }}" name="lie">
                  <br/>  
-                <div class="mws-form-item"> 
-                    <div id="seat-maps"></div>
-                    <ul id="selected-seats">
-                    </ul>
+                <div id="mmm" style="" class="mws-form-item">
+
+                    <table>
+                        <tr align="center">
+                            <td>
+                                <div id="ccc"><img src="/homes/ticket_screen.jpg" alt=""></div>
+                                <p><h2>{{ $cinema->cinema }}</h2></p>
+                                <p><h2>{{ $room->roomname }}{{ $room->roomtype }}</h2></p>
+                            </td>
+                            <!-- <td>dddddddddddd</td> -->
+                        </tr>
+                        <tr>
+                            <td><div  class=""  id="seat-maps"></td>
+                            <!-- <td>ddddddddddddddddddd</td> -->
+                        </tr>
+                    </table>
+
+                    
+                    
+                    
+                        
+                    </div>
+                 
                 </div>
+                <ul id="selected-seats"></ul>
             </div> 
             <br>
         </div>
         </form>
             <div class="mws-button-row" id="xiugai"  >
-                <button  class="btn btn-danger">购买</button>
+                <button   class="btn btn-danger">购买</button>
                 
             </div>
             <!-- <div id="legend"></div> -->
         
     </div>
 </div>
-
+</center>
 
 @endsection
 @section('js')      

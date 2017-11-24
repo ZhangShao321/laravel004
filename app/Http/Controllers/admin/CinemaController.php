@@ -17,27 +17,34 @@ class CinemaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+        public function index(Request $request)
     {   
 
         $res = DB::table('cinema')    
 
-             //将两张表拼接起来 
+             //将三张表拼接起来 
              //链接两个表的方法join
              //join('表名','主表id','与主表关联的附表的关联id')
-            ->join('cininfo','cinema.id', '=', 'cininfo.cid')   
+            ->join('cininfo','cininfo.cid', '=', 'cinema.id')->join('cinlogin','cinlogin.cid', '=', 'cinema.id')  
 
             //选择需要用的字段查询
-            ->select('cinema.id','cinema.cinema','cinema.phone','cinema.clogo','cinema.time','cinema.legal','cininfo.city','cininfo.area','cininfo.address')
+
+            ->select('cinema.id','cinema.cinema','cinema.phone','cinema.clogo','cinema.time','cinema.legal','cinema.status','cininfo.city','cininfo.area','cininfo.address','cinlogin.cinema','cinlogin.time','cinlogin.status')
+
             ->where('cinema.cinema','like','%'.$request->input('search').'%')
+            ->where('cinema.status','>',1)
             ->orderBy('cinema.id','asc')
             ->paginate($request->input('num',10));
-            // echo"<pre>";
-            // var_dump($res);die;
-        return view('admin.cinema.index',['res'=>$res,'request'=>$request]);
+
+            
+            return view('admin.cinema.index',['res'=>$res,'request'=>$request]);
+            
+            
+        
+
+
 
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -49,6 +56,7 @@ class CinemaController extends Controller
         //
        return view('admin.cinema.add');
 
+
     }
 
     /**
@@ -59,13 +67,16 @@ class CinemaController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
         //用only方法拿出添加页面传递过来的你需要的数据存入$input1
-        $input1 = $request->only('cinema','password','phone','legal','clogo','time');
+        $input1 = $request->only('cinema','password','phone','legal','clogo','time','status');
 
         //哈希加密
         $input1['password'] = Hash::make($input1['password']);
 
-        $time = time();
+        // $time = time();
       
         $input1['time'] = time();
         
@@ -102,14 +113,15 @@ class CinemaController extends Controller
             DB::beginTransaction();
 
             $input2 = $request->only('city','area','address');
-            $input3 = $request->only('cinema','password');
+            $input3 = $request->only('cinema','password','status');
             
             //把传递过来的id赋值给$input2['cid']
             $input2['cid'] = $cinema;
             $input3['cid'] = $cinema;
 
 
-            $input3['password'] = Hash::make($input1['password']);
+
+            $input3['password'] = $input1['password'];
 
             $ctime = time();
             $input3['time'] = $ctime;
@@ -172,6 +184,7 @@ class CinemaController extends Controller
      */
     public function update(Request $request, $id)
     {
+
           //判断是否有文件上传
         if($request->hasFile('clogo')){
             
@@ -213,13 +226,14 @@ class CinemaController extends Controller
         $res = DB::table('cininfo')->where('cid',$id)->update($input2);
         $res = DB::table('cinlogin')->where('cid',$id)->update($input3);
 
-        if($res==1 || $res==0){
+        if($res){
              return redirect('/admin/cinema');
            
         }else{
             return back();
         }
     }
+
 
 
     /**
@@ -230,6 +244,7 @@ class CinemaController extends Controller
      */
     public function destroy($id)
     {
+
         DB::beginTransaction();
 
         $res1 = DB::table('cinema')->where('id',$id)->delete();
@@ -237,12 +252,13 @@ class CinemaController extends Controller
         $res3 = DB::table('cinlogin')->where('cid',$id)->delete();
 
         
-        if($res){
+        if($res=1 || $res=0){
             DB::commit();
             return redirect('/admin/cinema')->with('删除成功');
         }else{
             return back();
         }
+
 
     }
 }
