@@ -24,8 +24,10 @@ class HomesController extends Controller
         //轮播图数据
         $res1 = lunbo::get();
 
+        $res2 = film::orderBy('showtime','time()')->limit('4')->get();
+
         //加载首页
-        return view('homes/index',['res' => $res,'res1' => $res1]);
+        return view('homes/index',['res' => $res,'res1' => $res1,'res2' => $res2]);
     }
 
 
