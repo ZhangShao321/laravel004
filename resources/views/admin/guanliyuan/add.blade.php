@@ -62,7 +62,7 @@
                                   <div class="mws-form-row">
                                       <label class="mws-form-label">状态</label>
                                       <div class="mws-form-item">
-                                          <select class="status">
+                                          <select class="status" name="status">
                                               <option selected value="1">普通管理员</option>
                                               <option value="2">中级管理员</option>
                                               <option value="3">超级管理员</option>
@@ -75,7 +75,13 @@
                               <div class="mws-button-row">
 
                                    {{csrf_field() }}
-                                   <input type="submit" class="btn btn-danger" value="添加">                            
+
+
+                                   <input id="but" type="submit" class="btn btn-danger" value="添加">
+
+
+                              
+
               
                               </div>
                          </form>
@@ -90,6 +96,7 @@
 <script>
 
      $('.mws-form-message').delay(3000).slideUp(1000);
+
 
      //用户名验证
      $('input[name=phone]').blur(function(){
@@ -152,6 +159,13 @@
             $(this).next().css('color','red');
         }
      })
+
+        $('#but').on('click', function(){
+                          
+          layer.msg('管理员添加成功:)');
+      });
+
+
 
 </script>
 

@@ -160,8 +160,9 @@
                 ?>
             	<!-- User Photo -->
             	<div id="mws-user-photo">
-                	
-                    <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$res->clogo.'?imageView2/0/w/90/h/90')}}" id="ftou" >
+
+                	<img style="width:31px;height:31px" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $res->clogo }}?imageView2/0/w/240/h/240" alt="User Photo">
+
                 </div>
                 
                 <!-- Username and Functions -->

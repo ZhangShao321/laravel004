@@ -19,7 +19,7 @@ class FilmShowController extends Controller
     public function index()
     {
       
-       $roo = showfilm::where('showfilm.cid',session('uid'))
+       $roo = showfilm::where('showfilm.cid',session('cid'))
                         ->join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')

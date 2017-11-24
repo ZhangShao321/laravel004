@@ -42,6 +42,8 @@ Route::get('/admin/login','admin\AdminLoginController@index');
 Route::post('/admin/dologin','admin\AdminLoginController@dologin');
 //生成登录验证码 
 Route::get('/admin/code','admin\AdminLoginController@code');
+//退出登录的方法
+Route::get('/admin/outlogin','admin\AdminLoginController@outlogin');
         
 
 //后台路由组 中间件
@@ -56,6 +58,12 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		//后台管理员管理
 		Route::resource('/guanliyuan','GuanliyuanController');
         Route::post('/guanliyuan/phone','GuanliyuanController@phone');
+        Route::post('/guanliyuan/work','GuanliyuanController@work');
+        Route::get('/guanli/pass','GuanliyuanController@pass');
+        Route::post('/guanli/dopass','GuanliyuanController@dopass');
+        Route::get('/guanli/photo','GuanliyuanController@photo');
+        Route::post('/guanli/dophoto','GuanliyuanController@dophoto');
+        
 
 		//后台商户(电影院)管理
 		Route::resource('/cinema','CinemaController');
@@ -65,9 +73,10 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台影视分类
 		Route::resource('/film','FilmController');
+        Route::post('/film/work','FilmController@work');
 
-		//后台轮播图管理
-		Route::resource('/lunbo','LunboController');
+        //后台轮播图管理
+        Route::resource('/lunbo','LunboController');
 
 		//后台板块管理
 		Route::resource('/block','BlockController');
@@ -200,8 +209,8 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 
 
 
-
 //===============================前台信息=============================
+
 
 
 
@@ -231,6 +240,9 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     //搜索框的页面
     Route::get('search','HomesController@search');
 
+    //订座
+    Route::get('dingpiao','HomesController@dingpiao');
+
 
 
     
@@ -246,6 +258,11 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('test','HomesRegisterController@doAction');
 	 //判断
 	Route::post('doregister','HomesRegisterController@store');
+
+    //个人中心
+    Route::get('detail','HomesDetailController@index');
+    Route::post('doaction','HomesDetailController@store');
+
 	//修改密码
     Route::get('change','HomesChangeController@index');
     Route::get('pass','HomesChangeController@doAction');
@@ -258,3 +275,4 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 
 });
+

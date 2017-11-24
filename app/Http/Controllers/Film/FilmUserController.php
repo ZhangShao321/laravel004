@@ -44,7 +44,7 @@ class FilmUserController extends Controller
         return view('FilmAdmins.FilmUser.info',['res'=>$res]);
     }
 
-//电影院信息修改
+    //电影院信息修改
     public function filmUpdate(Request $request)
     {
         
@@ -198,7 +198,7 @@ class FilmUserController extends Controller
 
               //上传
               $clogo = 'image_'.$name;
-              $info =cinema::find(1); 
+              $info =cinema::find(session('cid')); 
               $info->clogo = "{$clogo}";
               if($info->save())
                 {
