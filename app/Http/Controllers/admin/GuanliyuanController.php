@@ -306,10 +306,10 @@ class GuanliyuanController extends Controller
 
                 //你要测试的空间， 并且这个key在你空间中存在
                 $bucket = 'laravel-upload';
-                $key = 'Uplodes/'.$clic->photo;
+                @$key = 'Uplodes/'.$clic->photo;
 
                 //删除$bucket 中的文件 $key
-                $err = $bucketMgr->delete($bucket, $key);
+                @$err = $bucketMgr->delete($bucket, $key);
             
 
                  //获取文件
