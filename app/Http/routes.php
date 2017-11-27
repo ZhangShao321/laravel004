@@ -248,7 +248,9 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
     //订座
     Route::get('dingpiao','HomesController@dingpiao');
-    Route::get('la','HomesController@la');
+
+    //订单确认页面
+    Route::get('piao','HomesController@piao');
 
 
     //电影院注册
