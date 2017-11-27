@@ -204,6 +204,7 @@ class HomesController extends Controller
         return view('/homes/shopseat', ['data'=>$data,'room'=>$room, 'id'=>$id, 'seat'=>$seats, 'cinema'=>$cinema]); 
     }
 
+  
    
 
 }

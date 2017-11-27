@@ -64,7 +64,7 @@
                 <a href="{{url('/homes/filmdetail?id=').$v->id}}">
                     <div class="single-banner">
                         <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
-" style="width:360px;height:420px" alt="" />
+                        " style="width:360px;height:420px" alt="" />
                         <div class="banner-details">
                             <div class="mask">
                                 <p>
@@ -127,9 +127,9 @@
                                             <div class="product-img">
                                                 <a href="{{url('/homes/filmdetail?id=').$v->id}}">
                                                     <img class="primary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
-" style="width:300px;height:350px" alt="" />
+                                                    " style="width:300px;height:350px" alt="" />
                                                     <img class="secondary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
-" style="width:300px;height:350px" alt="" />
+                                                    " style="width:300px;height:350px" alt="" />
                                                 </a>
                                                 <span class="sale">
                                                     敬请期待

@@ -237,6 +237,7 @@ function registSeat(){
 
                                 layer.alert(data, {icon: 6});
 
+
                                 zuos();
 
                         })
