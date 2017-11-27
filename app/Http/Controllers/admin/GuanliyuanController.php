@@ -289,10 +289,6 @@ class GuanliyuanController extends Controller
     public function dophoto(Request $request)
     {
 
-<<<<<<< HEAD
-        
-=======
->>>>>>> 084b8a994a20b0ba755782ab478234bc919649d0
 
         if($request -> hasFile('photo')){
 

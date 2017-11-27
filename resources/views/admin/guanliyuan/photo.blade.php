@@ -26,32 +26,6 @@
                <form action="" style="text-align: center;" method="post" class="mws-form" enctype='multipart/form-data' id="art_form">
                                        
 								
-<<<<<<< HEAD
-                										<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px"/>
-                										
-                									</div>
-					                
-          				              <div class="mws-form-row">
-          				                    <label class="mws-form-label">
-          				                        头像
-          				                    </label>
-          				                    <div class="mws-form-item">
-          				                       <input type="file" name="photo" class="large">
-          				                    </div>
-          				                </div>
-                                                             
-                         
-                              </div>
-                              <div class="mws-button-row">
-
-                                   {{csrf_field() }}
-                                   <input type="submit" class="btn btn-danger" value="修改">                            
-              
-                              </div>
-                         </form>
-                    </div>         
-                </div>
-=======
      <!--                      <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px" id="img1"/> -->
                 			             
       					    <input type="text" name="art_thumb" id="art_thumb"  value="{{$data->photo}}" style="width: 400px;">
@@ -66,7 +40,7 @@
                         </form>
                 </div>         
   </div>
->>>>>>> 084b8a994a20b0ba755782ab478234bc919649d0
+
 
 
 
