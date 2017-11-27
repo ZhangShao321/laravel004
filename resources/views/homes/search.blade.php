@@ -33,8 +33,8 @@
                                     <div class="single-product">
                                         <div class="product-img">
                                             <a href="{{url('/homes/filmdetail?id=').$v->id}}">
-                                                <img class="primary-img" src="{{asset($v->filepic) }}" alt="" />
-                                                <img class="secondary-img" src="{{asset($v->filepic) }}" alt="" />
+                                                <img class="primary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" style="width:300px;height:350px" alt="" />
+                                                <img class="secondary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" style="width:300px;height:350px" alt="" />
                                             </a>
                                         </div>
                                         <div class="product-info">

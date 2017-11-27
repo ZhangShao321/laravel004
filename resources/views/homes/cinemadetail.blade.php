@@ -33,7 +33,7 @@
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="home">
                                     <a href="#">
-                                        <img src="{{asset($v->clogo)}}" alt="" />
+                                        <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->clogo) }}" style="width:450px;height:550px" alt="" />
                                     </a>
                                 </div>
                             </div>

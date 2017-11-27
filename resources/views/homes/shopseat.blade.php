@@ -113,7 +113,7 @@
         </div>
         </form>
             <div class="mws-button-row" id="xiugai"  >
-                <button   class="btn btn-danger">购买</button>
+                <button id="goumai"  class="btn btn-danger">购买</button> 
                 
             </div>
             <!-- <div id="legend"></div> -->
@@ -121,8 +121,6 @@
     </div>
 </div>
 </center>
-
-
 
 @endsection
 @section('js')      
@@ -207,7 +205,7 @@ function registSeat(){
     zuos();
 
     //购票
-    $('button').click(function(){
+    $('#goumai').click(function(){
 
                 var info = [];
                 $('.none').each(function(){
@@ -235,11 +233,26 @@ function registSeat(){
                     }else{
 
                         //发送ajax      into = '4_5#4_6#4_7'
-                        $.post('{{ url("/FilmAdmins/ticket/shopseat/$id") }}',{_token:'{{ csrf_token() }}', zuo:into},function(data){
+                        $.post('{{ url("/homes/shopseat/$id") }}',{_token:'{{ csrf_token() }}', zuo:into},function(data){
 
-                                layer.alert(data, {icon: 6});
+                                if(data == '购买失败'){
+                                    layer.alert(data, {icon: 6});
+                                } else {
+                                    layer.alert('购买成功', {icon: 6});
+
+                                    var ids = data;
+
+                                    console.log(ids);
+                                    //链接付款
+                                    var but = $("<a href='{{url('/homes/piao?id=')}}"+ids+"'><button id='shop' class='btn btn-danger'>马上付款</button></a>");
+                                    $('#goumai').after(but);
+                                    $('#shop').css('margin-left','20px');
+                                }
+                                
+
 
                                 zuos();
+                                
 
                         })
                     }
@@ -252,7 +265,7 @@ function registSeat(){
             //获取座位判断是否选中
 
             function zuos(){
-                $.post('{{ url("/FilmAdmins/ticket/shopseat_into/$id") }}',{_token:'{{ csrf_token() }}'},function(data){
+                $.post('{{ url("/homes/shopseat_into/$id") }}',{_token:'{{ csrf_token() }}'},function(data){
 
                     // console.log(typeof data);
                    
