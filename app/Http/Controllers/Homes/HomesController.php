@@ -20,17 +20,19 @@ use zgldh\QiniuStorage\QiniuStorage;
 class HomesController extends Controller
 {
 
-    //主页
+    //电影院主页
     public function index()
     {   
         //热映电影数据
         $res = film::orderBy('shownum','desc')->limit('3')->get();
+
         //轮播图数据
         $res1 = lunbo::get();
 
+        //即将上映电影数据
         $res2 = film::orderBy('showtime','time()')->limit('4')->get();
 
-        //加载首页
+        //加载前台首页
         return view('homes/index',['res' => $res,'res1' => $res1,'res2' => $res2]);
     }
 
@@ -42,7 +44,7 @@ class HomesController extends Controller
         //电影列表数据
         $res = film::paginate(2);
 
-        //电影类型
+        //电影类型数据
         $type = DB::table('filmtype')->where('status',1)->get();
 
         //电影排行榜数据
@@ -57,16 +59,15 @@ class HomesController extends Controller
     public function filmdetail(Request $request)
     {
 
-        
+        //电影详情数据
         $aaa = film::find($request->id);
-        // echo "<pre>";var_dump($aaa->filmname);die;
         $bbb = film::where('filmname',$aaa->filmname)
                 ->join('showfilm','film.id','=','showfilm.fid')
                 ->join('cinema','showfilm.cid','=','cinema.id')
                 ->join('cininfo','cinema.id','=','cininfo.cid')
                 ->select('showfilm.id','showfilm.time','cinema.cinema')
                 ->get();
-        // echo "<pre>";var_dump($bbb);die;
+        
         //加载电影详情页面
         return view('homes/filmdetail',['aaa' => $aaa,'bbb' => $bbb]);
     }
@@ -91,8 +92,7 @@ class HomesController extends Controller
         $res = cinema::find($request->only('id'));
         $res1 = cininfo::where('cid',$id)->get();
 
-       
-        
+        //该影院上映电影数据
         $res2 = cinema::where('cinema.id',$request->id)
                 ->join('cininfo','cinema.aid','=','cininfo.id')
                 ->join('showfilm','cininfo.cid','=','showfilm.cid')
@@ -110,17 +110,20 @@ class HomesController extends Controller
     //申请商户
     public function add()
     {
+        //加载申请商户的页面
         return view('homes/shenqing');
     }
 
+
     public function store(Request $request)
     {
+        //获取商户申请的数据
         $res = $request->except('_token','city','area','address');
         $res1 = $request->only('city','area','address');
 
         $res['password'] = Hash::make($res['password']);
 
-
+        //图片上传
         if($request -> hasFile('license'))
         {
 
@@ -204,7 +207,19 @@ class HomesController extends Controller
         return view('/homes/shopseat', ['data'=>$data,'room'=>$room, 'id'=>$id, 'seat'=>$seats, 'cinema'=>$cinema]); 
     }
 
+
+    //确认订单的页面
+    public function piao()
+    {
+        return view('/homes/piao');
+    }
+
   
-   
+
+    //钱包
+    public function money()
+    {
+
+    }
 
 }

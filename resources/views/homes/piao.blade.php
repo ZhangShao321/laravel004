@@ -2,6 +2,8 @@
 
 @section('title','傻家伙')
 
+<!-- <meta http-equiv="refresh" content="3;url=return back" /> -->
+
 @section('content')
 
 <style type="text/css">
@@ -47,6 +49,12 @@
     font-size: 24px;
 }
 
+.widget-buy-orderlist .wrap-content .cuttime-content {
+  background-color: #00CCFF;
+  margin-bottom: 30px;
+  padding: 24px 30px 24px 42px;
+}
+
 </style>
 
 <div class="widget-buy-orderlist">
@@ -57,6 +65,9 @@
         </span>
     </h2>
     <div class="wrap-content">
+    	<div class="cuttime-content nuomi-red">
+			请在5分钟内完成付款，超时系统将自动释放已选座位
+		</div>
         <ul class="order-list">
             <!-- 影片 -->
             <li class="item-tr">
@@ -85,7 +96,7 @@
                                 长春红旗街万达广场店
                             </li>
                             <li>
-                                <span class="font-shadow">
+                                <span class="font-shadow" id="cinema">
                                     影厅：
                                 </span>
                                 2号厅
@@ -139,18 +150,49 @@
         </ul>
     </div>
     <div class="confirm font-shadow text-right" style="padding-right:20px">
-        <p class="total-money">
-            实际支付：
-            <span data-selector="totalPrice" class="nuomi-red">
-                38.50元
-            </span>
-        </p>
-        <a data-selector="pay" style="width:200px;font-size:20px; "  href="javascript:;" class="btn btn-info confirm-button back-red" >
-	            确认并去支付
-        </a>
+    	<form action="" method="get">
+	        <p class="total-money">
+	            实际支付：
+	            <span data-selector="totalPrice" class="nuomi-red" id="price">
+	                38.50元
+	            </span>
+	        </p>
+	        <button data-selector="pay" style="width:200px;font-size:20px" class="btn btn-info confirm-button back-red" id="fun">
+		            确认并去支付
+	        </button>
+        </form>
     </div>
 </div>
+@endsection
 
 
+@section('js')
+<script type="text/javascript">
 
+	var price = $('#price').val();
+	var cinema = $('#cinema').val();
+
+	$('#fun').click(function(){
+
+     layer.alert('请确认订单信息', {
+        skin: 'layui-layer-molv' //样式类名  自定义样式
+        ,closeBtn: 1    // 是否显示关闭按钮
+        ,anim: 1 //动画类型
+        ,btn: ['确认','返回'] //按钮
+        ,icon: 6    // icon
+        ,yes:function(){
+            layer.msg('购票成功')
+            
+            $.post('{{ url("/homes/money") }}',{_token:'{{ csrf_token() }}', price:price,cinema:cinema},function(data){
+             		console.log(data);
+            })
+        }
+        ,btn2:function(){
+            layer.msg('返回中')
+            return back;
+        }});
+    });
+
+
+</script>
 @endsection
