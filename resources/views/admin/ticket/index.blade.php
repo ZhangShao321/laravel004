@@ -36,12 +36,13 @@
                         <td>{{$v->id}}</td>
                         <td>{{$v->nickName}}</td>                        
                         <td>{{$v->cinema}}</td>              
-                        <td>{{$v->nickName}}</td>              
-                        <td>{{$v->roomname}}</td>              
-                        <td>{{$v->filmname}}</td>              
-                        <td>{{$v->seat}}</td>              
+                        <td>{{$v->roomname}}</td> 
+                        <td>{{$v->filmname}}</td>             
+                        <td>{{$v->seat}}</td>                          
                         <td>{{date('Y-m-d H:i:s',$v->showtime)}}</td>              
-                        <td>{{date('Y-m-d H:i:s',$v->time)}}</td>              
+                        <td>{{date('Y-m-d H:i:s',$v->time)}}</td>  
+                        <td>{{$v->num}}</td>                          
+
                         <td>
                             <form action="/admin/ticket/{{$v->id}}" style="display:inline" method="post">  
                                 
