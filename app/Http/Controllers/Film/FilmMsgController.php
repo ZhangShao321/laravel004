@@ -81,14 +81,24 @@ class FilmMsgController extends Controller
 
         $info['showtime'] = strtotime($showtime['showtime']);
 
+        //修改电影类型
+        $tid = $request->only('tid')['tid'];
+
+        $type = DB::table('filmtype')->where('id',$tid)->first();
+
+        $type->num = $type->num + 1;
+
+        $sss = DB::table('filmtype')->where('id',$tid)->update(['num'=>$type->num]);
+
+        
+
 
                 // //判断文件是否上传
                 if($request -> hasFile('filepic'))
                 {
 
-
                      //获取文件
-                   $file=$request->file('filepic');
+                    $file=$request->file('filepic');
                    //初始化七牛
                    $disk=QiniuStorage::disk('qiniu');
 
@@ -254,22 +264,26 @@ class FilmMsgController extends Controller
           //删除$bucket 中的文件 $key
           $err = $bucketMgr->delete($bucket, $key);
 
-          if($err){
+<<<<<<< HEAD
+     
+=======
+         
+>>>>>>> fb49abfd1718f73f07d7fd6ee162221963b206bd
 
-                // $res = $del->delete();
-               if(film::where('id',$id)->delete())
-               {
-                echo "删除成功!";
-               }else{
-                echo "删除失败!";
-               }
+            // $res = $del->delete();
+           if(film::where('id',$id)->delete())
+           {
+            echo "删除成功!";
+           }else{
+            echo "删除失败!";
+           }
 
 
 
-          }else{
-            echo "删除失败";
-          }
+<<<<<<< HEAD
         
+=======
+>>>>>>> fb49abfd1718f73f07d7fd6ee162221963b206bd
            
 
      }

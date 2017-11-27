@@ -1,6 +1,6 @@
 @extends('admin.layout.admins')
         
-@section('title','商户列表')
+@section('title','友情链接')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <span>
             <i class="icon-table">
             </i>
-            商户列表
+            友情链接
         </span>
     </div>
     <div class="mws-panel-body no-padding">

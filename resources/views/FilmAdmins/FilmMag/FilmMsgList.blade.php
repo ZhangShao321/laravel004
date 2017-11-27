@@ -187,9 +187,9 @@
                                   
                                     
                                     <td class=""> {{$sta[$v->status] }}</td>
-                                   <td style="overflow: visible; " class="">
-                                     <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" >编辑</a> |
-                                     <span style="cursor:pointer; color:#C5D52B" class="del"  value="{{$v->id}}"  >删除</span>
+                                   <td style="overflow: visible;padding:0px " align="center" class="">
+                                     <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" ><button  class="btn btn-default btn-sm ">编辑</button></a> 
+                                     <span style="cursor:pointer; color:#C5D52B" class="del"  value="{{$v->id}}"  ><button class="btn btn-default btn-sm ">删除</button></span>
                                    </td>
                                 </tr>
                      @endforeach 

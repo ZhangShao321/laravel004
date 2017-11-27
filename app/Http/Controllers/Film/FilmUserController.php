@@ -187,7 +187,7 @@ class FilmUserController extends Controller
 
               //上传
               $clogo = 'image_'.$name;
-              $info =cinema::find(1); 
+              $info =cinema::find(session('cid')); 
               $info->clogo = "{$clogo}";
               if($info->save())
                 {

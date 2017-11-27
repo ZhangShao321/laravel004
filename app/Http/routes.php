@@ -54,14 +54,24 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台user用户管理
 		Route::resource('/user','UserController');
+        Route::post('/user/phone','UserController@phone');
+        Route::post('/user/work','UserController@work');
+        Route::get('/user/pass/{id}','UserController@pass');
+        Route::post('/user/dopass','UserController@dopass');
+        Route::get('/user/photo/{id}','UserController@photo');
+        Route::post('/user/dophoto','UserController@dophoto');
 
 		//后台管理员管理
 		Route::resource('/guanliyuan','GuanliyuanController');
         Route::post('/guanliyuan/phone','GuanliyuanController@phone');
         Route::post('/guanliyuan/work','GuanliyuanController@work');
+        //加载修改密码的页面方法
         Route::get('/guanli/pass','GuanliyuanController@pass');
+        //执行修改密码
         Route::post('/guanli/dopass','GuanliyuanController@dopass');
+        //添加修改头像页面
         Route::get('/guanli/photo','GuanliyuanController@photo');
+         //执行修改头像
         Route::post('/guanli/dophoto','GuanliyuanController@dophoto');
         
 
@@ -73,6 +83,7 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台影视分类
 		Route::resource('/film','FilmController');
+        Route::post('/film/work','FilmController@work');
 
         //后台轮播图管理
         Route::resource('/lunbo','LunboController');
@@ -239,7 +250,22 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     //搜索框的页面
     Route::get('search','HomesController@search');
 
+    //订座
+    Route::get('dingpiao','HomesController@dingpiao');
+    Route::post('shopseat','HomesController@shopseat');
+    Route::post('shopseat_into','HomesController@shopseat_into');
 
+    //订单确认页面
+    Route::get('piao','HomesController@piao');
+
+
+    //电影院注册
+    Route::get('register','HomesRegisterController@index');
+
+     //短信验证
+    Route::get('test','HomesRegisterController@doAction');
+     //判断
+    Route::post('doregister','HomesRegisterController@store');
 
     
 
@@ -247,13 +273,12 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('login','HomesLoginController@index');
 
     Route::post('dologin','HomesLoginController@dologin');
-	//电影院注册
-	Route::get('register','HomesRegisterController@index');
+	
+    //个人中心
+    Route::get('details','HomesDetailController@index');
+    
+    Route::post('doaction','HomesDetailController@store');
 
-	 //短信验证
-	Route::get('test','HomesRegisterController@doAction');
-	 //判断
-	Route::post('doregister','HomesRegisterController@store');
 	//修改密码
     Route::get('change','HomesChangeController@index');
     Route::get('pass','HomesChangeController@doAction');

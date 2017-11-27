@@ -22,7 +22,7 @@
         <script src="/homes/js/layer/jquery-1.8.3.min.js"></script>
         <script src="/homes/js/validate.js"></script>
         <script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
-
+        <script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
         <script type="text/javascript" src="{{asset('/homes/jss/jquery.js')}}"></script>
             <script type="text/javascript" src="{{asset('/homes/js/layer/layer.js')}}"></script>
             <script type="text/javascript" src="{{asset('/homes/js/layer/extend/layer.ext.js')}}"></script>
@@ -54,6 +54,8 @@
 
                 </div>
         </div>
+
+     
             
         <div class="footer ">
             <div class="footer-hd ">

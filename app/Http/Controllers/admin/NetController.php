@@ -12,6 +12,8 @@ use zgldh\QiniuStorage\QiniuStorage;
 use Qiniu\Auth;
 use Qiniu\Storage\BucketManager;
 
+use DB;
+
 
 
 class NetController extends Controller
@@ -23,14 +25,10 @@ class NetController extends Controller
      */
     public function index()
     {   
-        
-
         $res=config::all();
         // $res=DB::table('config')->get();
         // dd($res);
-        return view('admin.net.index',compact('res'));
-
-
+        return view('admin.net.index',['res'=>$res]);
     }
 
     /**
@@ -40,7 +38,10 @@ class NetController extends Controller
      */
     public function create()
     {
-
+        $res=config::all();
+        // $res=DB::table('config')->get();
+        // dd($res);
+        return view('admin.net.edit',compact('res'));
     }
 
     /**
@@ -184,7 +185,22 @@ class NetController extends Controller
                     
         }else{
 
-            return back()->with('msg','请上传文件');
+            $data = $request->except('_token','_method');
+
+            echo "<pre>";
+            var_dump($data);
+
+            $aaa = DB::table('config')->update($data);
+
+            //判断是否插入数据库成功
+            if($aaa){
+
+                return redirect('/admin/net')->with('msg','修改成功');
+            
+            }else{
+
+                return back();
+            }
         }
     }
 
