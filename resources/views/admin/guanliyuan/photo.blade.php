@@ -25,7 +25,15 @@
                                       
                <form action="" style="text-align: center;" method="post" class="mws-form" enctype='multipart/form-data' id="art_form">
                                        
+<<<<<<< HEAD
 
+=======
+								
+
+     <!--                      <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px" id="img1"/> -->
+                			             
+      					    <input type="text" name="art_thumb" id="art_thumb"  value="{{$data->photo}}" style="width: 400px;">
+>>>>>>> 6ce922f7d324604871691c4bace68a42e33ab177
                    
                     <p><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}" alt="" id="img1" style="width:240px;margin-top: 20px;" ></p>
                     <br/>
@@ -37,7 +45,10 @@
                         </form>
                 </div>         
   </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6ce922f7d324604871691c4bace68a42e33ab177
 
 
 

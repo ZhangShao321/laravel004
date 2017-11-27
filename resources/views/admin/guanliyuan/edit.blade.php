@@ -22,7 +22,7 @@
                   </div>
               @endif
                       
-         <form action="/admin/guanliyuan/{{ $data->id }}" method="post" class="mws-form" enctype='multipart/form-data'>
+         <form action="/admin/guanliyuan/{{$data->id}}" method="post" class="mws-form" enctype='multipart/form-data'>
               <div class="mws-form-inline">
 
                    <div class="mws-form-row">
