@@ -251,9 +251,11 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('add','HomesController@add');
     Route::post('store','HomesController@store');
 
-
     //搜索框的页面
     Route::get('search','HomesController@search');
+
+    //查看各类型电影的页面
+    Route::get('type','HomesController@type');
 
     //订座
     Route::get('dingpiao','HomesController@dingpiao');
@@ -262,6 +264,11 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
     //订单确认页面
     Route::get('/piao','HomesController@piao');
+    Route::get('/money','HomesController@money');
+
+
+
+
 
 
     //电影院注册

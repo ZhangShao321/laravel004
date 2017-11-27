@@ -118,6 +118,9 @@
             </div>
             @endforeach
         </div>
+        <div class="shop-pagination">
+            {!! $res->render() !!}        
+        </div>
     </div>
 </div>
 <!-- 电影院列表 end -->

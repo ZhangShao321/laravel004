@@ -2,6 +2,8 @@
 
 @section('title','傻家伙')
 
+<!-- <meta http-equiv="refresh" content="3;url=return back" /> -->
+
 @section('content')
 
 <style type="text/css">
@@ -47,6 +49,12 @@
     font-size: 24px;
 }
 
+.widget-buy-orderlist .wrap-content .cuttime-content {
+  background-color: #00CCFF;
+  margin-bottom: 30px;
+  padding: 24px 30px 24px 42px;
+}
+
 </style>
 
 <div class="widget-buy-orderlist">
@@ -57,6 +65,9 @@
         </span>
     </h2>
     <div class="wrap-content">
+    	<div class="cuttime-content nuomi-red">
+			请在5分钟内完成付款，超时系统将自动释放已选座位
+		</div>
         <ul class="order-list">
             <!-- 影片 -->
             <li class="item-tr">
@@ -68,7 +79,7 @@
                     </a>-->
                     <div class="order-detail">
                         <p data-data="{&quot;movieId&quot;:95124}" data-url="/movie/detail" class="order-name">
-                           <h3>{{ $film->filmname }}</h3> 
+                           <h3 id="name">{{ $film->filmname }}</h3> 
                         </p>
                         <p class="type-time font-shadow">
                             <span>
@@ -79,13 +90,14 @@
                         <ul class="threat-info font14">
                             <li data-data="{&quot;cinemaId&quot;:1019}" data-url="/cinema/detail"
                             class="cursor-pointer">
-                                <span class="font-shadow">
+                                <span class="font-shadow" >
                                     影院：
                                 </span>
-                                {{ $cinema->cinema }}
+                               <span id="cinema">{{ $cinema->cinema }}<span>
+                                
                             </li>
                             <li>
-                                <span class="font-shadow">
+                                <span class="font-shadow" >
                                     影厅：
                                 </span>
                                 {{ $room->roomname }}
@@ -119,13 +131,6 @@
                             {{ $user->phone }}
                         </span>
                     </p>
-                    <p class="phone-eidt-in hide">
-                        <input autocomplete="off" value="" placeholder="请输入接受取票码的手机号" class="group-input box-sizing font12"
-                        data-selector="edit-phone-inp">
-                        <a data-selector="edit-phone-comfirm" href="javascript:;" class="confirm-but box-sizing active">
-                            确认
-                        </a>
-                    </p>
                 </div>
                 <div class="item-td split-levline1">
                 </div>
@@ -141,18 +146,51 @@
         </ul>
     </div>
     <div class="confirm font-shadow text-right" style="padding-right:20px">
-        <p class="total-money">
-            实际支付：
-            <span data-selector="totalPrice" class="nuomi-red">
-                {{ $piao->price }}.00 元
-            </span>
-        </p>
-        <a data-selector="pay" style="width:200px;font-size:20px; "  href="javascript:;" class="btn btn-info confirm-button back-red" >
-	            确认并去支付
-        </a>
+    		        
+	        <p class="total-money">
+	            实际支付：
+	            <span data-selector="totalPrice" id="price" class="nuomi-red">{{ $piao->price }}.00元</span>
+	        </p>
+	        <button data-selector="pay" id='fun' style="width:200px;font-size:20px; "  class="btn btn-info confirm-button back-red" >
+		            确认并去支付
+	        </button>
+		
     </div>
 </div>
+@endsection
 
 
+@section('js')
+<script type="text/javascript">
 
+	var price = $('#price').text();
+	var cinema = $('#cinema').text();
+	var name = $('#name').text();
+
+	$('#fun').click(function(){
+
+     layer.alert('请确认订单信息', {
+        skin: 'layui-layer-molv' //样式类名  自定义样式
+        ,closeBtn: 1    // 是否显示关闭按钮
+        ,anim: 1 //动画类型
+        ,btn: ['确认','返回'] //按钮
+        ,icon: 6    // icon
+        ,yes:function(){
+            
+		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name},function(data){
+
+		     		layer.msg('购票成功');
+		     		window.location.href="/homes/index";
+
+		     });
+           
+        }
+        ,btn2:function(){
+            layer.msg('返回中')
+            return back;
+        }});
+    });
+
+
+</script>
 @endsection

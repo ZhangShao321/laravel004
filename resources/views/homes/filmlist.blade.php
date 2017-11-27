@@ -33,7 +33,7 @@
 
                     @foreach($type as $aa=>$bb)
                         <li>
-                            <a href="#">
+                            <a href="{{url('/homes/type?id=').$bb->id}}">
                                 {{ $bb->tname }}
                             </a>
                             <span class="count">
