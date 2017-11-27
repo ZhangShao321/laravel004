@@ -72,7 +72,7 @@ class HomesController extends Controller
                 ->join('cininfo','cinema.id','=','cininfo.cid')
                 ->select('showfilm.id','showfilm.time','cinema.cinema')
                 ->get();
-        
+
         //加载电影详情页面
         return view('homes/filmdetail',['aaa' => $aaa,'bbb' => $bbb]);
     }
@@ -311,7 +311,7 @@ class HomesController extends Controller
         $yonghu = DB::table('user')->where('id',$uid)->first();
 
         //判断用户是否登陆
-      
+       
 
         //座位信息
         $seat = $piao->seat;
