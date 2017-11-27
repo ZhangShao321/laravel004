@@ -205,6 +205,67 @@ class HomesController extends Controller
     }
 
   
+
+    //执行售票
+    public function shopseat(Request $request,$id)
+    {
+
+        $seat = $request->except('_token')['zuo'];
+
+        if(!$seat){
+
+            echo '请选择电影票';die;
+        }
+
+        $bbb = DB::table('ticket')->where('showid',$id)->where('seat',$seat)->get();
+
+        if($bbb){
+            echo '票已出售';die;
+        }
+
+        $res = DB::table('showfilm')->where('id',$id)->first();
+
+        $data = array();
+
+        $data['showid'] = $id;
+        $data['uid'] = 0;
+        $data['cid'] = $res->cid;
+        $data['fid'] = $res->fid;
+        $data['rid'] = $res->rid;
+        $data['price'] = $res->price;
+        $data['seat'] = $request->except('_token')['zuo'];
+        $data['time'] = time();
+
+        // $data = $request->except('_token');
+        // echo json_encode($data);die;
+
+        $aaa = DB::table('ticket')->insert($data);
+
+        if($aaa){
+
+            echo '购买成功';
+        }else{
+            echo '购买失败';
+        }
+
+    }
+
+    //已出售
+    public function shopseat_into(Request $request,$id)
+    {
+        // echo 1;die;
+        $res = DB::table('ticket')->where('showid',$id)->get();
+
+        $seat = array();
+        $i = 1;
+        foreach($res as $k => $v){
+
+            $seat[$i] = $v->seat;
+            $i++;
+        }
+
+        echo json_encode($seat);
+    }
    
 
 }

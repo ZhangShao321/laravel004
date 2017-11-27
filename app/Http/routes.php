@@ -65,9 +65,13 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		Route::resource('/guanliyuan','GuanliyuanController');
         Route::post('/guanliyuan/phone','GuanliyuanController@phone');
         Route::post('/guanliyuan/work','GuanliyuanController@work');
+        //加载修改密码的页面方法
         Route::get('/guanli/pass','GuanliyuanController@pass');
+        //执行修改密码
         Route::post('/guanli/dopass','GuanliyuanController@dopass');
+        //添加修改头像页面
         Route::get('/guanli/photo','GuanliyuanController@photo');
+         //执行修改头像
         Route::post('/guanli/dophoto','GuanliyuanController@dophoto');
         
 
@@ -248,6 +252,8 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
     //订座
     Route::get('dingpiao','HomesController@dingpiao');
+    Route::post('shopseat','HomesController@shopseat');
+    Route::post('shopseat_into','HomesController@shopseat_into');
 
     //订单确认页面
     Route::get('piao','HomesController@piao');

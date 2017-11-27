@@ -233,7 +233,7 @@ function registSeat(){
                     }else{
 
                         //发送ajax      into = '4_5#4_6#4_7'
-                        $.post('{{ url("/FilmAdmins/ticket/shopseat/$id") }}',{_token:'{{ csrf_token() }}', zuo:into},function(data){
+                        $.post('{{ url("/homes/shopseat/$id") }}',{_token:'{{ csrf_token() }}', zuo:into},function(data){
 
                                 layer.alert(data, {icon: 6});
 
@@ -251,7 +251,7 @@ function registSeat(){
             //获取座位判断是否选中
 
             function zuos(){
-                $.post('{{ url("/FilmAdmins/ticket/shopseat_into/$id") }}',{_token:'{{ csrf_token() }}'},function(data){
+                $.post('{{ url("/homes/shopseat_into/$id") }}',{_token:'{{ csrf_token() }}'},function(data){
 
                     // console.log(typeof data);
                    
