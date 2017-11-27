@@ -65,7 +65,7 @@
                 <!-- User Photo -->
                 <div id="mws-user-photo">
                     <!-- <img src="{{ $datas->photo }}" alt="User Photo"> -->
-                    <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$datas->photo}}?imageView2/0/w/240/h/240" alt="User Photo">
+                    <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$datas->photo}}?imageView2/0/w/240/h/240" id="tou" alt="User Photo">
                 </div>
 
                 <!-- Username and Functions -->
@@ -262,6 +262,13 @@
 
     <!-- layer -->
     <script src="/admins/js/layer/layer.js"></script>
+
+    <!-- jadate日期插件 -->
+    <link type="text/css" rel="stylesheet" href="/admins/jedate-6.0.2/test/jeDate-test.css">
+    <link type="text/css" rel="stylesheet" href="/admins/jedate-6.0.2/skin/jedate.css">
+    <script type="text/javascript" src="/admins/jedate-6.0.2/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="/admins/jedate-6.0.2/jquery.jedate.js"></script>
+    <script type="text/javascript" src="/admins/jedate-6.0.2/test/jedate-test.js"></script>
 
 
     @section('js')

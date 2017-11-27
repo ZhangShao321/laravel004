@@ -4,6 +4,7 @@
 
 
 @section('content')
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 	<div class="mws-panel grid_8">
 
@@ -17,7 +18,8 @@
                 <thead>
                     <tr>
 
-                        <th>ID</th>      
+                        <th>ID</th>
+
                         <th>用户名</th>                 
                         <th>最后登录时间</th>
                         <th>权限</th>

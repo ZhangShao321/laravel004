@@ -37,6 +37,8 @@
                                              <input type="password" name="password" class="small"><span></span>
                                         </div>
                                    </div>
+
+
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">重复密码:</label>
                                         <div class="mws-form-item">
@@ -46,7 +48,13 @@
 
 
                                    <!--  最后登录时间 -->
-                            
+                                    <div class="mws-form-row">
+                                        <label class="mws-form-label">最后登录时间:</label>
+                                        <div class="mws-form-item">            
+                                            <div class="jeinpbox"><input type="text" class="jeinput" id="test04" placeholder="YYYY-MM-DD hh:mm:ss" name="lastlogin">
+                                            </div>                                 
+                                        </div>
+                                   </div>
                                   
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">权限</label>
@@ -76,13 +84,7 @@
 
                                    {{csrf_field() }}
 
-
-                                   <input id="but" type="submit" class="btn btn-danger" value="添加">
-
-
-                              
-
-              
+                                   <input id="but" type="submit" class="btn btn-danger" value="添加">            
                               </div>
                          </form>
                     </div>         
@@ -167,6 +169,31 @@
 
 
 
+
+/*$(function(){  
+            var currYear = (new Date()).getFullYear();    
+            var opt={};  
+            opt.date = {preset : 'date'};  
+            opt.datetime = {preset : 'datetime'};  
+            opt.time = {preset : 'time'};  
+            opt.default = {  
+                theme: 'android-ics light', //皮肤样式  
+                display: 'modal', //显示方式   
+                mode: 'scroller', //日期选择模式  
+                dateFormat: 'yyyy-mm-dd',  
+                lang: 'zh',  
+                showNow: true,  
+                nowText: "今天",  
+                startYear: currYear - 10, //开始年份  
+                endYear: currYear + 80 //结束年份  
+            };  
+            $("#EndDate").mobiscroll($.extend(opt['date'], opt['default']));//年月日型  
+            var optDateTime = $.extend(opt['datetime'], opt['default']);  
+        var optTime = $.extend(opt['time'], opt['default']);  
+            $("#AbsentEndDate").mobiscroll(optDateTime).datetime(optDateTime);//年月日时分型  
+            $("#EndTime").mobiscroll(optTime).time(optTime);//时分型  
+  
+         });  */
 </script>
 
 @endsection
