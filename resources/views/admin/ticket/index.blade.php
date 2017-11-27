@@ -34,7 +34,7 @@
                 @foreach($res as $k=>$v)
                     <tr align="center">                              
                         <td>{{$v->id}}</td>
-                        <td>{{$v->nickName}}</td>                        
+                        <td>{{$v->phone}}</td>                        
                         <td>{{$v->cinema}}</td>              
                         <td>{{$v->roomname}}</td> 
                         <td>{{$v->filmname}}</td>             

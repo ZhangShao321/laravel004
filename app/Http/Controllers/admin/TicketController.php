@@ -24,16 +24,7 @@ class TicketController extends Controller
     public function index()
     {   
 
-        //查询订单表的信息       
-        //ticket.uid=user.id  user.id=userDetail.uid 所以userDetail.uid = ticket.uid
-
-       /* $res =  DB::table('ticket')
-                ->join('userDetail','userDetail.uid','=','ticket.uid')   
-                ->join('cinema','cinema.id','=','ticket.cid')
-                ->join('roominfo','roominfo.id','=','ticket.rid')
-                ->join('film','film.id','=','ticket.fid')
-                ->select('ticket.id','userDetail.nickName','cinema.cinema','roominfo.roomname','film.filmname','ticket.seat','film.showtime','ticket.time','ticket.num')
-                ->get();*/
+       
 
         $res = DB::table('ticket')->get();
 
@@ -52,10 +43,12 @@ class TicketController extends Controller
 
             $rid = $v->rid;
             $v->roomname = DB::table('roominfo')->where('id',$rid)->first()->roomname;
-            // var_dump($v);die;
+            
+            $showid = $v->showid;
+            $show = DB::table('showfilm')->where('id',$showid)->first();
+            $v->showtime = $show->time;
         }
-        echo "<pre>";
-        var_dump($res);die;
+       
                        
         return view('admin.ticket.index',compact('res'));
     }
