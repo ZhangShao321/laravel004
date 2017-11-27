@@ -53,7 +53,7 @@
     <h2 class="title font16 clearfix" style="padding-top:20px;padding-left:20px">
         确认订单信息
         <span class="fr font12 font-shadow">
-            订单号：138212978247467008
+            订单号：{{ $piao->num }}
         </span>
     </h2>
     <div class="wrap-content">
