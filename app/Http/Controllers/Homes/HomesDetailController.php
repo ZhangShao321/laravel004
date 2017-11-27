@@ -12,6 +12,11 @@ use App\Http\Model\user;
 use App\Http\Model\film;
 use DB;
 
+use zgldh\QiniuStorage\QiniuStorage;
+use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
+
+
 class HomesDetailController extends Controller
 {
     //
@@ -21,41 +26,148 @@ class HomesDetailController extends Controller
     	return view('homes/detail');
     }
 
-    public function store(Request $request)
+     
+    public function update(Request $request,$id)
     {
-    	//  if(!session('uid')){
-    		
-    	// 	return view('/homes/login');
-    	// 	die;
-    	// }
+        $result1 = $request->except('_token','_method');
+         //userDetail表数据
+        $bbb['nickName'] = $result1['nickName'];
+        $bbb['email'] = $result1['email'];
+        $bbb['qq'] = $result1['qq'];
+        $bbb['sex'] = $result1['sex'];
 
-    	$result = $request->except('_token','phone');
+       
+        $ress = DB::table('userDetail')->where('id',$id)->update($bbb);
 
-    	$result['uid'] = session('uid');
-    	 // dd($res);die;
-    	if($request -> hasFile('photo'))
+            if($ress){
+                return redirect('homes/details')->with('msg','修改成功!!');
+            }else{
+                return redirect('homes/details')->with('msg','修改失败,请重新操作!!');
+            }
+
+
+
+
+           
+    }
+
+    //添加头像
+    public function add()
+    {
+        return view('homes/photo');
+    }
+
+    public function insert(Request $request)
+    {
+        $uid = session('uid');
+        $use = DB::table('userDetail')->where('uid',$uid)->first();
+
+        if($use->photo){
+            return redirect('homes/tian')->with('msg','你已添加,请勿重复添加');
+            die;
+        }
+
+        $result = $request->except('_token');
+         // dd($res);die;
+        if($request -> hasFile('photo'))
         {
 
-           //文件名
-            $name = rand(11111,99999).time();
+            //获取文件
+            $file = $request->file('photo');
+            
+            //初始化七牛
+            $disk = QiniuStorage::disk('qiniu');
 
             //获取后缀名
-            $jpg = $request -> file('photo')->getClientOriginalExtension();
+            $name = md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
           
-            //移动图片
-            $request ->file('photo') -> move('./public/userDetail/Uploads',$name.'.'.$jpg); 
+            //上传到文件到七牛
+            $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
         }  
 
-        $photo = './public/userDetail/Uploads/'.$name.$name.'.'.$jpg;
+        $photo = 'image_'.$name;
+
         $result['photo'] = $photo;
 
-        userDetail::insert($result);
+        $ares = userDetail::insert($result);
 
-        $res = film::orderBy('shownum','desc')->limit('3')->get();
 
-        return view('/homes/index',['result'=>$result,'res'=>$res]);
+        if($ares){
+
+            
+            return redirect('/homes/details')->with('msg','添加成功');
+
+        }else{
+
+            return redirect('/homes/details')->with('msg','添加失败');
+
+
+        }
+
+
+    }
+
+    public function edit()
+    {
+        return view('/homes/xiugai');
+    }
+
+    //修改头像
+    public function doedit(Request $request,$id)
+    {
+        $result1 = $request->except('_token','_method');
+
+         if($request -> hasFile('photo')){
+        
+
+            $clic = DB::table('userDetail')->where('id',$id)->first();
+
+                //删除原先的图片
+                $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+                $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
+
+                //初始化Auth状态：
+                $auth = new Auth($accessKey, $secretKey);
+
+                //初始化BucketManager
+                $bucketMgr = new BucketManager($auth);
+
+                //你要测试的空间， 并且这个key在你空间中存在
+                $bucket = 'laravel-upload';
+                $key = 'Uplodes/'.$clic->photo;
+
+                //删除$bucket 中的文件 $key
+                $err = $bucketMgr->delete($bucket, $key);
+            
+
+                 //获取文件
+                $file=$request->file('photo');
+                //初始化七牛
+                $disk=QiniuStorage::disk('qiniu');
+
+                 //重命名文件名
+                $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+                 //上传到文件到七牛
+                $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
+                $photo = 'image_'.$name;
+                // echo 111111;die;
+                // $res = DB::table('userDetail')->where('uid',session('uid'))->update(['photo'=>$photo]);
+            }
+
+            $aaa['photo'] = $photo;
+
+            $pres = DB::table('userDetail')->where('id',$id)->update($aaa);
+
+            if($pres){
+                return redirect('/homes/details')->with('msg','头像修改成功!!!');
+            }else{
+                return redirect('/homes/photo')->with('msg','头像修改失败!!!');
+            }
 
 
 
     }
+ 
 }

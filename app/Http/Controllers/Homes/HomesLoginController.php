@@ -51,4 +51,13 @@ class HomesLoginController extends Controller
 
     }
 
+    //退出登录
+
+    public function delete(Request $request)
+    {
+        $request->session()->forget('uid');
+
+        return redirect('homes/index');
+    }
+
 }

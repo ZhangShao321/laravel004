@@ -110,7 +110,7 @@
 
     		$.get("{{url('/homes/test')}}",{phone:phone,'_token':"{{csrf_token()}}"},function(data) {
     			
-                console.log(data);
+                
                 if(data == "1") 
     			{
     				layer.open({

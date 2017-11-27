@@ -14,6 +14,7 @@ use Flc\Alidayu\Requests\IRequest;
 use Flc\Alidayu\Requests\SendSms;
 
 use App\Http\Model\user;
+use App\Http\Model\userDetail;
 use Hash;
 use session;
 use Cookie;
@@ -88,6 +89,8 @@ class HomesRegisterController extends Controller
 
             $res = $request->except('_token','code');
 
+            // $aaa['uid']=$res['id'];
+
             // 使用Hash加密注册密码
             $res['password'] = Hash::make($request->input('password'));
          
@@ -99,6 +102,8 @@ class HomesRegisterController extends Controller
             {
                 // 注册信息存入数据库
                 user::insert($res);
+
+                // userDetail::insert($aaa);
 
                 echo 1;
 
