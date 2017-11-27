@@ -76,7 +76,19 @@
 			                    </div>
 			                </div>
 
+							   <div class="mws-form-row">
+			                    <label class="mws-form-label">
+			                        影院logo
+			                    </label>
+			                    <div class="mws-form-item">
+			                    	<div style="width:180px;height:220px;border:1px solid #C5C5C5;margin-bottom: 5px">
+			                    		
+										  <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$v->clogo.'?imageView2/0/w/220/h/220')}}" style="width:100%;height:218px;" >
 
+			                    	</div>
+
+			                    </div>
+			                </div>
 
 
 			               

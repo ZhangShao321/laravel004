@@ -66,15 +66,14 @@ class GuanliyuanController extends Controller
 
             return back()->withInput('添加失败');
         }
-       
+       // var_dump($res);die;
         //哈希加密
         $res['password']=Hash::make($res['password']);
 
-        //添加时间
-        $res['lastlogin']=time();
+        //添加时间 将时间转化为时间戳
+        $res['lastlogin']=strtotime($res['lastlogin']);
        
-
-        // var_dump($res);die;
+         
         //修改
         $id = DB::table('user')->insertGetId($res);  
         
@@ -266,7 +265,10 @@ class GuanliyuanController extends Controller
         if ($data) {
 
             // echo 1111111111;die;
-            return redirect('/admin/index');
+            //清除session 重新登录
+            $request->session()->flush();
+
+            return redirect('/admin/login')->withInput();
         } else {
             return back()->with('抱歉! 修改失败!');
         }
@@ -287,8 +289,9 @@ class GuanliyuanController extends Controller
     public function dophoto(Request $request)
     {
 
+
         if($request -> hasFile('photo')){
-        
+
 
             $clic = DB::table('userDetail')->where('uid',session('aid'))->first();
 
@@ -304,10 +307,10 @@ class GuanliyuanController extends Controller
 
                 //你要测试的空间， 并且这个key在你空间中存在
                 $bucket = 'laravel-upload';
-                $key = 'Uplodes/'.$clic->photo;
+                @$key = 'Uplodes/'.$clic->photo;
 
                 //删除$bucket 中的文件 $key
-                $err = $bucketMgr->delete($bucket, $key);
+                @$err = $bucketMgr->delete($bucket, $key);
             
 
                  //获取文件
@@ -323,18 +326,25 @@ class GuanliyuanController extends Controller
 
                 $photo = 'image_'.$name;
                 // echo 111111;die;
+
                 $res = DB::table('userDetail')->where('uid',session('aid'))->update(['photo'=>$photo]);
 
-                // var_dump($res);die;
+         
 
-                if ($res) {
-                    return redirect('/admin/index');
+                if ($bool) {
+                    // return redirect('/admin/index');
+                    echo $photo;
                 } else {
-                    return back()->with('抱歉! 修改失败!');
-                };
-        };
+                    // return back()->with('抱歉! 修改失败!');
+                    return $clic->photo;
+                }
+        }
 
         
     }
+
+
+
+
 
 }

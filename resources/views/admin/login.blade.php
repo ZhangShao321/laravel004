@@ -45,7 +45,7 @@
                 <form class="mws-form" action="/admin/dologin" method="post">
                     <div class="mws-form-row">
                         <div class="mws-form-item">
-                            <input type="text" name="phone" class="mws-login-username required" placeholder="请输入用户名">
+                            <input type="text" name="phone" class="mws-login-username required" placeholder="请输入用户名" value="{{old('phone')}}">
 
                         </div>
                     </div>

@@ -78,7 +78,7 @@
 					</div>
 					<div class="service-text">
 						<h2>{{$v->cinema}}</h2>
-						<a href="{{url('/homes/dingpiao?id=').$v->id}}"><p>上映时间:{{$v->time}}</p><button>选座购票</button></a>	
+						<a href="{{url('/homes/dingpiao?id=').$v->id}}"><p>上映时间:{{date('Y-m-d H:i:s',$v->time)}}</p><button>选座购票</button></a>	
 					</div>
 				</div>
 			</div>

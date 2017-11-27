@@ -17,7 +17,7 @@ use App\Http\Model\user;
 use Hash;
 use session;
 use Cookie;
-
+use DB;
 class HomesRegisterController extends Controller
 {
     //
@@ -29,13 +29,15 @@ class HomesRegisterController extends Controller
 
     public function doAction(Request $request)
     {
-    	$phone = $request->only('phone');
+    	$phone = $request->input('phone');
+        // echo "<pre>";
+        // var_dump($phone);
         // var_dump($phone);die;
-        $res = user::where('phone',$phone)->first();
-       
+        $res = DB::table('user')->where('phone',$phone)->first();
+    
         if($res)
         {
-            return redirect('/homes/register')->with('msg','手机号已注册!!!');
+            return '手机号已注册!!';
         }       
 
 
@@ -50,8 +52,9 @@ class HomesRegisterController extends Controller
             $client = new Client(new App($config));
             $req    = new AlibabaAliqinFcSmsNumSend;
             $code =  rand(100000, 999999);
-             
-            session(['code' => $code]);
+              
+            // session(['code' => $code]);
+
             $req->setRecNum($phone)
                 ->setSmsParam([
                     'number' => $code
@@ -60,7 +63,20 @@ class HomesRegisterController extends Controller
                 ->setSmsTemplateCode('SMS_75835101');
 
             $resp = $client->execute($req);
-   		 
+
+            if($resp)
+            {
+                session()->put('code',$code);
+
+                echo 1;
+
+                    // return view('/homes/register');
+            }else{
+
+                echo 0;
+            }
+
+   		   
 
     }
 
@@ -73,7 +89,7 @@ class HomesRegisterController extends Controller
             $res = $request->except('_token','code');
 
             // 使用Hash加密注册密码
-            $res['password'] = $request->input('password');
+            $res['password'] = Hash::make($request->input('password'));
          
             // 获取存入session中的code
             $session_code = session('code');
@@ -84,7 +100,7 @@ class HomesRegisterController extends Controller
                 // 注册信息存入数据库
                 user::insert($res);
 
-                return redirect('/homes/login')->with('msg','注册成功!!!');
+                echo 1;
 
                 
             }

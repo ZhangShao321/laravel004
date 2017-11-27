@@ -61,7 +61,7 @@
     <h2 class="title font16 clearfix" style="padding-top:20px;padding-left:20px">
         确认订单信息
         <span class="fr font12 font-shadow">
-            订单号：138212978247467008
+            订单号：{{ $piao->num }}
         </span>
     </h2>
     <div class="wrap-content">
@@ -79,40 +79,43 @@
                     </a>-->
                     <div class="order-detail">
                         <p data-data="{&quot;movieId&quot;:95124}" data-url="/movie/detail" class="order-name">
-                            引爆者
+                           <h3 id="name">{{ $film->filmname }}</h3> 
                         </p>
                         <p class="type-time font-shadow">
                             <span>
-                                国语&nbsp;&nbsp;2D
+                                <!-- 国语&nbsp;&nbsp;2D -->
                             </span>
                             <!--<span class="last">1511526000</span>-->
                         </p>
                         <ul class="threat-info font14">
                             <li data-data="{&quot;cinemaId&quot;:1019}" data-url="/cinema/detail"
                             class="cursor-pointer">
-                                <span class="font-shadow">
+                                <span class="font-shadow" >
                                     影院：
                                 </span>
-                                长春红旗街万达广场店
+                               <span id="cinema">{{ $cinema->cinema }}<span>
+                                
                             </li>
                             <li>
-                                <span class="font-shadow" id="cinema">
+                                <span class="font-shadow" >
                                     影厅：
                                 </span>
-                                2号厅
+                                {{ $room->roomname }}
                             </li>
                             <li>
                                 <span class="font-shadow">
                                     场次：
                                 </span>
-                                11月24号&nbsp;&nbsp;&nbsp; 周五&nbsp;&nbsp;&nbsp; 20:20
+                                
+                                {{date('Y-m-d H:i:s', $show->time ) }}
                             </li>
                         </ul>
                         <ul class="seat font14">
                             <li>
                                 <i>
                                 </i>
-                                4排7座
+                                {{ $seat['0'] }} 排 {{ $seat['1'] }} 座
+                                
                                 <em>
                                 </em>
                             </li>
@@ -125,15 +128,8 @@
                     接收取票码的手机号：
                     <p class="phone-eidt">
                         <span id="phoneNum">
-                            15738828985
+                            {{ $user->phone }}
                         </span>
-                    </p>
-                    <p class="phone-eidt-in hide">
-                        <input autocomplete="off" value="" placeholder="请输入接受取票码的手机号" class="group-input box-sizing font12"
-                        data-selector="edit-phone-inp">
-                        <a data-selector="edit-phone-comfirm" href="javascript:;" class="confirm-but box-sizing active">
-                            确认
-                        </a>
                     </p>
                 </div>
                 <div class="item-td split-levline1">
@@ -141,7 +137,7 @@
                 <div class="item-td order-num">
                     金额小计:
                     <p class="price">
-                        ¥38.50
+                        ¥{{ $piao->price }}.00
                     </p>
                 </div>
                 <!--<div class="split-hozline"></div>-->
@@ -150,17 +146,15 @@
         </ul>
     </div>
     <div class="confirm font-shadow text-right" style="padding-right:20px">
-    	<form action="" method="get">
+    		        
 	        <p class="total-money">
 	            实际支付：
-	            <span data-selector="totalPrice" class="nuomi-red" id="price">
-	                38.50元
-	            </span>
+	            <span data-selector="totalPrice" id="price" class="nuomi-red">{{ $piao->price }}.00元</span>
 	        </p>
-	        <button data-selector="pay" style="width:200px;font-size:20px" class="btn btn-info confirm-button back-red" id="fun">
+	        <button data-selector="pay" id='fun' style="width:200px;font-size:20px; "  class="btn btn-info confirm-button back-red" >
 		            确认并去支付
 	        </button>
-        </form>
+		
     </div>
 </div>
 @endsection
@@ -169,8 +163,9 @@
 @section('js')
 <script type="text/javascript">
 
-	var price = $('#price').val();
-	var cinema = $('#cinema').val();
+	var price = $('#price').text();
+	var cinema = $('#cinema').text();
+	var name = $('#name').text();
 
 	$('#fun').click(function(){
 
@@ -181,11 +176,14 @@
         ,btn: ['确认','返回'] //按钮
         ,icon: 6    // icon
         ,yes:function(){
-            layer.msg('购票成功')
             
-            $.post('{{ url("/homes/money") }}',{_token:'{{ csrf_token() }}', price:price,cinema:cinema},function(data){
-             		console.log(data);
-            })
+		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name},function(data){
+
+		     		layer.msg('购票成功');
+		     		window.location.href="/homes/index";
+
+		     });
+           
         }
         ,btn2:function(){
             layer.msg('返回中')

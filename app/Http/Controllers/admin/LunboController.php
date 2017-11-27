@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Model\lunbo;
-
+use DB;
 
 use zgldh\QiniuStorage\QiniuStorage;
 use Qiniu\Auth;
@@ -90,14 +90,14 @@ class LunboController extends Controller
             //插入到数据库
             $sql=lunbo::insert($res);
 
-            if($sql){
+                if($sql){
 
-                return redirect('/admin/lunbo')->with('msg','添加成功');
-            }else{
+                    return redirect('/admin/lunbo')->with('msg','添加成功');
+                }else{
 
-                return back()->withInput();
-            }
-          
+                    return back()->withInput();
+                }
+              
         }else{
 
              return back()->with('lbt','请输入电影名称!');
@@ -202,7 +202,7 @@ class LunboController extends Controller
                         
                         }else{
 
-                            return back();
+                            return back()->with('msg','修改失败');
                         }
 
                 }else{
@@ -212,7 +212,16 @@ class LunboController extends Controller
                     
             }else{
 
-                return back()->with('msg','请上传文件');
+                //修改电影名字
+                $aaa = $request->only('fname')['fname'];
+
+                $bbb = DB::table('lunbo')->where('id',$id)->update(['fname'=>$aaa]);
+
+                if($bbb){
+                    return redirect('/admin/lunbo')->with('msg','修改成功');
+                } else {
+                    return back()->with('msg','修改失败');
+                }
             }
     }
 
@@ -253,13 +262,13 @@ class LunboController extends Controller
             //执行删除
             $sql=lunbo::where('id',$id)->delete();
 
-            if($sql){
+                if($sql){
 
-                return redirect('/admin/lunbo')->with('msg','删除成功');    
-            }else{
-                
-                return back();
-            }
+                    return redirect('/admin/lunbo')->with('msg','删除成功');    
+                }else{
+                    
+                    return back();
+                }
 
     }
 
