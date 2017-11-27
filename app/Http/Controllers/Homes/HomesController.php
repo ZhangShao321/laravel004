@@ -311,7 +311,9 @@ class HomesController extends Controller
         $yonghu = DB::table('user')->where('id',$uid)->first();
 
         //判断用户是否登陆
-       
+        if(!session('uid')){
+            return redirect('/homes/login');
+        }
 
         //座位信息
         $seat = $piao->seat;
