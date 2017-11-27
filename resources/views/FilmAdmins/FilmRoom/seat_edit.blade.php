@@ -141,7 +141,7 @@ function registSeat(){
         var hang = $('#x').val();
         var lie = $('#y').val();
 
-        $.post('{{ url("/FilmAdmins/room/seatupdate/$id") }}', {_token:'{{ csrf_token() }}', seat:str, hang:hang, lie:lie}, function(data){
+        $.post('{{asset("/FilmAdmins/room/seatupdate/$id") }}', {_token:'{{ csrf_token() }}', seat:str, hang:hang, lie:lie}, function(data){
 
             console.log(data.url);
             window.location.href = data.url;

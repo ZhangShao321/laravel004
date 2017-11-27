@@ -28,6 +28,8 @@ Route::group(['namespace'=>'Homes'], function(){
 
 
 
+
+
 //=======================后台信息===================================
 
 
@@ -118,6 +120,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
         Route::post('doAction','FilmLoginController@doAction');
 
 
+        
+
+        Route::get('/testRedis','TestController@redisDemo');
         
 
         //退出登录
