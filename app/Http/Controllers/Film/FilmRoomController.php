@@ -18,8 +18,8 @@ class FilmRoomController extends Controller
 
     {  
 
-        // $res = DB::table('roominfo')->get();
-        $res = roominfo::all();
+        $res = DB::table('roominfo')->where('cid',session('cid'))->get();
+        // $res = roominfo::all();
 
         return view('/FilmAdmins/FilmRoom/list', ['res'=>$res]); 
 

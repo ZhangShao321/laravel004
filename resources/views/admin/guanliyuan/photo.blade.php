@@ -25,36 +25,7 @@
                                       
                <form action="" style="text-align: center;" method="post" class="mws-form" enctype='multipart/form-data' id="art_form">
                                        
-								
-<<<<<<< HEAD
-                										<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px"/>
-                										
-                									</div>
-					                
-          				              <div class="mws-form-row">
-          				                    <label class="mws-form-label">
-          				                        头像
-          				                    </label>
-          				                    <div class="mws-form-item">
-          				                       <input type="file" name="photo" class="large">
-          				                    </div>
-          				                </div>
-                                                             
-                         
-                              </div>
-                              <div class="mws-button-row">
 
-                                   {{csrf_field() }}
-                                   <input type="submit" class="btn btn-danger" value="修改">                            
-              
-                              </div>
-                         </form>
-                    </div>         
-                </div>
-=======
-     <!--                      <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px" id="img1"/> -->
-                			             
-      					    <input type="text" name="art_thumb" id="art_thumb"  value="{{$data->photo}}" style="width: 400px;">
                    
                     <p><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}" alt="" id="img1" style="width:240px;margin-top: 20px;" ></p>
                     <br/>
@@ -66,7 +37,7 @@
                         </form>
                 </div>         
   </div>
->>>>>>> 084b8a994a20b0ba755782ab478234bc919649d0
+
 
 
 
@@ -77,67 +48,7 @@
 
      $('.mws-form-message').delay(3000).slideUp(1000);
 
-     //用户名验证
-     $('input[name=phone]').blur(function(){
-
-        var reg = /^1[34578]\d{9}$/;
-
-        var phone = $(this).val();
-
-        $.post("{{ url('/admin/guanliyuan/phone') }}", {_token:'{{ csrf_token() }}', phone:phone}, function(data){
-            $('input[name=phone]').next().text(data);
-        })
-
-        var x = reg.exec(phone);
-
-        if (x) {
-            $(this).css('color','green');
-            $(this).next().text(' √ ');
-            $(this).next().css('color','green');
-        } else {
-            $(this).css('color','red');
-            $(this).next().text('手机号格式不正确');
-            $(this).next().css('color','red');
-        }
-     })
-
-     //密码验证
-     $('input[name=password]').blur(function(){
-
-        var reg = /^\S{6,12}$/;
-
-        var password = $(this).val();
-
-        var x = reg.exec(password);
-
-        if (x) {
-            $(this).css('color','green');
-            $(this).next().text(' √ ');
-            $(this).next().css('color','green');
-        } else {
-            $(this).css('color','red');
-            $(this).next().text('密码格式不正确');
-            $(this).next().css('color','red');
-        }
-     })
-
-     //重复密码
-     $('input[name=repass]').blur(function(){
-
-        var password = $('input[name=password]').val();
-
-        var repass = $(this).val();
-
-        if (password == repass) {
-            $(this).css('color','green');
-            $(this).next().text(' √ ');
-            $(this).next().css('color','green');
-        } else {
-            $(this).css('color','red');
-            $(this).next().text('两次密码不一致');
-            $(this).next().css('color','red');
-        }
-     })
+     
 
 
         $.ajaxSetup({

@@ -114,7 +114,7 @@
                             data: '_method='+'delete',
                             // data: { '_method':'delete','_token':"{{csrf_token()}}"},
                             success: function(msg){
-                              alert(msg);
+                              // alert(msg);
                               // console.log(msg);
                                location.reload();  
                             }

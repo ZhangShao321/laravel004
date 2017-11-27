@@ -12,6 +12,7 @@ use Gregwar\Captcha\CaptchaBuilder;
 use App\Http\Model\user; 
 use Session;
 use Hash;
+use DB;
 
 
 class AdminLoginController extends Controller

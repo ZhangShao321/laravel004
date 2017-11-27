@@ -23,7 +23,7 @@ class FilmShowController extends Controller
                         ->join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
-                        ->select('showfilm.id','showfilm.time','showfilm.status','film.filmname','roominfo.roomname','showfilm.price')
+                        ->select('showfilm.id','showfilm.time','showfilm.timeout','showfilm.status','film.filmname','roominfo.roomname','showfilm.price')
                         ->paginate(10);
 
         $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
@@ -35,13 +35,15 @@ class FilmShowController extends Controller
     //放映添加
     public function add()
     {
+          //电影院影厅
+          $roominfo = DB::table('roominfo')->where('status',1)->where('cid',session('cid'))->get();
+
+       
+          // 电影
+          $film = DB::table('film')->where('cid',session('cid'))->get();
           
-          $cinema = cinema::get();
-          $roominfo = roominfo::where("status",1)->get();
 
-          $film = film::get();
-
-        return view('FilmAdmins.FilmShow.FilmShowAdd',['film'=>$film,'cinema'=>$cinema,'room'=>$roominfo]);
+        return view('FilmAdmins.FilmShow.FilmShowAdd',['film'=>$film,'room'=>$roominfo]);
 
     }
 
@@ -49,7 +51,9 @@ class FilmShowController extends Controller
     public function  doadd(Request $request)
     {
         // echo "<pre>";
-        $info = $request->except('_token');
+        $info = $request->except('_token','ktime');
+
+        //放映时间
         $info['time'] = strtotime($info['time']); 
 
         
@@ -65,7 +69,19 @@ class FilmShowController extends Controller
         
         //时间格式  ([0-1][0-9]|(2[0-3])):([0-5][0-9]):([0-5][0-9])$#
         
+        //影院id
         $info['cid'] = session('cid');
+
+        //电影id
+        $fid = $info['fid'];
+        $film = DB::table('film')->where('id',$fid)->where('status',1)->first();
+        $ftime = $film->filmtime;
+
+        //结束id
+        $info['timeout'] = time()+$ftime*60;
+
+        // var_dump($info);die;
+        
         $res = showfilm::insert($info);
 
          if($res)
@@ -88,18 +104,27 @@ class FilmShowController extends Controller
     public  function edit(Request $request)
     {
 
+      $id = $request->only('id');
      
-     $res = showfilm::join('film','showfilm.fid','=','film.id')
+     // $res = showfilm::join('film','showfilm.fid','=','film.id')
+     //                    ->join('roominfo','showfilm.rid','=','roominfo.id')
+     //                    ->join('cinema','showfilm.cid','=','cinema.id')
+     //                    ->find($request->only('id'));
+
+
+       $res = showfilm::join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
-                        ->find($request->only('id'));
+                        ->select('showfilm.price','film.filmname','roominfo.roomname','showfilm.time','showfilm.timeout')
+                        ->find($request->only('id')['id']);
+
 
           //判断影厅是否正有电影放映
-          $roominfo = roominfo::where("status",'0')->get();
+          $roominfo = roominfo::where("status",'1')->get();
 
           //判断是否是该的登录用户的电影
-          $film = film::where('cid',session('uid'))->get();
-          $show = showfilm::get();
+          $film = film::where('cid',session('cid'))->get();
+          $show = showfilm::where('id',$id)->get();
 
           //b用汉语判断状态
           $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
@@ -154,7 +179,33 @@ class FilmShowController extends Controller
 
 
 
+    //空闲时间
+    public function showtime(Request $request)
+    {
+        $id = $request->only('id')['id'];
 
+        $data = DB::table('showfilm')->where('rid',$id)->get();
+
+        $showtime = array();
+
+        foreach ($data as $key => $value) {
+
+            $showtime[$key] = $value->timeout;
+
+        }
+
+        //判断
+        if(empty($showtime)){
+          $aaa = time();
+        } else {
+          $aaa = max($showtime)+30*60;
+        }
+        
+
+        $time = date('Y-m-d H:i:s',$aaa);
+
+        echo  $time;
+    }
 
 
 

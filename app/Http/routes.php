@@ -178,6 +178,8 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('showUpdate','FilmShowController@update');
             //删除放映
             Route::get('showDelete','FilmShowController@delete');
+            //空闲时间
+            Route::post('showtime','FilmShowController@showtime');
 
 
 
