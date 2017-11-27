@@ -39,11 +39,7 @@
                     role="columnheader" class="sorting">
                         影厅
                     </th>
-                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
-                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
-                    role="columnheader" class="sorting">
-                        类型
-                    </th>
+                  
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
@@ -74,38 +70,36 @@
             </thead>
             <tbody aria-relevant="all" aria-live="polite" role="alert">
              
+                @foreach($res as $K=>$v)
                 <tr class="odd" align="center">
-                @foreach($res1 as $ck=>$cv)
                     <td class="sorting_1">
-                    {{$cv->cinema}}    
+                    {{$v->cinema}}    
                     </td>
-                @endforeach
+                
 
-                @foreach($res3 as $fk=>$fv)
+                
                     <td class="sorting_1 ">
-                    {{$fv->filmname}}    
+                    {{$v->filmname}}    
                     </td>
-                @endforeach
+                
 
-                @foreach($res2 as $rk=>$rv)
+                
                     <td class="sorting_1">
-                    {{$rv->roomname}}    
+                    {{$v->roomname}}    
                     </td>
 
-                    <td class="sorting_1 ">
-                    {{$rv->roomtype}}    
-                    </td>
-                @endforeach
+                   
+               
 
-                @foreach($res4 as $sk=>$sv)
+                
                     <td class="sorting_1">
-                    {{$sv->time}}   
+                    {{$v->showtime}}   
                     </td>
-                @endforeach
+                
 
-                @foreach($res as $k=>$v)
+                
                     <td class="sorting_1">
-                    {{$v->seat}}     
+                    {{$v->hang}}排{{ $v->lie }}列    
                     </td>
 
                     <td class="sorting_1">
@@ -115,7 +109,7 @@
                     <td class="sorting_1">
                     {{$v->time}}    
                     </td>
-                @endforeach
+                
                     <td class="sorting_1">
                          
                        <form action="" method='post' style='display:inline'>
@@ -125,7 +119,9 @@
                        </form>
                         
                     </td>
+
                 </tr>
+                @endforeach
             </tbody>
         </table>
 
