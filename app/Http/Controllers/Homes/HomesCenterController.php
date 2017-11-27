@@ -42,10 +42,7 @@ class HomesCenterController extends Controller
         $rres=roominfo::where('id',$rid)->get();
         $fres=film::where('id',$fid)->get();
         $sres=showfilm::where('id',$showid)->get();
-        // dd($cres);
-        // dd($rres);
-        // dd($fres);
-        // dd($sres);die;
+          
 
     	return view('/homes/center',['res'=>$res,'res1'=>$cres,'res2'=>$rres,'res3'=>$fres,'res4'=>$sres]);
     }
