@@ -38,7 +38,7 @@
                         <td>{{$v->cinema}}</td>              
                         <td>{{$v->roomname}}</td> 
                         <td>{{$v->filmname}}</td>             
-                        <td>{{$v->seat}}</td>                          
+                        <td>{{$v->hang}}排{{ $v->lie }}列</td>                          
                         <td>{{date('Y-m-d H:i:s',$v->showtime)}}</td>              
                         <td>{{date('Y-m-d H:i:s',$v->time)}}</td>  
                         <td>{{$v->num}}</td>                          
