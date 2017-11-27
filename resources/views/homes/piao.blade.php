@@ -68,11 +68,11 @@
                     </a>-->
                     <div class="order-detail">
                         <p data-data="{&quot;movieId&quot;:95124}" data-url="/movie/detail" class="order-name">
-                            引爆者
+                           <h3>{{ $film->filmname }}</h3> 
                         </p>
                         <p class="type-time font-shadow">
                             <span>
-                                国语&nbsp;&nbsp;2D
+                                <!-- 国语&nbsp;&nbsp;2D -->
                             </span>
                             <!--<span class="last">1511526000</span>-->
                         </p>
@@ -82,26 +82,28 @@
                                 <span class="font-shadow">
                                     影院：
                                 </span>
-                                长春红旗街万达广场店
+                                {{ $cinema->cinema }}
                             </li>
                             <li>
                                 <span class="font-shadow">
                                     影厅：
                                 </span>
-                                2号厅
+                                {{ $room->roomname }}
                             </li>
                             <li>
                                 <span class="font-shadow">
                                     场次：
                                 </span>
-                                11月24号&nbsp;&nbsp;&nbsp; 周五&nbsp;&nbsp;&nbsp; 20:20
+                                
+                                {{date('Y-m-d H:i:s', $show->time ) }}
                             </li>
                         </ul>
                         <ul class="seat font14">
                             <li>
                                 <i>
                                 </i>
-                                4排7座
+                                {{ $seat['0'] }} 排 {{ $seat['1'] }} 座
+                                
                                 <em>
                                 </em>
                             </li>
@@ -114,7 +116,7 @@
                     接收取票码的手机号：
                     <p class="phone-eidt">
                         <span id="phoneNum">
-                            15738828985
+                            {{ $user->phone }}
                         </span>
                     </p>
                     <p class="phone-eidt-in hide">
@@ -130,7 +132,7 @@
                 <div class="item-td order-num">
                     金额小计:
                     <p class="price">
-                        ¥38.50
+                        ¥{{ $piao->price }}.00
                     </p>
                 </div>
                 <!--<div class="split-hozline"></div>-->
@@ -142,7 +144,7 @@
         <p class="total-money">
             实际支付：
             <span data-selector="totalPrice" class="nuomi-red">
-                38.50元
+                {{ $piao->price }}.00 元
             </span>
         </p>
         <a data-selector="pay" style="width:200px;font-size:20px; "  href="javascript:;" class="btn btn-info confirm-button back-red" >

@@ -252,11 +252,11 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
     //订座
     Route::get('dingpiao','HomesController@dingpiao');
-    Route::post('shopseat','HomesController@shopseat');
-    Route::post('shopseat_into','HomesController@shopseat_into');
+    Route::post('/shopseat/{id}','HomesController@shopseat');
+    Route::post('/shopseat_into/{id}','HomesController@shopseat_into');
 
     //订单确认页面
-    Route::get('piao','HomesController@piao');
+    Route::get('/piao','HomesController@piao');
 
 
     //电影院注册

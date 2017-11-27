@@ -113,6 +113,7 @@ class HomesController extends Controller
         return view('homes/shenqing');
     }
 
+    //处理申请商户
     public function store(Request $request)
     {
         $res = $request->except('_token','city','area','address');
@@ -228,22 +229,23 @@ class HomesController extends Controller
         $data = array();
 
         $data['showid'] = $id;
-        $data['uid'] = 0;
+        $data['uid'] = session('uid') ?? 1;
         $data['cid'] = $res->cid;
         $data['fid'] = $res->fid;
         $data['rid'] = $res->rid;
         $data['price'] = $res->price;
         $data['seat'] = $request->except('_token')['zuo'];
         $data['time'] = time();
+        $data['num'] = time().rand(11111111,99999999).$id;
 
         // $data = $request->except('_token');
         // echo json_encode($data);die;
 
-        $aaa = DB::table('ticket')->insert($data);
+        $aaa = DB::table('ticket')->insertGetId($data);
 
         if($aaa){
 
-            echo '购买成功';
+            echo $aaa;
         }else{
             echo '购买失败';
         }
@@ -265,6 +267,42 @@ class HomesController extends Controller
         }
 
         echo json_encode($seat);
+    }
+
+    public function piao(Request $request)
+    {
+        //票id
+        $id = $request->id;
+
+        //订单信息
+        $piao = DB::table('ticket')->where('id',$id)->first();
+
+        //电影院信息
+        $cinema = DB::table('cinema')->where('id',$piao->cid)->first();
+
+        //影厅信息
+        $room = DB::table('roominfo')->where('id',$piao->rid)->first();
+
+        //电影信息
+        $film = DB::table('film')->where('id',$piao->fid)->first();
+
+        //放映信息
+        $show = DB::table('showfilm')->where('id',$piao->showid)->first();
+
+        //用户信息
+        $uid = $piao->uid;
+        $yonghu = DB::table('user')->where('id',$uid)->first();
+
+        //座位信息
+        $seat = $piao->seat;
+
+        $aaa = explode('_',$seat);
+
+        // var_dump($aaa);die;
+
+
+        
+        return view('/homes/piao',['piao'=>$piao, 'seat'=>$aaa, 'user'=>$yonghu, 'show'=>$show, 'cinema'=>$cinema, 'room'=>$room, 'film'=>$film, 'uid'=>$uid]);
     }
    
 
