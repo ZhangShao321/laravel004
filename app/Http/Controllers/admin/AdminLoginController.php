@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 use Gregwar\Captcha\CaptchaBuilder;
 use App\Http\Model\user; 
+use App\Http\Model\userDetail; 
 use Session;
 use Hash;
 use DB;
@@ -39,9 +40,15 @@ class AdminLoginController extends Controller
            // var_dump($res);
            // $uname=DB::table('user')->where('phone',$res['phone'])->first();
            $uname=user::where('phone',$res['phone'])->first();
-             // var_dump($uname);
-     
+
+           $uname2=userDetail::where('uid',$uname->id)->first();
+              // var_dump($uname);
+              // var_dump($uname2);die;
+          
+          if($uname){
+
             // 判断数据库有没有这个用户
+          }
          if(!$uname){
               return redirect('/admin/login')->with('msg','没有此用户');
               die;

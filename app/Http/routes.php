@@ -92,7 +92,10 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		Route::resource('/block','BlockController');
 
 		//后台网站配置
-		Route::resource('/net','NetController');
+        Route::resource('/net','NetController');
+
+        //订单管理
+		Route::resource('/ticket','TicketController');
 
 });
 

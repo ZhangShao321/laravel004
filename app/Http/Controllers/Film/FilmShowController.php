@@ -115,7 +115,7 @@ class FilmShowController extends Controller
        $res = showfilm::join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
-                        ->select('showfilm.price','film.filmname','roominfo.roomname','showfilm.time','showfilm.timeout')
+                        ->select('showfilm.price','film.filmname','showfilm.id','roominfo.roomname','showfilm.time','showfilm.timeout')
                         ->find($request->only('id')['id']);
 
 
