@@ -93,7 +93,7 @@
     					</div>
                     </form>
 					<div style="float:right" class="col-lg-3 col-md-4 col-sm-4 col-xs-12 float-right account-wrap">
-						@if(session('uid'))
+						@if(!session('uid'))
                         <table>
                             <tr align="right">
                                 <td>
@@ -115,12 +115,21 @@
                         <table>
                             <tr>
                                 <td>欢迎来到{{ $con->webname }}!</td>
-                                <td rowspan="2"><a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a></td>
+                                <?php
+                                    $uid  = session('uid');
+                                    $ures = DB::table('userDetail')->where('uid',$uid)->first();
+                                ?>
+                                    @if(!$ures->photo)
+                                        <td rowspan="2"><a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a></td>
+                                    @else
+                                        <td rowspan="2"><a href=""><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$ures->photo}}?imageView2/0/w/57/h/57 " style="width:57px;height:57px;float:right"></a></td>
+                                    @endif    
+                               
                             </tr>
                             <tr>
                                 <td>
                                     
-                                    <a class="user_info_reg" href="/homes/detail" style="color:purple">
+                                    <a class="user_info_reg" href="/homes/details" style="color:purple">
                                         <button class="btn btn-default btn-sm">个人中心</button>
                                     </a>&nbsp;&nbsp;&nbsp;
                                     <a class="user_info_reg" href="/homes/detail" style="color:purple">

@@ -12,8 +12,6 @@
         "endroid/qrcode": "^2.4",
         "gregwar/captcha": "v1.1.3",
         "flc/alidayu": "^2.0"
-
-
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -50,6 +48,9 @@
             "php artisan optimize"
         ]
     },
+
+    
+
     "config": {
         "preferred-install": "dist"
     }

@@ -1,14 +1,14 @@
 
 @extends('admin.layout.admins')
         
-@section('title','管理员添加')
+@section('title','修改用户头像')
 
 
 @section('content')
 <div class="mws-panel grid_8">
                     <div class="mws-panel-header">
 
-                         <span>添加管理员</span>
+                         <span>修改用户头像</span>
                     </div>
                     <div class="mws-panel-body no-padding">
                     

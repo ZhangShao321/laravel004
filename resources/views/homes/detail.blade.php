@@ -67,7 +67,7 @@
                                 <div class="am-form-group">
                                     <label for="user-name2" class="am-form-label">昵称</label>
                                     <div class="am-form-content">
-                                        <input type="text" id="user-name2" name="uname" value="" placeholder="nickname">
+                                        <input type="text" id="user-name2" name="nickName" value="" placeholder="nickname">
                                           <small>昵称长度不能超过40个汉字</small>
                                     </div>
                                 </div>
@@ -77,13 +77,13 @@
                                     <label class="am-form-label">性别</label>
                                     <div class="am-form-content sex">
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="male" data-am-ucheck> 男
+                                            <input type="radio" name="sex" value="male" data-am-ucheck> 男
                                         </label>
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="female" data-am-ucheck> 女
+                                            <input type="radio" name="sex" value="female" data-am-ucheck> 女
                                         </label>
                                         <label class="am-radio-inline">
-                                            <input type="radio" name="radio10" value="secret" data-am-ucheck> 保密
+                                            <input type="radio" name="sex" value="secret" data-am-ucheck> 保密
                                         </label>
                                     </div>
                                 </div>
@@ -96,9 +96,16 @@
                                     </div>
                                 </div>
                                 <div class="am-form-group">
+                                    <label for="user-email" class="am-form-label">QQ</label>
+                                    <div class="am-form-content">
+                                        <input id="user-email" placeholder="QQ" type="text" name="qq" value="">
+
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
                                     <label for="user-email" class="am-form-label">上传头像</label>
                                     <div class="am-form-content">
-                                        <input id="user-email" placeholder="file" type="file" name="license" value="">
+                                        <input id="user-email" placeholder="file" type="file" name="photo" value="">
 
                                     </div>
                                 </div>
@@ -157,7 +164,7 @@
                     <li class="person">
                         <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                         <ul>
-                            <li> <a href="/homes/detail">个人信息</a></li>
+                            <li> <a href="/homes/details">个人信息</a></li>
                             <li> <a href="/homes/change">修改密码</a></li>
                             
                         </ul>

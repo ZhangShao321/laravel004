@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Model\userDetail;
 use App\Http\Model\user;
+use App\Http\Model\film;
 use DB;
 
 class HomesDetailController extends Controller
@@ -16,29 +17,45 @@ class HomesDetailController extends Controller
     //
     public function index()
     {
+        // echo 11111111;die;
     	return view('homes/detail');
     }
 
     public function store(Request $request)
     {
-    	 
-    	 $res = $request->except('_token');
+    	//  if(!session('uid')){
+    		
+    	// 	return view('/homes/login');
+    	// 	die;
+    	// }
+
+    	$result = $request->except('_token','phone');
+
+    	$result['uid'] = session('uid');
     	 // dd($res);die;
-    	 if($request -> hasFile('license'))
+    	if($request -> hasFile('photo'))
         {
 
            //文件名
             $name = rand(11111,99999).time();
 
             //获取后缀名
-            $jpg = $request -> file('license')->getClientOriginalExtension();
+            $jpg = $request -> file('photo')->getClientOriginalExtension();
           
             //移动图片
-            $request ->file('license') -> move('./public/UserDetail/Uploads',$name.'.'.$jpg); 
+            $request ->file('photo') -> move('./public/userDetail/Uploads',$name.'.'.$jpg); 
         }  
 
-        $license = './public/UserDetail/Uploads/'.$name.$name.'.'.$jpg;
-        $res['license'] = $license;
+        $photo = './public/userDetail/Uploads/'.$name.$name.'.'.$jpg;
+        $result['photo'] = $photo;
+
+        userDetail::insert($result);
+
+        $res = film::orderBy('shownum','desc')->limit('3')->get();
+
+        return view('/homes/index',['result'=>$result,'res'=>$res]);
+
+
 
     }
 }

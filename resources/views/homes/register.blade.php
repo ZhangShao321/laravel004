@@ -21,7 +21,7 @@
                         <i class="am-icon-mobile-phone am-icon-md">
                         </i>
                     </label>
-                    <input type="tel" name="tel" id="phone" placeholder="请输入手机号">
+                    <input type="text" name="phone" id="phone" placeholder="请输入手机号">
                 </div>
                 <div id="phonemsg" class="yanzheng">
 
@@ -32,7 +32,7 @@
                         </i>
                     </label>
                     <input type="text" name="code" id="code" placeholder="请输入验证码">
-                    <a class="btn" href="/homes/test" id="sendMobileCode">
+                    <a class="btn" href="" id="sendMobileCode">
                         <span id="dyMobileButton">
                             获取
                         </span>
@@ -66,17 +66,6 @@
 		            登录
 		        </a>
                 </div>
-				@if(session('msg'))
-                	<div class="mws-form-message info" id="msg">
-
-           
-                	{{session('msg')}}   
-                	</div>         
-          
-            	@endif
-             
-
-
             </form>
             <div class="am-cf">
             	{{ csrf_field() }}
@@ -92,21 +81,24 @@
 @section('js')
 
 <script type="text/javascript">
-	// var checktel = false;
-	// var checkVerifyCode=false;
-	// var checkpassword = false;
-	// var checkrelpassword = false;
+	 
 
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var checktel = false;
+    var checkverifyCode = false;
+    var checkpassword = false;
+    var checkrelpassword = false;
 
 	$('#phone').blur(function() 
 	{		
-		checktel = checkTel($(this),$('#phonemsg'));			 
+		checktel = checkTel($(this),$('#phonemsg'));
+
+        // console.log(checktel);
+        		 
 	})
 
 	$('#sendMobileCode').click(function() 
@@ -114,58 +106,60 @@
 		// 获取手机号
 		var phone = $('#phone').val();
 		// 发送ajax
-		$.get('{{url('/homes/test')}}',{phone:phone},function(data) {
-			if (data) 
-			{
-				return('短信已发送');
-			}else{
-				 
-				return('发送失败');
-			}
+        if(checktel == 100){
 
-		},'json')
-				 
+    		$.get("{{url('/homes/test')}}",{phone:phone,'_token':"{{csrf_token()}}"},function(data) {
+    			
+                console.log(data);
+                if(data == "1") 
+    			{
+    				layer.open({
+
+                        content:  '短信已发送!!!'
+                    });
+    			}else if(data == " 0"){
+    				 
+    				layer.open({
+                        content:'短信发送失败!!请重新操作!'
+                    });
+    			}else
+                {
+                    layer.open({
+                        content:'手机号已注册!!'
+                    });
+                }
+
+    		})
+		}else{
+            layer.open({
+
+                content:'输入的手机号码格式不正确,无法获取验证码!'
+            });
+        }		 
 		//消除默认设置 
 		return false;
 	})
 
-    //弹框
-    $('#submit').click(function(){
-
-     layer.alert('申请成功，请等待处理', {
-        skin: 'layui-layer-molv' //样式类名  自定义样式
-        ,closeBtn: 1    // 是否显示关闭按钮
-        ,anim: 1 //动画类型
-        ,btn: ['确认'] //按钮
-        ,icon: 6    // icon
-        ,yes:function(){
-
-            layer.msg('跳转中')->return redirect('/homes/login')
-
-             
-        }
-        ,btn2:function(){
-
-            layer.msg('跳转中')->return redirect('/homes/register')
-
-        }});
-    });
+     
 
 	$('#code').blur(function() 
 	{		
-		checkVerifyCode = checkVerifyCode($(this), $('#codemsg'), 6);
+		checkverifyCode = checkVerifyCode($(this), $('#codemsg'), 6);
+        // console.log(checkVerifyCode)
 				
 	})
 
 	$('#password').blur(function() 
 	{		
 		checkpassword=checkPassword($(this),$('#passwordmsg'), 6);
+        
 
 	})
 
 	$('#passwordRepeat').blur(function() 
 	{		
 		checkrelpassword = checkRelPassword($('#password'), $(this), $('#confirmpasswordmsg'), 6);
+        
 
 	})
 
@@ -178,26 +172,28 @@
 		// 获取输入的密码和确认密码
 		var password = $('#password').val();
 			
-	// 	if(checktel == 100 && checkverifyCode == 100 && checkpassword == 100 && checkrelpassword == 100){
-	// 		// 发送ajax
-		$.post("{{url('/homes/doregister')}}",{phone:phone,code:code,password:password,'_token':"{{csrf_token()}}"},function(data) {
-					
-			if(data)
-			{
-				return('注册成功!!!');
+		if(checktel == 100 && checkverifyCode == 100 && checkpassword == 100 && checkrelpassword == 100){
+	       	// 发送ajax
+    		$.post("{{url('/homes/doregister')}}",{phone:phone,code:code,password:password,'_token':"{{csrf_token()}}"},function(data) {
+    					
+    			if(data)
+    			{
+    				layer.open({
+                        content: '注册成功!!'
+                    });
 
-			}else{
+    			}
+    		})
 
-	 			return('请输入正确的注册方式!!');
+	 	}else{
+            layer.open({
 
-	 		}
-
-		})
-
-	 	
+                    content: '请填写正确的注册信息!!!'
+                
+                });
+        }
 		//消除默认设置
-		return false;
-			
+		return false;	
 
  	})
 	

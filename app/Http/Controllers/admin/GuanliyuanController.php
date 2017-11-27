@@ -287,12 +287,12 @@ class GuanliyuanController extends Controller
     public function dophoto(Request $request)
     {
 
-        $id = $request->only('id');
+        
 
         if($request -> hasFile('photo')){
         
 
-            $clic = DB::table('userDetail')->where('uid',$id)->first();
+            $clic = DB::table('userDetail')->where('uid',session('aid'))->first();
 
                 //删除原先的图片
                 $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
@@ -325,7 +325,7 @@ class GuanliyuanController extends Controller
 
                 $photo = 'image_'.$name;
                 // echo 111111;die;
-                $res = DB::table('userDetail')->where('uid',$id)->update(['photo'=>$photo]);
+                $res = DB::table('userDetail')->where('uid',session('aid'))->update(['photo'=>$photo]);
 
                 // var_dump($res);die;
 

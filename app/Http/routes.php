@@ -251,6 +251,13 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::get('la','HomesController@la');
 
 
+    //电影院注册
+    Route::get('register','HomesRegisterController@index');
+
+     //短信验证
+    Route::get('test','HomesRegisterController@doAction');
+     //判断
+    Route::post('doregister','HomesRegisterController@store');
 
     
 
@@ -258,16 +265,10 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('login','HomesLoginController@index');
 
     Route::post('dologin','HomesLoginController@dologin');
-	//电影院注册
-	Route::get('register','HomesRegisterController@index');
-
-	 //短信验证
-	Route::get('test','HomesRegisterController@doAction');
-	 //判断
-	Route::post('doregister','HomesRegisterController@store');
-
+	
     //个人中心
-    Route::get('detail','HomesDetailController@index');
+    Route::get('details','HomesDetailController@index');
+    
     Route::post('doaction','HomesDetailController@store');
 
 	//修改密码

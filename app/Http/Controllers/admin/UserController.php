@@ -325,14 +325,16 @@ class UserController extends Controller
     {
         $pass = $request->only('password');
 
-        $id = $request->only('id');
+        $id = $request->only('id')['id'];
+
+        // var_dump($id);die;
 
         $data = DB::table('user')->where('id',$id)->update($pass);
 
         if($data){
             return redirect('/admin/user')->with('修改成功');
         } else {
-            return back();
+            return back()->with('修改失败');
         }
     }
 
@@ -349,10 +351,14 @@ class UserController extends Controller
     public function dophoto(Request $request)
     {
 
+        $id = $request->only('id')['id'];
+
+        var_dump($id);die;
+
         if($request -> hasFile('photo')){
         
 
-            $clic = DB::table('userDetail')->where('uid',session('aid'))->first();
+            $clic = DB::table('userDetail')->where('id',$id)->first();
 
                 //删除原先的图片
                 $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
@@ -366,10 +372,10 @@ class UserController extends Controller
 
                 //你要测试的空间， 并且这个key在你空间中存在
                 $bucket = 'laravel-upload';
-                $key = 'Uplodes/'.$clic->photo;
+                @$key = 'Uplodes/'.$clic->photo;
 
                 //删除$bucket 中的文件 $key
-                $err = $bucketMgr->delete($bucket, $key);
+                @$err = $bucketMgr->delete($bucket, $key);
             
 
                  //获取文件
@@ -383,14 +389,20 @@ class UserController extends Controller
                  //上传到文件到七牛
                 $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
 
+                var_dump($bool);die;
+
+                if(!$bool){
+                    return back()->with('上传文件失败');
+                }
+
                 $photo = 'image_'.$name;
                 // echo 111111;die;
-                $res = DB::table('userDetail')->where('uid',session('aid'))->update(['photo'=>$photo]);
+                $res = DB::table('userDetail')->where('id',$id)->update(['photo'=>$photo]);
 
-                // var_dump($res);die;
+                var_dump($res);die;
 
                 if ($res) {
-                    return redirect('/admin/index');
+                    return redirect('/admin/index')->with('抱歉! 修改失败!');
                 } else {
                     return back()->with('抱歉! 修改失败!');
                 };
