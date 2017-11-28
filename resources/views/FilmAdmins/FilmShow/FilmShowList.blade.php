@@ -11,7 +11,7 @@
         <span>
             <i class="icon-table">
             </i>
-            Data Table with Numbered Pagination
+           放映列表
         </span>
     </div>
     <div class="mws-panel-body no-padding">
@@ -120,19 +120,14 @@
                         </td>
                          <td class=" ">
 
-                           {{date('Y-m-d H:i:s',$v->timeout)}}
-                            
+                             {{date('Y-m-d H:i:s',$v->timeout)}}
                             
                         </td>
                          <td class=" ">
-                             @if($v->timeout < time())
-                             {{ $arr['2'] }}
-                             @elseif($v->time < time() && $v->timeout > time())
-                             {{ $arr['1'] }}
-                             @else
-                             {{ $arr['0'] }}
-                             @endif
+                           {{ $arr[$v->status]}}
 
+
+                            
                         </td>
                          <td class=" ">
                            <a href="{{asset('/FilmAdmins/showEdit?id=').$v->id}}"><button class="btn btn-default">编辑</button></a>
