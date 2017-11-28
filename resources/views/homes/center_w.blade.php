@@ -112,11 +112,9 @@
                 
                     <td class="sorting_1">
                        <a href="/homes/piao?id={{ $v->id }}"><button class='btn btn-default'>马上付款</button></a>
-                       <form action="" method='post' style='display:inline'>
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}
-                            <button class='btn btn-default'>删除</button>
-                       </form>
+                       
+                        <button id="{{ $v->id }}" class='btn btn-default dels'>删除</button>
+                       
                         
                     </td>
 
@@ -128,4 +126,18 @@
 
 @endsection
 
- 
+@section('js')
+<script>
+	
+$('.dels').click(function(){
+
+	var id = $(this).attr('id');
+
+	$.post('{{ url("/homes/ticket/delete") }}', {_token:'{{ csrf_token() }}', id:id}, function(data){
+
+		console.log(data);
+	})
+})
+
+</script>
+@endsection

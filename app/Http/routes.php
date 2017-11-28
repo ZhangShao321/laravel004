@@ -310,6 +310,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::get('center','HomesCenterController@index');
     Route::get('center_w','HomesCenterController@weiwc');
     Route::get('insert','HomesCenterController@insert');
+    Route::get('/ticket/delete','HomesCenterController@delete');
  
 
 
