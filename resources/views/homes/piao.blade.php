@@ -2,7 +2,7 @@
 
 @section('title','傻家伙')
 
-<!-- <meta http-equiv="refresh" content="3;url=return back" /> -->
+<!-- <meta http-equiv="refresh" content="3; window.location.href={{'/homes/index'}}" /> -->
 
 @section('content')
 
