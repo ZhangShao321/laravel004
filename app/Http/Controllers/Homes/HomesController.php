@@ -349,23 +349,23 @@ class HomesController extends Controller
         $price = $request->only('price')['price'];
         $name = $request->only('name')['name'];
         $id = $request->only('id')['id'];
-        
+
         
         $res = cinema::where('cinema',trim($cinema))->first();
         $res1 = film::where('filmname',$name)->first();
         $money = money::where('cid',$res['id'])->first();
         
 
-        // echo "<pre>";var_dump($ticket);die;
-
         $newshownum =  $res1['shownum'] +'1';
         $newmoney = $money['money'] + $price;
 
         $num = film::where('filmname',$name)->update(['shownum'=>$newshownum]);
         $mon = money::where('cid',$res['id'])->update(['money'=>$newmoney]);
-        
+
         if($num && $mon){
-             $ticket = ticket::where('id',$id)->where('cid',$res['id'])->update(['status'=>'1']);
+
+             $ticket = ticket::where('id',$id)->update(['status'=>'0']);
+
         }
        
     }

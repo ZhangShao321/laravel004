@@ -81,32 +81,43 @@ class HomesRegisterController extends Controller
 
     }
 
-             public function store(Request $request)
+        public function store(Request $request)
         {
-
-
             // 获取注册信息并放入数组res
 
             $res = $request->except('_token','code');
-
-            // $aaa['uid']=$res['id'];
-
+ 
             // 使用Hash加密注册密码
-            $res['password'] = Hash::make($request->input('password'));
-         
+            $res['password'] = Hash::make($res['password']);
+           
             // 获取存入session中的code
             $session_code = session('code');
 
              //验证码是否一致
-             if($session_code == $request->input('code'))
+            if($session_code == $request->input('code'))
             {
                 // 注册信息存入数据库
-                user::insert($res);
+                $uid = DB::table('user')->insertGetId($res);
 
-                // userDetail::insert($aaa);
+                if($uid){
 
-                echo 1;
+                    $bbb = DB::table('userDetail')->insert(['uid'=>$uid]);
 
+                    if($bbb){
+                       echo 1; 
+                   } else {
+                        DB::table('user')->where('id',$uid)->delete();
+                        echo 0;
+                   }
+                }else{
+
+
+                    echo 0;
+                }
+
+                
+
+                
                 
             }
         }

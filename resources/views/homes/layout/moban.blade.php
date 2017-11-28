@@ -119,11 +119,9 @@
                                     $uid  = session('uid');
                                     $ures = DB::table('userDetail')->where('uid',$uid)->first();
                                 ?>
-                                    @if(!$ures->photo)
-                                        <td rowspan="2"><a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a></td>
-                                    @else
-                                        <td rowspan="2"><a href=""><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$ures->photo}}?imageView2/0/w/57/h/57 " style="width:57px;height:57px;float:right"></a></td>
-                                    @endif    
+                                    
+                                    <td rowspan="2"><a href=""><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$ures->photo}}?imageView2/0/w/57/h/57 " style="width:57px;height:57px;float:right"></a></td>
+                                      
                                
                             </tr>
                             <tr>
