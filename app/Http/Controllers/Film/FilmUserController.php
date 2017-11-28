@@ -218,7 +218,7 @@ class FilmUserController extends Controller
 
     public  function PasEdit(Request $request)
     {
-            echo "这是修改页面";
+            // echo "这是修改页面";
             return view('FilmAdmins.FilmUser.FilmPassEdit');
     }
 

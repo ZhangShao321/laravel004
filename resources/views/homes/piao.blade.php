@@ -180,7 +180,7 @@
 		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name},function(data){
 
 		     		layer.msg('购票成功');
-		     		window.location.href="/homes/index";
+		     		window.location.href="/homes/center";
 
 		     });
            

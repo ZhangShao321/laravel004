@@ -221,7 +221,7 @@ function registSeat(){
  
                 }else{
 
-                    var reg = /^\w{3}$/;
+                    var reg = /^\w{3,5}$/;
                     if(!reg.exec(into)){
 
                         // alert('抱歉!一次只能买一张!');

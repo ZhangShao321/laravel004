@@ -111,6 +111,24 @@
 			                </div>
 
 
+			                  <div class="mws-form-row">
+                				<label class="mws-form-label">状态</label>
+                				<div class="mws-form-item">
+                					<select class="large" name="status">
+                						 
+                                        <option value="1" @if($res->status == 1)  selected     @endif >上映</option>
+                                       
+                                        <option value="0" @if($res->status == 0)  selected     @endif >下架</option>
+                                        
+                					</select>
+                				</div>
+                    		</div>
+
+
+
+
+
+
 			               
 
 							 <div class="mws-form-row">

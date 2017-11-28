@@ -40,7 +40,7 @@ class FilmShowController extends Controller
 
        
           // 电影
-          $film = DB::table('film')->where('cid',session('cid'))->get();
+          $film = DB::table('film')->where('status',1)->where('cid',session('cid'))->get();
           
 
         return view('FilmAdmins.FilmShow.FilmShowAdd',['film'=>$film,'room'=>$roominfo]);

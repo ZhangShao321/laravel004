@@ -96,6 +96,14 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
         //订单管理
 		Route::resource('/ticket','TicketController');
+        //订单放入回收站方法
+        Route::post('/ticket/huishou','TicketController@huishou');
+        //加载回收站页面
+        Route::get('/tickets/hspage','TicketController@hspage');
+        
+
+
+
 
 });
 
@@ -285,11 +293,22 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('login','HomesLoginController@index');
 
     Route::post('dologin','HomesLoginController@dologin');
+
+    //退出
+    Route::get('deletes','HomesLoginController@delete');
 	
     //个人中心
     Route::get('details','HomesDetailController@index');
-    
+        //添加
     Route::post('doaction','HomesDetailController@store');
+        //修改
+    Route::post('/update/{id}','HomesDetailController@update');
+        //添加头像
+    Route::get('tian','HomesDetailController@add');
+    Route::post('photo','HomesDetailController@insert');
+        //修改头像
+    Route::get('edit','HomesDetailController@edit');
+    Route::post('/doedit/{id}','HomesDetailController@doedit');
 
 	//修改密码
     Route::get('change','HomesChangeController@index');
