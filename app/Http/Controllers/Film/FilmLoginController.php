@@ -97,17 +97,17 @@ class FilmLoginController extends Controller
    public  function outlogin(Request $request)
    {
 
-        //销毁session
-        $res = $request->session()->flush();
+            //销毁session
+            $res = $request->session()->flush();
 
 
-        if($res)
-        {
-            return  redirect("/FilmAdmins/FilmLogin");
-        }
-        else{
-            return back();
-        }
+            if($res)
+            {
+                return  redirect("/FilmAdmins/FilmLogin");
+            }
+            else{
+                return back();
+            }
 
    }  
 

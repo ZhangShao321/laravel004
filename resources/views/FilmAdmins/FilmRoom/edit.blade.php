@@ -10,7 +10,7 @@
         <span>修改影厅</span>
     </div>
     <div class="mws-panel-body no-padding">
-        <form class="mws-form" action="/FilmAdmins/room/update/{{ $res->id }}" method="post">
+        <form class="mws-form" action="{{asset('/FilmAdmins/room/update/id='). $res->id}}" method="post">
               <div class="mws-form-inline">
                     <br>
                     <br>

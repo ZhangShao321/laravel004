@@ -15,11 +15,12 @@ class FilmRoomController extends Controller
 {
      //影厅列表
     public function index()
-
     {  
 
+        //根据商户登录存储的id来查询该商户下所有的影厅
+
         $res = DB::table('roominfo')->where('cid',session('cid'))->get();
-        // $res = roominfo::all();
+        
 
         return view('/FilmAdmins/FilmRoom/list', ['res'=>$res]); 
 

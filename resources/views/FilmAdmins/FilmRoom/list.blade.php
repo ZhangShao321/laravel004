@@ -38,11 +38,9 @@
                         @endif
                     </td>
                     <td>
-<<<<<<< HEAD
-                        <a href="{{asset('/FilmAdmins/room/edit/').$v->id }}"><button>修改</button></a>
-=======
-                        <a href="/FilmAdmins/room/edit/{{ $v->id }}"><button>编辑</button></a>
->>>>>>> abf6130053f89eaffc106181d01ea42462d002fe
+
+                        <a href="{{asset('/FilmAdmins/room/edit/id='). $v->id}}"><button>编辑</button></a>
+
                         <!-- <a href="/FilmAdmins/room/delete/{{ $v->id }}"></a> -->
                         <button id="{{ $v->id }}" class="del">删除</button>
                         <a href="{{asset('/FilmAdmins/room/seats/').$v->id }}"><button>座位</button></a>

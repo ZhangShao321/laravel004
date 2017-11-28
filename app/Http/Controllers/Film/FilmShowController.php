@@ -18,12 +18,24 @@ class FilmShowController extends Controller
      //放映信息
     public function index()
     {
+
+      //多表查询
       
-       $roo = showfilm::where('showfilm.cid',session('cid'))
+       // $roo = showfilm::where('showfilm.cid',session('cid'))
+       //                  ->join('film','showfilm.fid','=','film.id')
+       //                  ->join('roominfo','showfilm.rid','=','roominfo.id')
+       //                  ->join('cinema','showfilm.cid','=','cinema.id')
+       //                  ->select('showfilm.id','showfilm.time','showfilm.status','film.filmname','roominfo.roomname','showfilm.price','showfilm.timeout')
+       //                  ->paginate(10);
+
+
+         $roo = showfilm::where('showfilm.cid',session('cid'))
                         ->join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
                         ->select('showfilm.id','showfilm.time','showfilm.status','film.filmname','roominfo.roomname','showfilm.price','showfilm.timeout')
+                        ->orderBy('showfilm.time', 'desc')
+
                         ->paginate(10);
 
         $arr = array(0=>'即将放映',1=>'正在放映');
@@ -37,11 +49,11 @@ class FilmShowController extends Controller
     public function add()
     {
 
-          //电影院影厅
+          //电影院影厅 更具影厅状态 商户id
           $roominfo = DB::table('roominfo')->where('status',1)->where('cid',session('cid'))->get();
 
        
-          // 电影
+          // 根据商户id 电影状态
           $film = DB::table('film')->where('status',1)->where('cid',session('cid'))->get();
           
 
@@ -76,12 +88,13 @@ class FilmShowController extends Controller
         //电影id
         $fid = $info['fid'];
         $film = DB::table('film')->where('id',$fid)->where('status',1)->first();
+        //获取电影时长
         $ftime = $film->filmtime;
 
-        //结束id
+        //结束id   放映结束时间戳
         $info['timeout'] = time()+$ftime*60;
 
-        // var_dump($info);die;
+     
         
         $res = showfilm::insert($info);
 
@@ -105,13 +118,10 @@ class FilmShowController extends Controller
     public  function edit(Request $request)
     {
 
-      $id = $request->only('id');
-     
-     // $res = showfilm::join('film','showfilm.fid','=','film.id')
-     //                    ->join('roominfo','showfilm.rid','=','roominfo.id')
-     //                    ->join('cinema','showfilm.cid','=','cinema.id')
-     //                    ->find($request->only('id'));
+      //获取放映的id
 
+      $id = $request->only('id');
+  
 
        $res = showfilm::join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
@@ -148,8 +158,10 @@ class FilmShowController extends Controller
 
           $info = $request->except('_token','id','time'); 
           $time = $request->only('time');
+          
           $info['time'] = strtotime($time['time']);
-          var_dump($request->only('id')['id']);
+
+        
           $res  =showfilm::where('id',$request->only('id')['id'])->update($info);
 
        
