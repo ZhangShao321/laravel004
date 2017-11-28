@@ -279,7 +279,7 @@
                                     </i>
                                 </a>
                                 <a href="{{url('/homes/add')}}" style="color:white">
-                                    申请商户
+                                    加入我们
                                 </a>
                             </li>
                         </ul>

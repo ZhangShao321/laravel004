@@ -66,11 +66,12 @@ class HomesController extends Controller
 
         //电影详情数据
         $aaa = film::find($request->id);
+
         $bbb = film::where('filmname',$aaa->filmname)
                 ->join('showfilm','film.id','=','showfilm.fid')
                 ->join('cinema','showfilm.cid','=','cinema.id')
                 ->join('cininfo','cinema.id','=','cininfo.cid')
-                ->select('showfilm.id','showfilm.time','cinema.cinema')
+                ->select('showfilm.id','showfilm.time','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
                 ->get();
 
         //加载电影详情页面
