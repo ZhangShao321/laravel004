@@ -111,7 +111,9 @@
 			                </div>
 
 
-			                  <div class="mws-form-row">
+
+			                 <div class="mws-form-row">
+
                 				<label class="mws-form-label">状态</label>
                 				<div class="mws-form-item">
                 					<select class="large" name="status">
@@ -123,9 +125,6 @@
                 					</select>
                 				</div>
                     		</div>
-
-
-
 
 
 

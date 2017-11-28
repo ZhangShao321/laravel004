@@ -139,4 +139,21 @@ class HomesCenterController extends Controller
         return view('/homes/center_w',['res'=>$res]);
     }
 
+    //未完成订单自动取消
+    public function dodel(Request $request)
+    {
+        //获取id
+        $id = $request->only('id')['id'];
+        //删除信息
+        $data = DB::table('ticket')->where('id',$id)->delete();
+
+        if ($data) {
+
+            echo 1;
+        } else {
+            echo 0;
+        }
+
+    }
+
 }

@@ -238,7 +238,7 @@ function registSeat(){
 
                                     var ids = data;
 
-                                    console.log(ids);
+                                    // console.log(ids);
                                     //链接付款
                                     var but = $("<a href='{{url('/homes/piao?id=')}}"+ids+"'><button id='shop' class='btn btn-danger'>马上付款</button></a>");
                                     $('#goumai').after(but);

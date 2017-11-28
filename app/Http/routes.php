@@ -28,6 +28,8 @@ Route::group(['namespace'=>'Homes'], function(){
 
 
 
+
+
 //=======================后台信息===================================
 
 
@@ -133,6 +135,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 
         
 
+        Route::get('/testRedis','TestController@redisDemo');
+        
+
         //退出登录
         Route::get('outlogin','FilmLoginController@outlogin');
         // 'middleware'=>'filmlogin'
@@ -202,6 +207,7 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('/room/delete/{id}','FilmRoomController@delete');
             Route::post('/room/work','FilmRoomController@work');
             Route::get('/room/seats/{id}','FilmRoomController@seats');
+
             Route::get('/room/seatedit/{id}','FilmRoomController@seatedit');
             Route::post('/room/seatupdate/{id}','FilmRoomController@seatupdate');
 
@@ -243,6 +249,14 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 	//电影院列表页
 	Route::get('cinemalist','HomesController@cinemalist');
+
+
+
+   
+  
+
+
+
 
 	//电影院详情
     Route::get('cinemadetail','HomesController@cinemadetail');
@@ -311,7 +325,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::get('center_w','HomesCenterController@weiwc');
     Route::get('insert','HomesCenterController@insert');
     Route::get('/ticket/delete','HomesCenterController@delete');
- 
+    Route::post('/ticket/dodel','HomesCenterController@dodel');
 
 
 

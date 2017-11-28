@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Model\cinema;
 use App\Http\Model\cininfo;
+use App\Http\Model\cinlogin;
 
 use zgldh\QiniuStorage\QiniuStorage;
 
@@ -33,12 +34,16 @@ class FilmUserController extends Controller
     {   
             $id = session('cid');
 
+
               $res = cinema::where('cinema.id',$id)
                             ->join('cininfo','cinema.id','=','cininfo.cid')
                             ->first();
 
                // echo "后台信息";die;
+
+              // var_dump($res);die;
                     
+
         return view('FilmAdmins.FilmUser.info',['res'=>$res]);
     }
 
@@ -57,9 +62,8 @@ class FilmUserController extends Controller
 
             $id = session('cid');
 
-            $license = $request->only('license');
-            
 
+            $license = $request->only('license');
               if($request -> hasFile('license'))
               {
 
@@ -100,7 +104,13 @@ class FilmUserController extends Controller
               }
 
                 $cin = DB::table('cinema')->where('id',$id)->update($cinema);
+                  var_dump($cin);
+            
+
                 $cinfo = DB::table('cininfo')->where('cid',$id)->update($arr);
+                var_dump($cinfo);
+
+              
 
                 if($cin)
                 {
@@ -112,7 +122,7 @@ class FilmUserController extends Controller
                 {
                      return redirect('/FilmAdmins/info')->with('msg','修改成功'); 
                 }else{
-                    return back();
+                    return back()->with('msg','修改失败');
 
                 }
 
@@ -149,28 +159,32 @@ class FilmUserController extends Controller
 
             //1,先查询
             $find = cinema::where('id',session('cid'))->first();
+
+
             // //判断文件是否上传
             if($request -> hasFile('clogo'))
             {
 
 
-               $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
-              $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-              //初始化Auth状态：
-              $auth = new Auth($accessKey, $secretKey);
+                //删除原先的图片
+                $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+                $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-              //初始化BucketManager
-              $bucketMgr = new BucketManager($auth);
+                //初始化Auth状态：
+                $auth = new Auth($accessKey, $secretKey);
 
-              //你要测试的空间， 并且这个key在你空间中存在
-              $bucket = 'laravel-upload';
-              $key = 'Uplodes/'.$find->clogo;
+                //初始化BucketManager
+                $bucketMgr = new BucketManager($auth);
 
-            //删除$bucket 中的文件 $key
-              $err = $bucketMgr->delete($bucket, $key);
-             $res = $request->only(['clogo']);
+                //你要测试的空间， 并且这个key在你空间中存在
+                $bucket = 'laravel-upload';
+                $key = 'Uplodes/'.$find->clogo;
 
+                //删除$bucket 中的文件 $key
+                $err = $bucketMgr->delete($bucket, $key);
+              
+                 $res = $request->only(['clogo']);
 
                //获取文件
                $file=$request->file('clogo');
@@ -182,6 +196,7 @@ class FilmUserController extends Controller
 
               //上传到文件到七牛
              $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+           
 
               //上传
               $clogo = 'image_'.$name;
@@ -190,18 +205,18 @@ class FilmUserController extends Controller
               if($info->save())
                 {
                     // echo "修改成功";
-                    return redirect('/FilmAdmins/Profile')->with('msg','修改成功');
+                      return redirect('FilmAdmins/Profile')->with('msg','修改成功'); 
 
 
                 }else{
                     
-                    return back();
+                    return back()->with('msg','修改失败');
 
                 }
 
             }else{
 
-                 return back()->with('msg','您还未选择图片');
+                 return back();
 
 
             }
@@ -229,32 +244,47 @@ class FilmUserController extends Controller
     {
 
         // var_dump($request->all());
-     $oldpassword = $request->only('oldpassword');
-     $newpassword = $request->only('newpassword');
+      // var_dump($request->only('oldpassword'));
+      // var_dump($request->only('newpassword'));
+      // echo $request->only('oldpassword')['oldpassword'];
 
+      // var_dump('这是修改密码');
+
+      // die;
+     $oldpassword = $request->only('oldpassword')['oldpassword'];
+     $newpassword = $request->only('newpassword')['newpassword'];
+
+     
       $info =cinema::find(session('cid')); 
-      if(!Hash::check($oldpassword['password'],$info->password))
-      {
+      // var_dump(Hash::check($oldpassword,$info->password));
 
-         $new = Hash::make($newpassword['newpassword']);
+  
 
-         $update = cinema::where('id',session('cid'))->update(['password',$new]);
+            if(Hash::check($oldpassword,$info->password))
+            {
+               $new = Hash::make( $newpassword);
+            
 
-         if($update)
-         {
-            echo 1;
+            
+               // $update = cinema::where('id',session('cid'))->update(['password',$new]);
+              $res =  cinema::where('id',session('cid'))->update(['password'=>$new]);
+              $res1 = cinlogin::where('cid',session('cid'))->update(['password'=>$new]);
+               
+
+                 if($res&&$res1)
+                 {
+                    echo 1;
 
 
-         }else{
-          echo 0;
-         }
-      }else{
-
-        echo 2;
-      }
-
-      
-      
+                 }else{
+                  echo 0;
+                 }
+            }else
+            {
+              echo 2;
+            }
+            
+            
 
     
       

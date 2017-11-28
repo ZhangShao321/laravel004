@@ -16,13 +16,15 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="stylesheet" href="/homes/AmazeUI-2.4.2/assets/css/amazeui.min.css" />
-        <link href="/homes/scss/dlstyle.css" rel="stylesheet" type="text/css">
+        <link href="{{asset('/homes/scss/dlstyle.css')}}" rel="stylesheet" type="text/css">
        
          
+
         <script src="/homes/js/layer/jquery-1.8.3.min.js"></script>
         <script src="/homes/js/validate.js"></script>
         <script src="/homes/AmazeUI-2.4.2/assets/js/jquery.min.js"></script>
         <script src="/homes/AmazeUI-2.4.2/assets/js/amazeui.min.js"></script>
+
         <script type="text/javascript" src="{{asset('/homes/jss/jquery.js')}}"></script>
             <script type="text/javascript" src="{{asset('/homes/js/layer/layer.js')}}"></script>
             <script type="text/javascript" src="{{asset('/homes/js/layer/extend/layer.ext.js')}}"></script>
@@ -38,13 +40,13 @@
     <body>
 
         <div class="login-boxtitle">
-            <a href="home/demo.html"><img alt="" src="/homes/img/logobig.png" /></a>
+            <a href="home/demo.html"><img alt="" src="{{asset('/homes/img/logobig.png')}}" /></a>
         </div>
 
         <div class="res-banner">
             <div class="res-main">
                 <div class="login-banner-bg">
-                    <img src="/homes/img/big.jpg" />
+                    <img src="{{asset('/homes/img/big.jpg')}}" />
                 </div>
 
           

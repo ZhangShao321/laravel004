@@ -131,8 +131,8 @@
 
 
         	var Npassword = $('#newpassword').val();
-        	console.log(Opassword);
-        	console.log(Npassword);
+        	// console.log(Opassword);
+        	// console.log(Npassword);
 
 
         	
@@ -140,6 +140,8 @@
         	if(checkoldpassword ==100 && checknewpassword == 100 && checkrelpassword == 100)
         	{	
         		 $.get("{{url('/FilmAdmins/updatePass')}}",{oldpassword:Opassword,newpassword:Npassword,'_token':'{{csrf_token()}}'},function(data) {
+
+        		
                 	
 	                if(data == '1')
 	                {   

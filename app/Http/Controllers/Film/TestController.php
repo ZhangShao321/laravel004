@@ -12,9 +12,15 @@ use Flc\Alidayu\App;
 use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
 use Flc\Alidayu\Requests\IRequest;
 
+
+use Redis;
+use DB;
+
+
 // use  DB;
 
 use App\Http\Model\user;
+use App\Http\Model\film;
 
 class TestController extends Controller
 {
@@ -66,8 +72,6 @@ class TestController extends Controller
             //  return "发送失败!";
             // }
 
-            
-
     }
 
 
@@ -86,8 +90,6 @@ class TestController extends Controller
                 return "登录失败!";
             }
 
-
-            
     }
 
 
@@ -115,6 +117,172 @@ class TestController extends Controller
        
       // echo "<pre>";
         // var_dump($info);
+
+    }
+
+
+    public  function redisDemo()
+    {
+
+        //  $redis = new Redis();
+        // $redis -> connect('127.0.0.1',6379);
+        // $redis->select(2);
+
+        //  $res = DB::table('film')->get();
+       
+        //  $key = '';
+        //  //hash存储
+        //  foreach ($res as $k => $value) {
+        //      $key = 'film'.$value->id;
+        //     // $redis->hset('film',$k,$value->id);
+        //     // $redis->hset($key,'id',$value->id);
+        //     // $redis->hset($key,'filmname',$value->filmname);
+        //     // $redis->hset($key,'filmtime',$value->filmtime);
+        //     // $redis->hset($key,'keywords',$value->keywords);
+        //     // $redis->hset($key,'summary',$value->summary);
+        //     // var_dump($key);
+             
+        //      }
+
+        //         $tt =$redis->hgetall('film');
+        //         var_dump($tt);
+
+      //       die;
+
+      //   //选择相对于的数据库
+      //   $redis->select(1);
+
+
+      //   // $user = film::find(4);
+      //   $res = DB::table('film')->get();
+      //  // $test = $res->toArray();
+      // // var_dump($res);
+      // // die;
+      //   $key = '';
+
+        // $res = $user->toArray();
+        // var_dump($res);
+        // // die;
+        //   var_dump(count($res));
+         
+            // for($i=0;$i<count($res);$i++){
+            // $key = "user:name:".$res[$i]->id;
+            // $redis->lpush('film',$key);
+        //     var_dump($redis->lpush($key,$res[$i]->cid));
+        //     var_dump($redis->lpush($key,$res[$i]->tid));
+        //     var_dump($redis->lpush($key,$res[$i]->filmname));
+        //     var_dump($redis->lpush($key,$res[$i]->filmtime));
+        //     var_dump($redis->lpush($key,$res[$i]->keywords));
+        //     var_dump($redis->lpush($key,$res[$i]->summary));
+        //     // var_dump($redis->lpush($res[$i]->id,$res->[$i]->cid));
+        //     // var_dump($redis->lpush($res[$i]->id,$res->[$i]->cid));
+        //     // var_dump($redis->lpush($res[$i]->id,$res->[$i]->cid));
+        //     // var_dump($redis->lpush($res[$i]->id,$res->[$i]->cid));
+        //     // var_dump($redis->lpush($res[$i]->id,$res->[$i]->cid));
+        //     // var_dump($redis->lpush($res[$i]->id,$res->[$i]->cid));
+        //     // var_dump($redis->lpush($res[$i]->id,$res->[$i]->cid));
+
+
+
+
+
+
+
+
+
+        //     // var_dump($redis->lpush($key,$user['tid']));
+        //     // var_dump($redis->lpush($key,$user['filmname']));
+        //     // var_dump($redis->lpush($key,$user['filmtime']));
+        //     // var_dump($redis->lpush($key,$user['keywords']));
+        //     // var_dump($redis->lpush($key,$user['director']));
+        //     // var_dump($redis->lpush($key,$user['protagonist']));
+        //     // var_dump($redis->lpush($key,$user['summary']));
+        //     // var_dump($redis->lpush($key,$user['showtime']));
+        //     // var_dump($redis->lpush($key,$user['filepic']));
+        //     // var_dump($redis->lpush($key,$user['price']));
+        //     // var_dump($redis->lpush($key,$user['shownum']));
+        //     // var_dump($redis->lpush($key,$user['status']));
+
+        // }
+        // var_dump($key);
+        // die;
+         
+     
+
+           // var_dump($key);
+
+
+      // var_dump($redis->lrange($key,0,-1));
+            //将用户名存储到Redis中
+     //  $tt =$redis->lrange("film",0,-1);
+      
+
+     // // dd(count($tt));
+     // for($i=0 ; $i<count($tt);$i++){ 
+     //         // var_dump($tt[$i]);
+     //          $test =$redis->lrange($tt[$i],0,-1);
+     //          var_dump($test);
+    
+     // }
+
+         
+
+        //判断指定键是否存在
+        // if($redis->exists($key)){
+        //     //根据键名获取键值
+        //     dd($redis->get($key));
+        // }
+       
+
+      
+        // var_dump($res);
+        // // $redis -> set('name','124');
+      
+        //  echo $redis->get('name');
+
+        // var_dump($redis);
+                
+
+        //     echo "这是redis测试";
+
+
+
+
+          $redis = new Redis();
+          $redis -> connect('127.0.0.1',6379);
+          $redis->select(2);
+
+           $res = DB::table('film')->get();
+         
+           $key = [];
+           $k="film";
+
+           $tt =$redis->hgetall('film');
+           var_dump($tt);
+
+          for ($i=0; $i <count($tt) ; $i++) { 
+
+             $key[] = $k.$tt[$i];
+
+          
+          }
+
+           // var_dump($redis->exists($key.$tt[$i]));
+            // $r = $redis->hgetall($key.$tt[$i]);
+            // var_dump($r['filmname']);
+            var_dump($key);
+
+       
+           //判断指定键是否存在
+        // if($redis->exists($key)){
+        //     //根据键名获取键值
+        //     dd($redis->get($key));
+        // }
+       
+
+
+
+
 
     }
 }

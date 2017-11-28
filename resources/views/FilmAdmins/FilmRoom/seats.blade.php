@@ -52,7 +52,7 @@
             <br>
             </div></form>
             <div class="mws-button-row" id="xiugai"  >
-                <a href="/FilmAdmins/room/seatedit/{{ $res->id }}"><button  class="btn btn-danger">修改</button></a>
+                <a href="{{asset('/FilmAdmins/room/seatedit/ ').$res->id }}"><button  class="btn btn-danger">修改</button></a>
                 
             </div>
             <!-- <div id="legend"></div> -->

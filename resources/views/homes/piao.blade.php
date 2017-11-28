@@ -61,8 +61,8 @@
     <h2 class="title font16 clearfix" style="padding-top:20px;padding-left:20px">
         确认订单信息
         <span class="fr font12 font-shadow">
-            订单号：{{ $piao->num }}
-            <input type="hidden" value="{{$piao->id}}" id="input">
+            订单号：{{ $piao['num'] }}
+            <input type="hidden" value="{{$piao['num']}}" id="input">
         </span>
     </h2>
     <div class="wrap-content">
@@ -138,7 +138,7 @@
                 <div class="item-td order-num">
                     金额小计:
                     <p class="price">
-                        ¥{{ $piao->price }}.00
+                        ¥{{ $piao['price']}}.00
                     </p>
                 </div>
                 <!--<div class="split-hozline"></div>-->
@@ -150,7 +150,7 @@
     		        
 	        <p class="total-money">
 	            实际支付：
-	            <span data-selector="totalPrice" id="price" class="nuomi-red">{{ $piao->price }}.00元</span>
+	            <span data-selector="totalPrice" id="price" class="nuomi-red">{{ $piao['price'] }}.00元</span>
 	        </p>
 	        <button data-selector="pay" id='fun' style="width:200px;font-size:20px; "  class="btn btn-info confirm-button back-red" >
 		            确认并去支付
@@ -183,9 +183,11 @@
 		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name,id:id},function(data){
                     
 		     		layer.msg('购票成功');
-		     		window.location.href="/homes/center";
+		     		// window.location.href="/homes/center";
 
-		     });
+                    console.log(data);
+
+		     },'json');
            
         }
         ,btn2:function(){
@@ -194,6 +196,6 @@
         }});
     });
 
-
+    
 </script>
 @endsection

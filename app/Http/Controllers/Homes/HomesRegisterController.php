@@ -111,7 +111,7 @@ class HomesRegisterController extends Controller
                    }
                 }else{
 
-
+                    
                     echo 0;
                 }
 

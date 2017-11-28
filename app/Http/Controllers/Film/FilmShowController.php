@@ -24,9 +24,13 @@ class FilmShowController extends Controller
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
                         ->select('showfilm.id','showfilm.time','showfilm.timeout','showfilm.status','film.filmname','roominfo.roomname','showfilm.price')
+                        ->orderBy('showfilm.time', 'desc')
                         ->paginate(10);
 
         $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
+
+        // var_dump($roo);die;
+
 
       return view('FilmAdmins.FilmShow.FilmShowList',['roo'=>$roo,'arr'=>$arr]);
     }
@@ -35,6 +39,7 @@ class FilmShowController extends Controller
     //放映添加
     public function add()
     {
+
           //电影院影厅
           $roominfo = DB::table('roominfo')->where('status',1)->where('cid',session('cid'))->get();
 
@@ -42,6 +47,7 @@ class FilmShowController extends Controller
           // 电影
           $film = DB::table('film')->where('status',1)->where('cid',session('cid'))->get();
           
+
 
         return view('FilmAdmins.FilmShow.FilmShowAdd',['film'=>$film,'room'=>$roominfo]);
 
@@ -56,7 +62,6 @@ class FilmShowController extends Controller
         //放映时间
         $info['time'] = strtotime($info['time']); 
 
-        
         $this->validate($request, [
         'time' => 'required',
         'price' => 'required',
@@ -67,7 +72,6 @@ class FilmShowController extends Controller
             ]
         );
         
-        //时间格式  ([0-1][0-9]|(2[0-3])):([0-5][0-9]):([0-5][0-9])$#
         
         //影院id
         $info['cid'] = session('cid');
@@ -99,7 +103,7 @@ class FilmShowController extends Controller
 
 
 
-
+    //引入编辑页面
     
     public  function edit(Request $request)
     {
@@ -119,12 +123,18 @@ class FilmShowController extends Controller
                         ->find($request->only('id')['id']);
 
 
+
           //判断影厅是否正有电影放映
           $roominfo = roominfo::where("status",'1')->get();
 
           //判断是否是该的登录用户的电影
-          $film = film::where('cid',session('cid'))->get();
+
+          $film = film::where('cid',session('cid'))->where('status','1')->get();
           $show = showfilm::where('id',$id)->get();
+
+
+
+
 
           //b用汉语判断状态
           $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
@@ -134,24 +144,27 @@ class FilmShowController extends Controller
     }
 
     //处理更新方法
-
-
     public function update(Request $request)
     {
 
-      $info = $request->except('_token','id','time'); 
-      $time = $request->only('time');
-      $info['time'] = strtotime($time['time']);
-      $res  =showfilm::where('id',$request->only('id'))->update($info);
-
-      if($res)
-      {
-          return redirect('/FilmAdmins/filmShow')->with('msg','修改成功');
-      }else{
 
 
-        return back();
-      }
+          $info = $request->except('_token','id','time'); 
+          $time = $request->only('time');
+          $info['time'] = strtotime($time['time']);
+          var_dump($request->only('id')['id']);
+          $res  =showfilm::where('id',$request->only('id')['id'])->update($info);
+
+       
+
+          if($res)
+          {
+              return redirect('/FilmAdmins/filmShow')->with('msg','修改成功');
+          }else{
+
+
+            return back();
+          }
 
       
 
@@ -163,9 +176,6 @@ class FilmShowController extends Controller
     public  function delete(Request $request)
     {
       $id = $request->only('id');
-      // echo "<pre>";
-      // $res = showfilm::find($id);
-
       $res = showfilm::where('id',$id)->delete();
       if($res)
       {
@@ -174,7 +184,7 @@ class FilmShowController extends Controller
       }else{
         return  "删除失败!";
       }
-      // echo "这是删除页面";
+     
     }
 
 
