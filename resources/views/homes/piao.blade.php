@@ -62,6 +62,7 @@
         确认订单信息
         <span class="fr font12 font-shadow">
             订单号：{{ $piao->num }}
+            <input type="hidden" value="{{$piao->id}}" id="input">
         </span>
     </h2>
     <div class="wrap-content">
@@ -166,6 +167,8 @@
 	var price = $('#price').text();
 	var cinema = $('#cinema').text();
 	var name = $('#name').text();
+    var id = $('#input').val();
+    
 
 	$('#fun').click(function(){
 
@@ -177,8 +180,8 @@
         ,icon: 6    // icon
         ,yes:function(){
             
-		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name},function(data){
-                        
+		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name,id:id},function(data){
+                    
 		     		layer.msg('购票成功');
 		     		window.location.href="/homes/index";
 
