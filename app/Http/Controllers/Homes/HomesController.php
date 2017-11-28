@@ -304,6 +304,16 @@ class HomesController extends Controller
         
         return view('/homes/piao',['piao'=>$piao, 'seat'=>$aaa, 'user'=>$yonghu, 'show'=>$show, 'cinema'=>$cinema, 'room'=>$room, 'film'=>$film, 'uid'=>$uid]);
     }
-   
+
+
+
+
+
+
+   public  function  demo()
+   {
+        view('homes.filmType');
+   }
+    
 
 }

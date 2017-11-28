@@ -141,7 +141,7 @@
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap">
             	<!-- <img src="images/mws-logo.png" alt="mws admin"> -->
-                <h3 style="color:white">电影院后台</h3>
+               <a href="{{asset('/FilmAdmins/index')}}"> <h3 style="color:white">电影院后台</h3></a>
 
 			</div>
         </div>

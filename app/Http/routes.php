@@ -244,6 +244,14 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	//电影院列表页
 	Route::get('cinemalist','HomesController@cinemalist');
 
+
+
+   
+  
+
+
+
+
 	//电影院详情
     Route::get('cinemadetail','HomesController@cinemadetail');
 

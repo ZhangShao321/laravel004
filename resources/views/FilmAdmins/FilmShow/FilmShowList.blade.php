@@ -119,12 +119,12 @@
                             
                         </td>
                          <td class=" ">
-                           结束时间
-                            
+                             {{date('Y-m-d H:i:s',$v->timeout)}}
                             
                         </td>
                          <td class=" ">
-                             {{ $arr[$v->status]}}
+                           {{ $arr[$v->status]}}
+
                             
                         </td>
                          <td class=" ">

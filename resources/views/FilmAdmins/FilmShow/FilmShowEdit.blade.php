@@ -25,8 +25,8 @@
 
 
     
-                     @foreach($res as $k => $v)
-			        <form action="{{asset('/FilmAdmins/showUpdate?id=').$v->id}}" method="post" class="mws-form">
+             
+			        <form action="{{asset('/FilmAdmins/showUpdate?id=').$res['id']}}" method="post" class="mws-form">
                         <div class="mws-form-inline">
                         
                           <div class="mws-form-row">
@@ -37,7 +37,7 @@
                                        
                                         @foreach($film as $fk => $fv)
                                         
-                                        <option  value="{{$fv->id}}" @if( $v->filmname == $fv->filmname) selected  @endif > {{$fv->filmname}} </option>
+                                        <option  value="{{$fv->id}}" @if( $res['filmname'] == $fv->filmname) selected  @endif > {{$fv->filmname}} </option>
                                           @endforeach 
 
                                
@@ -55,7 +55,7 @@
                                       
                                         
                                          @foreach($room as $rk => $rv)
-                                        <option  value="{{$rv->id}}" @if( $v->roomname == $rv->roomname) selected  @endif > {{$rv->roomname}} </option>
+                                        <option  value="{{$rv->id}}" @if( $res['roomname'] == $rv->roomname) selected  @endif > {{$rv->roomname}} </option>
                                           @endforeach 
 
                                        
@@ -67,7 +67,7 @@
                             <div class="mws-form-row">
                                 <label class="mws-form-label">价格</label>
                                 <div class="mws-form-item">
-                                  <input type="number" name="price" value="{{ $res['0']->price }}">
+                                  <input type="number" name="price" value="{{ $res['price'] }}">
                                 </div>
                             </div>
                             
@@ -81,7 +81,7 @@
                                          @foreach($arr as $ak => $av)
                                         
 
-                                          <option  value="{{$ak}}" @if($v->status == $ak) selected  @endif > {{$av}} </option>
+                                          <option  value="{{$ak}}" @if($res['status'] == $ak) selected  @endif > {{$av}} </option>
 
                               
                                           @endforeach 
@@ -102,7 +102,7 @@
                                 </label>
                                 <div class="mws-form-item">
                                     
-                              <input type="text" name="time" value="{{date('Y-m-d H:i:s',$v->time)}}" class="medium" id="AbsentEndDate" runat="server"  readonly="readonly" />  
+                              <input type="text" name="time" value="{{date('Y-m-d H:i:s',$res['time'])}}" class="medium" id="AbsentEndDate" runat="server"  readonly="readonly" />  
 
 
                                 </div>
@@ -120,7 +120,7 @@
         
 
                     </form>
-                     @endforeach 
+                
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-@section('js');
+@section('js')
 
 
 
