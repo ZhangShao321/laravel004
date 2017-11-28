@@ -268,6 +268,7 @@ class HomesController extends Controller
         $data['seat'] = $request->except('_token')['zuo'];
         $data['time'] = time();
         $data['num'] = time().rand(11111111,99999999).$id;
+        $data['status'] = 1;
 
 
         $aaa = DB::table('ticket')->insertGetId($data);

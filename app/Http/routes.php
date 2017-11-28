@@ -308,6 +308,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('dopass','HomesChangeController@store');
     //个人订单
     Route::get('center','HomesCenterController@index');
+    Route::get('center_w','HomesCenterController@weiwc');
     Route::get('insert','HomesCenterController@insert');
  
 
