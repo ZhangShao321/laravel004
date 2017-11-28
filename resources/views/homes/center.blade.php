@@ -99,7 +99,7 @@
 
                 
                     <td class="sorting_1">
-                    {{$v->hang}}排{{ $v->lie }}列    
+                    {{$v->hang}}排{{ $v->lie }}座    
                     </td>
 
                     <td class="sorting_1">

@@ -148,7 +148,7 @@ class HomesController extends Controller
         }  
 
       
-        //事务处理
+       /* //事务处理
         DB::beginTransaction();
 
         $cinema = cinema::insert($res);
@@ -163,7 +163,9 @@ class HomesController extends Controller
         }else{
             
             DB::rollback();
-        }
+        }*/
+
+        $id = DB::table('cinema')->insertGetId($res);
 
     }    
 

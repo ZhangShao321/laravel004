@@ -53,7 +53,7 @@ class HomesCenterController extends Controller
         foreach ($res as $k => $v) {
             //用户
             $uid = $v->uid;
-            $phone = DB::table('user')->where('id',$uid)->first();
+            $phone = DB::table('user')->where('id',session('uid'))->first();
             $v->phone = $phone->phone;
 
             //电影院
