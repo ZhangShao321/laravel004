@@ -107,7 +107,7 @@
                 <div class="single-about-team">
                     <a href="{{url('/homes/cinemadetail?id=').$v->id}}">
                     <div class="about-team-img">
-                        <img src="{{ asset($v->clogo)}}" alt="" />
+                        <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->clogo) }}" style="width:200px;height:200px" alt="" />
                     </div>
                     <div class="about-team-info">
                         <h3>
@@ -117,6 +117,9 @@
                 </div>
             </div>
             @endforeach
+        </div>
+        <div class="shop-pagination">
+            {!! $res->render() !!}        
         </div>
     </div>
 </div>

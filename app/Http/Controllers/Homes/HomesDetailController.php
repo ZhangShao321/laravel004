@@ -44,68 +44,11 @@ class HomesDetailController extends Controller
             }else{
                 return redirect('homes/details')->with('msg','修改失败,请重新操作!!');
             }
-
-
-
-
            
     }
 
-    //添加头像
-    public function add()
-    {
-        return view('homes/photo');
-    }
+   
 
-    public function insert(Request $request)
-    {
-        $uid = session('uid');
-        $use = DB::table('userDetail')->where('uid',$uid)->first();
-
-        if($use->photo){
-            return redirect('homes/tian')->with('msg','你已添加,请勿重复添加');
-            die;
-        }
-
-        $result = $request->except('_token');
-         // dd($res);die;
-        if($request -> hasFile('photo'))
-        {
-
-            //获取文件
-            $file = $request->file('photo');
-            
-            //初始化七牛
-            $disk = QiniuStorage::disk('qiniu');
-
-            //获取后缀名
-            $name = md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
-          
-            //上传到文件到七牛
-            $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
-        }  
-
-        $photo = 'image_'.$name;
-
-        $result['photo'] = $photo;
-
-        $ares = userDetail::insert($result);
-
-
-        if($ares){
-
-            
-            return redirect('/homes/details')->with('msg','添加成功');
-
-        }else{
-
-            return redirect('/homes/details')->with('msg','添加失败');
-
-
-        }
-
-
-    }
 
     public function edit()
     {

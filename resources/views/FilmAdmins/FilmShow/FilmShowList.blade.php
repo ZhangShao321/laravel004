@@ -86,7 +86,7 @@
 
                      <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 42px;">
+                        style="width: 100px;">
                             操作
                         </th>
 
@@ -119,17 +119,23 @@
                             
                         </td>
                          <td class=" ">
-                           结束时间
+                           {{date('Y-m-d H:i:s',$v->timeout)}}
                             
                             
                         </td>
                          <td class=" ">
-                             {{ $arr[$v->status]}}
+                             @if($v->timeout < time())
+                             {{ $arr['2'] }}
+                             @elseif($v->time < time() && $v->timeout > time())
+                             {{ $arr['1'] }}
+                             @else
+                             {{ $arr['0'] }}
+                             @endif
                             
                         </td>
                          <td class=" ">
-                           <a href="{{asset('/FilmAdmins/showEdit?id=').$v->id}}">编辑</a>
-                          <span style="cursor:pointer; color:#C5D52B" class="del"  value="{{$v->id}}"  >删除</span>
+                           <a href="{{asset('/FilmAdmins/showEdit?id=').$v->id}}"><button class="btn btn-default">编辑</button></a>
+                          <button   class="btn btn-default aaa"  value="{{$v->id}}">删除</button>
                             
                         </td>
                     </tr>
@@ -165,7 +171,7 @@
 <script type="text/javascript">
 
     //删除
-    $("span").click(function(){
+    $(".aaa").click(function(){
         //获取id
          var id = $(this).attr('value');
         
@@ -183,13 +189,13 @@
                               ,shade: 0.01
                             });
 
-                console.log(id);
+                // console.log(id);
                 $.ajax({
                             type: "GET",
                             url: "{{url('/FilmAdmins/showDelete')}}",
                             data: 'id='+id,
                             success: function(msg){
-                              alert(msg);
+                              // alert(msg);
                               // console.log(msg);
                                location.reload();  
                             }

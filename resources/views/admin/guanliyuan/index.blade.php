@@ -4,6 +4,7 @@
 
 
 @section('content')
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 	<div class="mws-panel grid_8">
 
@@ -17,7 +18,8 @@
                 <thead>
                     <tr>
 
-                        <th>ID</th>      
+                        <th>ID</th>
+
                         <th>用户名</th>                 
                         <th>最后登录时间</th>
                         <th>权限</th>
@@ -50,7 +52,7 @@
                         </td>
                         <td>
 
-                            <a href="/admin/guanliyuan/{{$v->id}}/edit"><button class="btn btn-danger">修改</button></a>&nbsp;&nbsp;&nbsp;
+                            <a href="/admin/guanliyuan/{{$v->id}}/edit"><button class="btn btn-danger">编辑</button></a>&nbsp;&nbsp;&nbsp;
                             <form action="/admin/guanliyuan/{{$v->id}}" style="display:inline" method="post">  
                                 
 
@@ -112,7 +114,7 @@
                             data: '_method='+'delete',
                             // data: { '_method':'delete','_token':"{{csrf_token()}}"},
                             success: function(msg){
-                              alert(msg);
+                              // alert(msg);
                               // console.log(msg);
                                location.reload();  
                             }

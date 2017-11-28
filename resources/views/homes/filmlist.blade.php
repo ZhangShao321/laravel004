@@ -33,7 +33,7 @@
 
                     @foreach($type as $aa=>$bb)
                         <li>
-                            <a href="#">
+                            <a href="{{url('/homes/type?id=').$bb->id}}">
                                 {{ $bb->tname }}
                             </a>
                             <span class="count">
@@ -91,8 +91,8 @@
                                         <div class="product-img">
                                             <a href="{{url('/homes/filmdetail?id=').$v->id}}">
                                                 
-                                                <img style="width:200px;height:300px" class="primary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" alt="" />
-                                                <img style="width:200px;height:300px" class="secondary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" alt="" />
+                                                <img style="width:300px;height:350px" class="primary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" alt="" />
+                                                <img style="width:300px;height:350px" class="secondary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" alt="" />
                                             </a>
                                         </div>
                                         <div class="product-info">

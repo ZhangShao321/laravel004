@@ -5,6 +5,7 @@
 
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <div class="mws-panel grid_8">
                     <div class="mws-panel-header">
 
@@ -22,41 +23,40 @@
                                   </div>
                               @endif
                                       
-                         <form action="/admin/guanli/dophoto" method="post" class="mws-form" enctype='multipart/form-data'>
-                              <div class="mws-form-inline">
+               <form action="" style="text-align: center;" method="post" class="mws-form" enctype='multipart/form-data' id="art_form">
+                                       
+<<<<<<< HEAD
+<<<<<<< HEAD
 
-                                   <div class="mws-form-row">
-                                        <label class="mws-form-label">昵称:</label>
-                                        <div class="mws-form-item">
-                                             <input type="text" name="nickName" readonly="readonly" class="small" value="{{ $data->nickName }}"><span></span>
-                                        </div>
-                                   </div>
-                                   <div style="width:240px;height:240px;border:1px solid #C5C5C5;margin:auto;">
+=======
 								
-                										<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px"/>
-                										
-                									</div>
-					                
-					              <div class="mws-form-row">
-					                    <label class="mws-form-label">
-					                        头像
-					                    </label>
-					                    <div class="mws-form-item">
-					                       <input type="file" name="photo" class="large">
-					                    </div>
-					                </div>
-                                                             
-                         
-                              </div>
-                              <div class="mws-button-row">
 
-                                   {{csrf_field() }}
-                                   <input type="submit" class="btn btn-danger" value="修改">                            
-              
-                              </div>
-                         </form>
-                    </div>         
-                </div>
+=======
+								
+>>>>>>> 8e0f8872264ce8e5d708463a65dfa535e4fa0f2f
+     <!--                      <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px" id="img1"/> -->
+                			             
+      					    <input type="text" name="art_thumb" id="art_thumb"  value="{{$data->photo}}" style="width: 400px;">
+>>>>>>> 6ce922f7d324604871691c4bace68a42e33ab177
+                   
+                    <p><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}" alt="" id="img1" style="width:240px;margin-top: 20px;" ></p>
+                    <br/>
+
+                     <input type="file" name="photo" id="file_upload" value="">
+                     <br>
+                     <br/>
+
+                        </form>
+                </div>         
+  </div>
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6ce922f7d324604871691c4bace68a42e33ab177
+=======
+
+>>>>>>> 8e0f8872264ce8e5d708463a65dfa535e4fa0f2f
 
 
 
@@ -67,68 +67,76 @@
 
      $('.mws-form-message').delay(3000).slideUp(1000);
 
-     //用户名验证
-     $('input[name=phone]').blur(function(){
+     
 
-        var reg = /^1[34578]\d{9}$/;
 
-        var phone = $(this).val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        }); 
 
-        $.post("{{ url('/admin/guanliyuan/phone') }}", {_token:'{{ csrf_token() }}', phone:phone}, function(data){
-            $('input[name=phone]').next().text(data);
-        })
+                  
 
-        var x = reg.exec(phone);
+            //头像修改 发送ajax  选择图片直接修改头像
+             $("input[type='file']").change(function (){
+                  
+                     uploadImage();
+                });
+            function uploadImage() {
+//            判断是否有选择上传文件
+//            input type file
+                var imgPath = $("#file_upload").val();
+                if (imgPath == "") {
+                    alert("请选择上传图片！");
+                    return;
+                }
+                //判断上传文件的后缀名
+                var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+             /*   if (strExtension != 'jpg' && strExtension != 'gif'
+                    && strExtension != 'png' && strExtension != 'bmp') {
+                    alert("请选择图片文件");
+                    return;
+                }*/
+                var formData = new FormData($( "#art_form" )[0]);
+                console.log(formData);
+                $.ajax({
+                    type: "post",
+                    url: "/admin/guanli/dophoto",
+                    data: formData,
+                    async: true,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    beforeSend:function(){
 
-        if (x) {
-            $(this).css('color','green');
-            $(this).next().text(' √ ');
-            $(this).next().css('color','green');
-        } else {
-            $(this).css('color','red');
-            $(this).next().text('手机号格式不正确');
-            $(this).next().css('color','red');
-        }
-     })
+                           a = layer.load(1,{offset:['240px','750px']});
+                      },
+                    success: function(data) {
+                        layer.close(a);
 
-     //密码验证
-     $('input[name=password]').blur(function(){
+                        $('#img1').attr('src','http://ozspa9a4f.bkt.clouddn.com/Uplodes/'+data);
+                        $('#tou').attr('src','http://ozspa9a4f.bkt.clouddn.com/Uplodes/'+data);
 
-        var reg = /^\S{6,12}$/;
+                         $('#art_thumb').val(data);
+                      // location.reload();
+                    },
+                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("上传失败，请检查网络后重试");
+                        var tp= $('#art_thumb').val();
+                        $('#img1').attr('src','http://ozspa9a4f.bkt.clouddn.com/Uplodes/'+tp);
+                    }
+                });
+            }
 
-        var password = $(this).val();
 
-        var x = reg.exec(password);
 
-        if (x) {
-            $(this).css('color','green');
-            $(this).next().text(' √ ');
-            $(this).next().css('color','green');
-        } else {
-            $(this).css('color','red');
-            $(this).next().text('密码格式不正确');
-            $(this).next().css('color','red');
-        }
-     })
 
-     //重复密码
-     $('input[name=repass]').blur(function(){
 
-        var password = $('input[name=password]').val();
 
-        var repass = $(this).val();
 
-        if (password == repass) {
-            $(this).css('color','green');
-            $(this).next().text(' √ ');
-            $(this).next().css('color','green');
-        } else {
-            $(this).css('color','red');
-            $(this).next().text('两次密码不一致');
-            $(this).next().css('color','red');
-        }
-     })
 
+                       
 </script>
 
 @endsection

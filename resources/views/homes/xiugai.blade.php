@@ -148,7 +148,6 @@
                         <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                         <ul>
                             <li> <a href="/homes/details">个人信息</a></li>
-                            <li> <a href="/homes/tian">添加头像</a></li>
                             <li> <a href="/homes/change">修改密码</a></li>
                             <li> <a href="/homes/edit">修改头像</a></li>
                             

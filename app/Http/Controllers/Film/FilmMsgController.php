@@ -97,7 +97,6 @@ class FilmMsgController extends Controller
                 if($request -> hasFile('filepic'))
                 {
 
-
                      //获取文件
                     $file=$request->file('filepic');
                    //初始化七牛
@@ -265,22 +264,18 @@ class FilmMsgController extends Controller
           //删除$bucket 中的文件 $key
           $err = $bucketMgr->delete($bucket, $key);
 
-          if($err){
-
-                // $res = $del->delete();
-               if(film::where('id',$id)->delete())
-               {
-                echo "删除成功!";
-               }else{
-                echo "删除失败!";
-               }
 
 
+            // $res = $del->delete();
+           if(film::where('id',$id)->delete())
+           {
+            echo "删除成功!";
+           }else{
+            echo "删除失败!";
+           }
 
-          }else{
-            echo "删除失败";
-          }
-        
+
+
            
 
      }

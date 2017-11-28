@@ -65,7 +65,13 @@
                 <!-- User Photo -->
                 <div id="mws-user-photo">
                     <!-- <img src="{{ $datas->photo }}" alt="User Photo"> -->
-                    <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$datas->photo}}?imageView2/0/w/240/h/240" alt="User Photo">
+
+
+
+                    <img style="width:30px;height:30px" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$datas->photo}}?imageView2/0/w/240/h/240" id="tou" alt="User Photo">
+
+
+
                 </div>
 
                 <!-- Username and Functions -->
@@ -173,7 +179,15 @@
                             <li><a href="/admin/lunbo">轮播图列表</a></li>
                         </ul>
                     </li>
+                    
 
+                    <li>
+                        <a href="#"><i class="icon-file"></i>订单管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/ticket">订单信息</a></li>
+                        </ul>
+                    </li>
+                    
                     <li>
                         <a href="#"><i class="icon-align-justify" ></i>友情链接</a>
                         <ul class='closed'>
@@ -190,7 +204,6 @@
                         </ul>
                     </li>
 
-                    
                 </ul>
             </div>         
         </div>
@@ -258,6 +271,13 @@
 
     <!-- layer -->
     <script src="/admins/js/layer/layer.js"></script>
+
+    <!-- jadate日期插件 -->
+    <link type="text/css" rel="stylesheet" href="/admins/jedate-6.0.2/test/jeDate-test.css">
+    <link type="text/css" rel="stylesheet" href="/admins/jedate-6.0.2/skin/jedate.css">
+    <script type="text/javascript" src="/admins/jedate-6.0.2/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="/admins/jedate-6.0.2/jquery.jedate.js"></script>
+    <script type="text/javascript" src="/admins/jedate-6.0.2/test/jedate-test.js"></script>
 
 
     @section('js')
