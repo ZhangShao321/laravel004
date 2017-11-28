@@ -185,6 +185,7 @@
                         <a href="#"><i class="icon-file"></i>订单管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/ticket">订单信息</a></li>
+                            <li><a href="/admin/tickets/hspage">回收站</a></li>
                         </ul>
                     </li>
                     

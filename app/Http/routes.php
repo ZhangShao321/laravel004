@@ -98,6 +98,14 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
         //订单管理
 		Route::resource('/ticket','TicketController');
+        //订单放入回收站方法
+        Route::post('/ticket/huishou','TicketController@huishou');
+        //加载回收站页面
+        Route::get('/tickets/hspage','TicketController@hspage');
+        
+
+
+
 
 });
 

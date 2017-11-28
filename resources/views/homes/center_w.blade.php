@@ -111,9 +111,9 @@
                     </td>
                 
                     <td class="sorting_1">
-                       <a href="/homes/piao?id={{ $v->id }}"><button class='btn btn-default'>马上付款</button></a>
+                       <a href="/homes/piao?id=seat_{{ $v->num }}"><button class='btn btn-default'>马上付款</button></a>
                        
-                        <button id="{{ $v->id }}" class='btn btn-default dels'>删除</button>
+                        <button id="{{ $v->num }}" class='btn btn-default dels'>删除</button>
                        
                         
                     </td>
@@ -131,9 +131,9 @@
 	
 $('.dels').click(function(){
 
-	var id = $(this).attr('id');
+	var num= $(this).attr('id');
 
-	$.post('{{ url("/homes/ticket/delete") }}', {_token:'{{ csrf_token() }}', id:id}, function(data){
+	$.post('{{ url("/homes/ticket/dodel") }}', {_token:'{{ csrf_token() }}', num:num}, function(data){
 
 		console.log(data);
 	})

@@ -273,7 +273,7 @@ class HomesController extends Controller
         
 
         $bool = Redis::hmset('seat_'.$data['num'],$data);
-        // Redis::expire('seat_'.$data['num'],10);
+        Redis::expire('seat_'.$data['num'],3000);
 
         // $aaa = DB::table('ticket')->insertGetId($data);
 
@@ -378,10 +378,20 @@ class HomesController extends Controller
         $newmoney = $money['money'] + $price;
 
         
-
-        //开启事务
+        //获取订单信息
         $data = Redis::hgetall($num);
 
+        //判断座位是否售出
+        $showid = $data['showid'];
+        $seat = $data['seat'];
+
+        $aaa = DB::table('ticket')->where('showid',$showid)->where('seat',$seat)->get();
+
+        if ($aaa) {
+            echo 0;die;
+        }
+
+        //开启事务
         DB::beginTransaction();
         //修改电影票房
         $nums = film::where('filmname',$name)->update(['shownum'=>$newshownum]);

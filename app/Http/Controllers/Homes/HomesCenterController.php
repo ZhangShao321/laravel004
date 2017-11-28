@@ -15,6 +15,8 @@ use App\Http\Model\roominfo;
 use App\Http\Model\showfilm;
 use DB;
 
+use Illuminate\Support\Facades\Redis;
+
 
 use Session;
 
@@ -31,11 +33,9 @@ class HomesCenterController extends Controller
     	}
          
         //获取票
-<<<<<<< HEAD
+
         $res = DB::table('ticket')->where('status',0)->where('uid',session('uid'))->get();
-=======
-        $res = DB::table('ticket')->where('uid',session('uid'))->get();
->>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
+
 
         // var_dump($res);die;
 
@@ -74,7 +74,7 @@ class HomesCenterController extends Controller
     	return view('/homes/center',['res'=>$res]);
     }
 
-<<<<<<< HEAD
+
     //未完成订单
     public function weiwc()
     {
@@ -128,22 +128,9 @@ class HomesCenterController extends Controller
         return view('/homes/center_w',['res'=>$res]);
     }
 
-    //未完成订单自动取消
-    public function dodel(Request $request)
-    {
-        //获取id
-        $id = $request->only('id')['id'];
-        //删除信息
-        $data = DB::table('ticket')->where('id',$id)->delete();
 
-        if ($data) {
 
-            echo 1;
-        } else {
-            echo 0;
-        }
-=======
-
+    //修改订单状态
     public function delete($id)
     {
 
@@ -157,9 +144,26 @@ class HomesCenterController extends Controller
         }else{
             return redirect('/homes/center')->with('msg','删除失败'); 
         }
-        
->>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
 
+    }
+
+    //删除未付款订单
+    public function dodel(Request $request)
+    {
+
+        $num = $request->only('num')['num'];
+
+        $num = 'seat_'.$num;
+
+        // echo json_encode($num);die;
+
+        $bool = Redis::del($num);
+
+        if($bool) {
+            echo 1;
+        } else {
+            echo 0;
+        }
     }
 
 }
