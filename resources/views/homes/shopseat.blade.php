@@ -280,9 +280,6 @@ function registSeat(){
             
 
 }    
-
-
-
 </script>
 
 
