@@ -32,7 +32,6 @@ class TicketController extends Controller
             
             $uid = $v->uid;
             $phone = DB::table('user')->where('id',$uid)->first();
-
             $v->phone = $phone->phone;
 
             $cid = $v->cid;
