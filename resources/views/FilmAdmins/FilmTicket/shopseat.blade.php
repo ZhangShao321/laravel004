@@ -91,9 +91,9 @@
 @endsection
 @section('js')      
 <script>
-
+//第一个座位号
 var firstSeatLabel = 1;
-
+//最后引入座位函数
 $(document).ready(function() {
     registSeat();
 
@@ -108,6 +108,7 @@ var map = new Array();
 
 function registSeat(){
 
+    //获取行和列
     var x = parseInt($("#x").val());
     var y = parseInt($("#y").val());
     map = [];
@@ -161,7 +162,7 @@ function registSeat(){
         // console.log($(this).attr('class')); //seatCharts-seat seatCharts-cell available cur
         if($(this).attr('class') != 'seatCharts-seat seatCharts-cell available cur'){
 
-            
+            //不可选座位单击无效
             $(this).click(function(){
                 $(this).removeClass('none');
             });
@@ -183,6 +184,7 @@ function registSeat(){
 
                 })
                 
+                //将数组转化为字符串
                 var into = info.join('#');
 
                 if(!into){
@@ -191,18 +193,23 @@ function registSeat(){
  
                 }else{
 
-                    var reg = /^\w{3}$/;
-                    if(!reg.exec(into)){
-
+                    //定义正则
+                    var reg = /^\w{3,5}$/;
+                    //执行验证
+                    var x = reg.exec(into);
+                
+                    if(!x){
+                        
                         // alert('抱歉!一次只能买一张!');
                         layer.alert('抱歉!一次只能买一张!', {icon: 6});
                     }else{
 
-                        //发送ajax      into = '4_5#4_6#4_7'
+                        //发送ajax      into = '4_5'
                         $.post('{{ url("/FilmAdmins/ticket/shopseat/$id") }}',{_token:'{{ csrf_token() }}', zuo:into},function(data){
 
                                 layer.alert(data, {icon: 6});
 
+                                //调用已购买函数
                                 zuos();
 
                         })

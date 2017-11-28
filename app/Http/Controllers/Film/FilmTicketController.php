@@ -18,8 +18,8 @@ class FilmTicketController extends Controller
         $res = DB::table('showfilm')
                     ->join('roominfo', 'showfilm.rid','=','roominfo.id')
                     ->join('film', 'showfilm.fid','=','film.id')
-                    ->select('showfilm.id','showfilm.price','showfilm.cid','showfilm.time','showfilm.status','roominfo.roomname','film.filmname')
-                    ->where('showfilm.cid',$cid)->where('showfilm.time','<',time())
+                    ->select('showfilm.id','showfilm.price','showfilm.cid','showfilm.time','showfilm.timeout','showfilm.status','roominfo.roomname','film.filmname')
+                    ->where('showfilm.cid',$cid)->where('showfilm.time','>',time())
                     ->get();
         // echo "<pre>";
         // var_dump($res);die;

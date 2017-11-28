@@ -92,7 +92,10 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		Route::resource('/block','BlockController');
 
 		//后台网站配置
-		Route::resource('/net','NetController');
+        Route::resource('/net','NetController');
+
+        //订单管理
+		Route::resource('/ticket','TicketController');
 
 });
 
@@ -178,6 +181,8 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('showUpdate','FilmShowController@update');
             //删除放映
             Route::get('showDelete','FilmShowController@delete');
+            //空闲时间
+            Route::post('showtime','FilmShowController@showtime');
 
 
 
@@ -280,11 +285,22 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 	Route::get('login','HomesLoginController@index');
 
     Route::post('dologin','HomesLoginController@dologin');
+
+    //退出
+    Route::get('deletes','HomesLoginController@delete');
 	
     //个人中心
     Route::get('details','HomesDetailController@index');
-    
+        //添加
     Route::post('doaction','HomesDetailController@store');
+        //修改
+    Route::post('/update/{id}','HomesDetailController@update');
+        //添加头像
+    Route::get('tian','HomesDetailController@add');
+    Route::post('photo','HomesDetailController@insert');
+        //修改头像
+    Route::get('edit','HomesDetailController@edit');
+    Route::post('/doedit/{id}','HomesDetailController@doedit');
 
 	//修改密码
     Route::get('change','HomesChangeController@index');

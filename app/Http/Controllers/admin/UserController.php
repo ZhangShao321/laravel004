@@ -42,12 +42,8 @@ class UserController extends Controller
     {
         //显示添加用户表单
 
-
        return view('admin.user.add');
-       
 
-
-       
     }
 
     /**
@@ -61,6 +57,10 @@ class UserController extends Controller
     {
         $input1 = $request->only('phone','password','lastlogin');
 
+        if(empty($input1[0])){
+
+            return back()->with('msg','数据不能为空');
+        }
 
         //哈希加密
         $input1['password'] = Hash::make($input1['password']);
@@ -274,6 +274,10 @@ class UserController extends Controller
     public function phone(Request $request)
     {
         $phone = $request->except('_token')['phone'];
+
+        if(!$phone){
+            echo "用户名不能为空";
+        }
 
         $data = DB::table('user')->where('phone',$phone)->first();
 

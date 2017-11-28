@@ -77,7 +77,7 @@
           				<label class="mws-form-label">状态：</label>
           				<div class="mws-form-item clearfix">
           					<input type="radio" name="status" value="1" readonly="readonly" checked> <label>开启</label>
-                                   <input type="radio" name="status" readonly="readonly" value="0"> <label>关闭</label>
+                    <input type="radio" name="status" readonly="readonly" value="0"> <label>关闭</label>
           				</div>
           			</div>  
           	    
@@ -86,7 +86,8 @@
 
           			{{ csrf_field() }}
 
-          			<input type="submit" class="btn btn-danger" value="添加">
+          			
+                <button id="but" class="btn btn-danger">添加</button>
           		
           			
           		</div>
@@ -109,9 +110,6 @@
 
         var phone = $(this).val();
 
-        $.post("{{ url('/admin/user/phone') }}", {_token:'{{ csrf_token() }}', phone:phone}, function(data){
-            $('input[name=phone]').next().text(data);
-        })
 
         var x = reg.exec(phone);
 
@@ -123,7 +121,17 @@
             $(this).css('color','red');
             $(this).next().text('手机号格式不正确');
             $(this).next().css('color','red');
+
+            $('#but').click(function(){
+
+              return false;
+            })
+            return
+
         }
+        $.post("{{ url('/admin/user/phone') }}", {_token:'{{ csrf_token() }}', phone:phone}, function(data){
+            $('input[name=phone]').next().text(data);
+        })
      })
 
      //密码验证
@@ -143,6 +151,11 @@
             $(this).css('color','red');
             $(this).next().text('密码格式不正确');
             $(this).next().css('color','red');
+
+            $('#but').click(function(){
+
+              return false;
+            })
         }
      })
 
@@ -163,6 +176,11 @@
             $(this).css('color','red');
             $(this).next().text('昵称格式不正确');
             $(this).next().css('color','red');
+
+            $('#but').click(function(){
+
+              return false;
+            })
         }
      })
 
@@ -183,6 +201,11 @@
             $(this).css('color','red');
             $(this).next().text('邮箱格式不正确');
             $(this).next().css('color','red');
+
+            $('#but').click(function(){
+
+              return false;
+            })
         }
      })
 
@@ -203,8 +226,18 @@
             $(this).css('color','red');
             $(this).next().text('QQ格式不正确');
             $(this).next().css('color','red');
+
+            $('#but').click(function(){
+
+              return false;
+            })
         }
      })
+
+    /* $('#but').on('click', function(){
+                          
+          layer.msg('用户添加成功:)');
+      });*/
 
 </script>
 

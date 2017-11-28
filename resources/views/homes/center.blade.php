@@ -21,97 +21,109 @@
 </div>
 
 <!-- heading-banner start -->
-<form class="form-horizontal" action="{{url('/homes/insert')}}" method="post" id="box" enctype="multipart/form-data">
-    <fieldset>
-    @foreach($res1 as $ck=>$cv)
-    <div class="form-group">
-        <label for="cinema" class="col-sm-2 control-label">
-             电影院
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputEmail3" value="{{$cv->cinema}}"   required>
-        </div>
-    </div>
-    @endforeach
+        <table aria-describedby="DataTables_Table_1_info" id="DataTables_Table_1" class="mws-datatable-fn mws-table dataTable">
+            <thead>
+                <tr role="row">
+                    <th aria-label="Rendering engine: activate to sort column descending"
+                    aria-sort="ascending" style="width: 156px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_1"
+                    tabindex="0" role="columnheader" class="sorting_asc">
+                        电影院
+                    </th>
+                    <th aria-label="Browser: activate to sort column ascending" style="width: 212px;"
+                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                    role="columnheader" class="sorting">
+                        电影
+                    </th>
+                    <th aria-label="Platform(s): activate to sort column ascending" style="width: 197px;"
+                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                    role="columnheader" class="sorting">
+                        影厅
+                    </th>
+                  
+                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
+                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                    role="columnheader" class="sorting">
+                        放映时间
+                    </th>
+                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
+                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                    role="columnheader" class="sorting">
+                        排_座
+                    </th>
+                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
+                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                    role="columnheader" class="sorting">
+                        价格
+                    </th>
+                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
+                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                    role="columnheader" class="sorting">
+                        购票时间
+                    </th>
+                     
+                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
+                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                    role="columnheader" class="sorting">
+                        操作
+                    </th>
+                </tr>
+            </thead>
+            <tbody aria-relevant="all" aria-live="polite" role="alert">
+             
+                @foreach($res as $K=>$v)
+                <tr class="odd" align="center">
+                    <td class="sorting_1">
+                    {{$v->cinema}}    
+                    </td>
+                
 
-    @foreach($res3 as $fk=>$fv) 
-    <div class="form-group">
-        <label for="cinema" class="col-sm-2 control-label">
-             电影
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputEmail3" value="{{$fv->filmname}}"  required>
-        </div>
-    </div>
-    @endforeach
-    
-    @foreach($res2 as $rk=>$rv)
-    <div class="form-group">
-        <label for="cinema" class="col-sm-2 control-label">
-             影厅
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputEmail3" value="{{$rv->roomname}}"  required>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="cinema" class="col-sm-2 control-label">
-             类型
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputEmail3" value="{{$rv->roomtype}}"  required>
-        </div>
-    </div>
-    @endforeach
+                
+                    <td class="sorting_1 ">
+                    {{$v->filmname}}    
+                    </td>
+                
 
-    @foreach($res4 as $sk=>$sv)
-     
-    <div class="form-group">
-        <label for="cinema" class="col-sm-2 control-label">
-             放映时间
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputEmail3" value="{{$sv->time}}"  required>
-        </div>
-    </div>
-    @endforeach
+                
+                    <td class="sorting_1">
+                    {{$v->roomname}}    
+                    </td>
 
-    @foreach($res as $k=>$v)
+                   
+               
 
-    <div class="form-group">
-        <label for="phone" class="col-sm-2 control-label">
-            排_座
-        </label>
-        <div class="col-sm-5">
-            <input type="phone" class="form-control" id="inputPassword3" value="{{$v->seat}}"  required>
-        </div>
-    </div>
-     
-    <div class="form-group">
-        <label for="city" class="col-sm-2 control-label">
-            价格
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputPassword3" value="{{$v->price}}"  required>
-        </div>
-    </div>
-   
+                
+                    <td class="sorting_1">
+                    {{$v->showtime}}   
+                    </td>
+                
 
-    <div class="form-group">
-        <label for="inputPassword3" class="col-sm-2 control-label">
-           购票时间
-        </label>
-        <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputPassword3" value="{{$v->time}}"  required>
-        </div>
-        {{ csrf_field() }}
-    </div>
-     @endforeach
-    
+                
+                    <td class="sorting_1">
+                    {{$v->hang}}排{{ $v->lie }}列    
+                    </td>
 
+                    <td class="sorting_1">
+                    {{$v->price}}   
+                    </td>
 
-    </fieldset>
-</form>
+                    <td class="sorting_1">
+                    {{$v->time}}    
+                    </td>
+                
+                    <td class="sorting_1">
+                         
+                       <form action="" method='post' style='display:inline'>
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button class='btn btn-primary'>删除</button>
+                       </form>
+                        
+                    </td>
+
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
 
 @endsection

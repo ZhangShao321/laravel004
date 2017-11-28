@@ -123,6 +123,7 @@ class GuanliyuanController extends Controller
         $res = DB::table('userDetail')->where('uid',$id)->first();
 
         return view('/admin/guanliyuan/edit', ['data'=>$data, 'res'=>$res]);
+        // var_dump($res);die
     }
 
     /**
@@ -289,7 +290,13 @@ class GuanliyuanController extends Controller
     public function dophoto(Request $request)
     {
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8e0f8872264ce8e5d708463a65dfa535e4fa0f2f
 
+=======
+>>>>>>> 6ce922f7d324604871691c4bace68a42e33ab177
         if($request -> hasFile('photo')){
 
 
@@ -342,9 +349,5 @@ class GuanliyuanController extends Controller
 
         
     }
-
-
-
-
 
 }

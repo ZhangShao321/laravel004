@@ -33,11 +33,9 @@ class FilmUserController extends Controller
     {   
             $id = session('cid');
 
-
-           
-             $res = cinema::join('cininfo','cininfo.cid','=','cinema.id')
-                            ->where('cinema.id',$id)
-                            ->get();
+              $res = cinema::where('cinema.id',$id)
+                            ->join('cininfo','cinema.id','=','cininfo.cid')
+                            ->first();
 
                // echo "后台信息";die;
                     
