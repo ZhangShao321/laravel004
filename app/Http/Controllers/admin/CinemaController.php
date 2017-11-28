@@ -10,6 +10,10 @@ use App\Http\model\cinema;
 use DB;
 use Hash;
 
+use zgldh\QiniuStorage\QiniuStorage;
+use Qiniu\Auth;
+use Qiniu\Storage\BucketManager;
+
 class CinemaController extends Controller
 {
     /**
@@ -84,20 +88,23 @@ class CinemaController extends Controller
         if($request -> hasFile('clogo'))
         {
 
-           //文件名
-            $name = rand(111,555).time();
+                $file=$request->file('clogo');
+                //初始化七牛
+                $disk=QiniuStorage::disk('qiniu');
 
-            //获取后缀名
-            $jpg = $request -> file('clogo')->getClientOriginalExtension();
-          
-            //移动图片
-            $request ->file('clogo') -> move('./adminsUplode/',$name.'.'.$jpg); 
+                //重命名文件名
+                $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+                //上传到文件到七牛
+                $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+           
         }  
 
-        $clogo = './adminsUplode/'.$name.'.'.$jpg;
+        //修改上传logo的名字
+        $input1['clogo'] = 'image_'.$name;
 
-        //把拼装好的clogo名字存入$input1['clogo']
-        $input1['clogo'] = $clogo;
+
+        // $clogo = './adminsUplode/'.$name.'.'.$jpg;
 
         // var_dump($input1);die;
         
@@ -192,24 +199,68 @@ class CinemaController extends Controller
             $find = cinema::where('id',$id)->first();
             //判断图片是否存在  存在就删除
             //遍历图片<img src="{{asset($find->logo)}}">
-                              
-            if(file_exists($find->clogo))
-             {
-                unlink($find->clogo);
-             }
+            echo "<pre>";
 
-            //获取文件名
-            $name=rand(1111,9999).time();
+            $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+            $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
 
-            //获取文件名后缀
-            $hz=$request->file('clogo')->getClientOriginalExtension();
+            //初始化Auth状态：
+            $auth = new Auth($accessKey, $secretKey);
 
-            //移动文件
-            $request->file('clogo')->move('./adminsUplode/',$name.'.'.$hz);
-        }else{
+            //初始化BucketManager
+            $bucketMgr = new BucketManager($auth);
 
-            return back()->with('msg','请上传网站logo!');
-            die;
+            //你要测试的空间， 并且这个key在你空间中存在
+            $bucket = 'laravel-upload';
+            $key = "Uplodes/".$find->clogo;
+            // var_dump($find->clogo);die;
+
+            //删除$bucket 中的文件 $key   删除七牛里的文件
+            $err = $bucketMgr->delete($bucket,$key);
+
+            // var_dump($err);die;
+
+            /*执行文件上传*/
+
+            //获取文件
+            $file=$request->file('clogo');
+
+            // var_dump($file);die;
+            //初始化七牛
+            $disk=QiniuStorage::disk('qiniu');
+
+            //重命名文件名
+            $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+
+            //上传到文件到七牛
+            $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+
+            // var_dump($bool);die;
+
+             if($bool){
+                
+
+                //修改上传logo的名字
+                $res['clogo'] = 'image_'.$name;
+
+                // var_dump($res);die;
+
+                //将修改后的文件名插入到数据库
+                $sql=cinema::where('id',$id)->update($res);
+
+                    //判断是否插入数据库成功
+                    if($sql){
+
+                        return redirect('/admin/cinema')->with('msg','修改成功');
+                    
+                    }else{
+
+                        return back()->with('msg','修改失败');
+                    }
+
+            }else{
+                return "上传失败";                    
+            }
         }
 
         $input1 = $request->except('_token','_method','city','area','address');
@@ -244,6 +295,29 @@ class CinemaController extends Controller
      */
     public function destroy($id)
     {
+         //从数据库查询
+        $find = cinema::where('id',$id)->first();
+       
+        $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+        $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
+
+        //初始化Auth状态：
+        $auth = new Auth($accessKey, $secretKey);
+
+        //初始化BucketManager
+        $bucketMgr = new BucketManager($auth);
+
+        //你要测试的空间， 并且这个key在你空间中存在
+        $bucket = 'laravel-upload';
+        $key = "Uplodes/".$find->clogo;
+        // var_dump($find->logo);
+
+        //删除$bucket 中的文件 $key   删除七牛里的文件
+        $err = $bucketMgr->delete($bucket,$key);
+         
+
+        //执行删除
+        $sql=cinema::where('id',$id)->delete();
 
         DB::beginTransaction();
 

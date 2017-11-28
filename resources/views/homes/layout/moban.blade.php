@@ -133,7 +133,7 @@
                                     <a class="user_info_reg" href="/homes/details" style="color:purple">
                                         <button class="btn btn-default btn-sm">个人中心</button>
                                     </a>&nbsp;&nbsp;&nbsp;
-                                    <a class="user_info_reg" href="/homes/detail" style="color:purple">
+                                    <a class="user_info_reg" href="/homes/deletes" style="color:purple">
                                         <button class="btn btn-default btn-sm">退出</button>
                                     </a>
                                 </td>

@@ -32,7 +32,7 @@
                 				<label class="mws-form-label">电影名称</label>
                 				<div class="mws-form-item">
                 					<select class="large" name="fid">
-                                 @foreach($film as $k => $v)
+                                @foreach($film as $k => $v)
                 						<option value="{{$v->id}}">{{$v->filmname}}</option>
                                 @endforeach 
                 					</select>
@@ -42,8 +42,9 @@
                     		<div class="mws-form-row">
                 				<label class="mws-form-label">影厅名称</label>
                 				<div class="mws-form-item">
-                					<select class="large" name="rid">
-                						 @foreach($room as $rk => $rv)
+                					<select id="sel" class="large" name="rid">
+                						<option value="">请选择影厅</option>
+                                        @foreach($room as $rk => $rv)
                                         <option value="{{$rv->id}}">{{$rv->roomname}}</option>
                                         @endforeach 
                 					</select>
@@ -54,6 +55,13 @@
                                 <label class="mws-form-label">价格</label>
                                 <div class="mws-form-item">
                                     <input type="number" name="price"> /元
+                                </div>
+                            </div>
+
+                            <div class="mws-form-row">
+                                <label class="mws-form-label">空闲时间</label>
+                                <div class="mws-form-item">
+                                    <input type="text" name="ktime">
                                 </div>
                             </div>
 
@@ -83,14 +91,38 @@
 
 
 
-
-
 @endsection
 
 
-
-
 @section('js')
+<script>
+$('#sel').blur(function(){
+    var id = $(this).val();
+
+    $.post('{{ url("/FilmAdmins/showtime") }}',{_token:'{{ csrf_token() }}', id:id}, function(data){
+
+        console.log(data);
+        $('input[name=ktime]').val(data);
+    })
+
+}) 
+
+$('input[name=time]').change(function(){
+
+    var time = $(this).val();
+
+    var ktime = $('input[name=ktime]').val();
+
+    if(time < ktime){
+
+        layer.alert('放映时间不合适', {icon: 6});
+        $(this).val('');
+    }
+
+
+})
+
+</script>
 
 
 @endsection

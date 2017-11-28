@@ -4,14 +4,19 @@ namespace App\Http\Controllers\Homes;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Hash;
+use DB;
+
+//数据库
 use App\Http\Model\cinema;
 use App\Http\Model\cininfo;
 use App\Http\Model\film;
 use App\Http\Model\showfilm;
 use App\Http\Model\lunbo;
 use App\Http\Model\seat;
-use Hash;
-use DB;
+use App\Http\Model\money;
+
+//七牛
 use Qiniu\Storage\UploadManager;
 use Qiniu\Auth;
 use Qiniu\Storage\BucketManager;
@@ -20,17 +25,19 @@ use zgldh\QiniuStorage\QiniuStorage;
 class HomesController extends Controller
 {
 
-    //主页
+    //电影院主页
     public function index()
     {   
         //热映电影数据
         $res = film::orderBy('shownum','desc')->limit('3')->get();
+
         //轮播图数据
         $res1 = lunbo::get();
 
-        $res2 = film::orderBy('showtime','time()')->limit('4')->get();
+        //即将上映电影数据
+        $res2 = film::where('status','1')->where('showtime','>',time())->limit('4')->get();
 
-        //加载首页
+        //加载前台首页
         return view('homes/index',['res' => $res,'res1' => $res1,'res2' => $res2]);
     }
 
@@ -42,7 +49,7 @@ class HomesController extends Controller
         //电影列表数据
         $res = film::paginate(2);
 
-        //电影类型
+        //电影类型数据
         $type = DB::table('filmtype')->where('status',1)->get();
 
         //电影排行榜数据
@@ -57,16 +64,15 @@ class HomesController extends Controller
     public function filmdetail(Request $request)
     {
 
-        
+        //电影详情数据
         $aaa = film::find($request->id);
-        // echo "<pre>";var_dump($aaa->filmname);die;
         $bbb = film::where('filmname',$aaa->filmname)
                 ->join('showfilm','film.id','=','showfilm.fid')
                 ->join('cinema','showfilm.cid','=','cinema.id')
                 ->join('cininfo','cinema.id','=','cininfo.cid')
                 ->select('showfilm.id','showfilm.time','cinema.cinema')
                 ->get();
-        // echo "<pre>";var_dump($bbb);die;
+
         //加载电影详情页面
         return view('homes/filmdetail',['aaa' => $aaa,'bbb' => $bbb]);
     }
@@ -76,7 +82,7 @@ class HomesController extends Controller
     public function cinemalist()
     {
         //电影院列表数据
-        $res = cinema::get();
+        $res = cinema::paginate(2);
 
         //加载电影院列表页面
         return view('homes/cinemalist',['res' => $res]);
@@ -91,15 +97,12 @@ class HomesController extends Controller
         $res = cinema::find($request->only('id'));
         $res1 = cininfo::where('cid',$id)->get();
 
-       
+        //该影院上映的电影数据
+        $res2 = showfilm::where('showfilm.cid','=',$request->id)
+                        ->join('film','film.id','=','showfilm.fid')
+                        ->select('film.filmname','film.filepic','film.price','showfilm.id')
+                        ->get();
         
-        $res2 = cinema::where('cinema.id',$request->id)
-                ->join('cininfo','cinema.aid','=','cininfo.id')
-                ->join('showfilm','cininfo.cid','=','showfilm.cid')
-                ->join('film','showfilm.fid','=','film.id')
-                ->select('film.filmname','film.filepic','film.price','showfilm.id')
-                ->get();
-                
         //加载电影院详情页面
         return view('homes/cinemadetail',['res' => $res,'res1' => $res1,'res2' => $res2]);
     }
@@ -110,18 +113,19 @@ class HomesController extends Controller
     //申请商户
     public function add()
     {
+        //加载申请商户的页面
         return view('homes/shenqing');
     }
 
-    //处理申请商户
     public function store(Request $request)
     {
+        //获取商户申请的数据
         $res = $request->except('_token','city','area','address');
         $res1 = $request->only('city','area','address');
 
         $res['password'] = Hash::make($res['password']);
 
-
+        //图片上传
         if($request -> hasFile('license'))
         {
 
@@ -144,7 +148,7 @@ class HomesController extends Controller
         }  
 
       
-        //事务处理
+       /* //事务处理
         DB::beginTransaction();
 
         $cinema = cinema::insert($res);
@@ -159,9 +163,12 @@ class HomesController extends Controller
         }else{
             
             DB::rollback();
-        }
+        }*/
+
+        $id = DB::table('cinema')->insertGetId($res);
 
     }    
+
 
 
     //搜索的页面
@@ -170,11 +177,24 @@ class HomesController extends Controller
         //获取要搜索的字段
         $seach = implode($request->all());
 
+        //模糊查询
         $res = film::where('filmname','like','%'.$seach.'%')->get();
 
         //加载模糊搜索匹配的电影列表
         return view('homes/search',['res' => $res]);
 
+    }
+
+
+    //查看各种类型电影的页面
+    public function type(Request $request)
+    {
+        //获取该类型的影片数据
+        $tid = $request->id;
+        $res = film::where('tid',$tid)->get();
+
+        //加载该类型的影片页面
+        return view('homes/search',['res' => $res]);
     }
         
     
@@ -198,14 +218,12 @@ class HomesController extends Controller
 
         //获取座位
         $seat = $data->seat;
-
         $seats = explode('#',$seat); 
 
-
+        //加载座位的页面
         return view('/homes/shopseat', ['data'=>$data,'room'=>$room, 'id'=>$id, 'seat'=>$seats, 'cinema'=>$cinema]); 
     }
 
-  
 
     //执行售票
     public function shopseat(Request $request,$id)
@@ -238,8 +256,6 @@ class HomesController extends Controller
         $data['time'] = time();
         $data['num'] = time().rand(11111111,99999999).$id;
 
-        // $data = $request->except('_token');
-        // echo json_encode($data);die;
 
         $aaa = DB::table('ticket')->insertGetId($data);
 
@@ -255,7 +271,7 @@ class HomesController extends Controller
     //已出售
     public function shopseat_into(Request $request,$id)
     {
-        // echo 1;die;
+        
         $res = DB::table('ticket')->where('showid',$id)->get();
 
         $seat = array();
@@ -269,8 +285,11 @@ class HomesController extends Controller
         echo json_encode($seat);
     }
 
+
+    //确认订单信息的页面
     public function piao(Request $request)
     {
+
         //票id
         $id = $request->id;
 
@@ -293,15 +312,17 @@ class HomesController extends Controller
         $uid = $piao->uid;
         $yonghu = DB::table('user')->where('id',$uid)->first();
 
+        //判断用户是否登陆
+        if(!session('uid')){
+            return redirect('/homes/login');
+        }
+
         //座位信息
         $seat = $piao->seat;
-
         $aaa = explode('_',$seat);
 
-        // var_dump($aaa);die;
-
-
         
+        //加载订单信息的页面
         return view('/homes/piao',['piao'=>$piao, 'seat'=>$aaa, 'user'=>$yonghu, 'show'=>$show, 'cinema'=>$cinema, 'room'=>$room, 'film'=>$film, 'uid'=>$uid]);
     }
 
@@ -316,4 +337,23 @@ class HomesController extends Controller
    }
     
 
+    //订单完成后钱包和售票数的添加
+    public function money(Request $request)
+    {
+        $cinema = $request->only('cinema')['cinema'];
+        $price = $request->only('price')['price'];
+        $name = $request->only('name')['name'];
+        
+        
+        $res = cinema::where('cinema',trim($cinema))->first();
+        $res1 = film::where('filmname',$name)->first();
+        $money = money::where('cid',$res['id'])->first();
+    
+        $shownum =  $res1['shownum'] +'1';
+        $newmoney = $money['money'] + $price;
+
+        $num = film::where('filmname',$name)->update(['shownum'=>$shownum]);
+        $mon = money::where('cid',$res['id'])->update(['money'=>$newmoney]);
+     
+    }
 }

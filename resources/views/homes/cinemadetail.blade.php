@@ -108,9 +108,9 @@
                                     <div class="col-lg-12">
                                         <div class="single-product">
                                             <div class="product-img">
-                                                <a href="single-product.html">
-                                                    <img class="primary-img" src="{{url($v->filepic)}}" alt="" />
-                                                    <img class="secondary-img" src="{{url($v->filepic)}}" alt="" />
+                                                <a href="{{url('/homes/dingpiao?id=').$v->id}}">
+                                                    <img class="primary-img" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $v->filepic }}" style="width:250px;height:300px" alt="" />
+                                                    <img class="secondary-img" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $v->filepic }}" style="width:250px;height:300px" alt="" />
                                                 </a>
                                                 <span class="sale">
                                                     精品
@@ -125,7 +125,7 @@
                                             </div>
                                             <div class="product-info">
                                                 <h3>
-                                                    <a href="single-product.html">
+                                                    <a href="{{url('/homes/dingpiao?id=').$v->id}}">
                                                         {{$v->filmname}}
                                                     </a>
                                                 </h3>

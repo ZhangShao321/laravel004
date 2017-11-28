@@ -188,8 +188,8 @@
                                     
                                     <td class=""> {{$sta[$v->status] }}</td>
                                    <td style="overflow: visible;padding:0px " align="center" class="">
-                                     <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" ><button  class="btn btn-default btn-sm ">编辑</button></a> 
-                                     <span style="cursor:pointer; color:#C5D52B" class="del"  value="{{$v->id}}"  ><button class="btn btn-default btn-sm ">删除</button></span>
+                                     <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" ><button  class="btn btn-default">编辑</button></a> 
+                                     <button name="{{$v->id}}"  class="btn btn-default aaa">删除</button>
                                    </td>
                                 </tr>
                      @endforeach 
@@ -227,9 +227,9 @@
 <script type="text/javascript">
 
     //删除
-    $("span").click(function(){
+    $('.aaa').click(function(){
         //获取id
-         var id = $(this).attr('value');
+         var id = $(this).attr('name');
          
          layer.alert('你确定要删除此信息', {
             skin: 'layui-layer-molv' //样式类名  自定义样式

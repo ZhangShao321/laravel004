@@ -89,53 +89,15 @@
                                 </div>
                             @endif       
                             
-                                 <form class="am-form am-form-horizontal" action="{{url('/homes/update/'.$re->id)}}"  method="post" enctype="multipart/form-data">
+                                 <form class="am-form am-form-horizontal" action="{{url('/homes/doedit/'.$re->id)}}"  method="post" enctype="multipart/form-data">
+                                     
                                     <div class="am-form-group">
-                                        <label for="user-name2" class="am-form-label">昵称</label>
+                                        <label for="user-email" class="am-form-label">上传头像</label>
                                         <div class="am-form-content">
-                                            <input type="text" id="user-name2" name="nickName" value="{{$re->nickName}}" placeholder="nickname">
-                                              <small>昵称长度不能超过40个汉字</small>
-                                        </div>
-                                    </div>
-
-                                    <div class="am-form-group">
-                                        <label class="am-form-label">性别</label>
-                                        <div class="am-form-content sex">
-                                            <label class="am-radio-inline">
-                                                <input type="radio" name="sex" @if($re->sex == 'm') checked @endif value="{{$re->sex}}" data-am-ucheck> 男
-                                            </label>
-                                            <label class="am-radio-inline">
-                                                <input type="radio" name="sex" @if($re->sex == 'w') checked @endif value="{{$re->sex}}" data-am-ucheck> 女
-                                            </label>
-                                            <label class="am-radio-inline">
-                                                <input type="radio" name="sex" value="{{$re->sex}}" data-am-ucheck> 保密
-                                            </label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="am-form-group">
-                                        <label for="user-email" class="am-form-label">电子邮件</label>
-                                        <div class="am-form-content">
-                                            <input id="user-email" placeholder="Email" type="email" name="email" value="{{$re->email}}">
+                                            <input id="user-email" placeholder="file" type="file" name="photo" value="">
 
                                         </div>
                                     </div>
-                                    <div class="am-form-group">
-                                        <label for="user-email" class="am-form-label">QQ</label>
-                                        <div class="am-form-content">
-                                            <input id="user-email" placeholder="QQ" type="text" name="qq" value="{{$re->qq}}">
-
-                                        </div>
-                                    </div>
-                            
-                                <div class="am-form-group">
-                                    <label for="user-phone" class="am-form-label">电话</label>
-                                    <div class="am-form-content">
-                                        <input id="user-phone" placeholder="telephonenumber" type="tel" name="phone" value="{{$user->phone}}">
-
-                                    </div>
-
-                                </div>
                             
                                 {{ csrf_field() }}
                                 <div class="info-btn">
@@ -147,7 +109,7 @@
 
                             </form>
                             
-                        </div>
+                        </div>                                                                                                    
 
                     </div>
 
@@ -196,6 +158,7 @@
                         <p><i class="am-icon-balance-scale"></i>我的交易</p>
                         <ul>
                             <li><a href="/homes/center">我的订单</a></li>
+                            <!-- <li> <a href=""></a></li> -->
                         </ul>
                     </li>
                     <li class="person">

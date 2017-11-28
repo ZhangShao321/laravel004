@@ -97,7 +97,7 @@
 
 
 @section('js')
-    <script src="{{asset('/FilmAdmin/validate.js')}}"></script>
+<script src="{{asset('/FilmAdmin/validate.js')}}"></script>
 
 <script type="text/javascript">
 

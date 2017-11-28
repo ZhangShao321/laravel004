@@ -7,18 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Http\Model\user;
-use Hash;
-
 use Flc\Alidayu\Client;
 use Flc\Alidayu\App;
-// use Flc\Dysms\Client;
-// use Flc\Dysms\Request\SendSms;
 use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
 use Flc\Alidayu\Requests\IRequest;
 use Flc\Alidayu\Requests\SendSms;
 
-// use session;
+use App\Http\Model\user;
+use App\Http\Model\userDetail;
+use Hash;
+
 use Cookie;
 
 class HomesChangeController extends Controller
@@ -31,10 +29,13 @@ class HomesChangeController extends Controller
 
     public function doAction(Request $request)
     {
-    	$phone = $request->only('phone');
+        // dd($request);
+    	$phone = $request->input('phone');
+        // dd($phone);
 
     	$res = user::where('phone',$phone)->first();
     	if(!$res){
+
     		return "你还没注册,赶快去注册吧!";
     	}
 
@@ -61,15 +62,15 @@ class HomesChangeController extends Controller
             $resp = $client->execute($req);
 
 
-            if($resp->result->model)
+            if($resp)
             {
-                return "发送成功";
-                //print_r($resp);
-                
+                session()->put('code',$code);
 
+                echo 1;
+                
             }else{
 
-                return "发送失败!";
+                 echo 0;   
             }
 
 
@@ -87,9 +88,9 @@ class HomesChangeController extends Controller
        if($request->input('code') == $session_code)
        {
        		// 将修改的密码存入数据库
- 			user::Where('phone',$request->input('phone'))->update(['password'=>$password]);
+ 			user::where('phone',$request->input('phone'))->update(['password'=>$password]);
 
-       		return redirect('/homes/login');
+       		echo "1";
        	}
 
     }

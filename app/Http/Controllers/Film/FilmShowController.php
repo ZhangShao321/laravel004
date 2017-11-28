@@ -36,12 +36,17 @@ class FilmShowController extends Controller
     //放映添加
     public function add()
     {
-          
-          $cinema = cinema::get();
-          $roominfo = roominfo::where("status",1)->get();
-          $film = film::where('status','1')->get();
 
-        return view('FilmAdmins.FilmShow.FilmShowAdd',['film'=>$film,'cinema'=>$cinema,'room'=>$roominfo]);
+          //电影院影厅
+          $roominfo = DB::table('roominfo')->where('status',1)->where('cid',session('cid'))->get();
+
+       
+          // 电影
+          $film = DB::table('film')->where('status',1)->where('cid',session('cid'))->get();
+          
+
+
+        return view('FilmAdmins.FilmShow.FilmShowAdd',['film'=>$film,'room'=>$roominfo]);
 
     }
 
@@ -49,7 +54,9 @@ class FilmShowController extends Controller
     public function  doadd(Request $request)
     {
         // echo "<pre>";
-        $info = $request->except('_token');
+        $info = $request->except('_token','ktime');
+
+        //放映时间
         $info['time'] = strtotime($info['time']); 
 
         $this->validate($request, [
@@ -63,7 +70,19 @@ class FilmShowController extends Controller
         );
         
         
+        //影院id
         $info['cid'] = session('cid');
+
+        //电影id
+        $fid = $info['fid'];
+        $film = DB::table('film')->where('id',$fid)->where('status',1)->first();
+        $ftime = $film->filmtime;
+
+        //结束id
+        $info['timeout'] = time()+$ftime*60;
+
+        // var_dump($info);die;
+        
         $res = showfilm::insert($info);
 
          if($res)
@@ -86,19 +105,30 @@ class FilmShowController extends Controller
     public  function edit(Request $request)
     {
 
+      $id = $request->only('id');
      
-     $res = showfilm::join('film','showfilm.fid','=','film.id')
+     // $res = showfilm::join('film','showfilm.fid','=','film.id')
+     //                    ->join('roominfo','showfilm.rid','=','roominfo.id')
+     //                    ->join('cinema','showfilm.cid','=','cinema.id')
+     //                    ->find($request->only('id'));
+
+
+       $res = showfilm::join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
-                        ->select('showfilm.price','film.filmname','roominfo.roomname','showfilm.time','showfilm.timeout','showfilm.id')
+
+                        ->select('showfilm.price','film.filmname','showfilm.id','roominfo.roomname','showfilm.time','showfilm.timeout')
                         ->find($request->only('id')['id']);
+
 
           //判断影厅是否正有电影放映
           $roominfo = roominfo::where("status",'1')->get();
 
           //判断是否是该的登录用户的电影
+
           $film = film::where('cid',session('cid'))->where('status','1')->get();
           $show = showfilm::get();
+
 
 
 
@@ -156,7 +186,33 @@ class FilmShowController extends Controller
 
 
 
+    //空闲时间
+    public function showtime(Request $request)
+    {
+        $id = $request->only('id')['id'];
 
+        $data = DB::table('showfilm')->where('rid',$id)->get();
+
+        $showtime = array();
+
+        foreach ($data as $key => $value) {
+
+            $showtime[$key] = $value->timeout;
+
+        }
+
+        //判断
+        if(empty($showtime)){
+          $aaa = time();
+        } else {
+          $aaa = max($showtime)+30*60;
+        }
+        
+
+        $time = date('Y-m-d H:i:s',$aaa);
+
+        echo  $time;
+    }
 
 
 

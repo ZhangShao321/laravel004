@@ -33,11 +33,14 @@ class FilmUserController extends Controller
     public function FilmInfo()
     {   
             $id = session('cid');
-        
-            $res = cinema::where('cinema.id',$id)
+
+
+              $res = cinema::where('cinema.id',$id)
                             ->join('cininfo','cinema.id','=','cininfo.cid')
                             ->first();
-            
+
+               // echo "后台信息";die;
+                  
         return view('FilmAdmins.FilmUser.info',['res'=>$res]);
     }
 
@@ -227,7 +230,7 @@ class FilmUserController extends Controller
 
     public  function PasEdit(Request $request)
     {
-            echo "这是修改页面";
+            // echo "这是修改页面";
             return view('FilmAdmins.FilmUser.FilmPassEdit');
     }
 
