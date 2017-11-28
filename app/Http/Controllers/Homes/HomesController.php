@@ -120,8 +120,11 @@ class HomesController extends Controller
     public function store(Request $request)
     {
         //获取商户申请的数据
+        //cinema
         $res = $request->except('_token','city','area','address');
+        //cininfo
         $res1 = $request->only('city','area','address');
+        
 
         $res['password'] = Hash::make($res['password']);
 
@@ -147,25 +150,34 @@ class HomesController extends Controller
 
         }  
 
-      
-       /* //事务处理
-        DB::beginTransaction();
 
-        $cinema = cinema::insert($res);
-        $cininfo = cininfo::insert($res1);
-
-        //判断
-        if($cinema && $cininfo)
-        {   
-            DB::commit();
-            return redirect('/homes/index'); 
-
-        }else{
-            
-            DB::rollback();
-        }*/
 
         $id = DB::table('cinema')->insertGetId($res);
+
+        if($id){
+
+            //添加cininfo表
+            $res1['cid'] = $id;
+            $aaa = DB::table('cininfo')->insert($res1);
+
+            //添加cinligin表
+            $res2['cinema'] = $res['cinema'];
+            $res2['password'] = $res['password'];
+            $res2['cid'] = $id;
+            $res2['time'] = time();
+            $bbb = DB::table('cinlogin')->insert($res2);
+
+            //判断
+            if ($aaa && $bbb) {
+                return redirect('/homes/index');
+            } else {
+                DB::table('cinema')->where('id',$id)->delete();
+                return back();
+            }
+        } else {
+
+            return back();
+        }
 
     }    
 
@@ -178,7 +190,7 @@ class HomesController extends Controller
         $seach = implode($request->all());
 
         //模糊查询
-        $res = film::where('filmname','like','%'.$seach.'%')->get();
+        $res = film::where('filmname','like','%'.$seach.'%')->where('status',1)->get();
 
         //加载模糊搜索匹配的电影列表
         return view('homes/search',['res' => $res]);
@@ -191,7 +203,7 @@ class HomesController extends Controller
     {
         //获取该类型的影片数据
         $tid = $request->id;
-        $res = film::where('tid',$tid)->get();
+        $res = film::where('tid',$tid)->where('status',1)->get();
 
         //加载该类型的影片页面
         return view('homes/search',['res' => $res]);
