@@ -16,25 +16,25 @@
 
 
 <!-- Required Stylesheets -->
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/bootstrap/css/bootstrap.min.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/fonts/ptsans/stylesheet.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/fonts/icomoon/style.css" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/bootstrap/css/bootstrap.min.css')}}" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/fonts/ptsans/stylesheet.css')}}" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/fonts/icomoon/style.css')}}" media="screen">
 
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/mws-style.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/icons/icol16.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/icons/icol32.css" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/mws-style.css')}}" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/icons/icol16.css')}}" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/icons/icol32.css')}}" media="screen">
 
 <!-- Demo Stylesheet -->
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/demo.css" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/demo.css')}}" media="screen">
 
 <!-- jQuery-UI Stylesheet -->
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/jui/css/jquery.ui.all.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/jui/jquery-ui.custom.css" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/jui/css/jquery.ui.all.css')}}" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/jui/jquery-ui.custom.css')}}" media="screen">
 
 <!-- Theme Stylesheet -->
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/mws-theme.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/themer.css" media="screen">
-<link rel="stylesheet" type="text/css" href="/FilmAdmin/css/seat/jquery.seat-charts.css" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/mws-theme.css')}}" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/themer.css')}}" media="screen">
+<link rel="stylesheet" type="text/css" href="{{asset('/FilmAdmin/css/seat/jquery.seat-charts.css')}}" media="screen">
 
 <style type="text/css">
     body, 
@@ -141,7 +141,7 @@
         	<!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
         	<div id="mws-logo-wrap">
             	<!-- <img src="images/mws-logo.png" alt="mws admin"> -->
-                <h3 style="color:white">电影院后台</h3>
+               <a href="{{asset('/FilmAdmins/index')}}"> <h3 style="color:white">电影院后台</h3></a>
 
 			</div>
         </div>
@@ -152,6 +152,7 @@
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
                 <?php
+
                     $id = session('cid');
 
                     $res = DB::table('cinema')->where('id',$id)->first();
@@ -159,7 +160,9 @@
                 ?>
             	<!-- User Photo -->
             	<div id="mws-user-photo">
+
                 	<img style="width:31px;height:31px" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{ $res->clogo }}?imageView2/0/w/240/h/240" alt="User Photo">
+
                 </div>
                 
                 <!-- Username and Functions -->
@@ -245,8 +248,8 @@
                         <ul class="closed">
 
                             
-                            <li><a href="/FilmAdmins/room/list">影厅列表</a></li>
-                            <li><a href="/FilmAdmins/room/add">添加影厅</a></li>                          
+                            <li><a href="{{asset('/FilmAdmins/room/list')}}">影厅列表</a></li>
+                            <li><a href="{{asset('/FilmAdmins/room/add')}}">添加影厅</a></li>                          
 
 
                         </ul>
@@ -255,7 +258,7 @@
                     <li>
                         <a href="/admins/#"><i class="icon-calendar-month"></i> 电影票</a>
                         <ul class="closed">
-                            <li><a href="/FilmAdmins/ticket/list">电影票详情</a></li>
+                            <li><a href="{{asset('/FilmAdmins/ticket/list')}}">电影票详情</a></li>
                            
                            
                         </ul>
@@ -323,18 +326,18 @@
     </div>
 
     <!-- JavaScript Plugins -->
-    <script src="/FilmAdmin/js/libs/jquery-1.8.3.js"></script>
-    <script src="/FilmAdmin/js/libs/jquery.mousewheel.min.js"></script>
-    <script src="/FilmAdmin/js/libs/jquery.placeholder.min.js"></script>
-    <script src="/FilmAdmin/custom-plugins/fileinput.js"></script>
+    <script src="{{asset('/FilmAdmin/js/libs/jquery-1.8.3.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/js/libs/jquery.mousewheel.min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/js/libs/jquery.placeholder.min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/custom-plugins/fileinput.js')}}"></script>
     
     <!-- jQuery-UI Dependent Scripts -->
-    <script src="/FilmAdmin/jui/js/jquery-ui-1.9.2.min.js"></script>
-    <script src="/FilmAdmin/jui/jquery-ui.custom.min.js"></script>
-    <script src="/FilmAdmin/jui/js/jquery.ui.touch-punch.js"></script>
+    <script src="{{asset('/FilmAdmin/jui/js/jquery-ui-1.9.2.min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/jui/jquery-ui.custom.min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/jui/js/jquery.ui.touch-punch.js')}}"></script>
 
     <!-- Plugin Scripts -->
-    <script src="/FilmAdmin/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{asset('/FilmAdmin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <!--[if lt IE 9]>
     <script src="/FilmAdmin/js/libs/excanvas.min.js"></script>
     <![endif]-->
@@ -343,16 +346,16 @@
     <!--<script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.pie.min.js"></script>-->
     <!--<script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.stack.min.js"></script>-->
     <!--<script src="/FilmAdmin/plugins/flot/plugins/jquery.flot.resize.min.js"></script>-->
-    <script src="/FilmAdmin/plugins/colorpicker/colorpicker-min.js"></script>
-    <script src="/FilmAdmin/plugins/validate/jquery.validate-min.js"></script>
-    <script src="/FilmAdmin/custom-plugins/wizard/wizard.min.js"></script>
+    <script src="{{asset('/FilmAdmin/plugins/colorpicker/colorpicker-min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/plugins/validate/jquery.validate-min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/custom-plugins/wizard/wizard.min.js')}}"></script>
 
     <!-- Core Script -->
-    <script src="/FilmAdmin/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/FilmAdmin/js/core/mws.js"></script>
+    <script src="{{asset('/FilmAdmin/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/js/core/mws.js')}}"></script>
 
     <!-- Themer Script (Remove if not needed) -->
-    <script src="/FilmAdmin/js/core/themer.js"></script>
+    <script src="{{asset('/FilmAdmin/js/core/themer.js')}}"></script>
 
     <!-- Demo Scripts (remove if not needed) -->
 
@@ -362,7 +365,7 @@
     <script type="text/javascript" src="{{asset('/FilmAdmin/layer/jquery.js')}}"></script>
     <script type="text/javascript" src="{{asset('/FilmAdmin/layer/layer.js')}}"></script>
     <script type="text/javascript" src="{{asset('/FilmAdmin/layer/extend/layer.ext.js')}}"></script>
-    <script src="/FilmAdmin/js/seat/jquery.seat-charts.min.js"></script>
+    <script src="{{asset('/FilmAdmin/js/seat/jquery.seat-charts.min.js')}}"></script>
 
 
 

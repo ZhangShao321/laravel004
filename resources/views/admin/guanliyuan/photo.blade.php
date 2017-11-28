@@ -24,6 +24,7 @@
                               @endif
                                       
                <form action="" style="text-align: center;" method="post" class="mws-form" enctype='multipart/form-data' id="art_form">
+
                    
                     <p><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}" alt="" id="img1" style="width:240px;margin-top: 20px;" ></p>
                     <br/>
@@ -32,11 +33,9 @@
                      <br>
                      <br/>
 
-                        </form>
+                  </form>
                 </div>         
   </div>
-
-
 
 
 @endsection

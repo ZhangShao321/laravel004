@@ -28,6 +28,8 @@ Route::group(['namespace'=>'Homes'], function(){
 
 
 
+
+
 //=======================后台信息===================================
 
 
@@ -96,6 +98,14 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
         //订单管理
 		Route::resource('/ticket','TicketController');
+        //订单放入回收站方法
+        Route::post('/ticket/huishou','TicketController@huishou');
+        //加载回收站页面
+        Route::get('/tickets/hspage','TicketController@hspage');
+        
+
+
+
 
 });
 
@@ -131,6 +141,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
         Route::post('doAction','FilmLoginController@doAction');
 
 
+        
+
+        Route::get('/testRedis','TestController@redisDemo');
         
 
         //退出登录
@@ -202,6 +215,7 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('/room/delete/{id}','FilmRoomController@delete');
             Route::post('/room/work','FilmRoomController@work');
             Route::get('/room/seats/{id}','FilmRoomController@seats');
+
             Route::get('/room/seatedit/{id}','FilmRoomController@seatedit');
             Route::post('/room/seatupdate/{id}','FilmRoomController@seatupdate');
 
@@ -243,6 +257,14 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 	//电影院列表页
 	Route::get('cinemalist','HomesController@cinemalist');
+
+
+
+   
+  
+
+
+
 
 	//电影院详情
     Route::get('cinemadetail','HomesController@cinemadetail');
@@ -295,9 +317,6 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('doaction','HomesDetailController@store');
         //修改
     Route::post('/update/{id}','HomesDetailController@update');
-        //添加头像
-    Route::get('tian','HomesDetailController@add');
-    Route::post('photo','HomesDetailController@insert');
         //修改头像
     Route::get('edit','HomesDetailController@edit');
     Route::post('/doedit/{id}','HomesDetailController@doedit');
@@ -308,8 +327,15 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('dopass','HomesChangeController@store');
     //个人订单
     Route::get('center','HomesCenterController@index');
+
+    Route::get('center_w','HomesCenterController@weiwc');
     Route::get('insert','HomesCenterController@insert');
+
+    Route::post('/ticket/dodel','HomesCenterController@dodel');
+
+    Route::get('/delete/{id}','HomesCenterController@delete');
  
+
 
 
 

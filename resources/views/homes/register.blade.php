@@ -175,15 +175,37 @@
 		if(checktel == 100 && checkverifyCode == 100 && checkpassword == 100 && checkrelpassword == 100){
 	       	// 发送ajax
     		$.post("{{url('/homes/doregister')}}",{phone:phone,code:code,password:password,'_token':"{{csrf_token()}}"},function(data) {
+<<<<<<< HEAD
+    			console.log(data);
+    			if(data == '1')
+=======
     					
-    			if(data)
+    			if(data=='1')
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
     			{
     				layer.open({
                         content: '注册成功!!'
                     });
 
-    			}
+<<<<<<< HEAD
+                    window.location.href="/homes/index";
+
+    			} else {
+                    layer.open({
+                        content: '注册失败!!'
+                    });
+                }
+    		},'json')
+=======
+                    window.location.href="{{url('/homes/login')}}";
+
+    			}else if(data=='0'){
+                    layer.open({
+                        content: '注册失败,请重新注册!!'
+                    });
+                }
     		})
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
 
 	 	}else{
             layer.open({

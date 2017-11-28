@@ -145,6 +145,8 @@ class FilmMsgController extends Controller
       $id = $request->only('id');
       $res = film::find($id)[0];
 
+   
+
       return  view('FilmAdmins.FilmMag.FilmMsgEdit',['res'=>$res]);
     }
 
@@ -273,7 +275,6 @@ class FilmMsgController extends Controller
            }else{
             echo "删除失败!";
            }
-
 
 
            

@@ -38,7 +38,9 @@
                         @endif
                     </td>
                     <td>
+
                         <a href="/FilmAdmins/room/edit/{{ $v->id }}"><button>编辑</button></a>
+
                         <!-- <a href="/FilmAdmins/room/delete/{{ $v->id }}"></a> -->
                         <button id="{{ $v->id }}" class="del">删除</button>
                         <a href="/FilmAdmins/room/seats/{{ $v->id }}"><button>座位</button></a>
@@ -61,7 +63,7 @@ $('.b1').click(function(){
     var status = $(this).attr('name');
     var bbb = $(this);
 
-    $.post('{{ url("/FilmAdmins/room/work") }}',{_token:'{{ csrf_token() }}', id:ids, status:status}, function(data){
+    $.post('{{ asset("/FilmAdmins/room/work") }}',{_token:'{{ csrf_token() }}', id:ids, status:status}, function(data){
         
         console.log(data);
 

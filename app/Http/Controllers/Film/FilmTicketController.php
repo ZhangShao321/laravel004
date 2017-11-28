@@ -85,6 +85,12 @@ class FilmTicketController extends Controller
 
         if($aaa){
 
+            $fid = $data['fid'];
+            $filmnum = DB::table('film')->where('id',$fid)->first()->shownum;
+            $filmnum = $filmnum + 1;
+            // echo $filmnum;
+            $bbb = DB::table('film')->where('id',$fid)->update(['shownum'=>$filmnum]);
+
             echo '购买成功';
         }else{
             echo '购买失败';

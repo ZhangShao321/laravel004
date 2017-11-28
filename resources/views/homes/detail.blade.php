@@ -51,21 +51,13 @@
 
                         <!--头像 -->
                         <div class="user-infoPic">
-                            @if(!$re->photo)
-                            <div class="filePic">
-                                <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
-                                <img class="am-circle am-img-thumbnail" src="/homes/img/default.jpg" alt="" />
-                            </div>
-
-                            <p class="am-form-help">头像</p>
-                            @else
+                             
                             <div class="filePic">
                                 <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
                                 <img class="am-circle am-img-thumbnail" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$re->photo}}?imageView2/0/w/57/h/57" alt="" />
                             </div>
 
                             <p class="am-form-help">头像</p>
-                            @endif
                             
                             @if(!$re->nickName)
                             <div class="info-m">
@@ -149,6 +141,7 @@
                             
                         </div>
 
+
                     </div>
 
                 </div>
@@ -186,7 +179,6 @@
                         <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                         <ul>
                             <li> <a href="/homes/details">个人信息</a></li>
-                            <li> <a href="/homes/tian">添加头像</a></li>
                             <li> <a href="/homes/change">修改密码</a></li>
                             <li> <a href="/homes/edit">修改头像</a></li>
                             
@@ -196,6 +188,7 @@
                         <p><i class="am-icon-balance-scale"></i>我的交易</p>
                         <ul>
                             <li><a href="/homes/center">我的订单</a></li>
+                            <li><a href="/homes/center_w">未完成订单</a></li>
                         </ul>
                     </li>
                     <li class="person">

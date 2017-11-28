@@ -189,7 +189,7 @@
                                     <td class=""> {{$sta[$v->status] }}</td>
                                    <td style="overflow: visible;padding:0px " align="center" class="">
                                      <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" ><button  class="btn btn-default">编辑</button></a> 
-                                     <button name="{{$v->id}}" class="aaa" class="btn btn-default">删除</button>
+                                     <button name="{{$v->id}}"  class="btn btn-default aaa">删除</button>
                                    </td>
                                 </tr>
                      @endforeach 
