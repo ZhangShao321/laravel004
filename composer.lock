@@ -4,10 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
 
     "hash": "69ce4ec352f574aadd195faef694d3ec",
     "content-hash": "e67ae2ed1bda467b95dbd62418de200d",
 
+=======
+    "hash": "428d046ceaa9c7ac4be6783a6a342a5d",
+    "content-hash": "3568fdce131152b15bece2665b9d41dd",
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -375,6 +380,41 @@
                 "flc"
             ],
             "time": "2017-08-12T02:55:34+00:00"
+        },
+        {
+            "name": "flc/dysms",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flc1125/dysms.git",
+                "reference": "a60645c6b35a15fe7fed6282784d2094368fc8f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flc1125/dysms/zipball/a60645c6b35a15fe7fed6282784d2094368fc8f5",
+                "reference": "a60645c6b35a15fe7fed6282784d2094368fc8f5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Flc\\Dysms\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "阿里短信-适用Laravel、Yii、Thinkphp等任何PHP项目...",
+            "keywords": [
+                "dysms",
+                "flc",
+                "阿里短信"
+            ],
+            "time": "2017-08-12 03:35:57"
         },
         {
             "name": "gregwar/captcha",

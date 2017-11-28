@@ -119,10 +119,18 @@
                                 <?php
                                     $uid  = session('uid');
                                     $ures = DB::table('userDetail')->where('uid',$uid)->first();
+
                                 ?>
+<<<<<<< HEAD
                                     
                                     <td rowspan="2"><a href=""><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$ures->photo}}?imageView2/0/w/57/h/57 " style="width:57px;height:57px;float:right"></a></td>
                                       
+=======
+                                     
+                                <td rowspan="2"><a href=""><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$ures->photo}}?imageView2/0/w/57/h/57 " style="width:57px;height:57px;float:right"></a></td>
+                 
+                                 
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
                                
                             </tr>
                             <tr>

@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use Flc\Alidayu\Client;
-use Flc\Alidayu\App;
-use Flc\Alidayu\Requests\AlibabaAliqinFcSmsNumSend;
-use Flc\Alidayu\Requests\IRequest;
-use Flc\Alidayu\Requests\SendSms;
+use Flc\Dysms\Client;
+use Flc\Dysms\Request\SendSms;
+
 
 use App\Http\Model\user;
 use App\Http\Model\userDetail;
@@ -31,9 +29,9 @@ class HomesRegisterController extends Controller
     public function doAction(Request $request)
     {
     	$phone = $request->input('phone');
-        // echo "<pre>";
-        // var_dump($phone);
-        // var_dump($phone);die;
+         
+         // var_dump($phone);die;
+
         $res = DB::table('user')->where('phone',$phone)->first();
     
         if($res)
@@ -42,36 +40,28 @@ class HomesRegisterController extends Controller
         }       
 
 
-        $config = [
-                'app_key'    => '23470922',
-                'app_secret' => '665345491559f6f682a65f3bf2e08644',
-                // 'sandbox'    => true,  // 是否为沙箱环境，默认false
-            ];
+            $config = [
+                'accessKeyId'    => 'LTAIO72dhdEdsuJK',
+                'accessKeySecret' => 'Ify72jjwShgLbKkW8WqXeDC6PwjD5Q',
+                ];
 
+            $code = rand(100000,999999);
 
-            // 使用方法一
-            $client = new Client(new App($config));
-            $req    = new AlibabaAliqinFcSmsNumSend;
-            $code =  rand(100000, 999999);
-              
-            // session(['code' => $code]);
-
-            $req->setRecNum($phone)
-                ->setSmsParam([
-                    'number' => $code
-                ])
-                ->setSmsFreeSignName('兄弟连')
-                ->setSmsTemplateCode('SMS_75835101');
-
-            $resp = $client->execute($req);
-
-            if($resp)
+            $client  = new Client($config);
+            $sendSms = new SendSms;     
+            $sendSms->setPhoneNumbers($phone);
+            $sendSms->setSignName('刘俊520love');
+            $sendSms->setTemplateCode('SMS_110835198');
+            $sendSms->setTemplateParam(['code' => $code]);
+            $sendSms->setOutId('1314520');
+            // print_r($client->execute($sendSms));
+           $resp = $client->execute($sendSms);
+            if($resp->Code=='OK')
             {
                 session()->put('code',$code);
 
                 echo 1;
 
-                    // return view('/homes/register');
             }else{
 
                 echo 0;
@@ -86,10 +76,17 @@ class HomesRegisterController extends Controller
             // 获取注册信息并放入数组res
 
             $res = $request->except('_token','code');
+<<<<<<< HEAD
  
             // 使用Hash加密注册密码
             $res['password'] = Hash::make($res['password']);
            
+=======
+
+            // 使用Hash加密注册密码
+            $res['password'] = Hash::make($res['password']);
+         
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
             // 获取存入session中的code
             $session_code = session('code');
 
@@ -97,13 +94,19 @@ class HomesRegisterController extends Controller
             if($session_code == $request->input('code'))
             {
                 // 注册信息存入数据库
+<<<<<<< HEAD
                 $uid = DB::table('user')->insertGetId($res);
+=======
+                
+                $uid = DB::table('user')->insertGetId($res); 
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
 
                 if($uid){
 
                     $bbb = DB::table('userDetail')->insert(['uid'=>$uid]);
 
                     if($bbb){
+<<<<<<< HEAD
                        echo 1; 
                    } else {
                         DB::table('user')->where('id',$uid)->delete();
@@ -119,6 +122,20 @@ class HomesRegisterController extends Controller
 
                 
                 
+=======
+                        echo '1';
+                    }else{
+                        DB::table('user')->where('id',$uid)->delete();
+                        echo '0';
+                    }
+                    
+                }else{
+                    echo '0';
+                }
+
+                       
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
             }
+
         }
 }

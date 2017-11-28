@@ -367,22 +367,43 @@ class HomesController extends Controller
         $name = $request->only('name')['name'];
         $num = 'seat_'.$request->only('id')['id'];
         // echo $num;die;
-        //存储订单
-        $data = Redis::hgetall($num);
-        $id = DB::table('ticket')->insertGetId($data);
-        echo json_encode($data);die;
-        echo $id;die;
-        
+
+        //获取电影院/电影/钱包信息
         $res = cinema::where('cinema',trim($cinema))->first();
         $res1 = film::where('filmname',$name)->first();
         $money = money::where('cid',$res['id'])->first();
         
-
+        //重定义钱
         $newshownum =  $res1['shownum'] +'1';
         $newmoney = $money['money'] + $price;
 
-        $num = film::where('filmname',$name)->update(['shownum'=>$newshownum]);
+        
+
+        //开启事务
+        $data = Redis::hgetall($num);
+
+        DB::beginTransaction();
+        //修改电影票房
+        $nums = film::where('filmname',$name)->update(['shownum'=>$newshownum]);
+        //修改电影院钱包
         $mon = money::where('cid',$res['id'])->update(['money'=>$newmoney]);
+        
+        //存储订单
+        $id = DB::table('ticket')->insertGetId($data);
+
+        if($id && $nums && $mon){
+
+            DB::commit();
+            echo 1;
+        } else {
+
+            DB::rollback();
+            echo 0;
+        }
+       
+        
+        
+        
 
         
        

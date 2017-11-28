@@ -29,23 +29,13 @@ class HomesCenterController extends Controller
     		return view('/homes/login');
     		die;
     	}
-        /*
-        $uid = session('uid');
-        // dd($uid);die;
-
-        $res=ticket::where('uid',$uid)->get();
-        $cid= $res['0']->cid;
-        $rid= $res['0']->rid;
-        $fid= $res['0']->fid;
-        $showid= $res['0']->showid;
-
-        $cres=cinema::where('id',$cid)->get();
-        $rres=roominfo::where('id',$rid)->get();
-        $fres=film::where('id',$fid)->get();
-        $sres=showfilm::where('id',$showid)->get();*/
-
+         
         //获取票
+<<<<<<< HEAD
         $res = DB::table('ticket')->where('status',0)->where('uid',session('uid'))->get();
+=======
+        $res = DB::table('ticket')->where('uid',session('uid'))->get();
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
 
         // var_dump($res);die;
 
@@ -80,12 +70,11 @@ class HomesCenterController extends Controller
             $v->hang = $aaa['0'];
             $v->lie = $aaa['1'];
         }
-        // echo "<pre>";
-        // var_dump($res);die;
 
     	return view('/homes/center',['res'=>$res]);
     }
 
+<<<<<<< HEAD
     //未完成订单
     public function weiwc()
     {
@@ -153,6 +142,23 @@ class HomesCenterController extends Controller
         } else {
             echo 0;
         }
+=======
+
+    public function delete($id)
+    {
+
+        $aaa='1';
+
+        $res1 = DB::table('ticket')->where('id',$id)->update(['status'=>$aaa]);
+         
+        if($res1)
+        {
+            return redirect('/homes/center')->with('msg','删除成功');
+        }else{
+            return redirect('/homes/center')->with('msg','删除失败'); 
+        }
+        
+>>>>>>> 2f72f0f526cc181109b89a3fd15c536815615219
 
     }
 

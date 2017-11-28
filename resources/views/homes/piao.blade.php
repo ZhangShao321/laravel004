@@ -182,10 +182,13 @@
             
 		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name,id:id},function(data){
                     
-		     		layer.msg('购票成功');
-		     		// window.location.href="/homes/center";
-
-                    console.log(data);
+		     		
+                    if (data == 1) {
+                        layer.msg('购票成功');
+                        window.location.href="/homes/center";
+                    } else {
+                        layer.msg('购票失败')
+                    }
 
 		     },'json');
            

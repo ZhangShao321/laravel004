@@ -309,9 +309,6 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('doaction','HomesDetailController@store');
         //修改
     Route::post('/update/{id}','HomesDetailController@update');
-        //添加头像
-    Route::get('tian','HomesDetailController@add');
-    Route::post('photo','HomesDetailController@insert');
         //修改头像
     Route::get('edit','HomesDetailController@edit');
     Route::post('/doedit/{id}','HomesDetailController@doedit');
@@ -322,10 +319,15 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('dopass','HomesChangeController@store');
     //个人订单
     Route::get('center','HomesCenterController@index');
+
     Route::get('center_w','HomesCenterController@weiwc');
     Route::get('insert','HomesCenterController@insert');
-    Route::get('/ticket/delete','HomesCenterController@delete');
+
     Route::post('/ticket/dodel','HomesCenterController@dodel');
+
+    Route::get('/delete/{id}','HomesCenterController@delete');
+ 
+
 
 
 

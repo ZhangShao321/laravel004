@@ -21,9 +21,9 @@
 </div>
 
 <!-- heading-banner start -->
-        <table aria-describedby="DataTables_Table_1_info" id="DataTables_Table_1" class="mws-datatable-fn mws-table dataTable">
+        <table  aria-describedby="DataTables_Table_1_info" id="DataTables_Table_1" class="mws-datatable-fn mws-table dataTable">
             <thead>
-                <tr role="row">
+                <tr role="row" align="center">
                     <th aria-label="Rendering engine: activate to sort column descending"
                     aria-sort="ascending" style="width: 156px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_1"
                     tabindex="0" role="columnheader" class="sorting_asc">
@@ -60,6 +60,11 @@
                     role="columnheader" class="sorting">
                         购票时间
                     </th>
+                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
+                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
+                    role="columnheader" class="sorting">
+                        订单号
+                    </th>
                      
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
@@ -68,9 +73,18 @@
                     </th>
                 </tr>
             </thead>
+            @if (session('msg'))
+                <div class="mws-form-message success">
+                    <ul>
+                        {{session('msg')}}
+                    </ul>
+                </div>
+            @endif    
+
             <tbody aria-relevant="all" aria-live="polite" role="alert">
              
                 @foreach($res as $K=>$v)
+                @if($v->status==0)
                 <tr class="odd" align="center">
                     <td class="sorting_1">
                     {{$v->cinema}}    
@@ -109,18 +123,22 @@
                     <td class="sorting_1">
                     {{$v->time}}    
                     </td>
-                
+                    
+                    <td class="sorting_1">
+                    {{$v->num}}    
+                    </td>
                     <td class="sorting_1">
                          
-                       <form action="" method='post' style='display:inline'>
+                        
                             {{csrf_field()}}
-                            {{method_field('DELETE')}}
-                            <button class='btn btn-primary'>删除</button>
-                       </form>
+                             
+                        <a href="{{url('/homes/delete/'.$v->id)}}"><button class='btn btn-primary'>删除</button></a>
+                     
                         
                     </td>
 
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>
@@ -128,4 +146,5 @@
 
 @endsection
 
+ 
  
