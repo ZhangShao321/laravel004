@@ -2,7 +2,7 @@
 
 @section('title','傻家伙')
 
-<!-- <meta http-equiv="refresh" content="3; window.location.href={{'/homes/index'}}" /> -->
+<!-- <meta http-equiv="refresh" content="3; return redirect('/homes/index') /> -->
 
 @section('content')
 
@@ -178,7 +178,7 @@
         ,yes:function(){
             
 		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name},function(data){
-
+                        
 		     		layer.msg('购票成功');
 		     		window.location.href="/homes/index";
 

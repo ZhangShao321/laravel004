@@ -15,6 +15,7 @@ use App\Http\Model\showfilm;
 use App\Http\Model\lunbo;
 use App\Http\Model\seat;
 use App\Http\Model\money;
+use App\Http\Model\ticket;
 
 //七牛
 use Qiniu\Storage\UploadManager;
@@ -337,12 +338,19 @@ class HomesController extends Controller
         $res = cinema::where('cinema',trim($cinema))->first();
         $res1 = film::where('filmname',$name)->first();
         $money = money::where('cid',$res['id'])->first();
-    
-        $shownum =  $res1['shownum'] +'1';
+        
+
+        // echo "<pre>";var_dump($ticket);die;
+
+        $newshownum =  $res1['shownum'] +'1';
         $newmoney = $money['money'] + $price;
 
-        $num = film::where('filmname',$name)->update(['shownum'=>$shownum]);
+        $num = film::where('filmname',$name)->update(['shownum'=>$newshownum]);
         $mon = money::where('cid',$res['id'])->update(['money'=>$newmoney]);
-     
+        
+        if($num && $mon){
+             $ticket = ticket::where('uid',session('uid'))->where('cid',$res['id'])->update(['status'=>'1']);
+        }
+       
     }
 }
