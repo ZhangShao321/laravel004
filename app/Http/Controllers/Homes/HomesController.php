@@ -109,7 +109,9 @@ class HomesController extends Controller
 
         //该影院上映的电影数据
         $res2 = showfilm::where('showfilm.cid','=',$request->id)
+
                         ->join('film','film.id','=','showfilm.fid')
+                        ->where('film.status','1')
                         ->select('film.filmname','film.filepic','film.price','showfilm.id')
                         ->get();
         
@@ -400,7 +402,7 @@ class HomesController extends Controller
 
             DB::commit();
             echo 1;
-            
+
         } else {
 
             DB::rollback();
