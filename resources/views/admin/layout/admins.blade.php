@@ -164,6 +164,14 @@
                         </ul>
                     </li>
 
+                    <li>
+                        <a href="#"><i class="icon-snowflake"></i>电影管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/movie">电影列表</a></li>
+                            <li><a href="/admin/movie/create">已下架电影</a></li>
+                        </ul>
+                    </li>
+
                      <li>
                         <a href="#"><i class="icon-film" ></i>影视分类</a>
                         <ul class='closed'>
@@ -204,6 +212,7 @@
                             <li><a href="/admin/net/create">修改网站配置</a></li>
                         </ul>
                     </li>
+
 
                 </ul>
             </div>         

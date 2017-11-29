@@ -158,9 +158,6 @@
 @section('js')
 <script type="text/javascript">
 
-	var price = $('#price').text();
-	var cinema = $('#cinema').text();
-	var name = $('#name').text();
     var id = $('#input').val();
     
 
@@ -174,8 +171,9 @@
         ,icon: 6    // icon
         ,yes:function(){
             
-		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name,id:id},function(data){
+		     $.get("{{url('/homes/money')}}",{id:id},function(data){
                     
+                    console.log(data);
                     if (data == 1) {
 
                         layer.msg('购票成功');
