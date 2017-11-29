@@ -188,6 +188,10 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('showDelete','FilmShowController@delete');
             //空闲时间
             Route::post('showtime','FilmShowController@showtime');
+            //放映历史
+            Route::get('history','FilmShowController@ShowHistory');
+            //删除李四记录
+            Route::get('hisdel','FilmShowController@ShowHisDel');
 
 
 
@@ -206,7 +210,7 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('/room/update/{id}','FilmRoomController@update');
             Route::post('/room/delete/{id}','FilmRoomController@delete');
             Route::post('/room/work','FilmRoomController@work');
-            Route::get('/room/seats/{id}','FilmRoomController@seats');
+            Route::get('/room/seats','FilmRoomController@seats');
             Route::get('/room/seatedit/{id}','FilmRoomController@seatedit');
             Route::post('/room/seatupdate/{id}','FilmRoomController@seatupdate');
 

@@ -238,6 +238,7 @@
                         <ul class="closed">
                             <li><a href="{{asset('/FilmAdmins/filmShow')}}">放映列表</a></li>
                             <li><a href="{{asset('/FilmAdmins/filmShowAdd')}}">添加放映</a></li>
+                            <li><a href="{{asset('/FilmAdmins/history')}}">放映历史</a></li>
                            
                         </ul>
                     </li>

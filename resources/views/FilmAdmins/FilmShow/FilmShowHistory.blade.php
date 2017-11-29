@@ -1,6 +1,6 @@
 @extends('FilmAdmins.layout.index')
 
-@section('title', '放映列表')
+@section('title', '放映历史')
 
 
 @section('content')
@@ -11,7 +11,7 @@
         <span>
             <i class="icon-table">
             </i>
-           放映列表
+           放映历史
         </span>
     </div>
     <div class="mws-panel-body no-padding">
@@ -58,23 +58,23 @@
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                        style="width: 96px;">
+                        style="width: 76px;">
                             影厅
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                        style="width: 64px;">
+                        style="width: 30px;">
                             价格 /元
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 42px;">
+                        style="width: 52px;">
                             开始时间
                         </th>
 
                          <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 42px;">
+                        style="width: 52px;">
                             结束时间
                         </th>
 
@@ -86,7 +86,7 @@
 
                      <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                        style="width: 100px;">
+                        style="width: 40px;">
                             操作
                         </th>
 
@@ -137,7 +137,6 @@
                             
                         </td>
                          <td class=" ">
-                           <a href="{{asset('/FilmAdmins/showEdit?id=').$v->id}}"><button class="btn btn-default">编辑</button></a>
                           <button   class="btn btn-default aaa"  value="{{$v->id}}">删除</button>
                             
                         </td>
@@ -195,7 +194,7 @@
                 // console.log(id);
                 $.ajax({
                             type: "GET",
-                            url: "{{url('/FilmAdmins/showDelete')}}",
+                            url: "{{url('/FilmAdmins/hisdel')}}",
                             data: 'id='+id,
                             success: function(msg){
                               // alert(msg);

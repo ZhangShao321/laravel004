@@ -30,6 +30,7 @@ class FilmShowController extends Controller
 
 
          $roo = showfilm::where('showfilm.cid',session('cid'))
+                        ->where('showfilm.timeout','>',time())
                         ->join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
@@ -38,7 +39,7 @@ class FilmShowController extends Controller
 
                         ->paginate(10);
 
-        $arr = array(0=>'即将放映',1=>'正在放映');
+        $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
 
 
       return view('FilmAdmins.FilmShow.FilmShowList',['roo'=>$roo,'arr'=>$arr]);
@@ -224,6 +225,47 @@ class FilmShowController extends Controller
         $time = date('Y-m-d H:i:s',$aaa);
 
         echo  $time;
+    }
+
+
+
+
+    //放映记录
+    public function  ShowHistory()
+    {
+
+       $raa = showfilm::where('showfilm.cid',session('cid'))
+                        ->where('showfilm.timeout','<',time())
+                        ->join('film','showfilm.fid','=','film.id')
+                        ->join('roominfo','showfilm.rid','=','roominfo.id')
+                        ->join('cinema','showfilm.cid','=','cinema.id')
+                        ->select('showfilm.id','showfilm.time','showfilm.status','film.filmname','roominfo.roomname','showfilm.price','showfilm.timeout')
+                        ->orderBy('showfilm.time', 'desc')
+
+                        ->paginate(10);
+
+
+        $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
+
+
+      return view('FilmAdmins.FilmShow.FilmShowHistory',['roo'=>$raa,'arr'=>$arr]);
+      
+    }
+
+    public function  ShowHisDel(Request $request)
+    {
+
+
+         $id = $request->only('id');
+          $res = showfilm::where('id',$id)->delete();
+          if($res)
+          {
+             echo "删除成功!";
+
+          }else{
+            return  "删除失败!";
+          }
+
     }
 
 

@@ -203,10 +203,12 @@ class FilmRoomController extends Controller
     
 
     //显示座位图
-    public function seats($id)
+    public function seats(Request $request)
     {
-        $data = DB::table('roominfo')->where('id',$id)->first();
 
+     
+        $data = DB::table('roominfo')->where('id',$request->only('id')['id'])->first();
+       
         $sid = $data->sid;
 
         $res = DB::table('seat')->where('id',$sid)->first();
