@@ -228,6 +228,7 @@
                         <ul class="closed">
                             <li><a href="{{asset('/FilmAdmins/filmMsg')}}">影片列表</a></li>
                             <li><a href="{{asset('/FilmAdmins/filmMsgAdd')}}">添加影片</a></li>
+                            <li><a href="{{asset('/FilmAdmins/filmOff')}}">下架影片</a></li>
                            
                         </ul>
                     </li>

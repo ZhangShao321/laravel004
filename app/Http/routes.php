@@ -174,6 +174,13 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('update','FilmMsgController@update');
             //删除
             Route::get('delete','FilmMsgController@delete');
+            
+            //影片下架信息
+            Route::get('filmOff','FilmMsgController@FilmMsgOff');
+            //下架删除
+            Route::get('offDel','FilmMsgController@FilmMsgDel');
+            //修改下架影片是否上映
+            Route::get('OffUpdate','FilmMsgController@updetSta');
 
 
 
