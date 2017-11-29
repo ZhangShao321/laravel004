@@ -21,10 +21,10 @@
 </div>
 
 <!-- heading-banner start -->
-        <table  aria-describedby="DataTables_Table_1_info" id="DataTables_Table_1" class="mws-datatable-fn mws-table dataTable">
+        <table align="center" aria-describedby="DataTables_Table_1_info" id="DataTables_Table_1" >
             <thead>
                 <tr align="center">
-                    <th style="width: 156px;" align="center">
+                    <th style="width: 130px;" align="center">
                         电影院
                     </th>
                     <th aria-label="Browser: activate to sort column ascending" style="width: 80px;"
@@ -38,7 +38,7 @@
                         影厅
                     </th>
                   
-                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
+                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 197px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
                         放映时间
@@ -53,7 +53,7 @@
                     role="columnheader" class="sorting">
                         价格
                     </th>
-                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
+                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 197px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
                         购票时间
@@ -79,12 +79,12 @@
                 </div>
             @endif    
 
-            <tbody aria-relevant="all" aria-live="polite" role="alert">
+            <tbody align="center">
              
                 @foreach($res as $K=>$v)
                 @if($v->status==0)
-                <tr class="odd" align="center">
-                    <td class="sorting_1">
+                <tr class="" align="center">
+                    <td class="" align="center">
                     {{$v->cinema}}    
                     </td>
                 
@@ -98,7 +98,7 @@
 
                    
                     <td class="sorting_1">
-                    {{$v->showtime}}   
+                    {{date('Y-m-d H:i:s',$v->showtime)}}   
                     </td>
                 
                     <td class="sorting_1">
@@ -106,11 +106,12 @@
                     </td>
 
                     <td class="sorting_1">
-                    {{$v->price}}   
+                    {{$v->price}}￥
                     </td>
 
                     <td class="sorting_1">
-                    {{$v->time}}    
+
+                    {{date('Y-m-d H:i:s',$v->time)}}    
                     </td>
                     
                     <td class="sorting_1">
@@ -119,7 +120,7 @@
                     <td class="sorting_1">
                          
                         
-                            {{csrf_field()}}
+                        {{csrf_field()}}
                              
                         <a href="{{url('/homes/delete/'.$v->id)}}"><button class='btn btn-primary'>删除</button></a>
                      
