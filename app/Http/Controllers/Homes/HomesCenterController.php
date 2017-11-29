@@ -22,7 +22,7 @@ use Session;
 
 class HomesCenterController extends Controller
 {
-    //
+    //个人订单
      public function index()
     {
     	
@@ -91,45 +91,67 @@ class HomesCenterController extends Controller
        
 
         //获取票
-        $res = DB::table('ticket')->where('status',1)->where('uid',session('uid'))->get();
-
+        // $res = DB::table('ticket')->where('status',1)->where('uid',session('uid'))->get();
+        $res = Redis::keys('seat_*');
         // var_dump($res);die;
+        $arr = array();
+        foreach ($res as $kk => $vv) {
+
+            $arr[$kk] = Redis::hgetall($vv);
+        }
+
+        //去掉非本用户的订单
+        $data = array();
+        foreach ($arr as $key => $value) {
+            if($value['uid'] != session('uid')){
+                unset($arr[$key]);
+            } else {
+
+                $data[$key] = $value;
+            }
+        }
+
+        //排序
+        sort($data);
+        
 
         //遍历
-        foreach ($res as $k => $v) {
+        foreach($data as $k => $v){
+
             //用户
-            $uid = $v->uid;
+            $uid = $v['uid'];
             $phone = DB::table('user')->where('id',session('uid'))->first();
-            $v->phone = $phone->phone;
+            $v['phone'] = $phone->phone;
 
             //电影院
-            $cid = $v->cid;
-            $v->cinema = DB::table('cinema')->where('id',$cid)->first()->cinema;
+            $cid = $v['cid'];
+            $cinema = DB::table('cinema')->where('id',$cid)->first();
+            $v['cinema'] = $cinema->cinema;
 
             //电影
-            $fid = $v->fid;
-            $v->filmname = DB::table('film')->where('id',$fid)->first()->filmname;
+            $fid = $v['fid'];
+            $v['filmname'] = DB::table('film')->where('id',$fid)->first()->filmname;
 
             //影厅
-            $rid = $v->rid;
-            $v->roomname = DB::table('roominfo')->where('id',$rid)->first()->roomname;
+            $rid = $v['rid'];
+            $v['roomname'] = DB::table('roominfo')->where('id',$rid)->first()->roomname;
             
             //放映
-            $showid = $v->showid;
+            $showid = $v['showid'];
             $show = DB::table('showfilm')->where('id',$showid)->first();
-            $v->showtime = $show->time;
+            $v['showtime'] = $show->time;
 
             //座位
-            $seat = $v->seat;
+            $seat = $v['seat'];
             //拆分字符串
             $aaa = explode('_',$seat);
-            $v->hang = $aaa['0'];
-            $v->lie = $aaa['1'];
+            $v['hang'] = $aaa['0'];
+            $v['lie'] = $aaa['1'];
         }
-        // echo "<pre>";
-        // var_dump($res);die;
+        echo "<pre>";
+        var_dump($data);die;
 
-        return view('/homes/center_w',['res'=>$res]);
+        return view('/homes/center_w',['res'=>$data]);
     }
 
 

@@ -184,15 +184,12 @@
                                         <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$v->filepic.'?imageView2/0/w/120/h/120')}}" style="width:120px;height:60px"  />
                                     </td>
                                   
-                                  
-                                    
                                     <td class=""> {{$sta[$v->status] }}</td>
                                    <td style="overflow: visible;padding:0px " align="center" class="">
                                      
                                      <button name="{{$v->id}}"  class="btn btn-default bbb">上映</button>
                                      <button name="{{$v->id}}"  class="btn btn-default aaa">删除</button>
                                    </td>
-                                   <td></td>
                                 </tr>
                      @endforeach 
 

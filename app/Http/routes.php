@@ -42,6 +42,7 @@ Route::group(['namespace'=>'Homes'], function(){
 Route::get('/admin/login','admin\AdminLoginController@index'); 
 //执行登录的方法
 Route::post('/admin/dologin','admin\AdminLoginController@dologin');
+
 //生成登录验证码 
 Route::get('/admin/code','admin\AdminLoginController@code');
 //退出登录的方法

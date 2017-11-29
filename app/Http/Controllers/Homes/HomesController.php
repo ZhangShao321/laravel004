@@ -286,7 +286,7 @@ class HomesController extends Controller
             
 
             $bool = Redis::hmset('seat_'.$data['num'],$data);
-            Redis::expire('seat_'.$data['num'],3000);
+            Redis::expire('seat_'.$data['num'],300);
 
             // $aaa = DB::table('ticket')->insertGetId($data);
 
@@ -384,11 +384,11 @@ class HomesController extends Controller
         $newshownum =  $res1->shownum + 1;
         $newmoney = $money->money + $data['price'];
 
+// echo json_encode($num);die;
         //个人钱包
         $muser = DB::table('userDetail')->where('uid',session('uid'))->first()->umoney;
         //重定义
         $newumoney = $muser - $data['price'];
-
 
         //开启事务
         DB::beginTransaction();
@@ -405,6 +405,7 @@ class HomesController extends Controller
         if($id && $nums && $mon && $users){
 
             DB::commit();
+            $data = Redis::del($num);
             echo 1;
 
         } else {

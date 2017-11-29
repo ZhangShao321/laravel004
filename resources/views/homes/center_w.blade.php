@@ -73,19 +73,19 @@
                 @foreach($res as $K=>$v)
                 <tr class="odd" align="center">
                     <td class="sorting_1">
-                    {{$v->cinema}}    
+                    {{$v['cinema']}}    
                     </td>
                 
 
                 
                     <td class="sorting_1 ">
-                    {{$v->filmname}}    
+                    {{$v['filmname']}}    
                     </td>
                 
 
                 
                     <td class="sorting_1">
-                    {{$v->roomname}}    
+                    {{$v['roomname']}}    
                     </td>
 
                    
@@ -93,27 +93,27 @@
 
                 
                     <td class="sorting_1">
-                    {{$v->showtime}}   
+                    {{$v['showtime']}}   
                     </td>
                 
 
                 
                     <td class="sorting_1">
-                    {{$v->hang}}排{{ $v->lie }}座    
+                    {{$v['hang']}}排{{ $v['lie'] }}座    
                     </td>
 
                     <td class="sorting_1">
-                    {{$v->price}}   
+                    {{$v['price']}}   
                     </td>
 
                     <td class="sorting_1">
-                    {{$v->time}}    
+                    {{$v['time']}}    
                     </td>
                 
                     <td class="sorting_1">
-                       <a href="/homes/piao?id=seat_{{ $v->num }}"><button class='btn btn-default'>马上付款</button></a>
+                       <a href="/homes/piao?id=seat_{{ $v['num'] }}"><button class='btn btn-default'>马上付款</button></a>
                        
-                        <button id="{{ $v->num }}" class='btn btn-default dels'>删除</button>
+                        <button id="{{ $v['num'] }}" class='btn btn-default dels'>删除</button>
                        
                         
                     </td>

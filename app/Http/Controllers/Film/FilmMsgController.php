@@ -40,7 +40,7 @@ class FilmMsgController extends Controller
     public function add()
     {
 
-        $data = DB::table('filmtype')->where('status',1)->get();
+        $data = DB::table('filmtype')->where('status',0)->get();
 
         return view('FilmAdmins.FilmMag.FilmMsgAdd',['data'=>$data]);
 
@@ -367,7 +367,7 @@ class FilmMsgController extends Controller
         $id = $request->only('id')['id'];
 
         //修改状态
-        $bool = DB::table('film')->where('id',$id)->update(['status'=>0]);
+        $bool = DB::table('film')->where('id',$id)->update(['status',0]);
 
         if($bool) {
 
