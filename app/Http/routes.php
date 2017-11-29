@@ -83,6 +83,11 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
         Route::get('/reques/{id}','RequestController@fou');
         Route::get('/reque/{id}','RequestController@not');
 
+        //后天电影管理
+        Route::resource('/movie','MovieController');
+        Route::get('/movie1/{id}','MovieController@xiajia');
+        Route::get('/movie2/{id}','MovieController@huifu');
+
 		//后台影视分类
 		Route::resource('/film','FilmController');
         Route::post('/film/work','FilmController@work');
