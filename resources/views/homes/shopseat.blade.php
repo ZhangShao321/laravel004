@@ -112,7 +112,6 @@
                 <button id="goumai"  class="btn btn-danger">购买</button> 
                 
             </div>
-            <!-- <div id="legend"></div> -->
         
     </div>
 </div>
@@ -232,23 +231,26 @@ function registSeat(){
                         $.post('{{ url("/homes/shopseat/$id") }}',{_token:'{{ csrf_token() }}', zuo:into},function(data){
 
                                 if(data == '购买失败'){
+
                                     layer.alert(data, {icon: 6});
+
+                                } else if(data == '1') {
+                                    
+                                    window.location.href='/homes/login';
+
                                 } else {
-                                    layer.alert('购买成功', {icon: 6});
+
+                                   layer.alert('购买成功', {icon: 6});
 
                                     var ids = data;
 
-                                    // console.log(ids);
                                     //链接付款
                                     var but = $("<a href='{{url('/homes/piao?id=')}}"+ids+"'><button id='shop' class='btn btn-danger'>马上付款</button></a>");
                                     $('#goumai').after(but);
-                                    $('#shop').css('margin-left','20px');
+                                    $('#shop').css('margin-left','20px'); 
                                 }
                                 
-
-
-                                zuos();
-                                
+                                zuos();    
 
                         })
                     }
