@@ -93,7 +93,7 @@
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-                     @foreach($roo as $k => $v)
+                    @foreach($roo as $k => $v)
                 
                    <tr class="odd">
                     
@@ -120,7 +120,10 @@
                         </td>
                          <td class=" ">
 
-                             {{date('Y-m-d H:i:s',$v->timeout)}}
+
+                           {{date('Y-m-d H:i:s',$v->timeout)}}
+                            
+
                             
                         </td>
                          <td class=" ">
@@ -131,7 +134,6 @@
                              @else
                              {{ $arr['0'] }}
                              @endif
-                       
 
 
                             

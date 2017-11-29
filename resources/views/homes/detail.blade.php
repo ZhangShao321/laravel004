@@ -51,21 +51,13 @@
 
                         <!--头像 -->
                         <div class="user-infoPic">
-                            @if(!$re->photo)
-                            <div class="filePic">
-                                <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
-                                <img class="am-circle am-img-thumbnail" src="/homes/img/default.jpg" alt="" />
-                            </div>
-
-                            <p class="am-form-help">头像</p>
-                            @else
+                             
                             <div class="filePic">
                                 <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
                                 <img class="am-circle am-img-thumbnail" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$re->photo}}?imageView2/0/w/57/h/57" alt="" />
                             </div>
 
                             <p class="am-form-help">头像</p>
-                            @endif
                             
                             @if(!$re->nickName)
                             <div class="info-m">
@@ -102,13 +94,13 @@
                                         <label class="am-form-label">性别</label>
                                         <div class="am-form-content sex">
                                             <label class="am-radio-inline">
-                                                <input type="radio" name="sex" @if($re->sex == 'm') checked @endif value="{{$re->sex}}" data-am-ucheck> 男
+                                                <input type="radio" name="sex" @if($re->sex == 'm') checked @endif value="m" data-am-ucheck> 男
                                             </label>
                                             <label class="am-radio-inline">
-                                                <input type="radio" name="sex" @if($re->sex == 'w') checked @endif value="{{$re->sex}}" data-am-ucheck> 女
+                                                <input type="radio" name="sex" @if($re->sex == 'w') checked @endif value="w" data-am-ucheck> 女
                                             </label>
                                             <label class="am-radio-inline">
-                                                <input type="radio" name="sex" value="{{$re->sex}}" data-am-ucheck> 保密
+                                                <input type="radio" name="sex" @if($re->sex == 'x') checked @endif value="x" data-am-ucheck> 保密
                                             </label>
                                         </div>
                                     </div>
@@ -131,7 +123,7 @@
                                 <div class="am-form-group">
                                     <label for="user-phone" class="am-form-label">电话</label>
                                     <div class="am-form-content">
-                                        <input id="user-phone" placeholder="telephonenumber" type="tel" name="phone" value="{{$user->phone}}">
+                                        <input id="user-phone" readonly="readonly" placeholder="telephonenumber" type="tel" name="phone" value="{{$user->phone}}">
 
                                     </div>
 
@@ -148,6 +140,7 @@
                             </form>
                             
                         </div>
+
 
                     </div>
 
@@ -186,7 +179,6 @@
                         <p><i class="am-icon-newspaper-o"></i>个人资料</p>
                         <ul>
                             <li> <a href="/homes/details">个人信息</a></li>
-                            <li> <a href="/homes/tian">添加头像</a></li>
                             <li> <a href="/homes/change">修改密码</a></li>
                             <li> <a href="/homes/edit">修改头像</a></li>
                             
@@ -196,6 +188,7 @@
                         <p><i class="am-icon-balance-scale"></i>我的交易</p>
                         <ul>
                             <li><a href="/homes/center">我的订单</a></li>
+                            <li><a href="/homes/center_w">未完成订单</a></li>
                         </ul>
                     </li>
                     <li class="person">

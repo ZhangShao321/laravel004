@@ -25,6 +25,7 @@
 
 
 
+
 			        <form action="{{asset('/FilmAdmins/showUpdate?id=').$res['id']}}" method="post" class="mws-form">
                         <div class="mws-form-inline">
                         
@@ -77,7 +78,20 @@
                                     <select class="large" name="status">
                                       
                                         <!-- 0,即将放映  1,正在, 2,放映结束/ 默认0 -->
+<<<<<<< HEAD
+<<<<<<< HEAD
+                                       
+                                          @if($res['timeout'] < time())
+                                          <option value="">{{ $arr['2'] }}</option>
+                                          @elseif($res['time'] < time() && $v->timeout > time())
+                                          <option value="">{{ $arr['1'] }}</option>
+                                          @else
+                                          <option value="">{{ $arr['0'] }}</option>
+                                          @endif
+=======
+=======
 
+>>>>>>> e04a03619e2a24bccab891dd5325bb71255a6fd5
                                          @foreach($arr as $ak => $av)
                                         
 
@@ -85,9 +99,13 @@
 
                               
                                           @endforeach 
+<<<<<<< HEAD
+>>>>>>> 1d175d67407fdbf6299f46f2a927290fa7ab3a3f
+=======
 
                                 
 e
+>>>>>>> e04a03619e2a24bccab891dd5325bb71255a6fd5
 
                                        
                                     
@@ -123,6 +141,14 @@ e
         
 
                     </form>
+<<<<<<< HEAD
+<<<<<<< HEAD
+                  
+=======
+                
+>>>>>>> 1d175d67407fdbf6299f46f2a927290fa7ab3a3f
+=======
+>>>>>>> e04a03619e2a24bccab891dd5325bb71255a6fd5
 
 
 

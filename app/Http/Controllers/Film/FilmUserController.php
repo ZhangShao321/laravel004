@@ -39,6 +39,7 @@ class FilmUserController extends Controller
                             ->join('cininfo','cinema.id','=','cininfo.cid')
                             ->first();
 
+
         return view('FilmAdmins.FilmUser.info',['res'=>$res]);
     }
 

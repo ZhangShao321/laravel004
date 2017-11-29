@@ -36,10 +36,10 @@ class FilmShowController extends Controller
                         ->join('cinema','showfilm.cid','=','cinema.id')
                         ->select('showfilm.id','showfilm.time','showfilm.status','film.filmname','roominfo.roomname','showfilm.price','showfilm.timeout')
                         ->orderBy('showfilm.time', 'desc')
-
                         ->paginate(10);
 
         $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
+
 
 
       return view('FilmAdmins.FilmShow.FilmShowList',['roo'=>$roo,'arr'=>$arr]);
@@ -50,7 +50,9 @@ class FilmShowController extends Controller
     public function add()
     {
 
+
           //电影院影厅 更具影厅状态 商户id
+
           $roominfo = DB::table('roominfo')->where('status',1)->where('cid',session('cid'))->get();
 
        
@@ -127,9 +129,9 @@ class FilmShowController extends Controller
        $res = showfilm::join('film','showfilm.fid','=','film.id')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
                         ->join('cinema','showfilm.cid','=','cinema.id')
-
                         ->select('showfilm.price','film.filmname','showfilm.id','roominfo.roomname','showfilm.time','showfilm.timeout')
                         ->find($request->only('id')['id']);
+
 
 
           //判断影厅是否正有电影放映
@@ -138,7 +140,9 @@ class FilmShowController extends Controller
           //判断是否是该的登录用户的电影
 
           $film = film::where('cid',session('cid'))->where('status','1')->get();
-          $show = showfilm::get();
+
+          $show = showfilm::where('id',$id)->get();
+
 
 
 

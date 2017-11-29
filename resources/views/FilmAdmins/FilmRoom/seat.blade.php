@@ -24,7 +24,7 @@
 
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
-        <span>添加座位图</span>
+        <span><a href="/FilmAdmins/room/list">影厅列表</a> | 添加座位图</span>
     </div>
     <div class="mws-panel-body no-padding">
         <form class="mws-form">
@@ -143,7 +143,7 @@ function registSeat(){
 
         $.post('{{ asset("/FilmAdmins/room/seat") }}', {_token:'{{ csrf_token() }}', seat:str, hang:hang, lie:lie, rid:'{{ $id }}'}, function(data){
 
-            console.log(data.url);
+            // console.log(data.url);
             location.href = data.url;
             
         },'json');

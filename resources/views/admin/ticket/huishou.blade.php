@@ -191,26 +191,26 @@
 
 
 @section('js')
-    <script>
-    //修改ticket状态    回收站    
-    $('.bb').click(function(){
+        <script>
+        //修改ticket状态    回收站
+        $('.bb').click(function(){
 
-        var ids = $(this).attr('id');
-        var status = $(this).attr('name');
-        var bbb = $(this);
+            var ids = $(this).attr('id');
+            var status = $(this).attr('name');
+            var bbb = $(this);
 
-        $.post("{{ url('/admin/ticket/huishou') }}", {_token:'{{ csrf_token() }}', id:ids, status:status}, function(data){
-            
-            // console.log(data);
+            $.post("{{ url('/admin/ticket/huishou') }}", {_token:'{{ csrf_token() }}', id:ids, status:status}, function(data){
+                
+                // console.log(data);
 
-          if(data == 2){
-                bbb.text('放入回收站');
-                bbb.attr('name',1);
-                location.reload();
-               
-            }
-        });
-    })
-    </script>
+                if(data == 1){
+                    bbb.text('恢复');
+                    bbb.attr('name',0);
+                    location.reload();
+
+                }
+            });
+        })
+        </script>
 
 @endsection

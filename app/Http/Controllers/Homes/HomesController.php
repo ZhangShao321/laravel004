@@ -15,6 +15,10 @@ use App\Http\Model\showfilm;
 use App\Http\Model\lunbo;
 use App\Http\Model\seat;
 use App\Http\Model\money;
+use App\Http\Model\ticket;
+
+//Redis
+use Illuminate\Support\Facades\Redis;
 
 //七牛
 use Qiniu\Storage\UploadManager;
@@ -25,7 +29,7 @@ use zgldh\QiniuStorage\QiniuStorage;
 class HomesController extends Controller
 {
 
-    //电影院主页
+    //1.电影院首页
     public function index()
     {   
         //热映电影数据
@@ -42,7 +46,8 @@ class HomesController extends Controller
     }
 
 
-    //电影列表
+
+    //2.电影列表页面
     public function filmlist()
     {
 
@@ -60,17 +65,20 @@ class HomesController extends Controller
     }
 
 
-    //电影详情页
+
+    //3.电影详情页面
     public function filmdetail(Request $request)
     {
 
         //电影详情数据
         $aaa = film::find($request->id);
+
+        //上映此电影的电影院数据
         $bbb = film::where('filmname',$aaa->filmname)
                 ->join('showfilm','film.id','=','showfilm.fid')
                 ->join('cinema','showfilm.cid','=','cinema.id')
                 ->join('cininfo','cinema.id','=','cininfo.cid')
-                ->select('showfilm.id','showfilm.time','cinema.cinema')
+                ->select('showfilm.id','showfilm.time','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
                 ->get();
 
         //加载电影详情页面
@@ -78,7 +86,8 @@ class HomesController extends Controller
     }
 
 
-    //电影院列表
+
+    //4.电影院列表页面
     public function cinemalist()
     {
         //电影院列表数据
@@ -89,7 +98,8 @@ class HomesController extends Controller
     }
 
 
-    //电影院详情
+
+    //5.电影院详情
     public function cinemadetail(Request $request)
     {
         //电影院详情数据 
@@ -99,7 +109,9 @@ class HomesController extends Controller
 
         //该影院上映的电影数据
         $res2 = showfilm::where('showfilm.cid','=',$request->id)
+
                         ->join('film','film.id','=','showfilm.fid')
+                        ->where('film.status','1')
                         ->select('film.filmname','film.filepic','film.price','showfilm.id')
                         ->get();
         
@@ -109,8 +121,7 @@ class HomesController extends Controller
 
 
 
-
-    //申请商户
+    //6.申请商户
     public function add()
     {
         //加载申请商户的页面
@@ -120,9 +131,11 @@ class HomesController extends Controller
     public function store(Request $request)
     {
         //获取商户申请的数据
+        //cinema
         $res = $request->except('_token','city','area','address');
+        //cininfo
         $res1 = $request->only('city','area','address');
-
+        //密码hash加密
         $res['password'] = Hash::make($res['password']);
 
         //图片上传
@@ -147,38 +160,46 @@ class HomesController extends Controller
 
         }  
 
-      
-       /* //事务处理
-        DB::beginTransaction();
-
-        $cinema = cinema::insert($res);
-        $cininfo = cininfo::insert($res1);
-
-        //判断
-        if($cinema && $cininfo)
-        {   
-            DB::commit();
-            return redirect('/homes/index'); 
-
-        }else{
-            
-            DB::rollback();
-        }*/
 
         $id = DB::table('cinema')->insertGetId($res);
+
+        if($id){
+
+            //添加cininfo表
+            $res1['cid'] = $id;
+            $aaa = DB::table('cininfo')->insert($res1);
+
+            //添加cinligin表
+            $res2['cinema'] = $res['cinema'];
+            $res2['password'] = $res['password'];
+            $res2['cid'] = $id;
+            $res2['time'] = time();
+            $bbb = DB::table('cinlogin')->insert($res2);
+
+            //判断
+            if ($aaa && $bbb) {
+                return redirect('/homes/index');
+            } else {
+                DB::table('cinema')->where('id',$id)->delete();
+                return back();
+            }
+        } else {
+
+            return back();
+        }
 
     }    
 
 
 
-    //搜索的页面
+    //7.搜索的页面
     public function search(Request $request)
     {
         //获取要搜索的字段
         $seach = implode($request->all());
 
         //模糊查询
-        $res = film::where('filmname','like','%'.$seach.'%')->get();
+        $res = film::where('filmname','like','%'.$seach.'%')->where('status',1)->get();
 
         //加载模糊搜索匹配的电影列表
         return view('homes/search',['res' => $res]);
@@ -186,12 +207,13 @@ class HomesController extends Controller
     }
 
 
-    //查看各种类型电影的页面
+
+    //8.查看各种类型电影的页面
     public function type(Request $request)
     {
         //获取该类型的影片数据
         $tid = $request->id;
-        $res = film::where('tid',$tid)->get();
+        $res = film::where('tid',$tid)->where('status',1)->get();
 
         //加载该类型的影片页面
         return view('homes/search',['res' => $res]);
@@ -199,7 +221,7 @@ class HomesController extends Controller
         
     
 
-    //订座的页面
+    //9.订座的页面
     public function dingpiao(Request $request)
     {
         $id = $request->id;
@@ -224,48 +246,59 @@ class HomesController extends Controller
         return view('/homes/shopseat', ['data'=>$data,'room'=>$room, 'id'=>$id, 'seat'=>$seats, 'cinema'=>$cinema]); 
     }
 
-
     //执行售票
     public function shopseat(Request $request,$id)
     {
 
         $seat = $request->except('_token')['zuo'];
 
-        if(!$seat){
+        //判断用户是否登陆
+        if(!session('uid')){
+            
+            echo '1'; 
 
-            echo '请选择电影票';die;
+        } else {
+
+            if(!$seat){
+
+                echo '请选择电影票';die;
+            }
+
+            $bbb = DB::table('ticket')->where('showid',$id)->where('seat',$seat)->get();
+
+            if($bbb){
+                echo '票已出售';die;
+            }
+
+            $res = DB::table('showfilm')->where('id',$id)->first();
+
+            $data = array();
+
+            $data['showid'] = $id;
+            $data['uid'] = session('uid') ?? 1;
+            $data['cid'] = $res->cid;
+            $data['fid'] = $res->fid;
+            $data['rid'] = $res->rid;
+            $data['price'] = $res->price;
+            $data['seat'] = $request->except('_token')['zuo'];
+            $data['time'] = time();
+            $data['num'] = time().rand(111111,999999);
+            
+
+            $bool = Redis::hmset('seat_'.$data['num'],$data);
+            Redis::expire('seat_'.$data['num'],3000);
+
+            // $aaa = DB::table('ticket')->insertGetId($data);
+
+            if($bool){
+
+                echo 'seat_'.$data['num'];
+
+            }else{
+
+                echo '购买失败';
+            }
         }
-
-        $bbb = DB::table('ticket')->where('showid',$id)->where('seat',$seat)->get();
-
-        if($bbb){
-            echo '票已出售';die;
-        }
-
-        $res = DB::table('showfilm')->where('id',$id)->first();
-
-        $data = array();
-
-        $data['showid'] = $id;
-        $data['uid'] = session('uid') ?? 1;
-        $data['cid'] = $res->cid;
-        $data['fid'] = $res->fid;
-        $data['rid'] = $res->rid;
-        $data['price'] = $res->price;
-        $data['seat'] = $request->except('_token')['zuo'];
-        $data['time'] = time();
-        $data['num'] = time().rand(11111111,99999999).$id;
-
-
-        $aaa = DB::table('ticket')->insertGetId($data);
-
-        if($aaa){
-
-            echo $aaa;
-        }else{
-            echo '购买失败';
-        }
-
     }
 
     //已出售
@@ -286,74 +319,98 @@ class HomesController extends Controller
     }
 
 
-    //确认订单信息的页面
+
+    //10.确认订单信息的页面
     public function piao(Request $request)
     {
 
         //票id
         $id = $request->id;
-
         //订单信息
-        $piao = DB::table('ticket')->where('id',$id)->first();
-
+        // $piao = DB::table('ticket')->where('id',$id)->first();
+        $piao = Redis::hgetall($id);
+        
         //电影院信息
-        $cinema = DB::table('cinema')->where('id',$piao->cid)->first();
+        $cinema = DB::table('cinema')->where('id',$piao['cid'])->first();
 
         //影厅信息
-        $room = DB::table('roominfo')->where('id',$piao->rid)->first();
+        $room = DB::table('roominfo')->where('id',$piao['rid'])->first();
 
         //电影信息
-        $film = DB::table('film')->where('id',$piao->fid)->first();
+        $film = DB::table('film')->where('id',$piao['fid'])->first();
 
         //放映信息
-        $show = DB::table('showfilm')->where('id',$piao->showid)->first();
+        $show = DB::table('showfilm')->where('id',$piao['showid'])->first();
 
         //用户信息
-        $uid = $piao->uid;
+        $uid = $piao['uid'];
         $yonghu = DB::table('user')->where('id',$uid)->first();
 
-        //判断用户是否登陆
-        if(!session('uid')){
-            return redirect('/homes/login');
-        }
-
         //座位信息
-        $seat = $piao->seat;
+        $seat = $piao['seat'];
         $aaa = explode('_',$seat);
 
-        
         //加载订单信息的页面
         return view('/homes/piao',['piao'=>$piao, 'seat'=>$aaa, 'user'=>$yonghu, 'show'=>$show, 'cinema'=>$cinema, 'room'=>$room, 'film'=>$film, 'uid'=>$uid]);
     }
 
-
-
-
-
-
-   public  function  demo()
-   {
-        view('homes.filmType');
-   }
     
 
-    //订单完成后钱包和售票数的添加
+    //11.订单完成后钱包和售票数的添加
     public function money(Request $request)
     {
+        //获取值
         $cinema = $request->only('cinema')['cinema'];
         $price = $request->only('price')['price'];
         $name = $request->only('name')['name'];
-        
-        
+        $num = 'seat_'.$request->only('id')['id'];
+
+        //获取电影院/电影/钱包信息
         $res = cinema::where('cinema',trim($cinema))->first();
         $res1 = film::where('filmname',$name)->first();
         $money = money::where('cid',$res['id'])->first();
-    
-        $shownum =  $res1['shownum'] +'1';
+        
+        //重定义钱
+        $newshownum =  $res1['shownum'] +'1';
         $newmoney = $money['money'] + $price;
 
-        $num = film::where('filmname',$name)->update(['shownum'=>$shownum]);
+        //获取订单信息
+        $data = Redis::hgetall($num);
+
+        //判断座位是否售出
+        $showid = $data['showid'];
+        $seat = $data['seat'];
+
+        $aaa = DB::table('ticket')->where('showid',$showid)->where('seat',$seat)->get();
+
+        if ($aaa) {
+
+            echo 0;die;
+        }
+
+        //开启事务
+        DB::beginTransaction();
+        //修改电影票房
+        $nums = film::where('filmname',$name)->update(['shownum'=>$newshownum]);
+        //修改电影院钱包
         $mon = money::where('cid',$res['id'])->update(['money'=>$newmoney]);
-     
+        
+        //存储订单
+        $id = DB::table('ticket')->insertGetId($data);
+
+        if($id && $nums && $mon){
+
+            DB::commit();
+            echo 1;
+
+        } else {
+
+            DB::rollback();
+            echo 0;
+        }    
     }
+
+
+
+
 }

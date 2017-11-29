@@ -72,7 +72,7 @@ class CinemaController extends Controller
     public function store(Request $request)
     {
 
-
+      
 
         //用only方法拿出添加页面传递过来的你需要的数据存入$input1
         $input1 = $request->only('cinema','password','phone','legal','clogo','time','status');
@@ -199,7 +199,7 @@ class CinemaController extends Controller
             $find = cinema::where('id',$id)->first();
             //判断图片是否存在  存在就删除
             //遍历图片<img src="{{asset($find->logo)}}">
-            echo "<pre>";
+        
 
             $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
             $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
@@ -292,7 +292,7 @@ class CinemaController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function destroy($id)
     {
          //从数据库查询

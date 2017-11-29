@@ -7,7 +7,7 @@
         
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
-        <span>添加影厅</span>
+        <span><a href="/FilmAdmins/room/list">影厅列表</a> | 添加影厅</span>
     </div>
     <div class="mws-panel-body no-padding">
 
@@ -63,7 +63,7 @@ $('input[name=roomname]').blur(function(){
     // alert(1111111);
     var roomname = $(this).val();
 
-    var reg = /^\S*$/;
+    var reg = /^\S+$/;
 
     var x = reg.exec(roomname);
 
@@ -82,7 +82,7 @@ $('input[name=roomtype]').blur(function(){
     // alert(1111111);
     var roomname = $(this).val();
 
-    var reg = /^\S*$/;
+    var reg = /^\S+$/;
 
     var x = reg.exec(roomname);
 
@@ -91,7 +91,7 @@ $('input[name=roomtype]').blur(function(){
         $(this).next().text('√');
         $(this).next().css('color','green');
     }else{
-        $(this).next().text('您的影厅名字不正确');
+        $(this).next().text('您的影厅类型不正确');
         $(this).next().css('color','red');
     }
 

@@ -2,7 +2,7 @@
 
 @section('title','傻家伙')
 
-<!-- <meta http-equiv="refresh" content="3;url=return back" /> -->
+<!-- <meta http-equiv="refresh" content="3; return redirect('/homes/index') /> -->
 
 @section('content')
 
@@ -61,7 +61,8 @@
     <h2 class="title font16 clearfix" style="padding-top:20px;padding-left:20px">
         确认订单信息
         <span class="fr font12 font-shadow">
-            订单号：{{ $piao->num }}
+            订单号：{{ $piao['num'] }}
+            <input type="hidden" value="{{$piao['num']}}" id="input">
         </span>
     </h2>
     <div class="wrap-content">
@@ -74,9 +75,6 @@
                 <label class="item-td check">
                 </label>
                 <div class="item-td order-info">
-                    <!--<a class="movie-pic" href="javascript:;" target="_blank">
-                    <img src="" alt="">
-                    </a>-->
                     <div class="order-detail">
                         <p data-data="{&quot;movieId&quot;:95124}" data-url="/movie/detail" class="order-name">
                            <h3 id="name">{{ $film->filmname }}</h3> 
@@ -85,7 +83,6 @@
                             <span>
                                 <!-- 国语&nbsp;&nbsp;2D -->
                             </span>
-                            <!--<span class="last">1511526000</span>-->
                         </p>
                         <ul class="threat-info font14">
                             <li data-data="{&quot;cinemaId&quot;:1019}" data-url="/cinema/detail"
@@ -137,19 +134,17 @@
                 <div class="item-td order-num">
                     金额小计:
                     <p class="price">
-                        ¥{{ $piao->price }}.00
+                        ¥{{ $piao['price']}}.00
                     </p>
                 </div>
-                <!--<div class="split-hozline"></div>-->
             </li>
-            <!-- 衍生品 -->
         </ul>
     </div>
     <div class="confirm font-shadow text-right" style="padding-right:20px">
     		        
 	        <p class="total-money">
 	            实际支付：
-	            <span data-selector="totalPrice" id="price" class="nuomi-red">{{ $piao->price }}.00元</span>
+	            <span data-selector="totalPrice" id="price" class="nuomi-red">{{ $piao['price'] }}.00元</span>
 	        </p>
 	        <button data-selector="pay" id='fun' style="width:200px;font-size:20px; "  class="btn btn-info confirm-button back-red" >
 		            确认并去支付
@@ -166,6 +161,8 @@
 	var price = $('#price').text();
 	var cinema = $('#cinema').text();
 	var name = $('#name').text();
+    var id = $('#input').val();
+    
 
 	$('#fun').click(function(){
 
@@ -177,20 +174,34 @@
         ,icon: 6    // icon
         ,yes:function(){
             
-		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name},function(data){
+		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name,id:id},function(data){
+                    
+                    if (data == 1) {
 
-		     		layer.msg('购票成功');
-		     		window.location.href="/homes/center";
+                        layer.msg('购票成功');
+                        window.location.href="/homes/center";
 
-		     });
+                    } else {
+<<<<<<< HEAD
+                        layer.msg('票已出售')
+=======
+
+                        layer.msg('此票已售出');
+
+>>>>>>> e4c2b1f1f40faadc7fc1eed0e7881bee51afeac2
+                    }
+
+		     },'json');
            
         }
         ,btn2:function(){
+
             layer.msg('返回中')
             return back;
+
         }});
     });
 
-
+    
 </script>
 @endsection

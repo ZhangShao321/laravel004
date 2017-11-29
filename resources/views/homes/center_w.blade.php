@@ -1,6 +1,6 @@
 @extends('homes.layout.moban')
 
-@section('title','个人订单')
+@section('title','未完成订单')
 
 @section('content')
 
@@ -13,83 +13,64 @@
                 <ul class="breadcrumb">
                     <li><a href="{{url('/homes/index')}}">首页</a></li>
                     
-                    <li class="active">个人订单(已完成)</li>
+                    <li class="active">未完成订单</li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
-   @if (session('msg'))
-        <div class="mws-form-message success">
-            <ul>
-                {{session('msg')}}
-            </ul>
-        </div>
-    @endif
+
 <!-- heading-banner start -->
-        <table   aria-describedby="DataTables_Table_1_info" id="DataTables_Table_1" class="mws-datatable-fn mws-table dataTable">
+        <table aria-describedby="DataTables_Table_1_info" id="DataTables_Table_1" class="mws-datatable-fn mws-table dataTable">
             <thead>
-                <tr role="row" align="center">
-                    <th  aria-label="Rendering engine: activate to sort column descending"
-                    aria-sort="ascending" style="text-align:center;width: 156px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_1" 
+                <tr role="row">
+                    <th aria-label="Rendering engine: activate to sort column descending"
+                    aria-sort="ascending" style="text-align:center;width: 156px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_1"
                     tabindex="0" role="columnheader" class="sorting_asc">
                         电影院
                     </th>
-                    <th  aria-label="Browser: activate to sort column ascending" style="text-align:center;width: 212px;"
+                    <th aria-label="Browser: activate to sort column ascending" style="text-align:center;width: 212px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
                         电影
                     </th>
-                    <th  aria-label="Platform(s): activate to sort column ascending" style="text-align:center;width: 197px;"
+                    <th aria-label="Platform(s): activate to sort column ascending" style="text-align:center;width: 197px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
                         影厅
                     </th>
                   
-                    <th  aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
+                    <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
                         放映时间
                     </th>
-                    <th  aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
+                    <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
                         排_座
                     </th>
-                    <th  aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
+                    <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        价格 /元
+                        价格
                     </th>
-                    <th  aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
+                    <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
                         购票时间
                     </th>
-                    <th  aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
-                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
-                    role="columnheader" class="sorting">
-                        详细地址
-                    </th>
-                    <th  aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
-                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
-                    role="columnheader" class="sorting">
-                        订单号
-                    </th>
                      
-                    <th  aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
+                    <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 200px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
                         操作
                     </th>
                 </tr>
             </thead>
-             
-            
             <tbody aria-relevant="all" aria-live="polite" role="alert">
              
                 @foreach($res as $K=>$v)
-                @if($v->status==0)
                 <tr class="odd" align="center">
                     <td class="sorting_1">
                     {{$v->cinema}}    
@@ -122,33 +103,22 @@
                     </td>
 
                     <td class="sorting_1">
-                    {{round($v->price,2)}}  
+                    {{$v->price}}   
                     </td>
 
                     <td class="sorting_1">
-                    {{date('Y-m-d H:i:s',$v->time)}}    
+                    {{$v->time}}    
                     </td>
-
+                
                     <td class="sorting_1">
-                    {{$v->address}}    
-                    </td>
-                    
-                    <td class="sorting_1">
-                    {{$v->num}}    
-                    </td>
-                    <td class="sorting_1">
-                         
-                        
-                            {{csrf_field()}}
-                             
-                        <a href="{{url('/homes/delete/'.$v->id)}}"><button class='btn btn-default'>删除</button></a>
-                     
+                       <a href="/homes/piao?id=seat_{{ $v->num }}"><button class='btn btn-default'>马上付款</button></a>
+                       
+                        <button id="{{ $v->num }}" class='btn btn-default dels'>删除</button>
+                       
                         
                     </td>
 
                 </tr>
-
-                @endif
                 @endforeach
             </tbody>
         </table>
@@ -156,5 +126,18 @@
 
 @endsection
 
- 
- 
+@section('js')
+<script>
+	
+$('.dels').click(function(){
+
+	var num= $(this).attr('id');
+
+	$.post('{{ url("/homes/ticket/dodel") }}', {_token:'{{ csrf_token() }}', num:num}, function(data){
+
+		console.log(data);
+	})
+})
+
+</script>
+@endsection

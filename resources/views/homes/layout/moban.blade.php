@@ -99,10 +99,10 @@
                             <tr align="right">
                                 <td>
                                     <a class="user_info_login" href="/homes/login" style="color:purple">
-                                        <button class="btn btn-default btn-sm">登录</button>
+                                        <button style="background:#eee" class="btn btn-default btn-sm">登录</button>
                                     </a>&nbsp;&nbsp;&nbsp;
                                     <a class="user_info_reg" href="/homes/register" style="color:purple">
-                                        <button class="btn btn-default btn-sm">注册</button>
+                                        <button style="background:#eee" class="btn btn-default btn-sm">注册</button>
                                     </a>&nbsp;&nbsp;&nbsp;
                                    
                                 </td>
@@ -119,22 +119,24 @@
                                 <?php
                                     $uid  = session('uid');
                                     $ures = DB::table('userDetail')->where('uid',$uid)->first();
+
                                 ?>
-                                    @if(!$ures->photo)
-                                        <td rowspan="2"><a href=""><img src="/homes/img/default.jpg" style="width:57px;height:57px;float:right"></a></td>
-                                    @else
-                                        <td rowspan="2"><a href=""><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$ures->photo}}?imageView2/0/w/57/h/57 " style="width:57px;height:57px;float:right"></a></td>
-                                    @endif    
+
+                                     
+                                <td rowspan="2"><a href=""><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$ures->photo}}?imageView2/0/w/57/h/57 " style="width:57px;height:57px;float:right"></a></td>
+                 
+                                 
+
                                
                             </tr>
                             <tr>
                                 <td>
                                     
                                     <a class="user_info_reg" href="/homes/details" style="color:purple">
-                                        <button class="btn btn-default btn-sm">个人中心</button>
+                                        <button style="background:#eee" class="btn btn-default btn-sm">个人中心</button>
                                     </a>&nbsp;&nbsp;&nbsp;
                                     <a class="user_info_reg" href="/homes/deletes" style="color:purple">
-                                        <button class="btn btn-default btn-sm">退出</button>
+                                        <button style="background:#eee" class="btn btn-default btn-sm">退出</button>
                                     </a>
                                 </td>
                             </tr>
@@ -191,7 +193,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-4">
                     <div class="footer-widget">
 
-                        <img src="{{asset('/homes/img/logo/logo.gif')}}" alt="" />
+                        <img src="{{asset('/homes/img/logo/logo3.jpg')}}" alt="" />
             <p>
                             <h4 style="color:white">
                                 傻家伙影视是一家成立了好多好多年的超清好多好多好多D的集好多好多种娱乐项目为一体的超超超超超超大型电影院
@@ -282,7 +284,7 @@
                                     </i>
                                 </a>
                                 <a href="{{url('/homes/add')}}" style="color:white">
-                                    申请商户
+                                    加入我们
                                 </a>
                             </li>
                         </ul>

@@ -175,15 +175,24 @@
 		if(checktel == 100 && checkverifyCode == 100 && checkpassword == 100 && checkrelpassword == 100){
 	       	// 发送ajax
     		$.post("{{url('/homes/doregister')}}",{phone:phone,code:code,password:password,'_token':"{{csrf_token()}}"},function(data) {
+
     					
-    			if(data)
+    			if(data=='1')
     			{
     				layer.open({
                         content: '注册成功!!'
                     });
 
-    			}
+
+                    window.location.href="{{url('/homes/login')}}";
+
+    			}else if(data=='0'){
+                    layer.open({
+                        content: '注册失败,请重新注册!!'
+                    });
+                }
     		})
+
 
 	 	}else{
             layer.open({
