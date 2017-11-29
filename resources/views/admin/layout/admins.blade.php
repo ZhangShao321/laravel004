@@ -160,7 +160,7 @@
                         <ul class='closed'>                         
 
                             <li><a href="/admin/request">申请列表</a></li>
-
+                            <li><a href="/admin/request/create">未通过申请</a></li>
                         </ul>
                     </li>
 

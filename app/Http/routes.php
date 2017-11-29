@@ -82,6 +82,8 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台申请管理
 		Route::resource('/request','RequestController');
+        Route::get('/reques/{id}','RequestController@fou');
+        Route::get('/reque/{id}','RequestController@not');
 
 		//后台影视分类
 		Route::resource('/film','FilmController');

@@ -27,7 +27,7 @@ class RequestController extends Controller
             //选择需要用的字段查询
             ->select('cinema.id','cinema.cinema','cinema.phone','cinema.clogo','cinema.time','cinema.legal','cinema.status','cininfo.city','cininfo.area','cininfo.address','cinlogin.cinema','cinlogin.time','cinlogin.status')
             ->where('cinema.cinema','like','%'.$request->input('search').'%')
-            ->where('cinema.status','<',2)
+            ->where('cinema.status','=',1)
             ->orderBy('cinema.id','asc')
             ->paginate($request->input('num',10));
 
@@ -41,9 +41,26 @@ class RequestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-  
+        //拿到状态为0的数据
+        $res = DB::table('cinema')    
+
+             //将三张表拼接起来 
+             //链接两个表的方法join
+             //join('表名','主表id','与主表关联的附表的关联id')
+            ->join('cininfo','cininfo.cid', '=', 'cinema.id')->join('cinlogin','cinlogin.cid', '=', 'cinema.id')  
+
+            //选择需要用的字段查询
+            ->select('cinema.id','cinema.cinema','cinema.phone','cinema.clogo','cinema.time','cinema.legal','cinema.status','cininfo.city','cininfo.area','cininfo.address','cinlogin.cinema','cinlogin.time','cinlogin.status')
+            ->where('cinema.cinema','like','%'.$request->input('search').'%')
+            ->where('cinema.status','=',0)
+            ->orderBy('cinema.id','asc')
+            ->paginate($request->input('num',10));
+
+            // echo "<pre>";
+            // var_dump($res);die;
+            return view('admin.request.not',['res'=>$res,'request'=>$request]);
     }
 
     /**
@@ -115,18 +132,65 @@ class RequestController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    // public function destroy($id)
+    // {
+    //    DB::beginTransaction();
+
+    //     $res = DB::table('cinema')->where('id',$id)->delete();
+    //     $res = DB::table('cinlogin')->where('cid',$id)->delete();
+
+    //     if($res=1 || $res=0){
+    //         DB::commit();
+    //         return redirect('/admin/request')->with('删除成功');
+    //     }else{
+    //         return back();
+    //     }
+    // }
+
+    public function fou($id)
     {
-       DB::beginTransaction();
 
-        $res = DB::table('cinema')->where('id',$id)->delete();
-        $res = DB::table('cinlogin')->where('cid',$id)->delete();
+        // echo "11111111";
+        $res = DB::table('cinema')    
+             //将两张表拼接起来 
+             //链接两个表的方法join
+             //join('表名','主表id','与主表关联的附表的关联id')
+            ->join('cinlogin','cinlogin.cid', '=', 'cinema.id')   
+            ->select('cinema.id','cinema.status','cinlogin.status')
+            //选择需要用的字段查询
+            ->where('cinema.id',$id)
+            ->orwhere('cinema.status','=',1)->first();
+            
 
-        if($res=1 || $res=0){
-            DB::commit();
-            return redirect('/admin/request')->with('删除成功');
-        }else{
-            return back();
-        }
+            // echo "<pre>";
+            // var_dump($aa);die; 
+            $ress = DB::table('cinema')->where('id',$id)->update(['status'=>0]);
+            $ress2 = DB::table('cinlogin')->where('cid',$id)->update(['status'=>0]);
+
+        //     echo "<pre>";
+        //     var_dump($res);die;
+        return redirect('/admin/request');
+    }
+
+    public function not($id)
+    {
+        $res = DB::table('cinema')    
+             //将两张表拼接起来 
+             //链接两个表的方法join
+             //join('表名','主表id','与主表关联的附表的关联id')
+            ->join('cinlogin','cinlogin.cid', '=', 'cinema.id')   
+            ->select('cinema.id','cinema.status','cinlogin.status')
+            //选择需要用的字段查询
+            ->where('cinema.id',$id)
+            ->orwhere('cinema.status','=',0)->first();
+
+            // echo "<pre>";
+            // var_dump($aa);die; 
+            $ress = DB::table('cinema')->where('id',$id)->update(['status'=>1]);
+            $ress2 = DB::table('cinlogin')->where('cid',$id)->update(['status'=>1]);
+
+        //     echo "<pre>";
+        //     var_dump($res);die;
+        return redirect('/admin/request/create');
     }
 }
