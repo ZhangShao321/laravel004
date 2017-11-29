@@ -182,13 +182,11 @@
                         window.location.href="/homes/center";
 
                     } else {
-<<<<<<< HEAD
-                        layer.msg('票已出售')
-=======
+
 
                         layer.msg('此票已售出');
 
->>>>>>> e4c2b1f1f40faadc7fc1eed0e7881bee51afeac2
+
                     }
 
 		     },'json');

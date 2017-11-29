@@ -192,6 +192,7 @@
                                      <button name="{{$v->id}}"  class="btn btn-default bbb">上映</button>
                                      <button name="{{$v->id}}"  class="btn btn-default aaa">删除</button>
                                    </td>
+                                   <td></td>
                                 </tr>
                      @endforeach 
 
@@ -252,7 +253,7 @@
                             url: "{{url('/FilmAdmins/offDel')}}",
                             data: 'id='+id,
                             success: function(msg){
-                              alert(msg);
+                              // alert(msg);
                               // console.log(msg);
                                location.reload();  
                             }
@@ -333,7 +334,7 @@
 </script>
 
 
-@endsection;
+@endsection
 
 
 

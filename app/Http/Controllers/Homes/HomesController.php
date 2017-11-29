@@ -374,6 +374,11 @@ class HomesController extends Controller
         $newshownum =  $res1['shownum'] +'1';
         $newmoney = $money['money'] + $price;
 
+        //个人钱包
+        $muser = DB::table('userDetail')->where('uid',session('uid'))->first()->umoney;
+
+        $newumoney = $muser - $price;
+
         //获取订单信息
         $data = Redis::hgetall($num);
 
@@ -394,11 +399,12 @@ class HomesController extends Controller
         $nums = film::where('filmname',$name)->update(['shownum'=>$newshownum]);
         //修改电影院钱包
         $mon = money::where('cid',$res['id'])->update(['money'=>$newmoney]);
-        
+        //修改个人钱包
+        $user = DB::table('userDetail')->where('cid',session('uid'))->update(['umoney'=>$newumoney]);
         //存储订单
         $id = DB::table('ticket')->insertGetId($data);
 
-        if($id && $nums && $mon){
+        if($id && $nums && $mon && $user){
 
             DB::commit();
             echo 1;

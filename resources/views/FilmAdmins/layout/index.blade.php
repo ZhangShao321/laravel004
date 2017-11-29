@@ -107,14 +107,13 @@
     background-color:#947131;
 }
 
-
-    
+ 
 </style>
 
+@section('css')
 
 
-
-
+@show
 
 
 
@@ -339,7 +338,7 @@
     <script src="{{asset('/FilmAdmin/jui/js/jquery.ui.touch-punch.js')}}"></script>
 
     <!-- Plugin Scripts -->
-    <script src="{{asset('/FilmAdmin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/plugins/datatables/jquery.dataTables.js')}}"></script>
     <!--[if lt IE 9]>
     <script src="/FilmAdmin/js/libs/excanvas.min.js"></script>
     <![endif]-->

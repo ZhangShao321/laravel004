@@ -191,6 +191,8 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('offDel','FilmMsgController@FilmMsgDel');
             //修改下架影片是否上映
             Route::get('OffUpdate','FilmMsgController@updetSta');
+            //下架电影
+            Route::post('/film/off','FilmMsgController@dofilmoff');
 
 
 
