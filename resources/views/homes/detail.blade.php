@@ -94,13 +94,13 @@
                                         <label class="am-form-label">性别</label>
                                         <div class="am-form-content sex">
                                             <label class="am-radio-inline">
-                                                <input type="radio" name="sex" @if($re->sex == 'm') checked @endif value="{{$re->sex}}" data-am-ucheck> 男
+                                                <input type="radio" name="sex" @if($re->sex == 'm') checked @endif value="m" data-am-ucheck> 男
                                             </label>
                                             <label class="am-radio-inline">
-                                                <input type="radio" name="sex" @if($re->sex == 'w') checked @endif value="{{$re->sex}}" data-am-ucheck> 女
+                                                <input type="radio" name="sex" @if($re->sex == 'w') checked @endif value="w" data-am-ucheck> 女
                                             </label>
                                             <label class="am-radio-inline">
-                                                <input type="radio" name="sex" value="{{$re->sex}}" data-am-ucheck> 保密
+                                                <input type="radio" name="sex" @if($re->sex == 'x') checked @endif value="x" data-am-ucheck> 保密
                                             </label>
                                         </div>
                                     </div>
@@ -123,7 +123,7 @@
                                 <div class="am-form-group">
                                     <label for="user-phone" class="am-form-label">电话</label>
                                     <div class="am-form-content">
-                                        <input id="user-phone" placeholder="telephonenumber" type="tel" name="phone" value="{{$user->phone}}">
+                                        <input id="user-phone" readonly="readonly" placeholder="telephonenumber" type="tel" name="phone" value="{{$user->phone}}">
 
                                     </div>
 

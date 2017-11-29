@@ -7,7 +7,7 @@
         
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
-        <span>添加影厅</span>
+        <span><a href="/FilmAdmins/room/list">影厅列表</a> | 添加影厅</span>
     </div>
     <div class="mws-panel-body no-padding">
 

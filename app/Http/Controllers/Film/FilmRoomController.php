@@ -206,6 +206,11 @@ class FilmRoomController extends Controller
     {
         $data = DB::table('roominfo')->where('id',$id)->first();
 
+        if(!$data->sid){
+
+            return view('/FilmAdmins/FilmRoom/seat', ['id'=>$id]);
+        }
+
         $sid = $data->sid;
 
         $res = DB::table('seat')->where('id',$sid)->first();

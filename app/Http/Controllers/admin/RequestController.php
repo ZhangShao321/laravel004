@@ -86,12 +86,11 @@ class RequestController extends Controller
             //选择需要用的字段查询
             ->where('cinema.id',$id)
             ->orwhere('cinema.status','=',1)->first();
-            $aa = $res->status == 1 ? 2 : 1;
 
             // echo "<pre>";
             // var_dump($res);die; 
-            $ress = DB::table('cinema')->where('id',$id)->update(['status'=>$aa]);
-            $ress2 = DB::table('cinlogin')->where('cid',$id)->update(['status'=>$aa]);
+            $ress = DB::table('cinema')->where('id',$id)->update(['status'=>2]);
+            $ress2 = DB::table('cinlogin')->where('cid',$id)->update(['status'=>2]);
 
         //     echo "<pre>";
         //     var_dump($res);die;

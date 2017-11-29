@@ -55,7 +55,7 @@ class FilmLoginController extends Controller
        
 
         //判断用户是否存在
-        $ddd = cinlogin::where('cinema',$res['cinema'])->first();
+        $ddd = cinlogin::where('cinema',$res['cinema'])->where('status',2)->first();
 
         echo "<pre>";
 

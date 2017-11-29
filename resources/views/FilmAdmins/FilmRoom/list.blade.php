@@ -90,6 +90,8 @@ $('.del').click(function(){
       $.post("/FilmAdmins/room/delete/"+ids,{_token:'{{ csrf_token() }}'}, function(data){
 
             layer.msg(data, {icon: 1});
+
+            window.location.reload();
         })
     });
 

@@ -50,6 +50,9 @@ class HomesCenterController extends Controller
             $cid = $v->cid;
             $v->cinema = DB::table('cinema')->where('id',$cid)->first()->cinema;
 
+            //电影院地址
+            $v->address = DB::table('cininfo')->where('cid',$cid)->first()->address;
+
             //电影
             $fid = $v->fid;
             $v->filmname = DB::table('film')->where('id',$fid)->first()->filmname;

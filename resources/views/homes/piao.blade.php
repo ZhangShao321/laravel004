@@ -187,7 +187,7 @@
                         layer.msg('购票成功');
                         window.location.href="/homes/center";
                     } else {
-                        layer.msg('购票失败')
+                        layer.msg('票已出售')
                     }
 
 		     },'json');
