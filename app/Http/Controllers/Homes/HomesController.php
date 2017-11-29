@@ -33,7 +33,7 @@ class HomesController extends Controller
     public function index()
     {   
         //热映电影数据
-        $res = film::orderBy('shownum','desc')->limit('3')->get();
+        $res = film::where('status','1')->orderBy('shownum','desc')->limit('3')->get();
 
         //轮播图数据
         $res1 = lunbo::get();
@@ -52,13 +52,13 @@ class HomesController extends Controller
     {
 
         //电影列表数据
-        $res = film::paginate(2);
+        $res = film::where('status','1')->paginate(2);
 
         //电影类型数据
-        $type = DB::table('filmtype')->where('status',1)->get();
+        $type = DB::table('filmtype')->where('status','1')->get();
 
         //电影排行榜数据
-        $res1 = film::orderBy('shownum','desc')->limit('3')->get();
+        $res1 = film::where('status','1')->orderBy('shownum','desc')->limit('3')->get();
 
        //加载电影列表
         return view('homes/filmlist',['res' => $res,'res1'=>$res1,'type'=>$type]);
@@ -79,6 +79,7 @@ class HomesController extends Controller
                 ->join('cinema','showfilm.cid','=','cinema.id')
                 ->join('cininfo','cinema.id','=','cininfo.cid')
                 ->select('showfilm.id','showfilm.time','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
+                ->where('showfilm.status','1')
                 ->get();
 
         //加载电影详情页面
@@ -91,7 +92,7 @@ class HomesController extends Controller
     public function cinemalist()
     {
         //电影院列表数据
-        $res = cinema::paginate(2);
+        $res = cinema::where('cinema.status','2')->paginate(2);
 
         //加载电影院列表页面
         return view('homes/cinemalist',['res' => $res]);
@@ -109,10 +110,9 @@ class HomesController extends Controller
 
         //该影院上映的电影数据
         $res2 = showfilm::where('showfilm.cid','=',$request->id)
-
                         ->join('film','film.id','=','showfilm.fid')
-                        ->where('film.status','1')
-                        ->select('film.filmname','film.filepic','film.price','showfilm.id')
+                        ->where('showfilm.status','1')
+                        ->select('film.filmname','film.filepic','film.price','showfilm.id','showfilm.time')
                         ->get();
         
         //加载电影院详情页面
@@ -213,7 +213,7 @@ class HomesController extends Controller
     {
         //获取该类型的影片数据
         $tid = $request->id;
-        $res = film::where('tid',$tid)->where('status',1)->get();
+        $res = film::where('tid',$tid)->where('status','1')->get();
 
         //加载该类型的影片页面
         return view('homes/search',['res' => $res]);
