@@ -243,35 +243,24 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 //===============================前台信息=============================
 
 
-
-
-
 Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 	//前台首页
 	Route::get('index','HomesController@index');
 
-	//电影列表页
+	//电影列表页面
 	Route::get('filmlist','HomesController@filmlist');
 
-	//电影详情页
+	//电影详情页面
 	Route::get('filmdetail','HomesController@filmdetail');
 
-	//电影院列表页
+	//电影院列表页面
 	Route::get('cinemalist','HomesController@cinemalist');
 
-
-
-   
-  
-
-
-
-
-	//电影院详情
+	//电影院详情页面
     Route::get('cinemadetail','HomesController@cinemadetail');
 
-    //申请商户
+    //申请商户页面
 	Route::get('add','HomesController@add');
     Route::post('store','HomesController@store');
 
@@ -281,7 +270,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     //查看各类型电影的页面
     Route::get('type','HomesController@type');
 
-    //订座
+    //订座页面
     Route::get('dingpiao','HomesController@dingpiao');
     Route::post('/shopseat/{id}','HomesController@shopseat');
     Route::post('/shopseat_into/{id}','HomesController@shopseat_into');

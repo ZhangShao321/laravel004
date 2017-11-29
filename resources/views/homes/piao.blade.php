@@ -75,9 +75,6 @@
                 <label class="item-td check">
                 </label>
                 <div class="item-td order-info">
-                    <!--<a class="movie-pic" href="javascript:;" target="_blank">
-                    <img src="" alt="">
-                    </a>-->
                     <div class="order-detail">
                         <p data-data="{&quot;movieId&quot;:95124}" data-url="/movie/detail" class="order-name">
                            <h3 id="name">{{ $film->filmname }}</h3> 
@@ -86,7 +83,6 @@
                             <span>
                                 <!-- 国语&nbsp;&nbsp;2D -->
                             </span>
-                            <!--<span class="last">1511526000</span>-->
                         </p>
                         <ul class="threat-info font14">
                             <li data-data="{&quot;cinemaId&quot;:1019}" data-url="/cinema/detail"
@@ -141,9 +137,7 @@
                         ¥{{ $piao['price']}}.00
                     </p>
                 </div>
-                <!--<div class="split-hozline"></div>-->
             </li>
-            <!-- 衍生品 -->
         </ul>
     </div>
     <div class="confirm font-shadow text-right" style="padding-right:20px">
@@ -182,20 +176,29 @@
             
 		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name,id:id},function(data){
                     
-		     		
                     if (data == 1) {
+
                         layer.msg('购票成功');
                         window.location.href="/homes/center";
+
                     } else {
+<<<<<<< HEAD
                         layer.msg('票已出售')
+=======
+
+                        layer.msg('此票已售出');
+
+>>>>>>> e4c2b1f1f40faadc7fc1eed0e7881bee51afeac2
                     }
 
 		     },'json');
            
         }
         ,btn2:function(){
+
             layer.msg('返回中')
             return back;
+
         }});
     });
 

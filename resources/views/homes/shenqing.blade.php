@@ -27,7 +27,7 @@
             电影院名称
         </label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="inputEmail3" placeholder="请输入影院名字" name="cinema" id="cinema">
+            <input type="text" class="form-control"  placeholder="请输入影院名字(最少两个字符)" name="cinema" id="cinema">
         </div>
     </div>
     <div class="form-group">
@@ -35,7 +35,7 @@
             电影院法人
         </label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="legal" placeholder="请输入法人名字" name="legal">
+            <input type="text" class="form-control" id="legal" placeholder="请输入法人名字(0~6个字符)" name="legal">
         </div>
     </div>
     <div class="form-group">
@@ -43,7 +43,7 @@
             联系电话
         </label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="phone" placeholder="请输入手机号" name="phone">
+            <input type="text" class="form-control" id="phone" placeholder="请输入手机号(11位)" name="phone">
         </div>
     </div>
     <div class="form-group">
@@ -51,7 +51,7 @@
             密码
         </label>
         <div class="col-sm-5">
-            <input type="password" class="form-control" id="password" placeholder="请输入密码" name="password">
+            <input type="password" class="form-control" id="password" placeholder="请输入密码(6~12个字符)" name="password">
         </div>
     </div>
     <div class="form-group">
@@ -85,7 +85,7 @@
             电影院执照
         </label>
         <div class="col-sm-5">
-            <input type="file" id="exampleInputFile" name="license">
+            <input type="file" id="license" name="license">
         </div>
     </div>
     <input type="hidden" id="time" name="time" value="{{time()}}">
@@ -106,6 +106,8 @@
 @section('js')
 <script type="text/javascript">
 
+    var inpu = $('#cinema').val();
+    
     //弹框
     $('#fun').click(function(){
 

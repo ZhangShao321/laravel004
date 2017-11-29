@@ -193,7 +193,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-4">
                     <div class="footer-widget">
 
-                        <img src="{{asset('/homes/img/logo/logo.gif')}}" alt="" />
+                        <img src="{{asset('/homes/img/logo/logo3.jpg')}}" alt="" />
             <p>
                             <h4 style="color:white">
                                 傻家伙影视是一家成立了好多好多年的超清好多好多好多D的集好多好多种娱乐项目为一体的超超超超超超大型电影院
