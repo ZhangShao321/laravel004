@@ -21,7 +21,7 @@
                           影厅名称
                         </label>
                         <div class="mws-form-item">
-                            <input type="text" name="roomname" value="{{ $res['roomname'] }}" class="small"><span></span>
+                            <input type="text" name="roomname" value="{{ $res->roomname }}" class="small"><span></span>
                         </div>
 
                     </div>
@@ -33,7 +33,7 @@
                         影厅类型
                         </label>
                         <div class="mws-form-item">
-                            <input type="text" name="roomtype" value="{{ $res['roomtype'] }}" class="small"><span></span>
+                            <input type="text" name="roomtype" value="{{ $res->roomtype }}" class="small"><span></span>
                         </div>
                     </div>
                     <br>
