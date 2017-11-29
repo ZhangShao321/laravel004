@@ -39,11 +39,18 @@
                     </td>
                     <td>
 
-                        <a href="/FilmAdmins/room/edit/{{ $v->id }}"><button>编辑</button></a>
+
+                        <!-- <a href="/FilmAdmins/room/edit/{{ $v->id }}"><button>编辑</button></a> -->
 
                         <!-- <a href="/FilmAdmins/room/delete/{{ $v->id }}"></a> -->
+                        <!-- <button id="{{ $v->id }}" class="del">删除</button> -->
+                        <!-- <a href="/FilmAdmins/room/seats/{{ $v->id }}"><button>座位</button></a> -->
+
+                        <a href="{{asset('/FilmAdmins/room/edit/id='). $v->id}}"><button>编辑</button></a>
+
                         <button id="{{ $v->id }}" class="del">删除</button>
-                        <a href="/FilmAdmins/room/seats/{{ $v->id }}"><button>座位</button></a>
+                        <a href="{{asset('/FilmAdmins/room/seats?id='). $v->id }}"><button>座位</button></a>
+
                     </td>
                 </tr>
             @endforeach   

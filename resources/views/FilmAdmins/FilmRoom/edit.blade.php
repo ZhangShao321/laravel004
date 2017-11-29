@@ -11,7 +11,7 @@
         <span><a href="/FilmAdmins/room/list">影厅列表</a> | 编辑影厅</span>
     </div>
     <div class="mws-panel-body no-padding">
-        <form class="mws-form" action="/FilmAdmins/room/update/{{ $res->id }}" method="post">
+        <form class="mws-form" action="{{asset('/FilmAdmins/room/update/id='). $res['id']}}" method="post">
               <div class="mws-form-inline">
                     <br>
                     <br>
@@ -21,7 +21,7 @@
                           影厅名称
                         </label>
                         <div class="mws-form-item">
-                            <input type="text" name="roomname" value="{{ $res->roomname }}" class="small"><span></span>
+                            <input type="text" name="roomname" value="{{ $res['roomname'] }}" class="small"><span></span>
                         </div>
 
                     </div>
@@ -33,7 +33,7 @@
                         影厅类型
                         </label>
                         <div class="mws-form-item">
-                            <input type="text" name="roomtype" value="{{ $res->roomtype }}" class="small"><span></span>
+                            <input type="text" name="roomtype" value="{{ $res['roomtype'] }}" class="small"><span></span>
                         </div>
                     </div>
                     <br>

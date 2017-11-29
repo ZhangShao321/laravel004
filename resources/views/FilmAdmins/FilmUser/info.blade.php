@@ -24,9 +24,11 @@
 			                    </label>
 			                    <div class="mws-form-item">
 
-			                        <input type="text" name="cinema" class="medium" value="{{$res->cinema}}">
 
-			                        <!-- <input type="text" name="cinema" class="medium" value="{{$res['cinema']}}"> -->
+			                        <!-- <input type="text" name="cinema" class="medium" value="{{$res->cinema}}"> -->
+
+			                        <input type="text" name="cinema" class="medium" value="{{$res['cinema']}}">
+
 
 			                    </div>
 			                </div>
@@ -36,7 +38,9 @@
 			                    </label>
 			                    <div class="mws-form-item">
 
+
 			                        <!-- <input type="text" name="legal" value="{{$res->legal}}" class="medium"> -->
+
 
 			                        <input type="text" name="legal" value="{{$res['legal']}}" class="medium">
 
@@ -48,7 +52,9 @@
 			                    </label>
 			                    <div class="mws-form-item">
 
+
 			                        <!-- <input type="text" name="phone" value="{{$res->phone}}" class="medium"> -->
+
 
 			                        <input type="text" name="phone" value="{{$res['phone']}}" class="medium">
 
@@ -61,7 +67,9 @@
 			                    </label>
 			                    <div class="mws-form-item">
 
+
 			                        <!-- <input type="text" name="city" value="{{$res->city}}" class="medium"> -->
+
 
 			                        <input type="text" name="city" value="{{$res['city']}}" class="medium">
 
@@ -75,7 +83,9 @@
 			                    </label>
 			                    <div class="mws-form-item">
 
+
 			                        <!-- <input type="text" name="area" value="{{$res->area}}" class="medium"> -->
+
 
 			                        <input type="text" name="area" value="{{$res['area']}}" class="medium">
 
@@ -89,8 +99,10 @@
 			                    <div class="mws-form-item">
 			                    	<select class="large" name="status">
 
+
                                           <!-- <option  value="0" @if($res->status == 0) selected  @endif >关闭</option> -->
                                           <!-- <option  value="1"@if($res->status == 1) selected  @endif >开启 </option> -->
+
 
                                           <option  value="0" @if($res['status'] == 0) selected  @endif >关闭</option>
                                           <option  value="1"@if($res['status'] == 1) selected  @endif >开启 </option>
@@ -108,7 +120,9 @@
 			                    	<div style="width:180px;height:220px;border:1px solid #C5C5C5;margin-bottom: 5px">
 			                    		
 
+
 										  <!-- <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$res->clogo.'?imageView2/0/w/220/h/220')}}" style="width:100%;height:218px;" > -->
+
 
 										  <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$res['clogo'].'?imageView2/0/w/220/h/220')}}" style="width:100%;height:218px;" >
 
@@ -128,7 +142,9 @@
 			                    	<div style="width:180px;height:220px;border:1px solid #C5C5C5;margin-bottom: 5px">
 			                    		
 
+
 										  <!-- <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$res->license.'?imageView2/0/w/220/h/220')}}" style="width:100%;height:218px;" > -->
+
 
 										  <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$res['license'].'?imageView2/0/w/220/h/220')}}" style="width:100%;height:218px;" >
 
@@ -148,7 +164,9 @@
 			                    <div class="mws-form-item">
 			                        <textarea class="medium" name="address" cols="" rows="">
 
+
 			                        	<!-- {{$res->address}} -->
+
 
 			                        	{{$res['address']}}
 
