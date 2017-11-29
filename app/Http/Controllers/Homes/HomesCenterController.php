@@ -64,6 +64,7 @@ class HomesCenterController extends Controller
             //放映
             $showid = $v->showid;
             $show = DB::table('showfilm')->where('id',$showid)->first();
+            // var_dump($show);die;
             $v->showtime = $show->time;
 
             //座位
