@@ -20,9 +20,6 @@ class FilmShowController extends Controller
     {
 
       //多表查询
-      
-                    ->paginate(10);
-
 
          $roo = showfilm::where('showfilm.cid',session('cid'))
                         ->where('showfilm.timeout','>',time())

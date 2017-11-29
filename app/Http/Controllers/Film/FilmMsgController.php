@@ -23,7 +23,10 @@ class FilmMsgController extends Controller
     {
         
         //分页查询
-        $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('cid'))->paginate($request->input('num',10));
+        $film = film::where('filmname','like','%'.$request->input('seach').'%')
+                      ->where('cid',session('cid'))
+                      ->where('status','=','1')
+                      ->paginate($request->input('num',10));
 
 
         $sta = array(0=>'下架',1=>'上映');
@@ -281,6 +284,82 @@ class FilmMsgController extends Controller
 
      }
 
+
+      public  function FilmMsgOff(Request $request)
+      {
+
+
+          $film = film::where('filmname','like','%'.$request->input('seach').'%')
+                      ->where('cid',session('cid'))
+                      ->where('status','=','0')
+                      ->paginate($request->input('num',10));
+
+         $sta = array(0=>'下架',1=>'上映');
+
+        
+        return view('FilmAdmins.FilmMag.FilmMsgOff',['film'=> $film,'request'=>$request,'sta'=>$sta]);
+        
+
+ 
+      }
+
+
+    public function FilmMsgDel(Request $request)
+    {
+
+
+       //获取影片id
+         $id = $request->only('id');
+         $del = film::find($id);
+         // echo $id;
+
+
+          //删除原先的图片
+          $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+          $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
+
+          //初始化Auth状态：
+          $auth = new Auth($accessKey, $secretKey);
+
+          //初始化BucketManager
+          $bucketMgr = new BucketManager($auth);
+
+          //你要测试的空间， 并且这个key在你空间中存在
+          $bucket = 'laravel-upload';
+          $key = 'Uplodes/'.$del[0]->filepic;
+
+          //删除$bucket 中的文件 $key
+          $err = $bucketMgr->delete($bucket, $key);
+
+
+
+            // $res = $del->delete();
+           if(film::where('id',$id)->delete())
+           {
+            echo "删除成功!";
+           }else{
+            echo "删除失败!";
+           }
+
+
+    }
+
+    //修改下架影片是否上映
+    public function updetSta(Request $request)
+    {
+        
+        $id =  $request->only('fid')['fid'];
+
+         $dd =film::where('id',$id)->update(['status'=>1]);
+        if($dd)
+         {
+            echo '上映成功';
+         }else{
+          echo "上映失败";
+           }
+
+
+    }
                
 
 

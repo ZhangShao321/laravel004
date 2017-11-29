@@ -11,7 +11,7 @@
         <span><a href="/FilmAdmins/room/list">影厅列表</a> | 编辑影厅</span>
     </div>
     <div class="mws-panel-body no-padding">
-        <form class="mws-form" action="{{asset('/FilmAdmins/room/update/id='). $res['id']}}" method="post">
+        <form class="mws-form" action='/FilmAdmins/room/update/{{ $res->id }}' method="post">
               <div class="mws-form-inline">
                     <br>
                     <br>
