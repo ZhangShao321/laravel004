@@ -7,10 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Http\Model\ticket;
+use App\Http\Model\userDetail;
 use App\Http\Model\user;
-use App\Http\Model\cinema;
-use App\Http\Model\money;
 use DB;
 
 class HomesMoneyController extends Controller
@@ -25,46 +23,40 @@ class HomesMoneyController extends Controller
     {
     	$money = $request->input('money');
 
-    	if(0 < $money ){
+    	if($money > 0){
+	    	$res = DB::table('userDetail')->where('uid',session('uid'))->first();
 
+	    	// var_dump($res);
+	    	$money1 = $res->umoney;
 
-	    	$res = DB::table('ticket')->where('uid',session('uid'))->first();
+	    	$moneys['umoney'] = $money1 + $money;
 
-	    	$cid = $res->cid;
+	    	$res1 = DB::table('userDetail')->where('uid',session('uid'))->update($moneys);
 
-	    	$res1 = DB::table('money')->where('cid',$cid)->first();
-	    	// var_dump($res1);die;
-
-	    	$id = $res1->cid;
-	    	$money1 = $res1->money;
-	 
-
-	    	$res1 = $money + $money1;
-	    	
-	    	$res2['money'] = $res1;
-	    	// $res2['id']  = 
-	    	 
-	    	$res3 = DB::table('money')->where('cid',$id)->update($res2);
-
-	    	if($res3){
-	    		return redirect('homes/moneys')->with('msg','充值成功!!');
+	    	if($res1){
+	    		return redirect('/homes/moneys')->with('msg','充值成功!!!');
 	    	}else{
-	    		return redirect('homes/moneys')->with('msg','充值失败,请重新操作!!');
+	    		return redirect('/homes/moneys')->with('msg','充值失败!!!');
 	    	}
 	    }else{
-	    	return redirect('homes/moneys')->with('msg','充值数额不正确,请重新操作!');
+
+	    	return redirect('/homes/moneys')->with('msg','充值数额不正确,请重新操作!!!');
+
 	    }
+
+
+
+
+    	 
     }
 
 
     public function store()
     {
-    	$res = DB::table('ticket')->where('uid',session('uid'))->first();
+    	$res = DB::table('userDetail')->where('uid',session('uid'))->first();
 
-	    $cid = $res->cid;
+    	// var_dump($res);die;
 
-	    $res1 = DB::table('money')->where('cid',$cid)->get();
-
-    	return view('homes/balance',['res1'=>$res1]);
+    	return view('homes/balance',['res'=>$res]);
     }
 }
