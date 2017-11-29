@@ -181,8 +181,10 @@
     				layer.open({
 
                         content: '修改成功!!'
-                        // return redirect('homes/login');
+                         
                     });
+
+                    window.location.href="{{url('/homes/login')}}";
 
     			}
     		})

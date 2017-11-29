@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
 
-        <title>个人资料</title>
+        <title>余额</title>
 
         <link href="/homes/AmazeUI-2.4.2/assets/css/admin.css" rel="stylesheet" type="text/css">
         <link href="/homes/AmazeUI-2.4.2/assets/css/amazeui.css" rel="stylesheet" type="text/css">
@@ -38,7 +38,7 @@
                     <div class="user-info">
                         <!--标题 -->
                         <div class="am-cf am-padding">
-                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">个人资料</strong> / <small>Personal&nbsp;information</small></div>
+                            <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">我的余额</strong> / <small>Personal&nbsp;information</small></div>
                         </div>
                         <hr/>
 
@@ -89,23 +89,15 @@
                                 </div>
                             @endif       
                             
-                                 <form class="am-form am-form-horizontal" action="{{url('/homes/doedit/'.$re->id)}}"  method="post" enctype="multipart/form-data">
-                                     
+                                 <form class="am-form am-form-horizontal" action="{{url('/homes/adds')}}"  method="post" enctype="multipart/form-data">
+                                    
                                     <div class="am-form-group">
-                                        <label for="user-email" class="am-form-label">上传头像</label>
+                                        <label for="user-email" class="am-form-label">余额:</label>
                                         <div class="am-form-content">
-                                            <input id="user-email" placeholder="file" type="file" name="photo" value="">
-
+                                         <input type="text" name="money" value="{{$res1['0']->money}}元"/>    
+                    
                                         </div>
                                     </div>
-                            
-                                {{ csrf_field() }}
-                                <div class="info-btn">
-                                     
-                                    <button type="submit" id="sub" class="am-btn am-btn-danger">保存修改</button>
-                                    
-
-                                </div>
 
                             </form>
                             

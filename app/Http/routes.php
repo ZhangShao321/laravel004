@@ -338,7 +338,13 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('/ticket/dodel','HomesCenterController@dodel');
 
     Route::get('/delete/{id}','HomesCenterController@delete');
- 
+    
+    //充值主页
+    Route::get('moneys','HomesMoneyController@index');
+    //充值
+    Route::post('adds','HomesMoneyController@add');
+    //余额
+    Route::get('balance','HomesMoneyController@store');
 
 
 

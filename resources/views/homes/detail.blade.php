@@ -188,7 +188,12 @@
                         <p><i class="am-icon-balance-scale"></i>我的交易</p>
                         <ul>
                             <li><a href="/homes/center">我的订单</a></li>
+
                             <li><a href="/homes/center_w">未完成订单</a></li>
+
+                            <li><a href="/homes/moneys">充值中心</a></li>
+                            <li><a href="/homes/balance">我的余额</a></li>
+
                         </ul>
                     </li>
                     <li class="person">
