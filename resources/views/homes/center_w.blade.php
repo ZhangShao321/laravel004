@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <ul class="breadcrumb">
-                    <li><a href="{{url('/homes/index')}}">首页</a></li>
+                    <li><a href="{{url('/homes/details')}}">个人中心</a></li>
                     
                     <li class="active">未完成订单</li>
                 </ul>
