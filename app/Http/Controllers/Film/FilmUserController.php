@@ -39,10 +39,6 @@ class FilmUserController extends Controller
                             ->join('cininfo','cinema.id','=','cininfo.cid')
                             ->first();
 
-               // echo "后台信息";die;
-
-              // var_dump($res);die;
-                    
 
         return view('FilmAdmins.FilmUser.info',['res'=>$res]);
     }
@@ -146,8 +142,6 @@ class FilmUserController extends Controller
     
         $res = cinema::find($id);
 
-        
-
         return view('FilmAdmins.FilmUser.Profile',['res'=>$res]);
     }
 
@@ -155,7 +149,7 @@ class FilmUserController extends Controller
     //执行修改logo
     public function doPro(Request $request)
     {
-             //先删除原先的图片
+           
 
             //1,先查询
             $find = cinema::where('id',session('cid'))->first();
@@ -243,53 +237,38 @@ class FilmUserController extends Controller
     public function  PasUpdate(Request $request)
     {
 
-        // var_dump($request->all());
-      // var_dump($request->only('oldpassword'));
-      // var_dump($request->only('newpassword'));
-      // echo $request->only('oldpassword')['oldpassword'];
+         $oldpassword = $request->only('oldpassword')['oldpassword'];
+         $newpassword = $request->only('newpassword')['newpassword'];
 
-      // var_dump('这是修改密码');
+         
+          $info =cinema::find(session('cid')); 
+          // var_dump(Hash::check($oldpassword,$info->password));
 
-      // die;
-     $oldpassword = $request->only('oldpassword')['oldpassword'];
-     $newpassword = $request->only('newpassword')['newpassword'];
-
-     
-      $info =cinema::find(session('cid')); 
-      // var_dump(Hash::check($oldpassword,$info->password));
-
-  
-
-            if(Hash::check($oldpassword,$info->password))
-            {
-               $new = Hash::make( $newpassword);
-            
-
-            
-               // $update = cinema::where('id',session('cid'))->update(['password',$new]);
-              $res =  cinema::where('id',session('cid'))->update(['password'=>$new]);
-              $res1 = cinlogin::where('cid',session('cid'))->update(['password'=>$new]);
-               
-
-                 if($res&&$res1)
-                 {
-                    echo 1;
-
-
-                 }else{
-                  echo 0;
-                 }
-            }else
-            {
-              echo 2;
-            }
-            
-            
-
-    
       
-     
-     
+
+                if(Hash::check($oldpassword,$info->password))
+                {
+                   $new = Hash::make( $newpassword);
+                
+
+                
+                   // $update = cinema::where('id',session('cid'))->update(['password',$new]);
+                  $res =  cinema::where('id',session('cid'))->update(['password'=>$new]);
+                  $res1 = cinlogin::where('cid',session('cid'))->update(['password'=>$new]);
+                   
+
+                     if($res&&$res1)
+                     {
+                        echo 1;
+
+
+                     }else{
+                      echo 0;
+                     }
+                }else
+                {
+                  echo 2;
+                }
 
       
 

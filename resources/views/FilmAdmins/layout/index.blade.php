@@ -107,14 +107,13 @@
     background-color:#947131;
 }
 
-
-    
+ 
 </style>
 
+@section('css')
 
 
-
-
+@show
 
 
 
@@ -228,6 +227,7 @@
                         <ul class="closed">
                             <li><a href="{{asset('/FilmAdmins/filmMsg')}}">影片列表</a></li>
                             <li><a href="{{asset('/FilmAdmins/filmMsgAdd')}}">添加影片</a></li>
+                            <li><a href="{{asset('/FilmAdmins/filmOff')}}">下架影片</a></li>
                            
                         </ul>
                     </li>
@@ -238,6 +238,7 @@
                         <ul class="closed">
                             <li><a href="{{asset('/FilmAdmins/filmShow')}}">放映列表</a></li>
                             <li><a href="{{asset('/FilmAdmins/filmShowAdd')}}">添加放映</a></li>
+                            <li><a href="{{asset('/FilmAdmins/history')}}">放映历史</a></li>
                            
                         </ul>
                     </li>
@@ -337,7 +338,7 @@
     <script src="{{asset('/FilmAdmin/jui/js/jquery.ui.touch-punch.js')}}"></script>
 
     <!-- Plugin Scripts -->
-    <script src="{{asset('/FilmAdmin/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/FilmAdmin/plugins/datatables/jquery.dataTables.js')}}"></script>
     <!--[if lt IE 9]>
     <script src="/FilmAdmin/js/libs/excanvas.min.js"></script>
     <![endif]-->

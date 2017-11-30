@@ -24,7 +24,7 @@
 
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
-        <span>修改座位图</span>
+        <span><a href="/FilmAdmins/room/list">影厅列表</a> | 修改座位图</span>
     </div>
     <div class="mws-panel-body no-padding">
         <form class="mws-form">

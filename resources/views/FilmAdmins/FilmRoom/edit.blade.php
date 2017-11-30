@@ -1,16 +1,17 @@
 @extends('FilmAdmins.layout.index')
 
-@section('title', '电影院修改影厅')
+@section('title', '编辑影厅')
 
 
 @section('content')
         
 <div class="mws-panel grid_8">
     <div class="mws-panel-header">
-        <span>修改影厅</span>
+        
+        <span><a href="/FilmAdmins/room/list">影厅列表</a> | 编辑影厅</span>
     </div>
     <div class="mws-panel-body no-padding">
-        <form class="mws-form" action="/FilmAdmins/room/update/{{ $res->id }}" method="post">
+        <form class="mws-form" action='/FilmAdmins/room/update/{{ $res->id }}' method="post">
               <div class="mws-form-inline">
                     <br>
                     <br>

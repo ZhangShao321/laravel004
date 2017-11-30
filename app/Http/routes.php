@@ -42,6 +42,7 @@ Route::group(['namespace'=>'Homes'], function(){
 Route::get('/admin/login','admin\AdminLoginController@index'); 
 //执行登录的方法
 Route::post('/admin/dologin','admin\AdminLoginController@dologin');
+
 //生成登录验证码 
 Route::get('/admin/code','admin\AdminLoginController@code');
 //退出登录的方法
@@ -82,6 +83,13 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
 		//后台申请管理
 		Route::resource('/request','RequestController');
+        Route::get('/reques/{id}','RequestController@fou');
+        Route::get('/reque/{id}','RequestController@not');
+
+        //后天电影管理
+        Route::resource('/movie','MovieController');
+        Route::get('/movie1/{id}','MovieController@xiajia');
+        Route::get('/movie2/{id}','MovieController@huifu');
 
 		//后台影视分类
 		Route::resource('/film','FilmController');
@@ -182,6 +190,15 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('update','FilmMsgController@update');
             //删除
             Route::get('delete','FilmMsgController@delete');
+            
+            //影片下架信息
+            Route::get('filmOff','FilmMsgController@FilmMsgOff');
+            //下架删除
+            Route::get('offDel','FilmMsgController@FilmMsgDel');
+            //修改下架影片是否上映
+            Route::get('OffUpdate','FilmMsgController@updetSta');
+            //下架电影
+            Route::post('/film/off','FilmMsgController@dofilmoff');
 
 
 
@@ -196,6 +213,10 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('showDelete','FilmShowController@delete');
             //空闲时间
             Route::post('showtime','FilmShowController@showtime');
+            //放映历史
+            Route::get('history','FilmShowController@ShowHistory');
+            //删除李四记录
+            Route::get('hisdel','FilmShowController@ShowHisDel');
 
 
 
@@ -214,7 +235,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::post('/room/update/{id}','FilmRoomController@update');
             Route::post('/room/delete/{id}','FilmRoomController@delete');
             Route::post('/room/work','FilmRoomController@work');
+
             Route::get('/room/seats/{id}','FilmRoomController@seats');
+
 
             Route::get('/room/seatedit/{id}','FilmRoomController@seatedit');
             Route::post('/room/seatupdate/{id}','FilmRoomController@seatupdate');
@@ -241,35 +264,24 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 //===============================前台信息=============================
 
 
-
-
-
 Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
 
 	//前台首页
 	Route::get('index','HomesController@index');
 
-	//电影列表页
+	//电影列表页面
 	Route::get('filmlist','HomesController@filmlist');
 
-	//电影详情页
+	//电影详情页面
 	Route::get('filmdetail','HomesController@filmdetail');
 
-	//电影院列表页
+	//电影院列表页面
 	Route::get('cinemalist','HomesController@cinemalist');
 
-
-
-   
-  
-
-
-
-
-	//电影院详情
+	//电影院详情页面
     Route::get('cinemadetail','HomesController@cinemadetail');
 
-    //申请商户
+    //申请商户页面
 	Route::get('add','HomesController@add');
     Route::post('store','HomesController@store');
 
@@ -279,7 +291,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     //查看各类型电影的页面
     Route::get('type','HomesController@type');
 
-    //订座
+    //订座页面
     Route::get('dingpiao','HomesController@dingpiao');
     Route::post('/shopseat/{id}','HomesController@shopseat');
     Route::post('/shopseat_into/{id}','HomesController@shopseat_into');
@@ -334,7 +346,13 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('/ticket/dodel','HomesCenterController@dodel');
 
     Route::get('/delete/{id}','HomesCenterController@delete');
- 
+    
+    //充值主页
+    Route::get('moneys','HomesMoneyController@index');
+    //充值
+    Route::post('adds','HomesMoneyController@add');
+    //余额
+    Route::get('balance','HomesMoneyController@store');
 
 
 

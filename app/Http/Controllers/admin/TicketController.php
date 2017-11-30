@@ -40,9 +40,9 @@ class TicketController extends Controller
                 $v->nickName = '电影院直售';
             } else {
                 $v->nickName = DB::table('userDetail')->where('uid',$uid)->first()->nickName;
-            }
-             
-           
+            }     
+
+            $v->nickName = DB::table('userDetail')->where('uid',$uid)->first()->nickName;
             // var_dump($v->nickName);die;
             // $ = $phone->phone;
 

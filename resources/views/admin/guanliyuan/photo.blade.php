@@ -25,7 +25,6 @@
                                       
                <form action="" style="text-align: center;" method="post" class="mws-form" enctype='multipart/form-data' id="art_form">
 
-     <!--                      <img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}?imageView2/0/w/240/h/240" style="width:239px;height:239px" id="img1"/> -->
                    
                     <p><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$data->photo}}" alt="" id="img1" style="width:240px;margin-top: 20px;" ></p>
                     <br/>

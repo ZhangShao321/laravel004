@@ -42,8 +42,9 @@ class HomesLoginController extends Controller
             // 跳转至首页
             return redirect('/homes/index');
         } else {
+
             // 返回登录页(带提示信息）
-            return redirect('/home/login')->with('status', '用户名或密码错误，请重新登录。');
+            return redirect('/homes/login')->with('status', '用户名或密码错误，请重新登录。');
         }
 
 

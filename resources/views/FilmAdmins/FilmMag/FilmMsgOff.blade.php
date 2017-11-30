@@ -1,28 +1,10 @@
 @extends('FilmAdmins.layout.index')
 
-@section('title', '影片列表')
+@section('title', '下架影片')
 
-@section('css')
-<style type="text/css">
- table{
-    
-        table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
-
-        font-size: 12px;
-    }
-    td{
-       
-        word-break:keep-all;/* 不换行 */
-        white-space:nowrap;/* 不换行 */
-        overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
-        text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
-    }
-
-</style> 
-@endsection
 
 @section('content')
-        
+         
 
 
  <div class="mws-panel grid_8">
@@ -30,7 +12,7 @@
         <span>
             <i class="icon-table">
             </i>
-           影片列表
+           下架影片
         </span>
     </div>
     <div class="mws-panel-body no-padding">
@@ -72,18 +54,18 @@
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
                         >
                            ID
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="Browser: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                         >
                            名称
                         </th>
                         
                          <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="Browser: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                        >
                         时长
                         </th>
@@ -91,24 +73,24 @@
 
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="Platform(s): activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
                         >
                             关键字
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="Engine version: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
                         >
                             导演
                         </th>
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="CSS grade: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         >
                         
                             主演
                         </th>
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                        aria-label="CSS grade: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                        >
                         
                             简介
@@ -116,42 +98,45 @@
 
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="CSS grade: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         >
                         
                             上映时间
                         </th>
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="CSS grade: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         >
                         
                             票价
                         </th>
 
                       <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="CSS grade: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                         >
                         
                             售票总数
                         </th>
 
 
+
+
+
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="CSS grade: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                        >
                         
                         图片
                         </th>
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="CSS grade: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                        >
                         
                         状态
                         </th>
                         <th class="sorting"  role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
-                         aria-label="CSS grade: activate to sort column ascending"
+                        rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                        style="width:70px" >
                         
                         操作
@@ -159,34 +144,54 @@
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
+                    <style type="text/css">
+                     table{
+                        
+                            table-layout:fixed;/* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+
+                            font-size: 12px;
+                        }
+                        td{
+                           
+                            word-break:keep-all;/* 不换行 */
+                            white-space:nowrap;/* 不换行 */
+                            overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+                            text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+                        }
+
+                     
                     
 
-                    @foreach($film as $k => $v)
-                        <tr>
-                            <td class="bian">{{$v->id}}</td>
-                            <td class="bian">{{$v->filmname}}</td>
-                            <td class="bian">{{$v->filmtime}}</td>
-                            <td class="bian">{{$v->keywords}}</td>
-                            <td class="bian">{{$v->director}}</td>
-                            <td class="bian">{{$v->protagonist}}</td>
-                            <td class="bian">{{$v->summary}}</td>
-                            <td class="bian">{{ date('Y-m-d H:i:s',$v->showtime) }}</td>
-                            <td class="bian">{{$v->price}}</td>
-                            <td class="bian">{{$v->shownum}}</td>
-                            <td>
+                    </style>
 
-                                <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$v->filepic.'?imageView2/0/w/120/h/120')}}" style="width:120px;height:60px"  />
-                            </td>
-                            <td> {{$sta[$v->status] }}</td>
-                            
-                           
-                           <td style="overflow: visible;padding:0px " align="center" >
-                             <a href="{{asset('/FilmAdmins/edit?id=').$v->id}}" ><button  class="btn btn-default">编辑</button></a> 
-                             <button id="{{$v->id }}" class="btn btn-default status">下架</button>
-                           </td>
 
-                        </tr>
-                    @endforeach 
+
+                  
+                       @foreach($film as $k => $v)
+                                <tr class="">
+                                    <td class="bian">{{$v->id}}</td>
+                                    <td class="bian">{{$v->filmname}}</td>
+                                    <td class="bian">{{$v->filmtime}}</td>
+                                    <td class="bian">{{$v->keywords}}</td>
+                                    <td class="bian">{{$v->director}}</td>
+                                    <td class="bian">{{$v->protagonist}}</td>
+                                    <td class="bian">{{$v->summary}}</td>
+                                    <td class="bian">{{ date('Y-m-d H:i:s',$v->showtime) }}</td>
+                                    <td class="bian">{{$v->price}}</td>
+                                    <td class="bian">{{$v->shownum}}</td>
+                                    <td >
+
+                                        <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$v->filepic.'?imageView2/0/w/120/h/120')}}" style="width:120px;height:60px"  />
+                                    </td>
+                                  
+                                    <td class=""> {{$sta[$v->status] }}</td>
+                                   <td style="overflow: visible;padding:0px " align="center" class="">
+                                     
+                                     <button name="{{$v->id}}"  class="btn btn-default bbb">上映</button>
+                                     <button name="{{$v->id}}"  class="btn btn-default aaa">删除</button>
+                                   </td>
+                                </tr>
+                     @endforeach 
 
 
                 </tbody>
@@ -242,8 +247,50 @@
                 // console.log(id);
                 $.ajax({
                             type: "GET",
-                            url: "{{url('/FilmAdmins/delete')}}",
+                            url: "{{url('/FilmAdmins/offDel')}}",
                             data: 'id='+id,
+                            success: function(msg){
+                              // alert(msg);
+                              // console.log(msg);
+                               location.reload();  
+                            }
+                         });
+
+
+
+
+            }
+            ,btn2:function(){
+                // layer.msg('按钮2');取消执行的按钮
+            }});
+    });
+
+
+
+
+     $('.bbb').click(function(){
+        //获取id
+         var id = $(this).attr('name');
+         
+         layer.alert('你确定要将此片上映吗?', {
+            skin: 'layui-layer-molv' //样式类名  自定义样式
+            ,closeBtn: 1    // 是否显示关闭按钮
+            ,anim: 1 //动画类型
+            ,btn: ['确定','取消'] //按钮
+            ,icon: 3    // icon  6 笑脸  4,锁  5 哭 3,?  2,X  1,√ 0,!
+            ,shadeClose: false
+            ,yes:function(){
+                // layer.msg('执行中');
+                layer.msg('执行中', {
+                              icon: 16
+                              ,shade: 0.01
+                            });
+
+                // console.log(id);
+                $.ajax({
+                            type: "GET",
+                            url: "{{url('/FilmAdmins/OffUpdate')}}",
+                            data: 'fid='+id,
                             success: function(msg){
                               alert(msg);
                               // console.log(msg);
@@ -252,11 +299,17 @@
                          });
 
 
+
+
             }
             ,btn2:function(){
                 // layer.msg('按钮2');取消执行的按钮
             }});
     });
+
+
+
+
 
 
     //说表移入效果
@@ -269,23 +322,6 @@
 
 
     });
-
-    //电影下架
-    $('.status').click(function(){
-
-        var id = $(this).attr('id');
-
-        $.post('{{ url("/FilmAdmins/film/off") }}', {_token:'{{ csrf_token() }}', id:id}, function(data){
-
-            if(data ==1){
-
-                
-                window.location.reload();
-            } else {
-                layer.alert('抱歉!!电影下架失败了',{icon: 6});
-            }
-        })
-    })
 
 
 

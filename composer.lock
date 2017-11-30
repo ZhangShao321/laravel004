@@ -4,6 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    "hash": "58555d5617bd1549a816f6ed6c99b99c",
+=======
+    "hash": "519a7ba00826eac07130572cedbe7bc5",
+>>>>>>> e4c2b1f1f40faadc7fc1eed0e7881bee51afeac2
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
     "content-hash": "3568fdce131152b15bece2665b9d41dd",
     "packages": [
         {
@@ -16,7 +24,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/Bacon/BaconQrCode/5a91b62b9d37cee635bbf8d553f4546057250bee.zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/5a91b62b9d37cee635bbf8d553f4546057250bee",
                 "reference": "5a91b62b9d37cee635bbf8d553f4546057250bee",
                 "shasum": ""
             },
@@ -50,7 +58,11 @@
             ],
             "description": "BaconQrCode is a QR code generator for PHP.",
             "homepage": "https://github.com/Bacon/BaconQrCode",
+<<<<<<< HEAD
             "time": "2017-10-17T09:59:25+00:00"
+=======
+            "time": "2017-10-17 09:59:25"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "classpreloader/classpreloader",
@@ -260,7 +272,11 @@
                 "singularize",
                 "string"
             ],
+<<<<<<< HEAD
             "time": "2017-07-22T12:18:28+00:00"
+=======
+            "time": "2017-07-22 12:18:28"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "endroid/qrcode",
@@ -272,7 +288,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://files.phpcomposer.com/files/endroid/QrCode/159423a97c74133e4bcbcc9c5b04957fdfed2935.zip",
+=======
+                "url": "https://api.github.com/repos/endroid/QrCode/zipball/159423a97c74133e4bcbcc9c5b04957fdfed2935",
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
                 "reference": "159423a97c74133e4bcbcc9c5b04957fdfed2935",
                 "shasum": ""
             },
@@ -329,7 +349,11 @@
                 "qrcode",
                 "symfony"
             ],
+<<<<<<< HEAD
             "time": "2017-10-22T12:17:28+00:00"
+=======
+            "time": "2017-10-22 12:17:28"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "flc/alidayu",
@@ -363,7 +387,7 @@
                 "alidayu",
                 "flc"
             ],
-            "time": "2017-08-12T02:55:34+00:00"
+            "time": "2017-08-12 02:55:34"
         },
         {
             "name": "flc/dysms",
@@ -446,7 +470,7 @@
                 "captcha",
                 "spam"
             ],
-            "time": "2017-09-27T06:58:14+00:00"
+            "time": "2017-09-27 06:58:14"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -591,7 +615,11 @@
                 "serialize",
                 "tokenizer"
             ],
+<<<<<<< HEAD
             "time": "2016-12-07T09:37:55+00:00"
+=======
+            "time": "2016-12-07 09:37:55"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "khanamiryan/qrcode-detector-decoder",
@@ -603,7 +631,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/khanamiryan/php-qrcode-detector-decoder/96d5f80680b04803c4f1b69d6e01735e876b80c7.zip",
+                "url": "https://api.github.com/repos/khanamiryan/php-qrcode-detector-decoder/zipball/96d5f80680b04803c4f1b69d6e01735e876b80c7",
                 "reference": "96d5f80680b04803c4f1b69d6e01735e876b80c7",
                 "shasum": ""
             },
@@ -641,7 +669,11 @@
                 "qr",
                 "zxing"
             ],
+<<<<<<< HEAD
             "time": "2017-01-13T09:11:46+00:00"
+=======
+            "time": "2017-01-13 09:11:46"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "laravel/framework",
@@ -975,7 +1007,11 @@
                 "cron",
                 "schedule"
             ],
+<<<<<<< HEAD
             "time": "2017-01-23T04:29:33+00:00"
+=======
+            "time": "2017-01-23 04:29:33"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "myclabs/php-enum",
@@ -987,7 +1023,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/myclabs/php-enum/3ed7088cfd0a0e06534b7f8b0eee82acea574fac.zip",
+                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/3ed7088cfd0a0e06534b7f8b0eee82acea574fac",
                 "reference": "3ed7088cfd0a0e06534b7f8b0eee82acea574fac",
                 "shasum": ""
             },
@@ -1019,7 +1055,11 @@
             "keywords": [
                 "enum"
             ],
+<<<<<<< HEAD
             "time": "2017-06-28T16:24:08+00:00"
+=======
+            "time": "2017-06-28 16:24:08"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "nesbot/carbon",
@@ -1172,56 +1212,6 @@
                 "random"
             ],
             "time": "2017-03-13T16:22:52+00:00"
-        },
-        {
-            "name": "predis/predis",
-            "version": "v1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nrk/predis.git",
-                "reference": "9ead747663bb1b1ae017dfa0d152aca87792b42f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/nrk/predis/9ead747663bb1b1ae017dfa0d152aca87792b42f.zip",
-                "reference": "9ead747663bb1b1ae017dfa0d152aca87792b42f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.8"
-            },
-            "suggest": {
-                "ext-curl": "Allows access to Webdis when paired with phpiredis",
-                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Predis\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniele Alessandri",
-                    "email": "suppakilla@gmail.com",
-                    "homepage": "http://clorophilla.net"
-                }
-            ],
-            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
-            "homepage": "http://github.com/nrk/predis",
-            "keywords": [
-                "nosql",
-                "predis",
-                "redis"
-            ],
-            "time": "2016-05-30T15:25:52+00:00"
         },
         {
             "name": "psr/log",
@@ -1392,6 +1382,57 @@
                 "storage"
             ],
             "time": "2017-11-07T06:12:11+00:00"
+        },
+        {
+            "name": "qiniu/php-sdk",
+            "version": "v7.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/qiniu/php-sdk.git",
+                "reference": "79290fd9cb5d72cc2feef779008b3aaeeac49eb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/qiniu/php-sdk/zipball/79290fd9cb5d72cc2feef779008b3aaeeac49eb9",
+                "reference": "79290fd9cb5d72cc2feef779008b3aaeeac49eb9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Qiniu\\": "src/Qiniu"
+                },
+                "files": [
+                    "src/Qiniu/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Qiniu",
+                    "email": "sdk@qiniu.com",
+                    "homepage": "http://www.qiniu.com"
+                }
+            ],
+            "description": "Qiniu Resource (Cloud) Storage SDK for PHP",
+            "homepage": "http://developer.qiniu.com/",
+            "keywords": [
+                "cloud",
+                "qiniu",
+                "sdk",
+                "storage"
+            ],
+            "time": "2017-11-07 06:12:11"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -1918,24 +1959,28 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-11-16T16:24:22+00:00"
+=======
+            "time": "2017-11-16 16:24:22"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "symfony/inflector",
-            "version": "v3.3.6",
+            "version": "v3.3.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/inflector.git",
-                "reference": "aed5a0874a3bcfd8d0393a2d91b4cf828f29c7fb"
+                "reference": "0474dc4d867c7efefd44017f7903465a7f368b6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/inflector/aed5a0874a3bcfd8d0393a2d91b4cf828f29c7fb.zip",
-                "reference": "aed5a0874a3bcfd8d0393a2d91b4cf828f29c7fb",
+                "url": "https://api.github.com/repos/symfony/inflector/zipball/0474dc4d867c7efefd44017f7903465a7f368b6b",
+                "reference": "0474dc4d867c7efefd44017f7903465a7f368b6b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9"
+                "php": "^5.5.9|>=7.0.8"
             },
             "type": "library",
             "extra": {
@@ -1975,24 +2020,24 @@
                 "symfony",
                 "words"
             ],
-            "time": "2017-04-12T14:14:56+00:00"
+            "time": "2017-07-29 21:54:42"
         },
         {
             "name": "symfony/options-resolver",
-            "version": "v3.3.6",
+            "version": "v3.3.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
-                "reference": "ff48982d295bcac1fd861f934f041ebc73ae40f0"
+                "reference": "623d9c210a137205f7e6e98166105625402cbb2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/options-resolver/ff48982d295bcac1fd861f934f041ebc73ae40f0.zip",
-                "reference": "ff48982d295bcac1fd861f934f041ebc73ae40f0",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/623d9c210a137205f7e6e98166105625402cbb2f",
+                "reference": "623d9c210a137205f7e6e98166105625402cbb2f",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9"
+                "php": "^5.5.9|>=7.0.8"
             },
             "type": "library",
             "extra": {
@@ -2029,7 +2074,11 @@
                 "configuration",
                 "options"
             ],
+<<<<<<< HEAD
             "time": "2017-04-12T14:14:56+00:00"
+=======
+            "time": "2017-11-05 15:47:03"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2144,7 +2193,11 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
             "time": "2017-10-11T12:05:26+00:00"
+=======
+            "time": "2017-10-11 12:05:26"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "symfony/polyfill-php70",
@@ -2156,7 +2209,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/polyfill-php70/0442b9c0596610bd24ae7b5f0a6cdbbc16d9fcff.zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/0442b9c0596610bd24ae7b5f0a6cdbbc16d9fcff",
                 "reference": "0442b9c0596610bd24ae7b5f0a6cdbbc16d9fcff",
                 "shasum": ""
             },
@@ -2203,7 +2256,11 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
             "time": "2017-10-11T12:05:26+00:00"
+=======
+            "time": "2017-10-11 12:05:26"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "symfony/polyfill-util",
@@ -2304,24 +2361,28 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2017-10-29T09:49:53+00:00"
+=======
+            "time": "2017-10-29 09:49:53"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "symfony/property-access",
-            "version": "v3.3.6",
+            "version": "v3.3.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "4cd2bc4afdfd914ad18cec97bb4159fc403384ea"
+                "reference": "abfaa3b9785eb4d6e7afb231915ad6c3d17471eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/symfony/property-access/4cd2bc4afdfd914ad18cec97bb4159fc403384ea.zip",
-                "reference": "4cd2bc4afdfd914ad18cec97bb4159fc403384ea",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/abfaa3b9785eb4d6e7afb231915ad6c3d17471eb",
+                "reference": "abfaa3b9785eb4d6e7afb231915ad6c3d17471eb",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.9",
+                "php": "^5.5.9|>=7.0.8",
                 "symfony/inflector": "~3.1",
                 "symfony/polyfill-php70": "~1.0"
             },
@@ -2372,7 +2433,11 @@
                 "property path",
                 "reflection"
             ],
+<<<<<<< HEAD
             "time": "2017-07-03T08:12:02+00:00"
+=======
+            "time": "2017-11-05 15:47:03"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "symfony/routing",
@@ -2617,7 +2682,11 @@
                 "env",
                 "environment"
             ],
+<<<<<<< HEAD
             "time": "2015-05-30T15:59:26+00:00"
+=======
+            "time": "2015-05-30 15:59:26"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "zgldh/qiniu-laravel-storage",
@@ -2669,7 +2738,11 @@
                 "sdk",
                 "storage"
             ],
+<<<<<<< HEAD
             "time": "2017-10-18T06:01:28+00:00"
+=======
+            "time": "2017-10-18 06:01:28"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         }
     ],
     "packages-dev": [
@@ -2951,7 +3024,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://files.phpcomposer.com/files/phpDocumentor/ReflectionDocBlock/66465776cfc249844bde6d117abff1d22e06c2da.zip",
+=======
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/66465776cfc249844bde6d117abff1d22e06c2da",
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
                 "reference": "66465776cfc249844bde6d117abff1d22e06c2da",
                 "shasum": ""
             },
@@ -2990,7 +3067,11 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+<<<<<<< HEAD
             "time": "2017-11-27T17:38:31+00:00"
+=======
+            "time": "2017-11-27 17:38:31"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -3161,7 +3242,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://files.phpcomposer.com/files/phpspec/prophecy/e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf.zip",
+=======
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
                 "reference": "e4ed002c67da8eceb0eb8ddb8b3847bb53c5c2bf",
                 "shasum": ""
             },
@@ -3212,7 +3297,11 @@
                 "spy",
                 "stub"
             ],
+<<<<<<< HEAD
             "time": "2017-11-24T13:59:53+00:00"
+=======
+            "time": "2017-11-24 13:59:53"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3286,7 +3375,11 @@
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://files.phpcomposer.com/files/sebastianbergmann/php-file-iterator/730b01bc3e867237eaac355e06a36b85dd93a8b4.zip",
+=======
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/730b01bc3e867237eaac355e06a36b85dd93a8b4",
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
                 "reference": "730b01bc3e867237eaac355e06a36b85dd93a8b4",
                 "shasum": ""
             },
@@ -3321,7 +3414,11 @@
                 "filesystem",
                 "iterator"
             ],
+<<<<<<< HEAD
             "time": "2017-11-27T13:52:08+00:00"
+=======
+            "time": "2017-11-27 13:52:08"
+>>>>>>> f9094096cacd33e20cb19fdfae86adac1bad105c
         },
         {
             "name": "phpunit/php-text-template",

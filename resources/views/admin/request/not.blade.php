@@ -1,6 +1,6 @@
 @extends('admin.layout.admins')
         
-@section('title','申请列表')
+@section('title','未通过申请')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <span>
             <i class="icon-table">
             </i>
-            申请列表
+            未通过申请
         </span>
     </div>
     <div class="mws-panel-body no-padding">
@@ -98,7 +98,7 @@
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        申请是否通过
+                        恢复
                     </th>
                 </tr>
             </thead>
@@ -142,9 +142,7 @@
                     </td>
 
                     <td class=" ">
-                        <a href="{{url('/admin/request/'.$v->id.'/edit')}}" class='btn btn-primary'>是</a>
-                        <a href="{{url('/admin/reques/'.$v->id)}}" class='btn btn-primary'>否</a>
-                        
+                        <a href="{{url('/admin/reque/'.$v->id)}}" class='btn btn-primary'>恢复</a>   
                     </td>
                 </tr>
 
@@ -207,8 +205,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 @endsection

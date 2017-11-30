@@ -75,9 +75,6 @@
                 <label class="item-td check">
                 </label>
                 <div class="item-td order-info">
-                    <!--<a class="movie-pic" href="javascript:;" target="_blank">
-                    <img src="" alt="">
-                    </a>-->
                     <div class="order-detail">
                         <p data-data="{&quot;movieId&quot;:95124}" data-url="/movie/detail" class="order-name">
                            <h3 id="name">{{ $film->filmname }}</h3> 
@@ -86,7 +83,6 @@
                             <span>
                                 <!-- 国语&nbsp;&nbsp;2D -->
                             </span>
-                            <!--<span class="last">1511526000</span>-->
                         </p>
                         <ul class="threat-info font14">
                             <li data-data="{&quot;cinemaId&quot;:1019}" data-url="/cinema/detail"
@@ -141,9 +137,7 @@
                         ¥{{ $piao['price']}}.00
                     </p>
                 </div>
-                <!--<div class="split-hozline"></div>-->
             </li>
-            <!-- 衍生品 -->
         </ul>
     </div>
     <div class="confirm font-shadow text-right" style="padding-right:20px">
@@ -164,9 +158,6 @@
 @section('js')
 <script type="text/javascript">
 
-	var price = $('#price').text();
-	var cinema = $('#cinema').text();
-	var name = $('#name').text();
     var id = $('#input').val();
     
 
@@ -180,22 +171,30 @@
         ,icon: 6    // icon
         ,yes:function(){
             
-		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name,id:id},function(data){
+		     $.get("{{url('/homes/money')}}",{id:id},function(data){
                     
-		     		
+                    console.log(data);
                     if (data == 1) {
+
                         layer.msg('购票成功');
                         window.location.href="/homes/center";
+
                     } else {
-                        layer.msg('购票失败')
+
+
+                        layer.msg('此票已售出');
+
+
                     }
 
 		     },'json');
            
         }
         ,btn2:function(){
+
             layer.msg('返回中')
             return back;
+
         }});
     });
 

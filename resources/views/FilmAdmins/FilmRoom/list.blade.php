@@ -39,11 +39,13 @@
                     </td>
                     <td>
 
+
                         <a href="/FilmAdmins/room/edit/{{ $v->id }}"><button>编辑</button></a>
 
-                        <!-- <a href="/FilmAdmins/room/delete/{{ $v->id }}"></a> -->
+                       
                         <button id="{{ $v->id }}" class="del">删除</button>
                         <a href="/FilmAdmins/room/seats/{{ $v->id }}"><button>座位</button></a>
+
                     </td>
                 </tr>
             @endforeach   
@@ -90,6 +92,8 @@ $('.del').click(function(){
       $.post("/FilmAdmins/room/delete/"+ids,{_token:'{{ csrf_token() }}'}, function(data){
 
             layer.msg(data, {icon: 1});
+
+            window.location.reload();
         })
     });
 
