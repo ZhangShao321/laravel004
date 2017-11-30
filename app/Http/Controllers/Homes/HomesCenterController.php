@@ -148,8 +148,8 @@ class HomesCenterController extends Controller
             $v['hang'] = $aaa['0'];
             $v['lie'] = $aaa['1'];
         }
-        echo "<pre>";
-        var_dump($data);die;
+        // echo "<pre>";
+        // var_dump($data);die;
 
         return view('/homes/center_w',['res'=>$data]);
     }
