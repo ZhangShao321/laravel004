@@ -61,7 +61,7 @@
                 <div class="top-menu">
                     <ul>
                         <h2 style="color:white">
-                            
+                            <!-- 让生活遇见电影，让电影融入生活！ -->
                         </h2>
                         <h2 ><marquee behavior="" style="color:red;font-family:'宋体'" direction="left"><i> 欢 迎 来 到 傻 家 伙 电 影 院 !!! </i></marquee></h2>
                     </ul>
@@ -81,7 +81,7 @@
 				<div class="row">
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 						<div class="logo">
-							<a href="{{url('/homes/index')}}"><img src="/homes/img/logo/logo3.jpg" alt="" /></a>
+							<a href="{{url('/homes/index')}}"><img style="width:300px;height:100px" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$con->logo}}" alt="" /></a>
 						</div>
 					</div>
                     <form action="{{url('/homes/search')}}" method="get">
@@ -161,7 +161,8 @@
 									<li><a href="{{url('/homes/filmlist')}}">电影</a></li>
 									<li><a href="{{url('/homes/cinemalist')}}">电影院</a></li>
 									<li style="float:right">
-                                        <h2 ><marquee behavior="" style="color:blue;font-family:'宋体'" direction="left"><i>让生活遇见电影，让电影融入生活！</i></marquee></h2>
+                                        <!-- <h2 ><marquee behavior="" style="color:blue;font-family:'宋体'" direction="left"><i>让生活遇见电影，让电影融入生活！</i></marquee></h2> -->
+                                        <!-- <h2>让生活遇见电影，让电影融入生活！</h2> -->
                                     </li>
 								</ul>
 							</nav>
@@ -190,8 +191,8 @@
                 <div class="col-lg-3 col-md-3 col-sm-4">
                     <div class="footer-widget">
 
-                        <img src="{{asset('/homes/img/logo/logo3.jpg')}}" alt="" />
-            <p>
+                        <img style="width:300px;height:100px" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$con->logo}}" alt="" />
+                        <p>
                             <h4 style="color:white">
                                 傻家伙影视是一家成立了好多好多年的超清好多好多好多D的集好多好多种娱乐项目为一体的超超超超超超大型电影院
                             </h4>
@@ -295,10 +296,9 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-md-offset-2">
                     <div class="copyright">
-                        <p>
-                            北京傻家伙网络科技有限公司Copyright 1937-2017 Mtime.com Inc. All rights reserved..
-                            京ICP证888888号网络视听许可证888888888888号网络文化经营许可证广播电视节目制作经营许可证(京)字第1435号京公网安备：66666666666666号
-                        </p>
+                    <p>北京傻家伙网络科技有限公司Copyright 1937-2017 Mtime.com Inc. All rights reserved..
+                    京ICP证888888号网络视听许可证888888888888号网络文化经营许可证广播电视节目制作经营许可证(京)字第1435号京公网安备：66666666666666号</p>
+                        
                     </div>
                 </div>
             </div>

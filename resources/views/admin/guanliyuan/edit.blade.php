@@ -28,7 +28,7 @@
                    <div class="mws-form-row">
                         <label class="mws-form-label">手机号:</label>
                         <div class="mws-form-item">
-                             <input type="text" name="phone" class="small" value="{{$data->phone}}"><span></span>
+                             <input type="text" readonly="readonly" name="phone" class="small" value="{{$data->phone}}"><span></span>
                         </div>
                    </div>
                    <div class="mws-form-row">
@@ -99,29 +99,7 @@
 
      $('.mws-form-message').delay(3000).slideUp(1000);
 
-     //用户名验证
-     $('input[name=phone]').blur(function(){
 
-        var reg = /^1[34578]\d{9}$/;
-
-        var phone = $(this).val();
-
-        $.post("{{ url('/admin/guanliyuan/phone') }}", {_token:'{{ csrf_token() }}', phone:phone}, function(data){
-            $('input[name=phone]').next().text(data);
-        })
-
-        var x = reg.exec(phone);
-
-        if (x) {
-            $(this).css('color','green');
-            $(this).next().text(' √ ');
-            $(this).next().css('color','green');
-        } else {
-            $(this).css('color','red');
-            $(this).next().text('手机号格式不正确');
-            $(this).next().css('color','red');
-        }
-     })
 
      //昵称验证
      $('input[name=nickName]').blur(function(){

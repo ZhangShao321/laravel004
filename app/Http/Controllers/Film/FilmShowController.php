@@ -198,12 +198,14 @@ class FilmShowController extends Controller
     //空闲时间
     public function showtime(Request $request)
     {
+        //影厅id
         $id = $request->only('id')['id'];
 
+        //获取该影厅的所有放映
         $data = DB::table('showfilm')->where('rid',$id)->get();
-
+        
+        //获取放映的结束时间
         $showtime = array();
-
         foreach ($data as $key => $value) {
 
             $showtime[$key] = $value->timeout;
@@ -212,14 +214,18 @@ class FilmShowController extends Controller
 
         //判断
         if(empty($showtime)){
+
+          //为空等于当前时间
           $aaa = time();
         } else {
+
+          //不为空取最大时间
           $aaa = max($showtime)+30*60;
         }
         
-
+        //格式化
         $time = date('Y-m-d H:i:s',$aaa);
-
+        //返回时间
         echo  $time;
     }
 
@@ -251,7 +257,7 @@ class FilmShowController extends Controller
     {
 
 
-         $id = $request->only('id');
+          $id = $request->only('id');
           $res = showfilm::where('id',$id)->delete();
           if($res)
           {
