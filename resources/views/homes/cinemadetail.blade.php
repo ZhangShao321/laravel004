@@ -126,7 +126,7 @@
                                             <div class="product-info">
                                                 <h3>
                                                     <a href="{{url('/homes/dingpiao?id=').$v->id}}">
-                                                        {{$v->filmname}}
+                                                        电影名：{{$v->filmname}}
                                                     </a>
                                                 </h3>
                                                 <div class="pro-price">
