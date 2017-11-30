@@ -33,14 +33,14 @@ class HomesController extends Controller
     public function index()
     {   
         //热映电影数据
-        $res = film::where('status','1')->orderBy('shownum','desc')->limit('3')->get();
-
+        // $res = film::where('status','1')->orderBy('shownum','desc')->limit('3')->get();
+        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('showfilm.status','1')->orderBy('shownum','desc')->limit('3')->get();
         //轮播图数据
         $res1 = lunbo::get();
 
         //即将上映电影数据
-        $res2 = film::where('status','1')->where('showtime','>',time())->limit('4')->get();
-
+        // $res2 = film::where('status','1')->where('showtime','>',time())->limit('4')->get();
+        $res2 = film::where('showtime','>',time())->limit('4')->get();
         //加载前台首页
         return view('homes/index',['res' => $res,'res1' => $res1,'res2' => $res2]);
     }
@@ -52,13 +52,16 @@ class HomesController extends Controller
     {
 
         //电影列表数据
-        $res = film::where('status','1')->paginate(2);
-
+        // $res = film::where('status','1')->paginate(2);
+        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('showfilm.status','1')->where('film.filmname','!=','film.filmname')->paginate(4);
+        
+        // echo "<pre>";var_dump($res);die;
         //电影类型数据
         $type = DB::table('filmtype')->where('status','1')->get();
 
         //电影排行榜数据
-        $res1 = film::where('status','1')->orderBy('shownum','desc')->limit('3')->get();
+        // $res1 = film::where('status','1')->orderBy('shownum','desc')->limit('3')->get();
+        $res1 = film::join('showfilm','film.id','=','showfilm.fid')->where('film.status','1')->where('showfilm.status','1')->orderBy('film.shownum','desc')->limit('3')->get();
 
        //加载电影列表
         return view('homes/filmlist',['res' => $res,'res1'=>$res1,'type'=>$type]);
@@ -79,7 +82,7 @@ class HomesController extends Controller
                 ->join('cinema','showfilm.cid','=','cinema.id')
                 ->join('cininfo','cinema.id','=','cininfo.cid')
                 ->select('showfilm.id','showfilm.time','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
-                ->where('showfilm.status','1')
+                ->where('cinema.status','2')
                 ->get();
 
         //加载电影详情页面
@@ -92,7 +95,7 @@ class HomesController extends Controller
     public function cinemalist()
     {
         //电影院列表数据
-        $res = cinema::where('cinema.status','2')->paginate(2);
+        $res = cinema::where('status','2')->paginate(2);
 
         //加载电影院列表页面
         return view('homes/cinemalist',['res' => $res]);
@@ -199,7 +202,7 @@ class HomesController extends Controller
         $seach = implode($request->all());
 
         //模糊查询
-        $res = film::where('filmname','like','%'.$seach.'%')->where('status',1)->get();
+        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('film.filmname','like','%'.$seach.'%')->where('showfilm.status','1')->get();
 
         //加载模糊搜索匹配的电影列表
         return view('homes/search',['res' => $res]);
@@ -213,7 +216,7 @@ class HomesController extends Controller
     {
         //获取该类型的影片数据
         $tid = $request->id;
-        $res = film::where('tid',$tid)->where('status','1')->get();
+        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('tid',$tid)->where('showfilm.status','1')->get();
 
         //加载该类型的影片页面
         return view('homes/search',['res' => $res]);
