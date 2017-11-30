@@ -35,19 +35,16 @@ class TicketController extends Controller
         foreach ($res as $k => $v) {
             //用户
             $uid = $v->uid;
-<<<<<<< HEAD
+
             if($uid == 0){
-                $v->phone = '电影院直售';
+                $v->nickName = '电影院直售';
             } else {
-                $phone = DB::table('user')->where('id',$uid)->first();
-                $v->phone = $phone->phone;
+                $v->nickName = DB::table('userDetail')->where('uid',$uid)->first()->nickName;
             }
-            
-=======
-            $v->nickName = DB::table('userDetail')->where('uid',$uid)->first()->nickName;
+             
+           
             // var_dump($v->nickName);die;
             // $ = $phone->phone;
->>>>>>> 0b0a5c59293e1580fd2318061696b3ba0edf8bb3
 
             //电影院
             $cid = $v->cid;
