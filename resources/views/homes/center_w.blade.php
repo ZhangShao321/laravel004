@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <ul class="breadcrumb">
-                    <li><a href="{{url('/homes/index')}}">首页</a></li>
+                    <li><a href="{{url('/homes/details')}}">个人中心</a></li>
                     
                     <li class="active">未完成订单</li>
                 </ul>
@@ -53,7 +53,7 @@
                     <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        价格
+                        价格/元
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
@@ -70,22 +70,22 @@
             </thead>
             <tbody aria-relevant="all" aria-live="polite" role="alert">
              
-                @foreach($res as $K=>$v)
+                @foreach($res as $k => $v)
                 <tr class="odd" align="center">
                     <td class="sorting_1">
-                    {{$v['cinema']}}    
+                    {{$aaaa[$k]['cinema']}}    
                     </td>
                 
 
                 
                     <td class="sorting_1 ">
-                    {{$v['filmname']}}    
+                    {{$aaaa[$k]['filmname']}}    
                     </td>
                 
 
                 
                     <td class="sorting_1">
-                    {{$v['roomname']}}    
+                    {{$aaaa[$k]['roomname']}}    
                     </td>
 
                    
@@ -93,13 +93,13 @@
 
                 
                     <td class="sorting_1">
-                    {{$v['showtime']}}   
+                    {{date('Y-m-d H:i:s',$aaaa[$k]['showtime'])}}   
                     </td>
                 
 
                 
                     <td class="sorting_1">
-                    {{$v['hang']}}排{{ $v['lie'] }}座    
+                    {{$aaaa[$k]['hang']}}排{{ $aaaa[$k]['lie'] }}座    
                     </td>
 
                     <td class="sorting_1">
@@ -107,7 +107,7 @@
                     </td>
 
                     <td class="sorting_1">
-                    {{$v['time']}}    
+                    {{date('Y-m-d H:i:s',$v['time'])}}    
                     </td>
                 
                     <td class="sorting_1">

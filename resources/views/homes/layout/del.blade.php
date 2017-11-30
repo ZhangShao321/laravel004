@@ -95,23 +95,24 @@
                 <!--底部-->
                 <div class="footer">
                     <div class="footer-hd">
+                    <?php
+                        $friend = DB::table('friendlink')->get();
+                    ?>
                         <p>
-                            <a href="#">恒望科技</a>
+                        @foreach($friend as $kk=>$vv)
+                            <a href="{{ $vv->url }}">{{$vv->linkname}}</a>
                             <b>|</b>
-                            <a href="#">商城首页</a>
-                            <b>|</b>
-                            <a href="#">支付宝</a>
-                            <b>|</b>
-                            <a href="#">物流</a>
+                            
+                        @endforeach
                         </p>
                     </div>
                     <div class="footer-bd">
                         <p>
-                            <a href="#">关于恒望</a>
-                            <a href="#">合作伙伴</a>
-                            <a href="#">联系我们</a>
-                            <a href="#">网站地图</a>
-                            <em>© 2015-2025 Hengwang.com 版权所有</em>
+                            <p>
+                                北京傻家伙网络科技有限公司Copyright 1937-2017 Mtime.com Inc. All rights reserved..
+                            </p><p>
+                            京ICP证888888号网络视听许可证888888888888号网络文化经营许可证广播电视节目制作经营许可证(京)字第1435号京公网安备：66666666666666号
+                            </p>
                         </p>
                     </div>
                 </div>

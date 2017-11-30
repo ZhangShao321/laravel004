@@ -49,7 +49,7 @@ class FilmShowController extends Controller
 
        
           // 根据商户id 电影状态
-          $film = DB::table('film')->where('status',1)->where('cid',session('cid'))->get();
+          $film = DB::table('film')->where('status',1)->where('showtime','<',time())->where('cid',session('cid'))->get();
           
 
 
@@ -87,7 +87,7 @@ class FilmShowController extends Controller
         $ftime = $film->filmtime;
 
         //结束id   放映结束时间戳
-        $info['timeout'] = time()+$ftime*60;
+        $info['timeout'] = $info['time'] + $ftime*60;
 
      
         
@@ -237,7 +237,6 @@ class FilmShowController extends Controller
                         ->join('cinema','showfilm.cid','=','cinema.id')
                         ->select('showfilm.id','showfilm.time','showfilm.status','film.filmname','roominfo.roomname','showfilm.price','showfilm.timeout')
                         ->orderBy('showfilm.time', 'desc')
-
                         ->paginate(10);
 
 
