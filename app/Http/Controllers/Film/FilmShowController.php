@@ -49,7 +49,7 @@ class FilmShowController extends Controller
 
        
           // 根据商户id 电影状态
-          $film = DB::table('film')->where('status',1)->where('cid',session('cid'))->get();
+          $film = DB::table('film')->where('status',1)->where('showtime','<',time())->where('cid',session('cid'))->get();
           
 
 

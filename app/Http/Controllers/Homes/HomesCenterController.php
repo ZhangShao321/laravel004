@@ -114,32 +114,39 @@ class HomesCenterController extends Controller
         //排序
         sort($data);
         
+        $aaaa = array();
 
         //遍历
         foreach($data as $k => $v){
 
             //用户
             $uid = $v['uid'];
-            $phone = DB::table('user')->where('id',session('uid'))->first();
+            $phone = DB::table('user')->where('id',$uid)->first();
             $v['phone'] = $phone->phone;
+            $aaaa[$k]['phone'] = $phone->phone;
 
             //电影院
             $cid = $v['cid'];
             $cinema = DB::table('cinema')->where('id',$cid)->first();
             $v['cinema'] = $cinema->cinema;
-
+            $aaaa[$k]['cinema'] = $cinema->cinema;
             //电影
             $fid = $v['fid'];
-            $v['filmname'] = DB::table('film')->where('id',$fid)->first()->filmname;
+            $filmname = DB::table('film')->where('id',$fid)->first();
+            $v['filmname'] = $filmname->filmname;
+            $aaaa[$k]['filmname'] = $filmname->filmname;
 
             //影厅
             $rid = $v['rid'];
-            $v['roomname'] = DB::table('roominfo')->where('id',$rid)->first()->roomname;
+            $roomname = DB::table('roominfo')->where('id',$rid)->first();
+            $v['roomname'] = $roomname->roomname;
+            $aaaa[$k]['roomname'] = $roomname->roomname;
             
             //放映
             $showid = $v['showid'];
             $show = DB::table('showfilm')->where('id',$showid)->first();
             $v['showtime'] = $show->time;
+            $aaaa[$k]['showtime'] = $show->time;
 
             //座位
             $seat = $v['seat'];
@@ -147,11 +154,14 @@ class HomesCenterController extends Controller
             $aaa = explode('_',$seat);
             $v['hang'] = $aaa['0'];
             $v['lie'] = $aaa['1'];
+            $aaaa[$k]['hang'] = $aaa['0'];
+            $aaaa[$k]['lie'] = $aaa['1'];
         }
-        echo "<pre>";
-        var_dump($data);die;
+        // echo "<pre>";
+        // var_dump($aaaa);
+        // var_dump($data);die;
 
-        return view('/homes/center_w',['res'=>$data]);
+        return view('/homes/center_w',['res'=>$data,'aaaa'=>$aaaa]);
     }
 
 
