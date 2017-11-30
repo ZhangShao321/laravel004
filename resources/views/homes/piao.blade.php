@@ -158,9 +158,6 @@
 @section('js')
 <script type="text/javascript">
 
-	var price = $('#price').text();
-	var cinema = $('#cinema').text();
-	var name = $('#name').text();
     var id = $('#input').val();
     
 
@@ -174,21 +171,20 @@
         ,icon: 6    // icon
         ,yes:function(){
             
-		     $.get("{{url('/homes/money')}}",{price:price,cinema:cinema,name:name,id:id},function(data){
+		     $.get("{{url('/homes/money')}}",{id:id},function(data){
                     
+                    console.log(data);
                     if (data == 1) {
 
                         layer.msg('购票成功');
                         window.location.href="/homes/center";
 
                     } else {
-<<<<<<< HEAD
-                        layer.msg('票已出售')
-=======
+
 
                         layer.msg('此票已售出');
 
->>>>>>> e4c2b1f1f40faadc7fc1eed0e7881bee51afeac2
+
                     }
 
 		     },'json');

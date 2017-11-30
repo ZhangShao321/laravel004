@@ -16,41 +16,40 @@
         </span>
     </div>
     <div class="mws-panel-body no-padding">
-
-       
-         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
-                    <form action="" method="get">
-                    <div id="DataTables_Table_1_length" class="dataTables_length">
-                        <label>
-                            Show
-                         <select name="num" size="1" aria-controls="DataTables_Table_1">
-                            <option value="10" @if(isset($_GET['num'])  ? $_GET['num'] : '10')) selected="selected"  @endif >
+            <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
+                 <form action="" method="get">
+            <div id="DataTables_Table_1_length" class="dataTables_length">
+                <label>
+                    Show
+                    <select name="num" size="1" aria-controls="DataTables_Table_1">
+                        <option value="10" @if(isset($_GET['num'])  ? $_GET['num'] : '10')) selected="selected"  @endif >
                             10
-                            </option>
-                            <option value="25" @if($request->num == '15')  selected="selected" @endif >
-                                25
-                            </option>
-                            <option value="50" @if($request->num == '25')  selected="selected" @endif  >
-                                50
-                            </option>
+                        </option>
+                        <option value="25" @if($request->num == '25')  selected="selected" @endif >
+                            25
+                        </option>
+                        <option value="50" @if($request->num == '50')  selected="selected" @endif  >
+                            50
+                        </option>
                        
-                       
-                        </select>
-                            entries
-                        </label>
-                    </div>
-                    <div class="dataTables_filter" id="DataTables_Table_0_filter">
-                        <label>
-                            Search:
-                              <input type="text" aria-controls="DataTables_Table_1" name="seach" value="{{isset($_GET['seach']) ? $_GET['seach'] : ''}}">
-                              <button>确定</button>
-                        </label>
-                    </div>
-                    
-                    
-        </form> 
-            <table class="mws-datatable mws-table dataTable" id="DataTables_Table_0"
-            aria-describedby="DataTables_Table_0_info">
+                    </select>
+                    entries
+                </label>
+            </div>
+            <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                <label>
+                    搜索
+                    <input type="text" aria-controls="DataTables_Table_1" name="seach" value="{{isset($_GET['seach']) ? $_GET['seach'] : ''}}">
+                    <button class="btn btn-danger">确定</button>
+                </label>
+            </div>
+        </form>
+     
+
+
+
+            <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
+            aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
@@ -184,8 +183,6 @@
                                         <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'.$v->filepic.'?imageView2/0/w/120/h/120')}}" style="width:120px;height:60px"  />
                                     </td>
                                   
-                                  
-                                    
                                     <td class=""> {{$sta[$v->status] }}</td>
                                    <td style="overflow: visible;padding:0px " align="center" class="">
                                      
@@ -206,9 +203,6 @@
             
               <div class="dataTables_paginate paging_full_numbers" id="DataTables_Table_1_paginate">
                {!! $film->appends($request->all())->render() !!}
-
-
-
                                
             </div>
 
@@ -252,7 +246,7 @@
                             url: "{{url('/FilmAdmins/offDel')}}",
                             data: 'id='+id,
                             success: function(msg){
-                              alert(msg);
+                              // alert(msg);
                               // console.log(msg);
                                location.reload();  
                             }
@@ -333,7 +327,7 @@
 </script>
 
 
-@endsection;
+@endsection
 
 
 

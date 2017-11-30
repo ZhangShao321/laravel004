@@ -162,15 +162,7 @@
 			                       影院详细地址
 			                    </label>
 			                    <div class="mws-form-item">
-			                        <textarea class="medium" name="address" cols="" rows="">
-
-
-			                        	<!-- {{$res->address}} -->
-
-
-			                        	{{$res['address']}}
-
-			                        </textarea>
+			                        <textarea class="medium" name="address" cols="" rows="">{{$res['address']}}</textarea>
 			                    </div>
 			                </div>
 			                    		{{ csrf_field() }}

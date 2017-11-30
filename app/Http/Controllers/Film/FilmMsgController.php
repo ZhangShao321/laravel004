@@ -359,9 +359,25 @@ class FilmMsgController extends Controller
             echo '上映成功';
          }else{
           echo "上映失败";
-           }
+         }
 
 
+    }
+
+    //下架电影 ajax
+    public function dofilmoff(Request $request)
+    {
+        $id = $request->only('id')['id'];
+
+        //修改状态
+        $bool = DB::table('film')->where('id',$id)->update(['status',0]);
+
+        if($bool) {
+
+          echo 1;
+        } else {
+          echo 0;
+        }
     }
                
 

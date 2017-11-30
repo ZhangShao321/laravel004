@@ -124,9 +124,6 @@
 
                                      
                                 <td rowspan="2"><a href=""><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$ures->photo}}?imageView2/0/w/57/h/57 " style="width:57px;height:57px;float:right"></a></td>
-                 
-                                 
-
                                
                             </tr>
                             <tr>

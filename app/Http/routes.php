@@ -42,6 +42,7 @@ Route::group(['namespace'=>'Homes'], function(){
 Route::get('/admin/login','admin\AdminLoginController@index'); 
 //执行登录的方法
 Route::post('/admin/dologin','admin\AdminLoginController@dologin');
+
 //生成登录验证码 
 Route::get('/admin/code','admin\AdminLoginController@code');
 //退出登录的方法
@@ -84,6 +85,11 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 		Route::resource('/request','RequestController');
         Route::get('/reques/{id}','RequestController@fou');
         Route::get('/reque/{id}','RequestController@not');
+
+        //后天电影管理
+        Route::resource('/movie','MovieController');
+        Route::get('/movie1/{id}','MovieController@xiajia');
+        Route::get('/movie2/{id}','MovieController@huifu');
 
 		//后台影视分类
 		Route::resource('/film','FilmController');
@@ -191,6 +197,8 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('offDel','FilmMsgController@FilmMsgDel');
             //修改下架影片是否上映
             Route::get('OffUpdate','FilmMsgController@updetSta');
+            //下架电影
+            Route::post('/film/off','FilmMsgController@dofilmoff');
 
 
 
@@ -338,7 +346,13 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
     Route::post('/ticket/dodel','HomesCenterController@dodel');
 
     Route::get('/delete/{id}','HomesCenterController@delete');
- 
+    
+    //充值主页
+    Route::get('moneys','HomesMoneyController@index');
+    //充值
+    Route::post('adds','HomesMoneyController@add');
+    //余额
+    Route::get('balance','HomesMoneyController@store');
 
 
 

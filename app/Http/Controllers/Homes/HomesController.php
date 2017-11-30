@@ -286,7 +286,7 @@ class HomesController extends Controller
             
 
             $bool = Redis::hmset('seat_'.$data['num'],$data);
-            Redis::expire('seat_'.$data['num'],3000);
+            Redis::expire('seat_'.$data['num'],300);
 
             // $aaa = DB::table('ticket')->insertGetId($data);
 
@@ -360,19 +360,7 @@ class HomesController extends Controller
     public function money(Request $request)
     {
         //获取值
-        $cinema = $request->only('cinema')['cinema'];
-        $price = $request->only('price')['price'];
-        $name = $request->only('name')['name'];
         $num = 'seat_'.$request->only('id')['id'];
-
-        //获取电影院/电影/钱包信息
-        $res = cinema::where('cinema',trim($cinema))->first();
-        $res1 = film::where('filmname',$name)->first();
-        $money = money::where('cid',$res['id'])->first();
-        
-        //重定义钱
-        $newshownum =  $res1['shownum'] +'1';
-        $newmoney = $money['money'] + $price;
 
         //获取订单信息
         $data = Redis::hgetall($num);
@@ -388,19 +376,36 @@ class HomesController extends Controller
             echo 0;die;
         }
 
+        //获取电影/钱包信息
+        $res1 = film::where('id',$data['fid'])->first();
+        $money = money::where('cid',$data['cid'])->first();
+        
+        //重定义钱
+        $newshownum =  $res1->shownum + 1;
+        $newmoney = $money->money + $data['price'];
+
+// echo json_encode($num);die;
+        //个人钱包
+        $muser = DB::table('userDetail')->where('uid',session('uid'))->first()->umoney;
+        //重定义
+        $newumoney = $muser - $data['price'];
+
         //开启事务
         DB::beginTransaction();
         //修改电影票房
-        $nums = film::where('filmname',$name)->update(['shownum'=>$newshownum]);
+        $nums = film::where('id',$data['fid'])->update(['shownum'=>$newshownum]);
         //修改电影院钱包
-        $mon = money::where('cid',$res['id'])->update(['money'=>$newmoney]);
-        
+        $mon = money::where('cid',$data['cid'])->update(['money'=>$newmoney]);
+        //修改个人钱包
+        $users = DB::table('userDetail')->where('uid',session('uid'))->update(['umoney'=>$newumoney]);
+        // echo json_encode($num);die;
         //存储订单
         $id = DB::table('ticket')->insertGetId($data);
 
-        if($id && $nums && $mon){
+        if($id && $nums && $mon && $users){
 
             DB::commit();
+            $data = Redis::del($num);
             echo 1;
 
         } else {
