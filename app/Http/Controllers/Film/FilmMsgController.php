@@ -22,11 +22,14 @@ class FilmMsgController extends Controller
     public  function index(Request $request)
     {
         
+        //分页查询
+        $film = film::where('filmname','like','%'.$request->input('seach').'%')
+                      ->where('cid',session('cid'))
+                      ->where('status','=','1')
+                      ->paginate($request->input('num',10));
 
-        $film = film::where('filmname','like','%'.$request->input('seach').'%')->where('cid',session('cid'))->paginate($request->input('num',10));
 
-
-        $sta = array(0=>'下架',1=>'上映',2=>'即将上映');
+        $sta = array(0=>'下架',1=>'上映');
 
         
         return view('FilmAdmins.FilmMag.FilmMsgList',['film'=> $film,'request'=>$request,'sta'=>$sta]);
@@ -37,7 +40,7 @@ class FilmMsgController extends Controller
     public function add()
     {
 
-        $data = DB::table('filmtype')->where('status',1)->get();
+        $data = DB::table('filmtype')->where('status',0)->get();
 
         return view('FilmAdmins.FilmMag.FilmMsgAdd',['data'=>$data]);
 
@@ -47,8 +50,7 @@ class FilmMsgController extends Controller
     public  function doAdd(Request $request)
     {
         
-        // 时间支持格式"2017-08-08","2017/08/08",
-                
+        //验证        
         $this->validate($request, [
         'filmname' => 'required', 
         'keywords' => 'required',
@@ -72,7 +74,7 @@ class FilmMsgController extends Controller
             ]
         );
      
-   
+      //剔除'_token','filepic','showtime'
         $info = $request->except(['_token','filepic','showtime']);
       
         $res = $request->only(['filepic']);
@@ -84,10 +86,11 @@ class FilmMsgController extends Controller
         //修改电影类型
         $tid = $request->only('tid')['tid'];
 
+        //根据传过来的id今次那个查询
         $type = DB::table('filmtype')->where('id',$tid)->first();
-
+          //增加该类的影片的数量
         $type->num = $type->num + 1;
-
+        //更新该类型的数量num
         $sss = DB::table('filmtype')->where('id',$tid)->update(['num'=>$type->num]);
 
         
@@ -98,20 +101,20 @@ class FilmMsgController extends Controller
                 {
 
                      //获取文件
-                    $file=$request->file('filepic');
-                   //初始化七牛
-                   $disk=QiniuStorage::disk('qiniu');
+                      $file=$request->file('filepic');
+                     //初始化七牛
+                     $disk=QiniuStorage::disk('qiniu');
 
-                  //重命名文件名
-                  $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
+                    //重命名文件名
+                    $name=md5(rand(1111,9999).time()).'.'.$file->getClientOriginalExtension();
 
-                  //上传到文件到七牛
-                 $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
+                    //上传到文件到七牛
+                   $bool=$disk->put('Uplodes/image_'.$name,file_get_contents($file->getRealPath()));
 
-                  $filepic = 'image_'.$name;
+                    $filepic = 'image_'.$name;
 
-                  $info['filepic'] = $filepic;
-                
+                    $info['filepic'] = $filepic;
+                  
 
                 }
 
@@ -126,17 +129,13 @@ class FilmMsgController extends Controller
 
                   }else{
 
-                        //添加失败的话,把上传的图图片
-                     if(file_exists($filepic))
-                         {
-                            unlink($find->clogo);
-                         }
+                    
                      return back()->withInput($request->except('_token','filepic'));
                     // return back();
                   }
     }
 
-    //修改页面
+    //修改页面影片
 
     public function edit(Request $request)
     {
@@ -157,6 +156,8 @@ class FilmMsgController extends Controller
 
     public function update(Request $request)
     {
+
+      //验证
         $this->validate($request, [
         'filmname' => 'required', 
         'keywords' => 'required',
@@ -179,10 +180,12 @@ class FilmMsgController extends Controller
         );
 
 
-
+        //获取影片的id
       $id = $request->only('id');
+      //获取放映时间
       $showtime = $request->only('showtime');
       $res =  $request->except('id','_token','id','filepic','showtime');
+      //将时间存为时间戳
       $res['showtime'] = strtotime($showtime['showtime']);
              // //判断文件是否上传
               if($request -> hasFile('filepic'))
@@ -243,7 +246,7 @@ class FilmMsgController extends Controller
     //信息删除
      public function delete(Request $request)
      {
-        // echo "这是删除";
+        //获取影片id
          $id = $request->only('id');
          $del = film::find($id);
          // echo $id;
@@ -281,6 +284,98 @@ class FilmMsgController extends Controller
 
      }
 
+
+      public  function FilmMsgOff(Request $request)
+      {
+
+
+          $film = film::where('filmname','like','%'.$request->input('seach').'%')
+                      ->where('cid',session('cid'))
+                      ->where('status','=','0')
+                      ->paginate($request->input('num',10));
+
+         $sta = array(0=>'下架',1=>'上映');
+
+        
+        return view('FilmAdmins.FilmMag.FilmMsgOff',['film'=> $film,'request'=>$request,'sta'=>$sta]);
+        
+
+ 
+      }
+
+
+    public function FilmMsgDel(Request $request)
+    {
+
+
+       //获取影片id
+         $id = $request->only('id');
+         $del = film::find($id);
+         // echo $id;
+
+
+          //删除原先的图片
+          $accessKey = '6KNr_k8cHOhY8vRfsoVVQDOsepKnzYgh7gxMqg0w';
+          $secretKey = 'USietl53216m7raLRSEVuXwYEwxwEs3ZR1hQ5hKZ';
+
+          //初始化Auth状态：
+          $auth = new Auth($accessKey, $secretKey);
+
+          //初始化BucketManager
+          $bucketMgr = new BucketManager($auth);
+
+          //你要测试的空间， 并且这个key在你空间中存在
+          $bucket = 'laravel-upload';
+          $key = 'Uplodes/'.$del[0]->filepic;
+
+          //删除$bucket 中的文件 $key
+          $err = $bucketMgr->delete($bucket, $key);
+
+
+
+            // $res = $del->delete();
+           if(film::where('id',$id)->delete())
+           {
+            echo "删除成功!";
+           }else{
+            echo "删除失败!";
+           }
+
+
+    }
+
+    //修改下架影片是否上映
+    public function updetSta(Request $request)
+    {
+        
+        $id =  $request->only('fid')['fid'];
+
+         $dd =film::where('id',$id)->update(['status'=>1]);
+        if($dd)
+         {
+            echo '上映成功';
+         }else{
+          echo "上映失败";
+         }
+
+
+    }
+
+    //下架电影 ajax
+    public function dofilmoff(Request $request)
+    {
+        $id = $request->only('id')['id'];
+
+        //修改状态
+        $bool = DB::table('film')->where('id',$id)->update(['status',0]);
+
+        if($bool) {
+
+          echo 1;
+        } else {
+          echo 0;
+        }
+    }
                
 
 

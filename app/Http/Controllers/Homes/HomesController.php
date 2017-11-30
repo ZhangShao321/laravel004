@@ -33,8 +33,27 @@ class HomesController extends Controller
     public function index()
     {   
         //热映电影数据
-        // $res = film::where('status','1')->orderBy('shownum','desc')->limit('3')->get();
-        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('showfilm.status','1')->orderBy('shownum','desc')->limit('3')->get();
+        $res = film::join('showfilm','film.id','=','showfilm.fid')
+                    ->select('film.filepic','film.summary','film.id','film.filmname','film.director')
+                    ->where('showfilm.status','1')
+                    ->orderBy('shownum','desc')
+                    ->limit('3')->get();
+            //去除重复电影
+            $z = array();
+
+            foreach ($res as $k => $v) {
+
+                $x = in_array($v->id,$z);
+               
+                if($x){
+
+                    unset($res[$k]);
+                }
+
+                $z[$k] = $v->id;
+     
+            }
+
         //轮播图数据
         $res1 = lunbo::get();
 
@@ -50,19 +69,58 @@ class HomesController extends Controller
     //2.电影列表页面
     public function filmlist()
     {
-
-        //电影列表数据
-        // $res = film::where('status','1')->paginate(2);
-        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('showfilm.status','1')->where('film.filmname','!=','film.filmname')->paginate(4);
-        
-        // echo "<pre>";var_dump($res);die;
         //电影类型数据
-        $type = DB::table('filmtype')->where('status','1')->get();
+        $type = DB::table('filmtype')->where('status','0')->get();
 
         //电影排行榜数据
-        // $res1 = film::where('status','1')->orderBy('shownum','desc')->limit('3')->get();
-        $res1 = film::join('showfilm','film.id','=','showfilm.fid')->where('film.status','1')->where('showfilm.status','1')->orderBy('film.shownum','desc')->limit('3')->get();
+        $res1 = film::join('showfilm','film.id','=','showfilm.fid')
+                    ->where('film.status','1')
+                    ->where('showfilm.status','1')
+                    ->select('film.filmname','film.shownum','film.id')
+                    ->orderBy('film.shownum','desc')
+                    ->limit('5')->get();
 
+            //去除重复电影
+            $bbb = array();
+
+            foreach ($res1 as $k => $v) {
+
+                $x = in_array($v->id,$bbb);
+
+                if($x){
+
+                    unset($res1[$k]);
+                }
+
+                $bbb[$k] = $v->id;
+     
+            }
+
+        //电影列表数据
+        $res = DB::table('film')
+                    ->join('showfilm','film.id','=','showfilm.fid')
+                    ->select('film.summary','film.id','film.cid','showfilm.timeout','showfilm.cid','showfilm.price','film.filepic','film.shownum','film.director','film.filmname')
+                    ->where('showfilm.timeout','>',time())
+                    ->orderBy('shownum','desc')->limit('10')->paginate(3);
+
+        //去除重复电影
+        $aaaa = array();
+
+        foreach ($res as $key => $value) {
+
+            $x = in_array($value->id,$aaaa);
+
+            if($x){
+
+                unset($res[$key]);
+            }
+
+            $aaaa[$key] = $value->id;
+ 
+        }
+
+
+      
        //加载电影列表
         return view('homes/filmlist',['res' => $res,'res1'=>$res1,'type'=>$type]);
     }
@@ -289,7 +347,7 @@ class HomesController extends Controller
             
 
             $bool = Redis::hmset('seat_'.$data['num'],$data);
-            Redis::expire('seat_'.$data['num'],3000);
+            Redis::expire('seat_'.$data['num'],300);
 
             // $aaa = DB::table('ticket')->insertGetId($data);
 
@@ -363,19 +421,7 @@ class HomesController extends Controller
     public function money(Request $request)
     {
         //获取值
-        $cinema = $request->only('cinema')['cinema'];
-        $price = $request->only('price')['price'];
-        $name = $request->only('name')['name'];
         $num = 'seat_'.$request->only('id')['id'];
-
-        //获取电影院/电影/钱包信息
-        $res = cinema::where('cinema',trim($cinema))->first();
-        $res1 = film::where('filmname',$name)->first();
-        $money = money::where('cid',$res['id'])->first();
-        
-        //重定义钱
-        $newshownum =  $res1['shownum'] +'1';
-        $newmoney = $money['money'] + $price;
 
         //获取订单信息
         $data = Redis::hgetall($num);
@@ -391,19 +437,36 @@ class HomesController extends Controller
             echo 0;die;
         }
 
+        //获取电影/钱包信息
+        $res1 = film::where('id',$data['fid'])->first();
+        $money = money::where('cid',$data['cid'])->first();
+        
+        //重定义钱
+        $newshownum =  $res1->shownum + 1;
+        $newmoney = $money->money + $data['price'];
+
+
+        //个人钱包
+        $muser = DB::table('userDetail')->where('uid',session('uid'))->first()->umoney;
+        //重定义
+        $newumoney = $muser - $data['price'];
+
         //开启事务
         DB::beginTransaction();
         //修改电影票房
-        $nums = film::where('filmname',$name)->update(['shownum'=>$newshownum]);
+        $nums = film::where('id',$data['fid'])->update(['shownum'=>$newshownum]);
         //修改电影院钱包
-        $mon = money::where('cid',$res['id'])->update(['money'=>$newmoney]);
+        $mon = money::where('cid',$data['cid'])->update(['money'=>$newmoney]);
+        //修改个人钱包
+        $users = DB::table('userDetail')->where('uid',session('uid'))->update(['umoney'=>$newumoney]);
         
         //存储订单
         $id = DB::table('ticket')->insertGetId($data);
 
-        if($id && $nums && $mon){
+        if($id && $nums && $mon && $users){
 
             DB::commit();
+            $data = Redis::del($num);
             echo 1;
 
         } else {

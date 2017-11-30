@@ -7,14 +7,16 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-
-
         "zgldh/qiniu-laravel-storage": "^0.8.4",
         "endroid/qrcode": "^2.4",
         "gregwar/captcha": "v1.1.3",
         "flc/alidayu": "^2.0",
         "predis/predis": "1.0.*",
         "flc/dysms": "^1.0"
+<<<<<<< HEAD
+
+=======
+>>>>>>> e4c2b1f1f40faadc7fc1eed0e7881bee51afeac2
 
     },
     "require-dev": {

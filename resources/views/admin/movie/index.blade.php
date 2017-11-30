@@ -1,6 +1,6 @@
 @extends('admin.layout.admins')
         
-@section('title','申请列表')
+@section('title','电影列表')
 
 @section('content')
 
@@ -9,7 +9,7 @@
         <span>
             <i class="icon-table">
             </i>
-            申请列表
+            电影列表
         </span>
     </div>
     <div class="mws-panel-body no-padding">
@@ -63,42 +63,37 @@
                     <th aria-label="Platform(s): activate to sort column ascending" style="width: 197px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        手机号
+                        电影名称
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        省
+                        电影时长
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        市
+                        关键词
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        县
+                        导演
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        电影院logo
+                        价格
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        时间
+                        状态
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        法人
-                    </th>
-                    <th aria-label="CSS grade: activate to sort column ascending" style="width: 97px;"
-                    colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
-                    role="columnheader" class="sorting">
-                        申请是否通过
+                        操作
                     </th>
                 </tr>
             </thead>
@@ -114,36 +109,33 @@
                     </td>
 
                     <td class=" ">
-                        {{$v->phone}}
+                        {{$v->filmname}}
                     </td>
 
                     <td class=" ">
-                        {{$v->city}}
+                        {{$v->filmtime}}
                     </td>
 
                     <td class=" ">
-                        {{$v->area}}
+                        {{$v->keywords}}
                     </td>
 
                     <td class=" ">
-                        {{$v->address}}
+                        {{$v->director}}
                     </td>
+                    <td class=" ">
+                        {{$v->price}}
+                    </td>
+                         
 
-                    <td class="">
-                        <img src="{{asset($v->clogo)}}" alt="" style="height: 50px" >
+                    <td class=" ">
+                        {{$v->status ? "开启" : "关闭"}}
                     </td>
 
                     <td class=" ">
-                        {{date('Y-m-d H:i:s',$v->time)}}
-                    </td>
+                        <a href="{{url('/admin/movie/'.$v->id.'/edit')}}" class='btn btn-primary'>修改</a>
 
-                    <td class=" ">
-                        {{$v->legal}}
-                    </td>
-
-                    <td class=" ">
-                        <a href="{{url('/admin/request/'.$v->id.'/edit')}}" class='btn btn-primary'>是</a>
-                        <a href="{{url('/admin/reques/'.$v->id)}}" class='btn btn-primary'>否</a>
+                       <a href="{{url('/admin/movie1/'.$v->id)}}" class='btn btn-primary'>下架</a>
                         
                     </td>
                 </tr>
@@ -212,3 +204,4 @@
 
 
 @endsection
+

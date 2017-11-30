@@ -55,7 +55,7 @@ class FilmLoginController extends Controller
        
 
         //判断用户是否存在
-        $ddd = cinlogin::where('cinema',$res['cinema'])->first();
+        $ddd = cinlogin::where('cinema',$res['cinema'])->where('status',2)->first();
 
         echo "<pre>";
 
@@ -97,17 +97,17 @@ class FilmLoginController extends Controller
    public  function outlogin(Request $request)
    {
 
-        //销毁session
-        $res = $request->session()->flush();
+            //销毁session
+            $res = $request->session()->flush();
 
 
-        if($res)
-        {
-            return  redirect("/FilmAdmins/FilmLogin");
-        }
-        else{
-            return back();
-        }
+            if($res)
+            {
+                return  redirect("/FilmAdmins/FilmLogin");
+            }
+            else{
+                return back();
+            }
 
    }  
 
