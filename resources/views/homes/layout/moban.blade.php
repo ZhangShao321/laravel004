@@ -296,14 +296,9 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-md-offset-2">
                     <div class="copyright">
-                        <table border="1px solid blue">
-                            <tr align="center">
-                                <td>北京傻家伙网络科技有限公司Copyright 1937-2017 Mtime.com Inc. All rights reserved..</td>
-                            </tr>
-                            <tr align="center">
-                                <td>京ICP证888888号网络视听许可证888888888888号网络文化经营许可证广播电视节目制作经营许可证(京)字第1435号京公网安备：66666666666666号</td>
-                            </tr>
-                        </table>
+                    <p>北京傻家伙网络科技有限公司Copyright 1937-2017 Mtime.com Inc. All rights reserved..
+                    京ICP证888888号网络视听许可证888888888888号网络文化经营许可证广播电视节目制作经营许可证(京)字第1435号京公网安备：66666666666666号</p>
+                        
                     </div>
                 </div>
             </div>
