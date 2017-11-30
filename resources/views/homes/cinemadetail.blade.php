@@ -131,7 +131,7 @@
                                                 </h3>
                                                 <div class="pro-price">
                                                     <span class="normal">
-                                                        ￥{{$v->price}}
+                                                        场次:{{ date('Y-m-d H:i:s',$v->time) }} | ￥{{$v->price}}
                                                     </span>
                                                 </div>
                                             </div>

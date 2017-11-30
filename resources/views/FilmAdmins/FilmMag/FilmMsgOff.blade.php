@@ -18,20 +18,20 @@
     <div class="mws-panel-body no-padding">
 
        
-         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
+         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
                     <form action="" method="get">
-                    <div id="DataTables_Table_0_length" class="dataTables_length">
+                    <div id="DataTables_Table_1_length" class="dataTables_length">
                         <label>
                             Show
                          <select name="num" size="1" aria-controls="DataTables_Table_1">
                             <option value="10" @if(isset($_GET['num'])  ? $_GET['num'] : '10')) selected="selected"  @endif >
                             10
                             </option>
-                            <option value="25" @if($request->num == '15')  selected="selected" @endif >
-                                25
+                            <option value="15" @if($request->num == '15')  selected="selected" @endif >
+                                15
                             </option>
-                            <option value="50" @if($request->num == '25')  selected="selected" @endif  >
-                                50
+                            <option value="25" @if($request->num == '25')  selected="selected" @endif  >
+                                25
                             </option>
                        
                        
@@ -39,7 +39,7 @@
                             entries
                         </label>
                     </div>
-                    <div class="dataTables_filter" id="DataTables_Table_0_filter">
+                    <div class="dataTables_filter" id="DataTables_Table_1_filter">
                         <label>
                             Search:
                               <input type="text" aria-controls="DataTables_Table_1" name="seach" value="{{isset($_GET['seach']) ? $_GET['seach'] : ''}}">
@@ -49,8 +49,8 @@
                     
                     
         </form> 
-            <table class="mws-datatable mws-table dataTable" id="DataTables_Table_0"
-            aria-describedby="DataTables_Table_0_info">
+            <table class="mws-datatable mws-table dataTable" id="DataTables_Table_1"
+            aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"
@@ -117,9 +117,6 @@
                         
                             售票总数
                         </th>
-
-
-
 
 
                         <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"

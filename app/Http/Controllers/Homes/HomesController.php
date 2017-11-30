@@ -61,9 +61,11 @@ class HomesController extends Controller
                     ->join('showfilm','film.id','=','showfilm.fid')
                     ->select('film.summary','film.id','film.cid','showfilm.timeout','showfilm.cid','showfilm.price','film.filepic','film.shownum','film.director','film.filmname')
                     ->where('showfilm.timeout','>',time())
-                    ->orderBy('shownum','desc')->limit('10')->paginate(3);
+                    ->where('film.status',1)
+                    ->orderBy('shownum','desc')->limit('10')->paginate(5);
 
 
+        //去除重复数据
         $aaaa = array();
          // echo "<pre>";
         foreach ($res as $key => $value) {
@@ -89,7 +91,23 @@ class HomesController extends Controller
         $res1 = DB::table('film')
                     ->join('showfilm', 'film.id','=','showfilm.fid')
                     ->select('film.summary','film.id','film.filepic','film.shownum','film.director','film.filmname')
+                    ->where('film.status',1)
                     ->orderBy('shownum','desc')->limit('10')->get();
+
+          //去除重复数据
+        $aa = array();
+         // echo "<pre>";
+        foreach ($res1 as $key => $value) {
+
+            $x = in_array($value->id,$aa);
+            if($x){
+
+                unset($res1[$key]);
+            }
+
+            $aa[$key] = $value->id;
+ 
+        }
 
        //加载电影列表
         return view('homes/filmlist',['res' => $res,'res1'=>$res1,'type'=>$type]);
@@ -139,12 +157,15 @@ class HomesController extends Controller
         $res1 = cininfo::where('cid',$id)->get();
 
         //该影院上映的电影数据
-        $res2 = showfilm::where('showfilm.cid','=',$request->id)
-
+        $res2 = showfilm::where('showfilm.cid','=',$id)
                         ->join('film','film.id','=','showfilm.fid')
+                        ->select('film.filmname','film.filepic','film.price','showfilm.id','showfilm.time','showfilm.timeout')
                         ->where('film.status','1')
-                        ->select('film.filmname','film.filepic','film.price','showfilm.id')
+                        ->where('showfilm.timeout','>',time())
                         ->get();
+
+        // echo "<pre>";
+        // var_dump($res2);die;
         
         //加载电影院详情页面
         return view('homes/cinemadetail',['res' => $res,'res1' => $res1,'res2' => $res2]);
