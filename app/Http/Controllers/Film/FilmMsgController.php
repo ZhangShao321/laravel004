@@ -40,7 +40,8 @@ class FilmMsgController extends Controller
     public function add()
     {
 
-        $data = DB::table('filmtype')->where('status',1)->get();
+        $data = DB::table('filmtype')->where('status',0)->get();
+
 
         return view('FilmAdmins.FilmMag.FilmMsgAdd',['data'=>$data]);
 
@@ -347,8 +348,10 @@ class FilmMsgController extends Controller
     //修改下架影片是否上映
     public function updetSta(Request $request)
     {
-        
+        // echo "这是修改下架影片是否上映";
+        // var_dump();
         $id =  $request->only('fid')['fid'];
+      
 
          $dd =film::where('id',$id)->update(['status'=>1]);
         if($dd)

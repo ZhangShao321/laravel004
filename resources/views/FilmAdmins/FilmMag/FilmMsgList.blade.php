@@ -20,7 +20,7 @@
        
          <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
                     <form action="" method="get">
-                    <div id="DataTables_Table_0_length" class="dataTables_length">
+                    <div id="DataTables_Table_l_length" class="dataTables_length">
                         <label>
                             Show
                          <select name="num" size="1" aria-controls="DataTables_Table_1">
@@ -48,7 +48,7 @@
                     </div>
                     
                     
-        </form> 
+           </form> 
             <table class="mws-datatable mws-table dataTable" id="DataTables_Table_0"
             aria-describedby="DataTables_Table_0_info">
                 <thead>
