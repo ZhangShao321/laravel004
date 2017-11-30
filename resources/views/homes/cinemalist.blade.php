@@ -110,8 +110,7 @@
                         <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->clogo) }}" style="width:200px;height:200px" alt="" />
                     </div>
                     <div class="about-team-info">
-                        <h3>
-                            {{ $v->cinema}}</h3>
+                        <h3>{{ $v->cinema}}</h3>
                     </div>
                     </a>
                 </div>

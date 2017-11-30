@@ -34,10 +34,10 @@ class HomesController extends Controller
     {   
         //热映电影数据
         $res = film::join('showfilm','film.id','=','showfilm.fid')
-                    ->select('film.filepic','film.summary','film.id','film.filmname','film.director')
+                    ->select('film.filepic','film.summary','film.id','film.filmname','film.director','film.price')
                     ->where('showfilm.status','1')
                     ->orderBy('shownum','desc')
-                    ->limit('3')->get();
+                    ->limit('10')->get();
             //去除重复电影
             $z = array();
 
@@ -60,6 +60,7 @@ class HomesController extends Controller
         //即将上映电影数据
         // $res2 = film::where('status','1')->where('showtime','>',time())->limit('4')->get();
         $res2 = film::where('showtime','>',time())->limit('4')->get();
+
         //加载前台首页
         return view('homes/index',['res' => $res,'res1' => $res1,'res2' => $res2]);
     }
@@ -78,7 +79,7 @@ class HomesController extends Controller
                     ->where('showfilm.status','1')
                     ->select('film.filmname','film.shownum','film.id')
                     ->orderBy('film.shownum','desc')
-                    ->limit('5')->get();
+                    ->limit('10')->get();
 
             //去除重复电影
             $bbb = array();
@@ -97,30 +98,28 @@ class HomesController extends Controller
             }
 
         //电影列表数据
-        $res = DB::table('film')
-                    ->join('showfilm','film.id','=','showfilm.fid')
+        $res = film::join('showfilm','film.id','=','showfilm.fid')
                     ->select('film.summary','film.id','film.cid','showfilm.timeout','showfilm.cid','showfilm.price','film.filepic','film.shownum','film.director','film.filmname')
                     ->where('showfilm.timeout','>',time())
-                    ->orderBy('shownum','desc')->limit('10')->paginate(3);
+                    ->where('film.status','1')
+                    ->orderBy('shownum','desc')->paginate(3);
 
-        //去除重复电影
-        $aaaa = array();
+            //去除重复电影
+            $aaaa = array();
 
-        foreach ($res as $key => $value) {
+            foreach ($res as $key => $value) {
 
-            $x = in_array($value->id,$aaaa);
+                $x = in_array($value->id,$aaaa);
 
-            if($x){
+                if($x){
 
-                unset($res[$key]);
+                    unset($res[$key]);
+                }
+
+                $aaaa[$key] = $value->id;
+     
             }
 
-            $aaaa[$key] = $value->id;
- 
-        }
-
-
-      
        //加载电影列表
         return view('homes/filmlist',['res' => $res,'res1'=>$res1,'type'=>$type]);
     }
@@ -170,12 +169,13 @@ class HomesController extends Controller
         $res1 = cininfo::where('cid',$id)->get();
 
         //该影院上映的电影数据
-        $res2 = showfilm::where('showfilm.cid','=',$request->id)
+        $res2 = showfilm::where('showfilm.cid','=',$id)
                         ->join('film','film.id','=','showfilm.fid')
-                        ->where('showfilm.status','1')
-                        ->select('film.filmname','film.filepic','film.price','showfilm.id','showfilm.time')
+                        ->select('film.filmname','film.filepic','film.price','showfilm.id','showfilm.time','showfilm.timeout')
+                        ->where('film.status','1')
+                        ->where('showfilm.timeout','>',time())
                         ->get();
-        
+
         //加载电影院详情页面
         return view('homes/cinemadetail',['res' => $res,'res1' => $res1,'res2' => $res2]);
     }

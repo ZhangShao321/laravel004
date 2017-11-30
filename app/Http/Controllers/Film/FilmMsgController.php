@@ -367,7 +367,7 @@ class FilmMsgController extends Controller
         $id = $request->only('id')['id'];
 
         //修改状态
-        $bool = DB::table('film')->where('id',$id)->update(['status',0]);
+        $bool = DB::table('film')->where('id',$id)->update(['status'=>0]);
 
         if($bool) {
 

@@ -51,56 +51,67 @@
 <!-- 轮播图 end -->
 
 <!-- 热映电影 start -->
-<div class="banner-area">
+<div class="features-area pad-60">
     <div class="container">
         <div class="row">
-            <div class="section-title text-center">
-                
-                <h2 style="color:red;margin:3px"> 热 映 电 影 </h2>
-                
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h2 style="color:red;margin:3px"> 热 映 电 影 </h2>
+                </div>
             </div>
-            @foreach($res as $k=>$v)
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <a href="{{url('/homes/filmdetail?id=').$v->id}}">
-                    <div class="single-banner">
-                        <img src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}
-                        " style="width:360px;height:420px" alt="" />
-                        <div class="banner-details">
-                            <div class="mask">
-                                <p>
-                                    {{ $v->summary}}
-                                </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="product-tab">
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="row">
+                                <div class="product-curosel">
+                                 @foreach($res as $k=>$v)
+                                    <div class="col-lg-12">
+                                        <div class="single-product">
+                                            <div class="product-img">
+                                                <a href="{{url('/homes/filmdetail?id=').$v->id}}">
+                                                    <img class="primary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" style="width:370px;height:370px" alt="" />
+                                                    <img class="secondary-img" src="{{asset('http://ozspa9a4f.bkt.clouddn.com/Uplodes/'. $v->filepic) }}" style="width:370px;height:370px" alt="" />
+                                                </a>
+                                                <span class="sale">
+                                                    热映中
+                                                </span>
+                                                <div class="product-action">
+                                                    <div class="pro-button-top">
+                                                        <a href="{{url('/homes/filmdetail?id=').$v->id}}">
+                                                            查看详情
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-info">
+                                                <h3>
+                                                    <a href="{{url('/homes/filmdetail?id=').$v->id}}">
+                                                        {{$v->filmname}}
+                                                    </a>
+                                                </h3>
+                                                <h3>
+                                                    导演:{{ $v->director}}
+                                                </h3>
+                                                <div class="pro-price">
+                                                    <span class="normal">
+                                                        ￥{{ $v->price }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach  
+                                </div>
                             </div>
                         </div>
                     </div>
-                </a>
+                </div>
             </div>
-            @endforeach
         </div>
     </div>
-</div>
-<div class="service-area pad-top">
-	<div class="container">
-		<div class="row">
-			@foreach($res as $k=>$v)
-			<div class="col-lg-4 col-md-4 col-sm-6">
-				<a href="{{url('/homes/filmdetail?id=').$v->id}}">
-					<div class="single-service">
-						<div class="service-icon">
-							<i class="fa fa-file"></i>
-						</div>
-						<div class="service-text">
-							<h2>
-								{{ $v->filmname}}</h2>
-							<p>
-								导演:{{ $v->director}}</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			@endforeach
-		</div>
-	</div>
 </div>
 <!-- 热映电影 end -->
 
@@ -150,7 +161,7 @@
                                                 </h3>
                                                 <div class="pro-price">
                                                     <span class="normal">
-                                                        ￥{{$v->price}}
+                                                        导演:{{ $v->director}}
                                                     </span>
                                                 </div>
                                             </div>
