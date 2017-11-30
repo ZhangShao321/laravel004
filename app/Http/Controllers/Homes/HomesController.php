@@ -140,7 +140,7 @@ class HomesController extends Controller
     public function cinemalist()
     {
         //电影院列表数据
-        $res = cinema::paginate(2);
+        $res = cinema::where('status',2)->paginate(4);
 
         //加载电影院列表页面
         return view('homes/cinemalist',['res' => $res]);

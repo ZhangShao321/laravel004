@@ -55,10 +55,15 @@
                         style="width: 156px;">
                             ID
                         </th>
-                              <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
                         style="width: 156px;">
                             用户名
+                        </th>
+                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                        style="width: 156px;">
+                            手机号
                         </th>
                  
                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
@@ -110,9 +115,10 @@
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
                     @foreach($res as $k=>$v)
-                    <tr class="@if($k % 2== 1)odd @else even @endif">
+                    <tr align="center" class="@if($k % 2== 1)odd @else even @endif">
                         <td>{{$v->id}}</td>
-                        <td>{{$v->nickName}}</td>          
+                        <td>{{$v->nick}}</td>
+                        <td>{{$v->phone}}</td>          
                         <td>{{$v->cinema}}</td>              
                         <td>{{$v->roomname}}</td> 
                         <td>{{$v->filmname}}</td>             
