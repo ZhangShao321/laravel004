@@ -33,7 +33,11 @@ class HomesController extends Controller
     public function index()
     {   
         //热映电影数据
-        $res = film::orderBy('shownum','desc')->limit('3')->get();
+        // $res = film::orderBy('shownum','desc')->limit('3')->get();
+        $res = DB::table('film')
+                    ->join('showfilm', 'film.id','=','showfilm.fid')
+                    ->select('film.summary','film.id','film.filepic','film.shownum','film.director','film.filmname')
+                    ->orderBy('shownum','desc')->limit('3')->get();
 
         //轮播图数据
         $res1 = lunbo::get();
@@ -52,13 +56,40 @@ class HomesController extends Controller
     {
 
         //电影列表数据
-        $res = film::paginate(2);
+        // $res = film::paginate(2);
+        $res = DB::table('film')
+                    ->join('showfilm','film.id','=','showfilm.fid')
+                    ->select('film.summary','film.id','film.cid','showfilm.timeout','showfilm.cid','showfilm.price','film.filepic','film.shownum','film.director','film.filmname')
+                    ->where('showfilm.timeout','>',time())
+                    ->orderBy('shownum','desc')->limit('10')->paginate(3);
+
+
+        $aaaa = array();
+         // echo "<pre>";
+        foreach ($res as $key => $value) {
+
+            $x = in_array($value->id,$aaaa);
+            if($x){
+
+                unset($res[$key]);
+            }
+
+            $aaaa[$key] = $value->id;
+ 
+        }
+
+       
+        // var_dump($res);die;
 
         //电影类型数据
-        $type = DB::table('filmtype')->where('status',1)->get();
+        $type = DB::table('filmtype')->where('status',0)->get();
 
         //电影排行榜数据
-        $res1 = film::orderBy('shownum','desc')->limit('3')->get();
+        // $res1 = film::orderBy('shownum','desc')->limit('3')->get();
+        $res1 = DB::table('film')
+                    ->join('showfilm', 'film.id','=','showfilm.fid')
+                    ->select('film.summary','film.id','film.filepic','film.shownum','film.director','film.filmname')
+                    ->orderBy('shownum','desc')->limit('10')->get();
 
        //加载电影列表
         return view('homes/filmlist',['res' => $res,'res1'=>$res1,'type'=>$type]);
