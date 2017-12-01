@@ -27,7 +27,8 @@
                 <div class="shop-content">                   
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="profile">
-                            <div class="row shop-list">
+                            <div id="cont" class="row shop-list">
+
                                 @foreach($res as $k=>$v)
                                 <div class="col-md-12">
                                     <div class="single-product">
@@ -54,7 +55,7 @@
                                                 </span>
                                             </div>
                                             <div class="product-desc">
-                                                <p>
+                                                <p id="p">
                                                     {{$v->summary}}
                                                 </p>
                                             </div>
@@ -69,6 +70,9 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                
+                                <h2 align="center">{{ $aaaa }}</h2>
+                                
                             </div>
                         </div>
                     </div>
@@ -82,4 +86,11 @@
     </div>
 </div>
 <!-- content end -->
+@endsection
+
+@section('js')
+<script>
+    
+    
+</script>
 @endsection

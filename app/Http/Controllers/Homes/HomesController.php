@@ -32,6 +32,13 @@ class HomesController extends Controller
     //1.电影院首页
     public function index()
     {   
+
+        $bool = DB::table('config')->first()->status;
+
+        if($bool == 1){
+
+            return redirect('/404');
+        }
         //热映电影数据
         $res = film::join('showfilm','film.id','=','showfilm.fid')
                     ->select('film.filepic','film.showtime','film.summary','film.id','film.filmname','film.director','film.price')
@@ -282,8 +289,16 @@ class HomesController extends Controller
         $res = film::where('film.filmname','like','%'.$seach.'%')
                     ->select('film.id','film.filmname','film.summary','film.price','film.director','film.filepic')
                     ->paginate($request->input('num',4));
+
+        //是否为空            
+        $aaaa = '';
+        if(empty($res[0])){
+
+            $aaaa = "抱歉！您搜索的影片不存在！";
+        }
+
         //加载模糊搜索匹配的电影列表
-        return view('homes/search',['res' => $res,'request'=>$request]);
+        return view('homes/search',['res' => $res,'request'=>$request,'aaaa'=>$aaaa]);
 
     }
 
