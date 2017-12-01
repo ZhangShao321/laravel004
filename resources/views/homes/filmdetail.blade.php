@@ -71,7 +71,7 @@
 	<div class="container">
 		<div class="row">
 			@foreach($bbb as $k=>$v)
-			<div class="col-lg-4 col-md-4 col-sm-6">
+			<div style="margin-top:20px" class="col-lg-4 col-md-4 col-sm-6">
 				<div class="single-service">
 					<div class="service-icon">
 						<i class="fa fa-money"></i>

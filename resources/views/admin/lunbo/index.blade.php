@@ -42,7 +42,7 @@
                                     <td>{{date('Y-m-d  H:i:s',$v->time)}}</td>
                                     <td>{{$v->status == 0 ?'正在使用':'未使用'}}</p></td>
                                     <td>
-                                    	<a href="/admin/lunbo/{{$v->id}}/edit"><button class="btn btn-primary">修改</button></a>
+                                    	<a href="/admin/lunbo/{{$v->id}}/edit"><button class="btn btn-primary">编辑</button></a>
                                     	
                                     	<form action="/admin/lunbo/{{$v->id}}" style="display:inline" method="post">
 

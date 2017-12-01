@@ -23,11 +23,12 @@ class UserController extends Controller
     public function index(Request $request)
     {
         
-        $res = DB::table('user')->join('userDetail','userDetail.uid','=','user.id')->
-            select('user.id','user.phone','userDetail.nickName','userDetail.photo','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')->
-            where('phone','like','%'.$request->input('search').'%')->
-            orderBy('id','asc')->
-            paginate($request->input('num',10));
+        $res = DB::table('user')
+                   ->join('userDetail','userDetail.uid','=','user.id')
+                   ->select('user.id','user.phone','userDetail.nickName','userDetail.photo','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')
+                   ->where('phone','like','%'.$request->input('search').'%')
+                   ->orderBy('id','asc')
+                   ->paginate($request->input('num',10));
 
         return view('admin.user.index',['res'=>$res,'request'=>$request]);
         

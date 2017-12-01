@@ -55,7 +55,7 @@
 	    		<div class="mws-button-row">
 	    			{{ csrf_field() }}
 	    			{{method_field('PUT') }}
-	    			<input type="submit" class="btn btn-primary" value="修改">
+	    			<input type="submit" class="btn btn-primary" value="编辑">
 	    			    			
 	    		</div>
 	    	</form>
