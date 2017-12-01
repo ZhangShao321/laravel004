@@ -248,6 +248,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('/ticket/shop/{id}', 'FilmTicketController@shop');
             Route::post('/ticket/shopseat/{id}', 'FilmTicketController@shopseat');
             Route::post('/ticket/shopseat_into/{id}', 'FilmTicketController@shopseat_into');
+
+            Route::post('/seach','SeachController@seach');
+            Route::post('/seach/del','SeachController@delete');
     });
 
 

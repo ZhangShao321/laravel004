@@ -209,7 +209,15 @@
             <!-- Main Navigation -->
               <div id="mws-navigation">
                 <ul>
-                    
+                    <li>
+                        <a href="#"><i class="icon-user"></i> 电影院首页</a>
+                        <ul class="closed">
+
+                            <li><a href="{{asset('/FilmAdmins/index')}}">电影院首页</a></li>
+
+                           
+                        </ul>
+                    </li>
                     <li>
                         <a href="#"><i class="icon-user"></i> 电影院管理</a>
                         <ul class="closed">

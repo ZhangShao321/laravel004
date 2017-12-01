@@ -119,7 +119,7 @@ class HomesController extends Controller
                     ->select('film.summary','film.id','film.cid','showfilm.timeout','showfilm.cid','showfilm.price','film.filepic','film.shownum','film.director','film.filmname')
                     ->where('showfilm.timeout','>',time())
                     ->where('film.status','1')
-                    ->orderBy('shownum','desc')->paginate(2);
+                    ->orderBy('shownum','desc')->paginate(5);
 
             //去除重复电影
             $aaaa = array();
@@ -193,7 +193,7 @@ class HomesController extends Controller
                         ->join('film','film.id','=','showfilm.fid')
                         ->select('film.filmname','film.filepic','film.price','showfilm.id','showfilm.time','showfilm.timeout')
                         ->where('film.status','1')
-                        ->where('showfilm.timeout','>',time())
+                        ->where('showfilm.time','>',time())
                         ->get();
 
         //加载电影院详情页面
