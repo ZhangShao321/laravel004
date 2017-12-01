@@ -119,7 +119,7 @@ class HomesController extends Controller
                     ->select('film.summary','film.id','film.cid','showfilm.timeout','showfilm.cid','showfilm.price','film.filepic','film.shownum','film.director','film.filmname')
                     ->where('showfilm.timeout','>',time())
                     ->where('film.status','1')
-                    ->orderBy('shownum','desc')->paginate(5);
+                    ->orderBy('shownum','desc')->paginate(2);
 
             //去除重复电影
             $aaaa = array();
@@ -276,14 +276,14 @@ class HomesController extends Controller
     //7.搜索的页面
     public function search(Request $request)
     {
-        //获取要搜索的字段
-        $seach = implode($request->all());
-
+            //获取要搜索的字段
+        $seach = $request->only('seach')['seach'];
         //模糊查询
-        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('film.filmname','like','%'.$seach.'%')->where('showfilm.status','1')->get();
-
+        $res = film::where('film.filmname','like','%'.$seach.'%')
+                    ->select('film.id','film.filmname','film.summary','film.price','film.director','film.filepic')
+                    ->paginate($request->input('num',4));
         //加载模糊搜索匹配的电影列表
-        return view('homes/search',['res' => $res]);
+        return view('homes/search',['res' => $res,'request'=>$request]);
 
     }
 
@@ -294,10 +294,21 @@ class HomesController extends Controller
     {
         //获取该类型的影片数据
         $tid = $request->id;
-        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('tid',$tid)->where('showfilm.status','1')->get();
-
+        $res = film::where('tid',$tid)      
+                    ->select('film.id','film.filepic','film.filmname','film.director','film.price','film.summary')
+                    ->paginate($request->input('num',2));
+            //去除重复电影
+            $xxx = array();
+            foreach ($res as $key1 => $value1) {
+                $x = in_array($value1->id,$xxx);
+                if($x){
+                    unset($res[$key1]);
+                }
+                $xxx[$key1] = $value1->id;
+     
+            }
         //加载该类型的影片页面
-        return view('homes/search',['res' => $res]);
+        return view('homes/search',['res' => $res,'request'=>$request]);
     }
         
     

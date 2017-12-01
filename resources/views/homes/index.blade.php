@@ -97,7 +97,7 @@
                                                 </h3>
                                                 <div class="pro-price">
                                                     <span class="normal">
-                                                        ￥{{ $v->price }}
+                                                        均价：￥{{ $v->price }}
                                                     </span>
                                                 </div>
                                             </div>
