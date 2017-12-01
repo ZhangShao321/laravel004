@@ -158,7 +158,9 @@ class HomesCenterController extends Controller
             $aaaa[$k]['lie'] = $aaa['1'];
         }
         // echo "<pre>";
+ 
         // var_dump($aaaa);
+ 
         // var_dump($data);die;
 
         return view('/homes/center_w',['res'=>$data,'aaaa'=>$aaaa]);

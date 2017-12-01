@@ -53,7 +53,7 @@
                     <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        价格
+                        价格/元
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
@@ -69,12 +69,7 @@
                 </tr>
             </thead>
             <tbody aria-relevant="all" aria-live="polite" role="alert">
-             <?php
-
-                // var_dump($aaaa);
-                // var_dump($res);die;
-
-             ?>
+             
                 @foreach($res as $k => $v)
                 <tr class="odd" align="center">
                     <td class="sorting_1">

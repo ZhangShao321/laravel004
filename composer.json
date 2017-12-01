@@ -13,10 +13,6 @@
         "flc/alidayu": "^2.0",
         "predis/predis": "1.0.*",
         "flc/dysms": "^1.0"
-<<<<<<< HEAD
-
-=======
->>>>>>> e4c2b1f1f40faadc7fc1eed0e7881bee51afeac2
 
     },
     "require-dev": {

@@ -97,7 +97,9 @@ class HomesDetailController extends Controller
                 $photo = 'image_'.$name;
                 // echo 111111;die;
                 // $res = DB::table('userDetail')->where('uid',session('uid'))->update(['photo'=>$photo]);
-            }
+            }else{
+                return redirect('/homes/edit')->with('msg','没有添加头像，请重新操作!!!');
+            } 
 
             $aaa['photo'] = $photo;
 
@@ -106,7 +108,7 @@ class HomesDetailController extends Controller
             if($pres){
                 return redirect('/homes/details')->with('msg','头像修改成功!!!');
             }else{
-                return redirect('/homes/photo')->with('msg','头像修改失败!!!');
+                return redirect('/homes/edit')->with('msg','头像修改失败!!!');
             }
 
 
