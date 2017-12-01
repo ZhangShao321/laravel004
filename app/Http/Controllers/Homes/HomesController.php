@@ -155,7 +155,7 @@ class HomesController extends Controller
                 ->join('showfilm','film.id','=','showfilm.fid')
                 ->join('cinema','showfilm.cid','=','cinema.id')
                 ->join('cininfo','cinema.id','=','cininfo.cid')
-                ->select('showfilm.id','showfilm.time','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
+                ->select('showfilm.id','showfilm.time','showfilm.price','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
                 ->where('showfilm.time','>',time())
                 ->where('cinema.status','2')
                 ->get();

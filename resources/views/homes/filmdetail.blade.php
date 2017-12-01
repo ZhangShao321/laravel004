@@ -80,7 +80,7 @@
 						<h2>影院：{{$v->cinema}}</h2>
 						<h5>{{$v->city}}{{$v->area}}{{$v->address}}</h5>
 						<a href="{{url('/homes/dingpiao?id=').$v->id}}"><p>上映时间:{{date('Y-m-d H:i:s',$v->time)}}</p><button class="btn btn-danger">选座购票</button></a>	
-
+						价格：￥{{ $v->price }} 
 					</div>
 				</div>
 			</div>
