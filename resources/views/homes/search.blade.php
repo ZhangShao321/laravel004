@@ -74,6 +74,9 @@
                     </div>
                 </div>
                  <!-- 影片列表 end-->
+                 <div class="shop-pagination">
+                    {!!$res->appends($request->all())->render() !!}
+                </div>
             </div>
         </div>
     </div>

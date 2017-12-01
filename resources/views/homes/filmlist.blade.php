@@ -132,10 +132,8 @@
                     </div>
                 </div>
                  <!-- 影片列表 end-->
-
                 <div class="shop-pagination">
-                {!! $res->render() !!}
-                    
+                    {!! $res->render() !!}
                 </div>
             </div>
         </div>
