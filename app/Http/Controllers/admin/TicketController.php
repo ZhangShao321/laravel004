@@ -41,29 +41,29 @@ class TicketController extends Controller
                 $v->nick = 'www';
             } else {
                 $phone = DB::table('user')->where('id',$uid)->first();
-                $v->phone = $phone->phone;
+                $v->phone = $phone->phone ?? '该用户已不存在';
 
                 $names = DB::table('userDetail')->where('uid',$uid)->first();
-                $v->nick = $names->nickName;
+                $v->nick = $names->nickName ?? '该用户已不存在';
             }
 
 
             //电影院
             $cid = $v->cid;
-            $v->cinema = DB::table('cinema')->where('id',$cid)->first()->cinema;
+            $v->cinema = DB::table('cinema')->where('id',$cid)->first()->cinema ?? '该影院已不存在';
 
             //电影
             $fid = $v->fid;
-            $v->filmname = DB::table('film')->where('id',$fid)->first()->filmname;
+            $v->filmname = DB::table('film')->where('id',$fid)->first()->filmname ?? '该电影已不存在';
 
             //影厅
             $rid = $v->rid;
-            $v->roomname = DB::table('roominfo')->where('id',$rid)->first()->roomname;
+            $v->roomname = DB::table('roominfo')->where('id',$rid)->first()->roomname ?? '该影厅已不存在';
             
             //放映
             $showid = $v->showid;
             $show = DB::table('showfilm')->where('id',$showid)->first();
-            $v->showtime = $show->time;
+            $v->showtime = $show->time ?? 0;
 
             //座位
             $seat = $v->seat;

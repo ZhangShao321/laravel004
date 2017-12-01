@@ -1,6 +1,6 @@
 @extends('admin.layout.admins')
         
-@section('title','回收站列表')
+@section('title','订单列表')
 
 
 @section('content')
@@ -10,7 +10,7 @@
         <span>
             <i class="icon-table">
             </i>
-            回收站列表
+            订单列表
         </span>
     </div>
     <div class="mws-panel-body no-padding">

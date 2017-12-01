@@ -98,7 +98,7 @@
 
                 
                     <td class="sorting_1">
-                    {{$aaaa[$k]['showtime']}}   
+                    {{date('Y-m-d H:i:s',$aaaa[$k]['showtime'])}}   
                     </td>
                 
 
@@ -112,7 +112,7 @@
                     </td>
 
                     <td class="sorting_1">
-                    {{$v['time']}}    
+                    {{date('Y-m-d H:i:s',$v['time'])}}    
                     </td>
                 
                     <td class="sorting_1">
