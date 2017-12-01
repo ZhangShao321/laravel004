@@ -365,7 +365,7 @@ class HomesController extends Controller
             $data['time'] = time();
             $data['num'] = time().rand(111111,999999);
             
-
+            //缓存至Redis
             $bool = Redis::hmset('seat_'.$data['num'],$data);
             Redis::expire('seat_'.$data['num'],300);
 

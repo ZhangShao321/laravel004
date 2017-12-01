@@ -42,7 +42,7 @@
 						<div class="product-info product-single">
 							<h3>{{$aaa->filmname}}</h3>
 							<div class="pro-price">
-								<span class="normal">￥{{$aaa->price}}</span> 
+								<span class="normal">均价：￥{{$aaa->price}}</span> 
 							</div>
 							<hr class="page-divider">
 
@@ -71,7 +71,7 @@
 	<div class="container">
 		<div class="row">
 			@foreach($bbb as $k=>$v)
-			<div style="margin-top:20px" class="col-lg-4 col-md-4 col-sm-6">
+			<div style="margin-bottom:20px" class="col-lg-4 col-md-4 col-sm-6">
 				<div class="single-service">
 					<div class="service-icon">
 						<i class="fa fa-money"></i>
