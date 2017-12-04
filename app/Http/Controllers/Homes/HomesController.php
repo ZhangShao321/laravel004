@@ -32,13 +32,14 @@ class HomesController extends Controller
     //1.电影院首页
     public function index()
     {   
-
+        //判断平台是否开启
         $bool = DB::table('config')->first()->status;
 
-        if($bool == 1){
+        if($bool == 0){
 
             return redirect('/404');
         }
+
         //热映电影数据
         $res = film::join('showfilm','film.id','=','showfilm.fid')
                     ->select('film.filepic','film.showtime','film.summary','film.id','film.filmname','film.director','film.price')
