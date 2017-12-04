@@ -244,10 +244,12 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film', 'middleware'=>'fi
 
 
             //电影票
-            Route::get('/ticket/list', 'FilmTicketController@index');
+            Route::get('/ticket/index', 'FilmTicketController@index');
             Route::get('/ticket/shop/{id}', 'FilmTicketController@shop');
             Route::post('/ticket/shopseat/{id}', 'FilmTicketController@shopseat');
             Route::post('/ticket/shopseat_into/{id}', 'FilmTicketController@shopseat_into');
+            Route::get('/ticket/list', 'FilmTicketController@list');
+            Route::get('/ticket/list_out', 'FilmTicketController@list_out');
 
             Route::post('/seach','SeachController@seach');
             Route::post('/seach/del','SeachController@delete');
