@@ -152,10 +152,28 @@ class FilmMsgController extends Controller
 
 
 
-//修改信息
+    //修改信息
 
     public function update(Request $request)
     {
+
+        //获取影片的id
+      $id = $request->only('id');
+
+      //修改影片类型
+      $tid = DB::table('film')->where('id',$id['id'])->first()->tid;
+
+      $aa = DB::table('filmtype')->where('id',$tid)->first();
+
+      $bb = DB::table('filmtype')->where('id',$tid)->update(['num'=>$aa->num-1]);
+
+      $newtid = $request->only('tid')['tid'];
+
+      $cc = DB::table('filmtype')->where('id',$newtid)->first();
+
+      $dd = DB::table('filmtype')->where('id',$newtid)->update(['num'=>$cc->num+1]);
+
+      // var_dump($tid);die;
 
       //验证
         $this->validate($request, [
@@ -180,8 +198,7 @@ class FilmMsgController extends Controller
         );
 
 
-        //获取影片的id
-      $id = $request->only('id');
+
       //获取放映时间
       $showtime = $request->only('showtime');
       $res =  $request->except('id','_token','id','filepic','showtime');
@@ -233,12 +250,12 @@ class FilmMsgController extends Controller
             
 
               if($dd)
-               {
-                   return redirect('/FilmAdmins/filmMsg')->with('msg','修改成功');
-               }else{
+              {
+                  return redirect('/FilmAdmins/filmMsg')->with('msg','修改成功');
+              }else{
 
-                    return back();
-               }
+                  return back();
+              }
      }
 
 

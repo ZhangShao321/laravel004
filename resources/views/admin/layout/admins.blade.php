@@ -48,7 +48,7 @@
         
             <!-- Logo Wrapper, images put within this wrapper will always be vertically centered -->
             <div id="mws-logo-wrap">
-                <h2 style='color:white'>后台管理</h2>
+                <h1 style='color:white;font-size:15px'>在线购票平台后台管理系统</h1>
             </div>
         </div>
         
