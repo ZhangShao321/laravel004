@@ -153,7 +153,6 @@ class FilmShowController extends Controller
 
           $info = $request->except('_token','id','time'); 
           $time = $request->only('time');
-          $id = $request->only('time');
           
           $info['time'] = strtotime($time['time']);
 

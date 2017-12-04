@@ -66,6 +66,8 @@ class GuanliyuanController extends Controller
 
             return back()->withInput('添加失败');
         }
+
+
        // var_dump($res);die;
         //哈希加密
         $res['password']=Hash::make($res['password']);
@@ -201,9 +203,9 @@ class GuanliyuanController extends Controller
 
         if ($data) {
 
-            echo "管理员已存在";
+            echo "1";
         } else {
-            echo '√';
+            echo '0';
         }
     }
 

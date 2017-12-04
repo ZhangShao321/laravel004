@@ -117,6 +117,10 @@
             $(this).css('color','green');
             $(this).next().text(' √ ');
             $(this).next().css('color','green');
+            $('#but').click(function(){
+
+              return true;
+            })
         } else {
             $(this).css('color','red');
             $(this).next().text('手机号格式不正确');
@@ -126,7 +130,7 @@
 
               return false;
             })
-            return
+            
 
         }
         $.post("{{ url('/admin/user/phone') }}", {_token:'{{ csrf_token() }}', phone:phone}, function(data){
@@ -147,6 +151,10 @@
             $(this).css('color','green');
             $(this).next().text(' √ ');
             $(this).next().css('color','green');
+            $('#but').click(function(){
+
+              return true;
+            })
         } else {
             $(this).css('color','red');
             $(this).next().text('密码格式不正确');
@@ -172,6 +180,10 @@
             $(this).css('color','green');
             $(this).next().text(' √ ');
             $(this).next().css('color','green');
+            $('#but').click(function(){
+
+              return true;
+            })
         } else {
             $(this).css('color','red');
             $(this).next().text('昵称格式不正确');
@@ -197,6 +209,10 @@
             $(this).css('color','green');
             $(this).next().text(' √ ');
             $(this).next().css('color','green');
+            $('#but').click(function(){
+
+              return true;
+            })
         } else {
             $(this).css('color','red');
             $(this).next().text('邮箱格式不正确');
@@ -222,6 +238,10 @@
             $(this).css('color','green');
             $(this).next().text(' √ ');
             $(this).next().css('color','green');
+            $('#but').click(function(){
+
+              return true;
+            })
         } else {
             $(this).css('color','red');
             $(this).next().text('QQ格式不正确');
