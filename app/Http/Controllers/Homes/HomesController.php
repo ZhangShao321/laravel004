@@ -322,6 +322,7 @@ class HomesController extends Controller
      
             }
 
+
         //是否为空            
         $aaaa = '';
         if(empty($res[0])){
