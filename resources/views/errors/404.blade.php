@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Be right back.</title>
+
+        <title>404页面</title>
+
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
@@ -40,8 +42,11 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Not Find.</div>
+
+            	<div><img src="/img/404.jpg" alt=""/></div>
+
             </div>
         </div>
     </body>
 </html>
+
