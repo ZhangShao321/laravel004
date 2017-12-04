@@ -144,9 +144,9 @@ class FilmMsgController extends Controller
       $id = $request->only('id');
       $res = film::find($id)[0];
 
-   
+      $data = DB::table('filmtype')->where('status',0)->get();
 
-      return  view('FilmAdmins.FilmMag.FilmMsgEdit',['res'=>$res]);
+      return  view('FilmAdmins.FilmMag.FilmMsgEdit',['res'=>$res,'data'=>$data]);
     }
 
 

@@ -138,10 +138,6 @@ class FilmShowController extends Controller
           $show = showfilm::where('id',$id)->get();
 
 
-
-
-
-
           //b用汉语判断状态
           $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
 
@@ -157,8 +153,18 @@ class FilmShowController extends Controller
 
           $info = $request->except('_token','id','time'); 
           $time = $request->only('time');
+          $id = $request->only('time');
           
           $info['time'] = strtotime($time['time']);
+
+          //电影id
+          $fid = $info['fid'];
+          $film = DB::table('film')->where('id',$fid)->where('status',1)->first();
+          //获取电影时长
+          $ftime = $film->filmtime;
+
+          //结束id   放映结束时间戳
+          $info['timeout'] = $info['time'] + $ftime*60;
 
         
           $res  =showfilm::where('id',$request->only('id')['id'])->update($info);

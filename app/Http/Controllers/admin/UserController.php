@@ -28,6 +28,7 @@ class UserController extends Controller
                    ->select('user.id','user.phone','userDetail.nickName','userDetail.photo','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')
                    ->where('phone','like','%'.$request->input('search').'%')
                    ->orderBy('id','asc')
+                   ->where('auth',0)
                    ->paginate($request->input('num',10));
 
         return view('admin.user.index',['res'=>$res,'request'=>$request]);
@@ -56,6 +57,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        // echo 11111;die;
         $input1 = $request->only('phone','password','lastlogin');
 
         if(empty($input1['password'])){
@@ -69,7 +71,7 @@ class UserController extends Controller
         // $time = time();
       
         $input1['lastlogin'] = time();
-        echo "<pre>";
+        // echo "<pre>";
         // var_dump($input1);die;
         
         //定义一个变量$cinema存查询cinema表的id

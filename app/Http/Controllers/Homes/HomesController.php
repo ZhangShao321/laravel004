@@ -323,8 +323,15 @@ class HomesController extends Controller
                 $xxx[$key1] = $value1->id;
      
             }
-        //加载该类型的影片页面
-        return view('homes/search',['res' => $res,'request'=>$request]);
+
+              //是否为空            
+                $aaaa = '';
+                if(empty($res[0])){
+
+                    $aaaa = "抱歉！您搜索的影片不存在！";
+                }
+                //加载该类型的影片页面
+        return view('homes/search',['res' => $res,'request'=>$request,'aaaa'=>$aaaa]);
     }
         
     
