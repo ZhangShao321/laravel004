@@ -29,24 +29,26 @@ class HomesLoginController extends Controller
         // var_dump($res);
 
     	$uname = user::where('phone',$res)->first();
-        // var_dump($uname);die;
+        if($uname){
        
-        $pass = Hash::check($request->input('password'),$uname->password);
-        // $pass = Hash::check($a,$b);
-        if ($uname && $pass ){
-            
-            // 将用户数据保存至session中
-            $request->session()->put('uid', $uname->id);
+            $pass = Hash::check($request->input('password'),$uname->password);
+            // $pass = Hash::check($a,$b);
+            if ($uname && $pass ){
+                
+                // 将用户数据保存至session中
+                $request->session()->put('uid', $uname->id);
 
-             
-            // 跳转至首页
-            return redirect('/homes/index');
-        } else {
+                 
+                // 跳转至首页
+                return redirect('/homes/index');
+            } else {
 
-            // 返回登录页(带提示信息）
-            return redirect('/homes/login')->with('status', '用户名或密码错误，请重新登录。');
+                // 返回登录页(带提示信息）
+                return redirect('/homes/login')->with('status', '用户名或密码错误，请重新登录。');
+            }
+        }else{
+            return redirect('/homes/login')->with('status','亲，你还没注册呢！');
         }
-
 
          
 
