@@ -323,7 +323,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes', 'middleware'=>'home']
 
     Route::post('dologin','HomesLoginController@dologin');
 
-    //退出
+    //退出登录
     Route::get('deletes','HomesLoginController@delete');
 	
     //个人中心
@@ -343,11 +343,13 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes', 'middleware'=>'home']
     //个人订单
     Route::get('center','HomesCenterController@index');
 
+    //未完成订单
     Route::get('center_w','HomesCenterController@weiwc');
     Route::get('insert','HomesCenterController@insert');
 
     Route::post('/ticket/dodel','HomesCenterController@dodel');
 
+    //删除订单
     Route::get('/delete/{id}','HomesCenterController@delete');
     
     //充值主页
