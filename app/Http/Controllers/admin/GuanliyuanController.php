@@ -31,7 +31,7 @@ class GuanliyuanController extends Controller
     {
 
 
-        $res=user::where('status','>','0')->get();
+        $res=user::where('status','>','0')->where('auth',1)->get();
          
         return view('admin.guanliyuan.index',compact('res'));
 
@@ -71,7 +71,7 @@ class GuanliyuanController extends Controller
         $res['password']=Hash::make($res['password']);
 
         //添加时间 将时间转化为时间戳
-        $res['lastlogin']=strtotime($res['lastlogin']);
+        $res['lastlogin']=time();
        
          
         //修改
