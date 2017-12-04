@@ -58,7 +58,7 @@ class UserController extends Controller
     {
         $input1 = $request->only('phone','password','lastlogin');
 
-        if(empty($input1[0])){
+        if(empty($input1['password'])){
 
             return back()->with('msg','数据不能为空');
         }
