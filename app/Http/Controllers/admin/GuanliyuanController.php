@@ -66,12 +66,12 @@ class GuanliyuanController extends Controller
 
             return back()->withInput('添加失败');
         }
-       // var_dump($res);die;
         //哈希加密
         $res['password']=Hash::make($res['password']);
 
-        //添加时间 将时间转化为时间戳
-        $res['lastlogin']=strtotime($res['lastlogin']);
+        //添加时间
+        // $res['lastlogin']=$res['lastlogin'];
+        $res['lastlogin']=time();
        
          
         //修改
@@ -82,7 +82,7 @@ class GuanliyuanController extends Controller
 
             //添加userDetail表
             $data = DB::table('userDetail')->insert(['uid'=>$id]);
-
+            // var_dump($data);die;
             if ($data) {
                 return redirect('/admin/guanliyuan')->with('添加成功');
             } else {
@@ -172,21 +172,22 @@ class GuanliyuanController extends Controller
      */
     public function destroy($id)
     {
-
-
-        
+       
        
         $sql = user::where('id',$id)->delete();
+
         if($sql){
 
+            $sql2 = DB::table('userDetail')->where('uid',$id)->delete();
+            if($sql2){
+
+                echo "删除成功!";
              // return redirect('/admin/guanliyuan')->with('msg','删除成功');
-            echo "删除成功!";
-            
+            }           
 
         }else{
             // return back();
             echo "删除失败!";
-
 
         }
     }

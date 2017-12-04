@@ -96,21 +96,27 @@
 
 @section('js')
 <script>
+
+//设置空闲时间
 $('#sel').blur(function(){
+
+    //获取选好的影厅id
     var id = $(this).val();
 
+    //发送ajax
     $.post('{{ url("/FilmAdmins/showtime") }}',{_token:'{{ csrf_token() }}', id:id}, function(data){
 
-        console.log(data);
+        // console.log(data);
         $('input[name=ktime]').val(data);
     })
 
 }) 
 
+//定义放映开始时间验证
 $('input[name=time]').change(function(){
-
+    //放映时间
     var time = $(this).val();
-
+    //当前影厅放映结束时间
     var ktime = $('input[name=ktime]').val();
 
     if(time < ktime){

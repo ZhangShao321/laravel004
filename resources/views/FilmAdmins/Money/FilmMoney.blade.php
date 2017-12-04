@@ -15,9 +15,7 @@
                                     <th>电影院名称</th>
                                     <th>法人</th>
                                     <th>电话</th>
-                                    <th>钱包</th>
-                                    <th>今日收益</th>
-                                                                    </tr>
+                                    <th>钱包</th>                                 </tr>
                             </thead>
                             <tbody>
                             
@@ -27,9 +25,6 @@
                                     <td>{{$v->legal}}</td>
                                     <td>{{$v->phone}}</td>
                                     <td>{{$v->money}}</td>
-                                    <td>收益</td>
-                                   
-                                   
                                 </tr>
                         @endforeach
                           

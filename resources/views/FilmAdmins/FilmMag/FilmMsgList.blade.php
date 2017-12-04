@@ -38,7 +38,7 @@
        
          <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper" role="grid">
                     <form action="" method="get">
-                    <div id="DataTables_Table_0_length" class="dataTables_length">
+                    <div id="DataTables_Table_1_length" class="dataTables_length">
                         <label>
                             Show
                          <select name="num" size="1" aria-controls="DataTables_Table_1">
@@ -57,7 +57,7 @@
                             entries
                         </label>
                     </div>
-                    <div class="dataTables_filter" id="DataTables_Table_0_filter">
+                    <div class="dataTables_filter" id="DataTables_Table_1_filter">
                         <label>
                             Search:
                               <input type="text" aria-controls="DataTables_Table_1" name="seach" value="{{isset($_GET['seach']) ? $_GET['seach'] : ''}}">
@@ -68,7 +68,7 @@
                     
         </form> 
             <table class="mws-datatable mws-table dataTable" id="DataTables_Table_0"
-            aria-describedby="DataTables_Table_0_info">
+            aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_0"

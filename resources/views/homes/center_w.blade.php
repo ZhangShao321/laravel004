@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <ul class="breadcrumb">
-                    <li><a href="{{url('/homes/index')}}">首页</a></li>
+                    <li><a href="{{url('/homes/details')}}">个人中心</a></li>
                     
                     <li class="active">未完成订单</li>
                 </ul>
@@ -69,23 +69,28 @@
                 </tr>
             </thead>
             <tbody aria-relevant="all" aria-live="polite" role="alert">
-             
-                @foreach($res as $K=>$v)
+             <?php
+
+                // var_dump($aaaa);
+                // var_dump($res);die;
+
+             ?>
+                @foreach($res as $k => $v)
                 <tr class="odd" align="center">
                     <td class="sorting_1">
-                    {{$v['cinema']}}    
+                    {{$aaaa[$k]['cinema']}}    
                     </td>
                 
 
                 
                     <td class="sorting_1 ">
-                    {{$v['filmname']}}    
+                    {{$aaaa[$k]['filmname']}}    
                     </td>
                 
 
                 
                     <td class="sorting_1">
-                    {{$v['roomname']}}    
+                    {{$aaaa[$k]['roomname']}}    
                     </td>
 
                    
@@ -93,13 +98,13 @@
 
                 
                     <td class="sorting_1">
-                    {{$v['showtime']}}   
+                    {{$aaaa[$k]['showtime']}}   
                     </td>
                 
 
                 
                     <td class="sorting_1">
-                    {{$v['hang']}}排{{ $v['lie'] }}座    
+                    {{$aaaa[$k]['hang']}}排{{ $aaaa[$k]['lie'] }}座    
                     </td>
 
                     <td class="sorting_1">

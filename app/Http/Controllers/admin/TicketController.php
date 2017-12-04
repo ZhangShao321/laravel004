@@ -36,15 +36,16 @@ class TicketController extends Controller
             //用户
             $uid = $v->uid;
 
-            if($uid == 0){
-                $v->nickName = '电影院直售';
-            } else {
-                $v->nickName = DB::table('userDetail')->where('uid',$uid)->first()->nickName;
-            }     
-
-            $v->nickName = DB::table('userDetail')->where('uid',$uid)->first()->nickName;
-            // var_dump($v->nickName);die;
-            // $ = $phone->phone;
+ /*           if($uid == 0){
+                    
+                $names = DB::table('userDetail')->where('uid',$uid)->first();
+                $names->nickName = '影院直售';
+               
+            } else {*/
+              
+                $names = DB::table('userDetail')->where('uid',$uid)->first();
+                $v->nickName = $names->nickName;
+            // }
 
             //电影院
             $cid = $v->cid;
@@ -73,7 +74,8 @@ class TicketController extends Controller
             $v->hang = $aaa['0'];
             $v->lie = $aaa['1'];
         }
-       
+       // echo "<pre>";
+       // var_dump($res);die;
                        
         return view('admin.ticket.index',['res'=>$res],['request'=>$request]);
     }
@@ -197,8 +199,16 @@ class TicketController extends Controller
         foreach ($res as $k => $v) {
             //用户
             $uid = $v->uid;
-            $v->nickName = DB::table('userDetail')->where('uid',$uid)->first()->nickName;
+            if($uid == 0){
+                $v->phone = '电影院直售';
+                $v->nick = 'www';
+            } else {
+                $phone = DB::table('user')->where('id',$uid)->first();
+                $v->phone = $phone->phone;
 
+                $names = DB::table('userDetail')->where('uid',$uid)->first();
+                $v->nick = $names->nickName;
+            }
             //电影院
             $cid = $v->cid;
             $v->cinema = DB::table('cinema')->where('id',$cid)->first()->cinema;
