@@ -126,6 +126,7 @@ class FilmTicketController extends Controller
                 ->where('ticket.cid',session('cid'))
                 ->where('showfilm.time','>',time())
                 ->where('ticket.num','like','%'.$request->input('search').'%')
+                ->orderBy('ticket.time','desc')
                 ->paginate($request->input('number',10));
 
         //遍历
