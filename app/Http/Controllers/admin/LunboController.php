@@ -272,4 +272,36 @@ class LunboController extends Controller
 
     }
 
+
+ //修改状态
+    public function lbzt(Request $request)
+    {
+
+        // echo '1';die;
+        $data = $request->except('_token');
+
+        // var_dump($data);die;
+
+        if($data['status'] == '1'){
+
+            $res1 = DB::table('lunbo')->where('id',$data['id'])->update(['status'=>0]);
+            if($res1){
+                echo '1';
+            }else{
+                echo '0';
+            }
+        }else if($data['status'] == '0'){
+            $res2 = DB::table('lunbo')->where('id',$data['id'])->update(['status'=>1]);
+            if($res2){
+                echo '2';
+            }else{
+                echo '0';
+            }
+        }
+    }
+
+
+
+    
+
 }

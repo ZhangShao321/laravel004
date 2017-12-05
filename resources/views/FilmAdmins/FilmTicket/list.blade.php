@@ -102,6 +102,11 @@
                         style="width: 156px;">
                             订单号
                         </th>
+                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                        style="width: 100px;">
+                            操作
+                        </th>
                        
                     </tr>
                 </thead>
@@ -117,7 +122,7 @@
                         <td>{{date('Y-m-d H:i:s',$v->showtime)}}</td>              
                         <td>{{date('Y-m-d H:i:s',$v->time)}}</td>  
                         <td>{{$v->num}}</td>      
-                       
+                        <td><button class="btn btn-default">打印</button></td>
           
 
                     </tr>

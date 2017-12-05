@@ -58,6 +58,10 @@ class SeachController extends Controller
 	            $v->showtime = $show->time ?? 0;
 	            $v->price = $show->price ?? 0;
 
+	            if($v->showtime < time()){
+	            	unset($tic[$k]);
+	            }
+
 	            //座位
 	            $seat = $v->seat;
 

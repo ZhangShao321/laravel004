@@ -40,7 +40,15 @@
                                     <td><img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{($v->picname)}}" style="width:200px;height:80px;"></td>
                                     <td>{{$v->fname}}</td>
                                     <td>{{date('Y-m-d  H:i:s',$v->time)}}</td>
-                                    <td>{{$v->status == 0 ?'正在使用':'未使用'}}</p></td>
+                                    <td>
+                                            
+                                        @if($v->status == '0')
+                                        <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>开启</button>
+                                        @else
+                                        <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>关闭</button>
+                                        @endif 
+
+                                    </td>
                                     <td>
                                     	<a href="/admin/lunbo/{{$v->id}}/edit"><button class="btn btn-primary">编辑</button></a>
                                     	
@@ -66,6 +74,28 @@
 	<script type="text/javascript">
 
         $('.mws-form-message').delay(2000).slideUp(1000);
+
+
+        //修改状态    
+        $('.bb').click(function(){
+
+            var ids = $(this).attr('id');
+            var status = $(this).attr('name');
+            var bbb = $(this);
+
+            $.post("{{ url('/admin/lunbo/lbzt') }}", {_token:'{{ csrf_token() }}', id:ids, status:status}, function(data){
+                
+                // console.log(data);
+
+                if(data == 1){
+                    bbb.text('开启');
+                    bbb.attr('name',0);
+                } else if(data == 2){
+                    bbb.text('关闭');
+                    bbb.attr('name',1);
+                }
+            });
+        })
 
     </script>
 

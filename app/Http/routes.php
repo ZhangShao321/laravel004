@@ -100,6 +100,8 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
         //后台轮播图管理
         Route::resource('/lunbo','LunboController');
+        //状态
+        Route::post('/lunbo/lbzt','LunboController@lbzt');
 
 		//后台板块管理
 		Route::resource('/block','BlockController');

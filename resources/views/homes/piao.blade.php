@@ -2,7 +2,7 @@
 
 @section('title','傻家伙')
 
-<meta http-equiv="refresh"  content="300;index" />
+<meta http-equiv="refresh"  content="3;index" />
 
 @section('content')
 

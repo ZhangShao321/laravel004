@@ -84,7 +84,8 @@
                 <div class="mws-form-row">
     				<label class="mws-form-label">网站logo</label>
     				<div class="mws-form-item">
-    					<img src="{{asset($res->clogo)}}" style="width:50px;height:50px;"><input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="文件上传" name='clogo'>
+    					<img src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$res->clogo}}" style="width:50px;height:50px;">
+                        <input type="file" readonly="readonly" style="width: 100%; padding-right: 85px;" class="fileinput-preview" placeholder="文件上传" name='clogo'>
     				</div>
     			</div>
             </div>

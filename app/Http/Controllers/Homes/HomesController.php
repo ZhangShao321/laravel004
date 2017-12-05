@@ -64,7 +64,7 @@ class HomesController extends Controller
             }
 
         //轮播图数据
-        $res1 = lunbo::get(); 
+        $res1 = lunbo::where('status',0)->get(); 
 
         //即将上映电影数据
         $res2 = film::where('showtime','>',time())->limit('4')->get();
