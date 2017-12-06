@@ -68,11 +68,12 @@ class GuanliyuanController extends Controller
         }
         //哈希加密
         $res['password']=Hash::make($res['password']);
+       var_dump($res);die;
 
         //添加时间
         // $res['lastlogin']=$res['lastlogin'];
         $res['lastlogin']=time();
-       
+ 
          
         //修改
         $id = DB::table('user')->insertGetId($res);  

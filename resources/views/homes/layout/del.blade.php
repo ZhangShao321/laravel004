@@ -53,8 +53,8 @@
                         <div class="user-infoPic">
                              
                             <div class="filePic">
-                                <input type="file" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
-                                <img class="am-circle am-img-thumbnail" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$re->photo}}?imageView2/0/w/57/h/57" alt="" />
+                                <input type="" class="inputPic" allowexts="gif,jpeg,jpg,png,bmp" accept="image/*">
+                                <a href="/homes/edit"> <img class="am-circle am-img-thumbnail" src="http://ozspa9a4f.bkt.clouddn.com/Uplodes/{{$re->photo}}?imageView2/0/w/57/h/57" alt="" /></a>
                             </div>
 
                             <p class="am-form-help">头像</p>

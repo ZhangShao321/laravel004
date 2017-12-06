@@ -27,7 +27,8 @@
                 <div class="shop-content">                   
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="profile">
-                            <div class="row shop-list">
+                            <div id="cont" class="row shop-list">
+
                                 @foreach($res as $k=>$v)
                                 <div class="col-md-12">
                                     <div class="single-product">
@@ -50,11 +51,11 @@
                                             </div>
                                             <div class="pro-price">
                                                 <span class="normal">
-                                                    ￥{{$v->price}}
+                                                    均价：￥{{$v->price}}
                                                 </span>
                                             </div>
                                             <div class="product-desc">
-                                                <p>
+                                                <p id="p">
                                                     {{$v->summary}}
                                                 </p>
                                             </div>
@@ -69,14 +70,27 @@
                                     </div>
                                 </div>
                                 @endforeach
+                                
+                                <h2 align="center">{{ $aaaa }}</h2>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
                  <!-- 影片列表 end-->
+                 <div class="shop-pagination">
+                    {!!$res->appends($request->all())->render() !!}
+                </div>
             </div>
         </div>
     </div>
 </div>
 <!-- content end -->
+@endsection
+
+@section('js')
+<script>
+    
+    
+</script>
 @endsection

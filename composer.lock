@@ -329,7 +329,11 @@
                 "qrcode",
                 "symfony"
             ],
+<<<<<<< HEAD
             "time": "2017-10-22T18:56:00+00:00"
+=======
+            "time": "2017-10-22T12:17:28+00:00"
+>>>>>>> eafe9dfacaffe36a34192a6031da25e29dfaaa51
         },
         {
             "name": "flc/alidayu",

@@ -23,12 +23,14 @@ class UserController extends Controller
     public function index(Request $request)
     {
         
+
         $res = DB::table('user')->join('userDetail','userDetail.uid','=','user.id')->
             select('user.id','user.phone','userDetail.nickName','userDetail.photo','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')
             ->where('phone','like','%'.$request->input('search').'%')
             ->where('auth',0)
             ->orderBy('id','asc')
             ->paginate($request->input('num',10));
+
 
         return view('admin.user.index',['res'=>$res,'request'=>$request]);
         
@@ -58,7 +60,7 @@ class UserController extends Controller
     {
         $input1 = $request->only('phone','password','lastlogin');
 
-        if(empty($input1[0])){
+        if(empty($input1['password'])){
 
             return back()->with('msg','数据不能为空');
         }
@@ -69,7 +71,7 @@ class UserController extends Controller
         // $time = time();
       
         $input1['lastlogin'] = time();
-        echo "<pre>";
+        // echo "<pre>";
         // var_dump($input1);die;
         
         //定义一个变量$cinema存查询cinema表的id

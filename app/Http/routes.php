@@ -18,7 +18,10 @@ Route::group(['namespace'=>'Homes'], function(){
     Route::get('/', 'HomesController@index');
 });
 
-
+//404找不到页面
+Route::get('/404',function(){
+    abort(404);
+});
 
 
 // Route::get('/', function () {
@@ -97,6 +100,8 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 
         //后台轮播图管理
         Route::resource('/lunbo','LunboController');
+        //状态
+        Route::post('/lunbo/lbzt','LunboController@lbzt');
 
 		//后台板块管理
 		Route::resource('/block','BlockController');
@@ -140,16 +145,13 @@ Route::group(['prefix'=>'admin','namespace'=>'admin','middleware'=>'adminlogin']
 //  php artisan make:controller Film/FilmLoginController --plain
 
 
-Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
+Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film', 'middleware'=>'film'],function(){
          //电影院登录
         Route::get('FilmLogin','FilmLoginController@index');
         //电影院登录验证码
         Route::get('FilmCode','FilmLoginController@code');
         //处理登录
         Route::post('doAction','FilmLoginController@doAction');
-
-
-        
 
         Route::get('/testRedis','TestController@redisDemo');
         
@@ -248,6 +250,9 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
             Route::get('/ticket/shop/{id}', 'FilmTicketController@shop');
             Route::post('/ticket/shopseat/{id}', 'FilmTicketController@shopseat');
             Route::post('/ticket/shopseat_into/{id}', 'FilmTicketController@shopseat_into');
+
+            Route::post('/seach','SeachController@seach');
+            Route::post('/seach/del','SeachController@delete');
     });
 
 
@@ -264,7 +269,7 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film'],function(){
 //===============================前台信息=============================
 
 
-Route::group(['prefix' => 'homes', 'namespace' => 'Homes'], function(){
+Route::group(['prefix' => 'homes', 'namespace' => 'Homes', 'middleware'=>'home'], function(){
 
 	//前台首页
 	Route::get('index','HomesController@index');

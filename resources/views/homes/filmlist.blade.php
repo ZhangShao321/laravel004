@@ -108,7 +108,7 @@
                                             </div>
                                             <div class="pro-price">
                                                 <span class="normal">
-                                                    ￥{{$v->price}}
+                                                    均价：￥{{$v->price}}
                                                 </span>
                                             </div>
                                             <div class="product-desc">
@@ -132,10 +132,8 @@
                     </div>
                 </div>
                  <!-- 影片列表 end-->
-
                 <div class="shop-pagination">
-                {!! $res->render() !!}
-                    
+                    {!! $res->render() !!}
                 </div>
             </div>
         </div>

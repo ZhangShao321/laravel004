@@ -53,7 +53,7 @@
                     <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
                     role="columnheader" class="sorting">
-                        价格
+                        价格/元
                     </th>
                     <th aria-label="CSS grade: activate to sort column ascending" style="text-align:center;width: 97px;"
                     colspan="1" rowspan="1" aria-controls="DataTables_Table_1" tabindex="0"
@@ -69,12 +69,7 @@
                 </tr>
             </thead>
             <tbody aria-relevant="all" aria-live="polite" role="alert">
-             <?php
-
-                // var_dump($aaaa);
-                // var_dump($res);die;
-
-             ?>
+             
                 @foreach($res as $k => $v)
                 <tr class="odd" align="center">
                     <td class="sorting_1">
@@ -98,7 +93,7 @@
 
                 
                     <td class="sorting_1">
-                    {{$aaaa[$k]['showtime']}}   
+                    {{date('Y-m-d H:i:s',$aaaa[$k]['showtime'])}}   
                     </td>
                 
 
@@ -112,7 +107,7 @@
                     </td>
 
                     <td class="sorting_1">
-                    {{$v['time']}}    
+                    {{date('Y-m-d H:i:s',$v['time'])}}    
                     </td>
                 
                     <td class="sorting_1">

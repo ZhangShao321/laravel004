@@ -32,10 +32,19 @@ class HomesController extends Controller
     //1.电影院首页
     public function index()
     {   
+        //判断平台是否开启
+        $bool = DB::table('config')->first()->status;
+
+        if($bool == 0){
+
+            return redirect('/404');
+        }
+
         //热映电影数据
         $res = film::join('showfilm','film.id','=','showfilm.fid')
-                    ->select('film.filepic','film.summary','film.id','film.filmname','film.director','film.price')
+                    ->select('film.filepic','film.showtime','film.summary','film.id','film.filmname','film.director','film.price')
                     ->where('showfilm.status','1')
+                    ->where('film.showtime','<',time())
                     ->orderBy('shownum','desc')
                     ->limit('10')->get();
             //去除重复电影
@@ -43,14 +52,14 @@ class HomesController extends Controller
 
             foreach ($res as $k => $v) {
 
-                $x = in_array($v->id,$z);
+                $x = in_array($v->filmname,$z);
                
                 if($x){
 
                     unset($res[$k]);
                 }
 
-                $z[$k] = $v->id;
+                $z[$k] = $v->filmname;
      
             }
 
@@ -60,6 +69,22 @@ class HomesController extends Controller
         //即将上映电影数据
         // $res2 = film::where('status','1')->where('showtime','>',time())->limit('4')->get();
         $res2 = film::where('showtime','>',time())->limit('4')->get();
+
+        //去除重复电影
+        $zz = array();
+
+        foreach ($res2 as $k => $v) {
+
+            $x = in_array($v->filmname,$zz);
+           
+            if($x){
+
+                unset($res2[$k]);
+            }
+
+            $zz[$k] = $v->filmname;
+ 
+        }
 
         //加载前台首页
         return view('homes/index',['res' => $res,'res1' => $res1,'res2' => $res2]);
@@ -86,14 +111,14 @@ class HomesController extends Controller
 
             foreach ($res1 as $k => $v) {
 
-                $x = in_array($v->id,$bbb);
+                $x = in_array($v->filmname,$bbb);
 
                 if($x){
 
                     unset($res1[$k]);
                 }
 
-                $bbb[$k] = $v->id;
+                $bbb[$k] = $v->filmname;
      
             }
 
@@ -102,21 +127,21 @@ class HomesController extends Controller
                     ->select('film.summary','film.id','film.cid','showfilm.timeout','showfilm.cid','showfilm.price','film.filepic','film.shownum','film.director','film.filmname')
                     ->where('showfilm.timeout','>',time())
                     ->where('film.status','1')
-                    ->orderBy('shownum','desc')->paginate(3);
+                    ->orderBy('shownum','desc')->paginate(5);
 
             //去除重复电影
             $aaaa = array();
 
             foreach ($res as $key => $value) {
 
-                $x = in_array($value->id,$aaaa);
+                $x = in_array($value->filmname,$aaaa);
 
                 if($x){
 
                     unset($res[$key]);
                 }
 
-                $aaaa[$key] = $value->id;
+                $aaaa[$key] = $value->filmname;
      
             }
 
@@ -138,7 +163,8 @@ class HomesController extends Controller
                 ->join('showfilm','film.id','=','showfilm.fid')
                 ->join('cinema','showfilm.cid','=','cinema.id')
                 ->join('cininfo','cinema.id','=','cininfo.cid')
-                ->select('showfilm.id','showfilm.time','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
+                ->select('showfilm.id','showfilm.time','showfilm.price','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
+                ->where('showfilm.time','>',time())
                 ->where('cinema.status','2')
                 ->get();
 
@@ -175,7 +201,7 @@ class HomesController extends Controller
                         ->join('film','film.id','=','showfilm.fid')
                         ->select('film.filmname','film.filepic','film.price','showfilm.id','showfilm.time','showfilm.timeout')
                         ->where('film.status','1')
-                        ->where('showfilm.timeout','>',time())
+                        ->where('showfilm.time','>',time())
                         ->get();
 
         //加载电影院详情页面
@@ -258,14 +284,22 @@ class HomesController extends Controller
     //7.搜索的页面
     public function search(Request $request)
     {
-        //获取要搜索的字段
-        $seach = implode($request->all());
-
+            //获取要搜索的字段
+        $seach = $request->only('seach')['seach'];
         //模糊查询
-        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('film.filmname','like','%'.$seach.'%')->where('showfilm.status','1')->get();
+        $res = film::where('film.filmname','like','%'.$seach.'%')
+                    ->select('film.id','film.filmname','film.summary','film.price','film.director','film.filepic')
+                    ->paginate($request->input('num',4));
+
+        //是否为空            
+        $aaaa = '';
+        if(empty($res[0])){
+
+            $aaaa = "抱歉！您搜索的影片不存在！";
+        }
 
         //加载模糊搜索匹配的电影列表
-        return view('homes/search',['res' => $res]);
+        return view('homes/search',['res' => $res,'request'=>$request,'aaaa'=>$aaaa]);
 
     }
 
@@ -276,10 +310,21 @@ class HomesController extends Controller
     {
         //获取该类型的影片数据
         $tid = $request->id;
-        $res = film::join('showfilm','film.id','=','showfilm.fid')->where('tid',$tid)->where('showfilm.status','1')->get();
-
+        $res = film::where('tid',$tid)      
+                    ->select('film.id','film.filepic','film.filmname','film.director','film.price','film.summary')
+                    ->paginate($request->input('num',2));
+            //去除重复电影
+            $xxx = array();
+            foreach ($res as $key1 => $value1) {
+                $x = in_array($value1->id,$xxx);
+                if($x){
+                    unset($res[$key1]);
+                }
+                $xxx[$key1] = $value1->id;
+     
+            }
         //加载该类型的影片页面
-        return view('homes/search',['res' => $res]);
+        return view('homes/search',['res' => $res,'request'=>$request]);
     }
         
     
@@ -347,7 +392,7 @@ class HomesController extends Controller
             $data['time'] = time();
             $data['num'] = time().rand(111111,999999);
             
-
+            //缓存至Redis
             $bool = Redis::hmset('seat_'.$data['num'],$data);
             Redis::expire('seat_'.$data['num'],300);
 

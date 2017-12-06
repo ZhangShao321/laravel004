@@ -1,6 +1,6 @@
-@extends('admin.layout.admins')
+@extends('FilmAdmins.layout.index')
         
-@section('title','订单列表')
+@section('title','个人订单列表')
 
 
 @section('content')
@@ -10,7 +10,7 @@
         <span>
             <i class="icon-table">
             </i>
-            订单列表
+            个人订单列表
         </span>
     </div>
     <div class="mws-panel-body no-padding">
@@ -18,31 +18,13 @@
 
             <form action='/admin/ticket' method='get'>
             <div id="DataTables_Table_1_length" class="dataTables_length">
-                <label>
-                    显示
-                     <select name="number" size="1" aria-controls="DataTables_Table_1">
-                        <option value="5" @if(isset($_GET['number']) ? $_GET['number'] : '5') selected="selected"  @endif>
-                            5
-                        </option>
-                        <option value="10" @if($request->number == '10')  selected="selected"  @endif>
-                            10
-                        </option>
-                    
-                
-                    </select>
-                    条数据
-                </label>
-                 <button class='btn btn-primary'>确定</button>
+
             </div>
             </form>
 
             <form action='/admin/ticket' method='get'>
             <div class="dataTables_filter" id="DataTables_Table_1_filter">
-                <label>
-                    关键字:
-                    <input type="text" name='search' aria-controls="DataTables_Table_1">
-                </label>
-                <button class='btn btn-primary'>搜索</button>
+
 
             </div>
             </form>
@@ -55,22 +37,13 @@
                         style="width: 156px;">
                             ID
                         </th>
-                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        style="width: 156px;">
-                            用户名
-                        </th>
+                       
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
                         style="width: 156px;">
                             手机号
                         </th>
                  
-                       <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        style="width: 156px;">
-                            电影院
-                        </th>
                  
                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
@@ -89,6 +62,11 @@
                         style="width: 156px;">
                             座位
                         </th>
+                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
+                        style="width: 156px;">
+                            价格 
+                        </th>
                  
                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
@@ -106,48 +84,37 @@
                         style="width: 156px;">
                             订单号
                         </th>
-                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
+                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
                         style="width: 156px;">
                             操作
                         </th>
+
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
                     @foreach($res as $k=>$v)
                     <tr align="center" class="@if($k % 2== 1)odd @else even @endif">
                         <td>{{$v->id}}</td>
-                        <td>{{$v->nick}}</td>
-                        <td>{{$v->phone}}</td>          
-                        <td>{{$v->cinema}}</td>              
+                        <td>{{$v->phone}}</td>             
                         <td>{{$v->roomname}}</td> 
                         <td>{{$v->filmname}}</td>             
-                        <td>{{$v->hang}}排{{$v->lie }}座</td>                               
-                        <td>{{date('Y-m-d H:i:s',$v->showtime)}}</td>              
+                        <td>{{$v->hang}}排{{$v->lie }}座</td> 
+                        <td>￥{{$v->price}}/元</td>                              
+                        <td>{{date('m月d日 H时i分',$v->showtime)}}</td>              
                         <td>{{date('Y-m-d H:i:s',$v->time)}}</td>  
-                        <td>{{$v->num}}</td>      
+                        <td>{{$v->num}}</td>
                         <td>
-                       <!--  <form action="/admin/ticket/?{{$v->id}}&status={{$v->status}}" style="display:inline" method="post">  
-
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}                        
-
-                             <button class="btn btn-danger del" name="">放入回收站</button>
-                        </form>  --> 
-                            @if($v->status == '0')
-                            <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>放入回收站</button>
-                            @else
-                            <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>恢复</button>
-                            @endif 
-                        </td>
-          
+                            <button class="btn btn-default">打印</button>
+                            <button  id="{{ $v->id }}" class="btn btn-default dels">取消</button>
+                        </td>      
 
                     </tr>
                      @endforeach
                 </tbody>
             </table>
             <div class="dataTables_info" id="DataTables_Table_1_info">
-                Showing 1 to 10 of 57 entries
+                
             </div>
              <style type="text/css">
                           
@@ -197,26 +164,26 @@
 
 
 @section('js')
-    <script>
-    //修改ticket状态    回收站    
-    $('.bb').click(function(){
+<script>
+    
+    $('.dels').click(function(){
 
-        var ids = $(this).attr('id');
-        var status = $(this).attr('name');
-        var bbb = $(this);
+        var id = $(this).attr('id');
 
-        $.post("{{ url('/admin/ticket/huishou') }}", {_token:'{{ csrf_token() }}', id:ids, status:status}, function(data){
-            
+        $.post('{{ url("FilmAdmins/seach/del") }}',{_token:'{{ csrf_token() }}',id:id},function(data){
+
             // console.log(data);
+            if(data == 1){
 
-          if(data == 2){
-                bbb.text('放入回收站');
-                bbb.attr('name',1);
-                location.reload();
-               
+                // layer.alert('取消成功', {icon: 6});
+
+                window.location.reload();
+            }else{
+                // layer.alert('取消失败', {icon: 6});
+                window.location.reload();
             }
-        });
+        })
     })
-    </script>
+</script>
 
 @endsection

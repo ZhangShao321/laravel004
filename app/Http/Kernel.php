@@ -33,6 +33,8 @@ class Kernel extends HttpKernel
         'filmlogin' => \App\Http\Middleware\FilmLoginMiddleware::class,
 
         'adminlogin' => \App\Http\Middleware\AdminLoginMiddleware::class,
+        'home' => \App\Http\Middleware\HomeMiddleware::class,
+        'film' => \App\Http\Middleware\FilmMiddleware::class,
 
     ];
 }

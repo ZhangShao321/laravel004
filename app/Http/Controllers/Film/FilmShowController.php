@@ -21,16 +21,18 @@ class FilmShowController extends Controller
 
       //多表查询
 
-         $roo = showfilm::where('showfilm.cid',session('cid'))
-                        ->where('showfilm.timeout','>',time())
-                        ->join('film','showfilm.fid','=','film.id')
+         $roo = DB::table('showfilm')
                         ->join('roominfo','showfilm.rid','=','roominfo.id')
-                        ->join('cinema','showfilm.cid','=','cinema.id')
+                        ->join('film','showfilm.fid','=','film.id')
                         ->select('showfilm.id','showfilm.time','showfilm.status','film.filmname','roominfo.roomname','showfilm.price','showfilm.timeout')
+                        ->where('showfilm.timeout','>',time())
+                        ->where('showfilm.cid',session('cid'))
                         ->orderBy('showfilm.time', 'desc')
                         ->paginate(10);
 
         $arr = array(0=>'即将放映',1=>'正在放映',2=>'放映结束');
+
+        // var_dump($roo);die;
 
 
 
