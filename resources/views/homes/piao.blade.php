@@ -2,7 +2,7 @@
 
 @section('title','傻家伙')
 
-<!-- <meta http-equiv="refresh" content="3; return redirect('/homes/index') /> -->
+<meta http-equiv="refresh"  content="3000;index" />
 
 @section('content')
 
@@ -197,7 +197,6 @@
 
         }});
     });
-
-    
+ 
 </script>
 @endsection

@@ -114,4 +114,127 @@ class FilmTicketController extends Controller
 
         echo json_encode($seat);
     }
+
+    //订单列表
+    public function list(Request $request)
+    {
+        //获取票
+        $res = DB::table('ticket')
+                ->leftjoin('showfilm','showfilm.id','=','ticket.showid')
+                ->select('ticket.id','ticket.time','ticket.uid','ticket.fid','ticket.rid','ticket.cid','ticket.showid','ticket.seat','ticket.num','ticket.status','showfilm.time')
+                ->where('ticket.status','=',0)
+                ->where('ticket.cid',session('cid'))
+                ->where('showfilm.time','>',time())
+                ->where('ticket.num','like','%'.$request->input('search').'%')
+                ->orderBy('ticket.time','desc')
+                ->paginate($request->input('number',10));
+
+        //遍历
+        foreach ($res as $k => $v) {
+            //用户
+            $uid = $v->uid;
+
+            if($uid == 0){
+                $v->phone = '电影院直售';
+                $v->nick = 'www';
+            } else {
+                $phone = DB::table('user')->where('id',$uid)->first();
+                $v->phone = $phone->phone ?? '该用户已不存在';
+
+                $names = DB::table('userDetail')->where('uid',$uid)->first();
+                $v->nick = $names->nickName ?? '该用户已不存在';
+            }
+
+
+            //电影
+            $fid = $v->fid;
+            $v->filmname = DB::table('film')->where('id',$fid)->first()->filmname ?? '该电影已不存在';
+
+            //影厅
+            $rid = $v->rid;
+            $v->roomname = DB::table('roominfo')->where('id',$rid)->first()->roomname ?? '该影厅已不存在';
+            
+            //放映
+            $showid = $v->showid;
+            $show = DB::table('showfilm')->where('id',$showid)->first();
+            $v->showtime = $show->time ?? 0;
+
+
+            //座位
+            $seat = $v->seat;
+
+            //状态
+            $status=$v->status;
+            //拆分字符串
+            $aaa = explode('_',$seat);
+            $v->hang = $aaa['0'];
+            $v->lie = $aaa['1'];
+        }
+       // echo "<pre>";
+       // var_dump($res);die;
+                       
+        return view('FilmAdmins.Filmticket.list',['res'=>$res],['request'=>$request]);
+    }
+
+
+    //已放映订单
+    public function list_out(Request $request)
+    {
+        //获取票
+        $res = DB::table('ticket')
+                ->leftjoin('showfilm','showfilm.id','=','ticket.showid')
+                ->select('ticket.id','ticket.time','ticket.uid','ticket.fid','ticket.rid','ticket.cid','ticket.showid','ticket.seat','ticket.num','ticket.status','showfilm.time')
+                ->where('ticket.status','=',0)
+                ->where('ticket.cid',session('cid'))
+                ->where('showfilm.time','<',time())
+                ->where('ticket.num','like','%'.$request->input('search').'%')
+                ->paginate($request->input('number',10));
+
+        //遍历
+        foreach ($res as $k => $v) {
+            //用户
+            $uid = $v->uid;
+
+            if($uid == 0){
+                $v->phone = '电影院直售';
+                $v->nick = 'www';
+            } else {
+                $phone = DB::table('user')->where('id',$uid)->first();
+                $v->phone = $phone->phone ?? '该用户已不存在';
+
+                $names = DB::table('userDetail')->where('uid',$uid)->first();
+                $v->nick = $names->nickName ?? '该用户已不存在';
+            }
+
+
+            //电影
+            $fid = $v->fid;
+            $v->filmname = DB::table('film')->where('id',$fid)->first()->filmname ?? '该电影已不存在';
+
+            //影厅
+            $rid = $v->rid;
+            $v->roomname = DB::table('roominfo')->where('id',$rid)->first()->roomname ?? '该影厅已不存在';
+            
+            //放映
+            $showid = $v->showid;
+            $show = DB::table('showfilm')->where('id',$showid)->first();
+            $v->showtime = $show->time ?? 0;
+
+            
+
+            //座位
+            $seat = $v->seat;
+
+            //状态
+            $status=$v->status;
+            //拆分字符串
+            $aaa = explode('_',$seat);
+            $v->hang = $aaa['0'];
+            $v->lie = $aaa['1'];
+        }
+       // echo "<pre>";
+       // var_dump($res);die;
+                       
+        return view('FilmAdmins.Filmticket.list_out',['res'=>$res],['request'=>$request]);
+    }
 }

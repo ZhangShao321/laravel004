@@ -18,38 +18,36 @@
     <div class="mws-panel-body no-padding">
 
        
-         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
-                    <form action="" method="get">
-                    <div id="DataTables_Table_1_length" class="dataTables_length">
-                        <label>
-                            Show
-                         <select name="num" size="1" aria-controls="DataTables_Table_1">
-                            <option value="10" @if(isset($_GET['num'])  ? $_GET['num'] : '10')) selected="selected"  @endif >
+             <div class="mws-panel-body no-padding">
+            <div role="grid" class="dataTables_wrapper" id="DataTables_Table_1_wrapper">
+                 <form action="" method="get">
+            <div id="DataTables_Table_1_length" class="dataTables_length">
+                <label>
+                    Show
+                    <select name="num" size="1" aria-controls="DataTables_Table_1">
+                        <option value="10" @if(isset($_GET['num'])  ? $_GET['num'] : '10')) selected="selected"  @endif >
                             10
-                            </option>
-                            <option value="15" @if($request->num == '15')  selected="selected" @endif >
-                                15
-                            </option>
-                            <option value="25" @if($request->num == '25')  selected="selected" @endif  >
-                                25
-                            </option>
+                        </option>
+                        <option value="25" @if($request->num == '25')  selected="selected" @endif >
+                            25
+                        </option>
+                        <option value="50" @if($request->num == '50')  selected="selected" @endif  >
+                            50
+                        </option>
                        
-                       
-                        </select>
-                            entries
-                        </label>
-                    </div>
-                    <div class="dataTables_filter" id="DataTables_Table_1_filter">
-                        <label>
-                            Search:
-                              <input type="text" aria-controls="DataTables_Table_1" name="seach" value="{{isset($_GET['seach']) ? $_GET['seach'] : ''}}">
-                              <button>确定</button>
-                        </label>
-                    </div>
-                    
-                    
-        </form> 
-            <table class="mws-datatable mws-table dataTable" id="DataTables_Table_1"
+                    </select>
+                    entries
+                </label>
+            </div>
+            <div class="dataTables_filter" id="DataTables_Table_1_filter">
+                <label>
+                    搜索
+                    <input type="text" aria-controls="DataTables_Table_1" name="seach" value="{{isset($_GET['seach']) ? $_GET['seach'] : ''}}">
+                    <button class="btn btn-danger">确定</button>
+                </label>
+            </div>
+        </form>
+      <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
             aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
@@ -289,7 +287,7 @@
                             url: "{{url('/FilmAdmins/OffUpdate')}}",
                             data: 'fid='+id,
                             success: function(msg){
-                              alert(msg);
+                              // alert(msg);
                               // console.log(msg);
                                location.reload();  
                             }

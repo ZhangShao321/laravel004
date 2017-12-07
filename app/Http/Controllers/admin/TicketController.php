@@ -215,6 +215,7 @@ class TicketController extends Controller
 
             //电影院
             $cid = $v->cid;
+<<<<<<< HEAD
             $v->cinema = DB::table('cinema')->where('id',$cid)->first()->cinema ?? '该影院已不存在';
 
             //电影
@@ -224,6 +225,17 @@ class TicketController extends Controller
             //影厅
             $rid = $v->rid;
             $v->roomname = DB::table('roominfo')->where('id',$rid)->first()->roomname ?? '该影厅已不存在';
+=======
+            $v->cinema = DB::table('cinema')->where('id',$cid)->first()->cinema ?? '电影院不存在';
+
+            //电影
+            $fid = $v->fid;
+            $v->filmname = DB::table('film')->where('id',$fid)->first()->filmname ?? '电影不存在';
+
+            //影厅
+            $rid = $v->rid;
+            $v->roomname = DB::table('roominfo')->where('id',$rid)->first()->roomname ?? '电影厅不存在';
+>>>>>>> 993665a0eb7e1718ae7a8b554410803a080b1d10
             
             //放映
             $showid = $v->showid;

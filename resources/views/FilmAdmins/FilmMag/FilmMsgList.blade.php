@@ -67,7 +67,7 @@
                     
                     
         </form> 
-            <table class="mws-datatable mws-table dataTable" id="DataTables_Table_0"
+          <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1"
             aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">

@@ -267,8 +267,9 @@
                     <li>
                         <a href="/admins/#"><i class="icon-calendar-month"></i> 电影票</a>
                         <ul class="closed">
-                            <li><a href="{{asset('/FilmAdmins/ticket/list')}}">电影票详情</a></li>
-                           
+                            <li><a href="{{asset('/FilmAdmins/ticket/index')}}">电影票详情</a></li>
+                            <li><a href="{{asset('/FilmAdmins/ticket/list')}}">订单列表</a></li>
+                            <li><a href="{{asset('/FilmAdmins/ticket/list_out')}}">历史订单</a></li>
                            
                         </ul>
                     </li>

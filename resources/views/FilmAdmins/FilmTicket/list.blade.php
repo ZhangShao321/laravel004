@@ -1,4 +1,4 @@
-@extends('admin.layout.admins')
+@extends('FilmAdmins.layout.index')
         
 @section('title','订单列表')
 
@@ -66,11 +66,7 @@
                             手机号
                         </th>
                  
-                       <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
-                        rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        style="width: 156px;">
-                            电影院
-                        </th>
+                       
                  
                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
@@ -108,9 +104,10 @@
                         </th>
                         <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1"
                         rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                        style="width: 156px;">
+                        style="width: 100px;">
                             操作
                         </th>
+                       
                     </tr>
                 </thead>
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
@@ -118,28 +115,14 @@
                     <tr align="center" class="@if($k % 2== 1)odd @else even @endif">
                         <td>{{$v->id}}</td>
                         <td>{{$v->nick}}</td>
-                        <td>{{$v->phone}}</td>          
-                        <td>{{$v->cinema}}</td>              
+                        <td>{{$v->phone}}</td>             
                         <td>{{$v->roomname}}</td> 
                         <td>{{$v->filmname}}</td>             
                         <td>{{$v->hang}}排{{$v->lie }}座</td>                               
                         <td>{{date('Y-m-d H:i:s',$v->showtime)}}</td>              
                         <td>{{date('Y-m-d H:i:s',$v->time)}}</td>  
                         <td>{{$v->num}}</td>      
-                        <td>
-                       <!--  <form action="/admin/ticket/?{{$v->id}}&status={{$v->status}}" style="display:inline" method="post">  
-
-                            {{csrf_field()}}
-                            {{method_field('DELETE')}}                        
-
-                             <button class="btn btn-danger del" name="">放入回收站</button>
-                        </form>  --> 
-                            @if($v->status == '0')
-                            <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>放入回收站</button>
-                            @else
-                            <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>恢复</button>
-                            @endif 
-                        </td>
+                        <td><button class="btn btn-default">打印</button></td>
           
 
                     </tr>
@@ -198,25 +181,7 @@
 
 @section('js')
     <script>
-    //修改ticket状态    回收站    
-    $('.bb').click(function(){
-
-        var ids = $(this).attr('id');
-        var status = $(this).attr('name');
-        var bbb = $(this);
-
-        $.post("{{ url('/admin/ticket/huishou') }}", {_token:'{{ csrf_token() }}', id:ids, status:status}, function(data){
-            
-            // console.log(data);
-
-          if(data == 2){
-                bbb.text('放入回收站');
-                bbb.attr('name',1);
-                location.reload();
-               
-            }
-        });
-    })
+   
     </script>
 
 @endsection

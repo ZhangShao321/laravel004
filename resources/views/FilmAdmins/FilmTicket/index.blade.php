@@ -33,10 +33,12 @@
                     <td>{{ date('Y-m-d H:i:s', $v->time) }}</td>
                     <td>￥{{ $v->price }} 元</td>
                     <td>
-                        @if($v->status==1)
-                        <button id="{{ $v->id }}" name="{{ $v->status }}" class="b1">即将放映</button> 
+                        @if($v->timeout < time())
+                        放映结束
+                        @elseif($v->time < time() && $v->timeout > time())
+                        正在放映
                         @else
-                        <button id="{{ $v->id }}" name="{{ $v->status }}" class="b1">放映中</button>
+                        即将放映
                         @endif
                     </td>
                     <td>

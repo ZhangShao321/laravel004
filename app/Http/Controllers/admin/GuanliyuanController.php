@@ -31,7 +31,7 @@ class GuanliyuanController extends Controller
     {
 
 
-        $res=user::where('status','>','0')->get();
+        $res=user::where('status','>','0')->where('auth',1)->get();
          
         return view('admin.guanliyuan.index',compact('res'));
 
@@ -66,14 +66,26 @@ class GuanliyuanController extends Controller
 
             return back()->withInput('添加失败');
         }
+<<<<<<< HEAD
+=======
+
+
+       // var_dump($res);die;
+>>>>>>> 993665a0eb7e1718ae7a8b554410803a080b1d10
         //哈希加密
         $res['password']=Hash::make($res['password']);
        var_dump($res);die;
 
+<<<<<<< HEAD
         //添加时间
         // $res['lastlogin']=$res['lastlogin'];
         $res['lastlogin']=time();
  
+=======
+        //添加时间 将时间转化为时间戳
+        $res['lastlogin']=time();
+       
+>>>>>>> 993665a0eb7e1718ae7a8b554410803a080b1d10
          
         //修改
         $id = DB::table('user')->insertGetId($res);  
@@ -203,9 +215,9 @@ class GuanliyuanController extends Controller
 
         if ($data) {
 
-            echo "管理员已存在";
+            echo "1";
         } else {
-            echo '√';
+            echo '0';
         }
     }
 

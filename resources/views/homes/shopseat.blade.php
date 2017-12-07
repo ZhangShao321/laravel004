@@ -2,6 +2,8 @@
 
 @section('title','选座订票页')
 
+<meta http-equiv="refresh"  content="300;index" />
+
 <style>
     #seat-maps .seatCharts-cell{
         width: 30px;

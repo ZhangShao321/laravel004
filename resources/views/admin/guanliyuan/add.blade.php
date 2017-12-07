@@ -114,20 +114,24 @@
             $(this).css('color','green');
             $(this).next().text(' √ ');
             $(this).next().css('color','green');
+
+           
         } else {
             $(this).css('color','red');
             $(this).next().text('手机号格式不正确');
             $(this).next().css('color','red');
 
-            $('#but').click(function(){
-
-              return false;
-            })
-            return
-
+            
         }
         $.post("{{ url('/admin/guanliyuan/phone') }}", {_token:'{{ csrf_token() }}', phone:phone}, function(data){
             $('input[name=phone]').next().text(data);
+            if(data == 1){
+              $('input[name=phone]').next().text('管理员已存在');
+
+            }else{
+              $('input[name=phone]').next().text('√');
+
+            }
         })
      })
 
@@ -144,15 +148,12 @@
             $(this).css('color','green');
             $(this).next().text(' √ ');
             $(this).next().css('color','green');
+
         } else {
             $(this).css('color','red');
             $(this).next().text('密码格式不正确');
             $(this).next().css('color','red');
 
-            $('#but').click(function(){
-
-              return false;
-            })
         }
      })
 
@@ -167,22 +168,16 @@
             $(this).css('color','green');
             $(this).next().text(' √ ');
             $(this).next().css('color','green');
+
         } else {
             $(this).css('color','red');
             $(this).next().text('两次密码不一致');
             $(this).next().css('color','red');
 
-            $('#but').click(function(){
-
-              return false;
-            })
         }
      })
 
-      $('#but').on('click', function(){
-                          
-          layer.msg('管理员添加成功:)');
-      });
+     
 
 
 

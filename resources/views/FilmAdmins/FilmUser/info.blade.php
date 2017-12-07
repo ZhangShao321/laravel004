@@ -27,7 +27,7 @@
 
 			                        <!-- <input type="text" name="cinema" class="medium" value="{{$res->cinema}}"> -->
 
-			                        <input type="text" name="cinema" class="medium" value="{{$res['cinema']}}">
+			                        <input type="text" name="cinema" readonly="readonly" class="medium" value="{{$res['cinema']}}">
 
 
 			                    </div>

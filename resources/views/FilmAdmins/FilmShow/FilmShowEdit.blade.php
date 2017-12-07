@@ -67,16 +67,14 @@
 
                            
                             @if($res['timeout'] < time())
-                            <option value="">{{ $arr['2'] }}</option>
-                            @elseif($res['time'] < time() && $v->timeout > time())
-                            <option value="">{{ $arr['1'] }}</option>
+                            <option value="2">{{ $arr['2'] }}</option>
+                            @elseif($res['time'] < time() && $res->timeout > time())
+                            <option value="1">{{ $arr['1'] }}</option>
                             @else
-                            <option value="">{{ $arr['0'] }}</option>
+                            <option value="0">{{ $arr['0'] }}</option>
                             @endif
 
-                            @foreach($arr as $ak => $av)
-                            <option  value="{{$ak}}" @if($res['status'] == $ak) selected  @endif > {{$av}} </option>
-                            @endforeach 
+                           
 
                         </select>
                     </div>

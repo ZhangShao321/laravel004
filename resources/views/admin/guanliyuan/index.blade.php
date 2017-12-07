@@ -148,6 +148,8 @@ $('.bb').click(function(){
             bbb.text('开启');
             bbb.attr('name',1);
         }
+
+        window.location.reload();
     });
 })
 </script>

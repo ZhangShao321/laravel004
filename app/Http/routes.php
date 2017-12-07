@@ -246,10 +246,12 @@ Route::group(['prefix' => 'FilmAdmins', 'namespace' => 'Film', 'middleware'=>'fi
 
 
             //电影票
-            Route::get('/ticket/list', 'FilmTicketController@index');
+            Route::get('/ticket/index', 'FilmTicketController@index');
             Route::get('/ticket/shop/{id}', 'FilmTicketController@shop');
             Route::post('/ticket/shopseat/{id}', 'FilmTicketController@shopseat');
             Route::post('/ticket/shopseat_into/{id}', 'FilmTicketController@shopseat_into');
+            Route::get('/ticket/list', 'FilmTicketController@list');
+            Route::get('/ticket/list_out', 'FilmTicketController@list_out');
 
             Route::post('/seach','SeachController@seach');
             Route::post('/seach/del','SeachController@delete');
@@ -325,7 +327,7 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes', 'middleware'=>'home']
 
     Route::post('dologin','HomesLoginController@dologin');
 
-    //退出
+    //退出登录
     Route::get('deletes','HomesLoginController@delete');
 	
     //个人中心
@@ -345,11 +347,13 @@ Route::group(['prefix' => 'homes', 'namespace' => 'Homes', 'middleware'=>'home']
     //个人订单
     Route::get('center','HomesCenterController@index');
 
+    //未完成订单
     Route::get('center_w','HomesCenterController@weiwc');
     Route::get('insert','HomesCenterController@insert');
 
     Route::post('/ticket/dodel','HomesCenterController@dodel');
 
+    //删除订单
     Route::get('/delete/{id}','HomesCenterController@delete');
     
     //充值主页

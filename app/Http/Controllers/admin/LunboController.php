@@ -273,9 +273,13 @@ class LunboController extends Controller
     }
 
 
+<<<<<<< HEAD
 
 
     //修改状态
+=======
+ //修改状态
+>>>>>>> 993665a0eb7e1718ae7a8b554410803a080b1d10
     public function lbzt(Request $request)
     {
 
@@ -304,5 +308,9 @@ class LunboController extends Controller
 
 
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 993665a0eb7e1718ae7a8b554410803a080b1d10
 
 }

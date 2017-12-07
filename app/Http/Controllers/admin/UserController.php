@@ -23,6 +23,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         
+<<<<<<< HEAD
 
         $res = DB::table('user')->join('userDetail','userDetail.uid','=','user.id')->
             select('user.id','user.phone','userDetail.nickName','userDetail.photo','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')
@@ -31,6 +32,15 @@ class UserController extends Controller
             ->orderBy('id','asc')
             ->paginate($request->input('num',10));
 
+=======
+        $res = DB::table('user')
+                   ->join('userDetail','userDetail.uid','=','user.id')
+                   ->select('user.id','user.phone','userDetail.nickName','userDetail.photo','user.auth','user.status','user.lastlogin','userDetail.uid','userDetail.email','userDetail.qq','userDetail.sex')
+                   ->where('phone','like','%'.$request->input('search').'%')
+                   ->orderBy('id','asc')
+                   ->where('auth',0)
+                   ->paginate($request->input('num',10));
+>>>>>>> 993665a0eb7e1718ae7a8b554410803a080b1d10
 
         return view('admin.user.index',['res'=>$res,'request'=>$request]);
         
@@ -58,6 +68,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        // echo 11111;die;
         $input1 = $request->only('phone','password','lastlogin');
 
         if(empty($input1['password'])){

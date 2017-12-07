@@ -32,7 +32,7 @@ class HomesController extends Controller
     //1.电影院首页
     public function index()
     {   
-        //判断平台是否开启
+        //判断网站是否开启
         $bool = DB::table('config')->first()->status;
 
         if($bool == 0){
@@ -64,27 +64,26 @@ class HomesController extends Controller
             }
 
         //轮播图数据
-        $res1 = lunbo::get();
+        $res1 = lunbo::where('status',0)->get(); 
 
         //即将上映电影数据
-        // $res2 = film::where('status','1')->where('showtime','>',time())->limit('4')->get();
         $res2 = film::where('showtime','>',time())->limit('4')->get();
 
-        //去除重复电影
-        $zz = array();
+            //去除重复电影
+            $zz = array();
 
-        foreach ($res2 as $k => $v) {
+            foreach ($res2 as $k => $v) {
 
-            $x = in_array($v->filmname,$zz);
-           
-            if($x){
+                $x = in_array($v->filmname,$zz);
+               
+                if($x){
 
-                unset($res2[$k]);
+                    unset($res2[$k]);
+                }
+
+                $zz[$k] = $v->filmname;
+     
             }
-
-            $zz[$k] = $v->filmname;
- 
-        }
 
         //加载前台首页
         return view('homes/index',['res' => $res,'res1' => $res1,'res2' => $res2]);
@@ -165,7 +164,7 @@ class HomesController extends Controller
                 ->join('cininfo','cinema.id','=','cininfo.cid')
                 ->select('showfilm.id','showfilm.time','showfilm.price','cinema.cinema','cininfo.city','cininfo.area','cininfo.address')
                 ->where('showfilm.time','>',time())
-                ->where('cinema.status','2')
+                ->where('cinema.status',2)
                 ->get();
 
         //加载电影详情页面
@@ -178,9 +177,7 @@ class HomesController extends Controller
     public function cinemalist()
     {
         //电影院列表数据
-
         $res = cinema::where('status',2)->paginate(4);
-
 
         //加载电影院列表页面
         return view('homes/cinemalist',['res' => $res]);
@@ -249,7 +246,6 @@ class HomesController extends Controller
 
         }  
 
-
         $id = DB::table('cinema')->insertGetId($res);
 
         if($id){
@@ -284,8 +280,9 @@ class HomesController extends Controller
     //7.搜索的页面
     public function search(Request $request)
     {
-            //获取要搜索的字段
+        //获取要搜索的字段
         $seach = $request->only('seach')['seach'];
+
         //模糊查询
         $res = film::where('film.filmname','like','%'.$seach.'%')
                     ->select('film.id','film.filmname','film.summary','film.price','film.director','film.filepic')
@@ -313,6 +310,7 @@ class HomesController extends Controller
         $res = film::where('tid',$tid)      
                     ->select('film.id','film.filepic','film.filmname','film.director','film.price','film.summary')
                     ->paginate($request->input('num',2));
+
             //去除重复电影
             $xxx = array();
             foreach ($res as $key1 => $value1) {
@@ -323,8 +321,17 @@ class HomesController extends Controller
                 $xxx[$key1] = $value1->id;
      
             }
+
+
+        //是否为空            
+        $aaaa = '';
+        if(empty($res[0])){
+
+            $aaaa = "抱歉！您搜索的影片不存在！";
+        }
+
         //加载该类型的影片页面
-        return view('homes/search',['res' => $res,'request'=>$request]);
+        return view('homes/search',['res' => $res,'request'=>$request,'aaaa'=>$aaaa]);
     }
         
     
@@ -379,7 +386,7 @@ class HomesController extends Controller
             }
 
             $res = DB::table('showfilm')->where('id',$id)->first();
-            var_dump($res);die;
+            // var_dump($res);
             $data = array();
 
             $data['showid'] = $id;
@@ -431,7 +438,7 @@ class HomesController extends Controller
     //10.确认订单信息的页面
     public function piao(Request $request)
     {
-
+// var_dump('1');
         //票id
         $id = $request->id;
         //订单信息

@@ -41,12 +41,21 @@
                                     <td>{{$v->fname}}</td>
                                     <td>{{date('Y-m-d  H:i:s',$v->time)}}</td>
                                     <td>
+<<<<<<< HEAD
                                         
                                          @if($v->status == '0')
                                         <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>开启</button>
                                         @else
                                         <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>关闭</button>
                                         @endif         
+=======
+                                            
+                                        @if($v->status == '0')
+                                        <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>开启</button>
+                                        @else
+                                        <button id="{{ $v->id }}" name="{{ $v->status }}" class="bb" class='btn btn-error'>关闭</button>
+                                        @endif 
+>>>>>>> 993665a0eb7e1718ae7a8b554410803a080b1d10
 
                                     </td>
                                     <td>
@@ -96,9 +105,14 @@
                 }
             });
         })
+<<<<<<< HEAD
 </script>
 
 
+=======
+
+    </script>
+>>>>>>> 993665a0eb7e1718ae7a8b554410803a080b1d10
 
 
 @endsection
